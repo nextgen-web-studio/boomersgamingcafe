@@ -1176,50 +1176,213 @@ button {
 
 /* Live Availability Dashboard Widget */
 .live-availability {
-  border: 1px solid rgba(239, 189, 78, 0.25);
-  background: rgba(16, 17, 21, 0.6);
-  padding: 20px;
+  position: relative;
+  background: rgba(10, 10, 12, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 16px !important;
+  padding: 24px !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
+  overflow: hidden;
   margin-top: 20px;
 }
 
+/* Subtle tech grid background pattern */
+.live-availability::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .live-avail-title {
-  font: 700 11px var(--mono);
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin-bottom: 20px;
+  font: 700 13px var(--mono) !important;
+  color: #fff !important;
+}
+
+.live-avail-title span {
+  color: var(--lime) !important;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--lime);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
 }
 
 .live-avail-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 16px;
 }
 
-.live-avail-item {
+.live-card {
+  position: relative;
+  background: rgba(18, 18, 22, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 120px;
+}
+
+.live-card-glow {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 12px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+/* Category borders & glows */
+.pc-arena-card:hover {
+  border-color: #00c8ff !important;
+  box-shadow: 0 0 16px rgba(0, 200, 255, 0.2) !important;
+}
+.pc-arena-card:hover .live-card-glow {
+  opacity: 1;
+  box-shadow: inset 0 0 20px rgba(0, 200, 255, 0.1);
+}
+
+.ps5-lounge-card:hover {
+  border-color: #ad8cff !important;
+  box-shadow: 0 0 16px rgba(173, 140, 255, 0.2) !important;
+}
+.ps5-lounge-card:hover .live-card-glow {
+  opacity: 1;
+  box-shadow: inset 0 0 20px rgba(173, 140, 255, 0.1);
+}
+
+.sim-racing-card:hover {
+  border-color: #efbd4e !important;
+  box-shadow: 0 0 16px rgba(239, 189, 78, 0.2) !important;
+}
+.sim-racing-card:hover .live-card-glow {
+  opacity: 1;
+  box-shadow: inset 0 0 20px rgba(239, 189, 78, 0.1);
+}
+
+.vr-lounge-card:hover {
+  border-color: #ff4f70 !important;
+  box-shadow: 0 0 16px rgba(255, 79, 112, 0.2) !important;
+}
+.vr-lounge-card:hover .live-card-glow {
+  opacity: 1;
+  box-shadow: inset 0 0 20px rgba(255, 79, 112, 0.1);
+}
+
+.live-card:hover {
+  transform: translateY(-6px);
+  background: rgba(22, 22, 28, 0.85);
+}
+
+.live-card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 13px;
-  padding: 8px 12px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--line);
+  width: 100%;
 }
 
-.live-indicator {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
+.live-card-category {
+  font: 700 11px var(--mono);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  margin-right: 8px;
+  display: inline-block;
+  animation: status-pulse 2s infinite ease-in-out;
+}
+.pulse-dot.cyan { background: #00c8ff; box-shadow: 0 0 8px #00c8ff; }
+.pulse-dot.purple { background: #ad8cff; box-shadow: 0 0 8px #ad8cff; }
+.pulse-dot.gold { background: #efbd4e; box-shadow: 0 0 8px #efbd4e; }
+.pulse-dot.red { background: #ff4f70; box-shadow: 0 0 8px #ff4f70; }
+
+@keyframes status-pulse {
+  0% { transform: scale(0.95); opacity: 0.5; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.5; }
 }
 
-.live-indicator.green { background: #00db78; box-shadow: 0 0 10px #00db78; }
-.live-indicator.yellow { background: #ffbb54; box-shadow: 0 0 10px #ffbb54; }
-.live-indicator.red { background: #ff4f70; box-shadow: 0 0 10px #ff4f70; }
+.chevron {
+  color: rgba(255, 255, 255, 0.3);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.live-card:hover .chevron {
+  color: #fff;
+  transform: translateX(2px);
+}
+
+.live-card-hero {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-num {
+  font: 800 36px var(--mono);
+  line-height: 1;
+}
+.cyan-text { color: #00c8ff; }
+.purple-text { color: #ad8cff; }
+.gold-text { color: #efbd4e; }
+.red-text { color: #ff4f70; }
+
+.hero-lbl {
+  font: 700 8px var(--mono);
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+}
+
+.live-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 8px;
+  font-size: 10px;
+  font-family: var(--mono);
+}
+
+.footer-stat {
+  font-weight: 700;
+  color: #fff;
+}
+
+.hardware-preview {
+  color: var(--muted);
+}
+
+.live-card.dimmed {
+  opacity: 0.65;
+}
+.live-card.dimmed:hover {
+  opacity: 1;
+}
 
 /* Booking Steps Section */
 .book {
@@ -4666,5 +4829,91 @@ button {
   border-radius: 8px !important;
   justify-content: center !important;
   margin-top: 4px;
+}
+
+/* Premium BGC Gaming Toast Notification */
+.bgc-toast {
+  position: fixed;
+  top: 104px; /* 20px below desktop 84px navbar */
+  left: 50%;
+  transform: translate(-50%, -20px) scale(0.96);
+  width: 380px;
+  height: 76px;
+  background: rgba(18, 18, 22, 0.96) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 199, 70, 0.35) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 0 16px rgba(255, 199, 70, 0.12), 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+  z-index: 999999 !important;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.bgc-toast.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0) scale(1);
+}
+
+.toast-content {
+  width: 100%;
+  height: 100%;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.toast-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+}
+
+.toast-heading {
+  font: 700 13px var(--mono) !important;
+  color: #fff !important;
+}
+
+.toast-subtext {
+  font: 500 11px var(--mono) !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.toast-action {
+  font: 800 11px var(--mono) !important;
+  color: var(--menu-gold) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.toast-content:hover .toast-action {
+  background: var(--lime) !important;
+  color: #000 !important;
+  border-color: var(--lime) !important;
+  box-shadow: 0 0 10px rgba(0, 219, 120, 0.3) !important;
+}
+
+@media (max-width: 768px) {
+  .bgc-toast {
+    top: 88px !important; /* 20px below mobile 68px navbar */
+    width: calc(100% - 32px) !important;
+    padding: 0 !important;
+  }
+  .toast-content {
+    padding: 12px 16px !important;
+  }
 }
 

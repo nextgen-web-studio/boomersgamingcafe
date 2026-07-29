@@ -536,17 +536,29 @@ window.showBgcNotification = function(title, desc) {
     toast = document.createElement('div');
     toast.id = 'bgcToastNotification';
     toast.className = 'bgc-toast';
-    toast.innerHTML = `
-      <div class="bgc-toast-title" id="bgcToastTitle"></div>
-      <div class="bgc-toast-desc" id="bgcToastDesc"></div>
-    `;
     document.body.appendChild(toast);
   }
   
-  const titleEl = document.getElementById('bgcToastTitle');
-  const descEl = document.getElementById('bgcToastDesc');
-  if (titleEl) titleEl.innerHTML = title;
-  if (descEl) descEl.innerHTML = desc;
+  // Extract item name from strong tag or raw description
+  const match = desc.match(/<strong>(.*?)<\/strong>/);
+  const itemName = match ? match[1] : desc.split('added')[0].trim().replace(/✔/g, '').trim();
+
+  // Retrieve total count and cost from cart or active booking state
+  const itemsCount = (window.cartState && window.cartState.addedFood) ? window.cartState.addedFood.reduce((sum, item) => sum + item.qty, 0) : ((window.activeBooking && window.activeBooking.addedFood) ? window.activeBooking.addedFood.length : 0);
+  const totalCost = (window.cartState && window.cartState.addedFood) ? window.cartState.addedFood.reduce((sum, item) => sum + (item.price * item.qty), 0) : ((window.activeBooking && window.activeBooking.addedFood) ? window.activeBooking.addedFood.reduce((sum, item) => sum + item.price, 0) : 0);
+
+  // Set premium gaming alert structure
+  toast.innerHTML = `
+    <div class="toast-content" onclick="if(window.openSessionHUD) window.openSessionHUD();">
+      <div class="toast-body">
+        <div class="toast-heading">✓ ${itemName} added</div>
+        <div class="toast-subtext">${itemsCount} items in session · ₹${totalCost}</div>
+      </div>
+      <div class="toast-action">
+        View →
+      </div>
+    </div>
+  `;
   
   // Trigger transition reflow
   toast.offsetHeight; 
@@ -555,7 +567,7 @@ window.showBgcNotification = function(title, desc) {
   if (window.bgcToastTimer) clearTimeout(window.bgcToastTimer);
   window.bgcToastTimer = setTimeout(() => {
     toast.classList.remove('show');
-  }, 3200);
+  }, 3000);
 };
 
 /**

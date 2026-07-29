@@ -753,22 +753,75 @@ function initLiveAvailabilityWidget() {
     const vrState = Math.random() > 0.6 ? 'Full' : '1 Available';
     const raceAvail = Math.floor(Math.random() * 3); // 0-2 available
 
+    const pcOccupied = 30 - pcAvail;
+    const psOccupied = 12 - psAvail;
+    const raceOccupied = 4 - raceAvail;
+    const vrAvail = vrState === 'Full' ? 0 : (Math.random() > 0.5 ? 1 : 2);
+    const vrOccupied = 6 - vrAvail;
+
     capacityDashboard.innerHTML = `
-      <div class="live-avail-item">
-        <span><i class="live-indicator ${pcAvail > 3 ? 'green' : 'yellow'}"></i>PC Arena</span>
-        <b>${pcAvail} Avail</b>
+      <div class="live-card pc-arena-card" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'})">
+        <div class="live-card-glow"></div>
+        <div class="live-card-header">
+          <span class="live-card-category"><span class="pulse-dot cyan"></span>PC Arena</span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+        <div class="live-card-hero">
+          <span class="hero-num cyan-text">${pcAvail}</span>
+          <span class="hero-lbl">AVAILABLE STATIONS</span>
+        </div>
+        <div class="live-card-footer">
+          <span class="footer-stat">${pcOccupied}/30 Occupied</span>
+          <span class="hardware-preview">RTX 4070 · 240Hz</span>
+        </div>
       </div>
-      <div class="live-avail-item">
-        <span><i class="live-indicator ${psAvail > 2 ? 'green' : 'yellow'}"></i>PS5 Lounge</span>
-        <b>${psAvail} Avail</b>
+      
+      <div class="live-card ps5-lounge-card" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'})">
+        <div class="live-card-glow"></div>
+        <div class="live-card-header">
+          <span class="live-card-category"><span class="pulse-dot purple"></span>PS5 Lounge</span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+        <div class="live-card-hero">
+          <span class="hero-num purple-text">${psAvail}</span>
+          <span class="hero-lbl">AVAILABLE STATIONS</span>
+        </div>
+        <div class="live-card-footer">
+          <span class="footer-stat">${psOccupied}/12 Occupied</span>
+          <span class="hardware-preview">PS5 Slim · 4K HDR</span>
+        </div>
       </div>
-      <div class="live-avail-item">
-        <span><i class="live-indicator ${vrState === 'Full' ? 'red' : 'yellow'}"></i>VR Lounge</span>
-        <b>${vrState}</b>
+
+      <div class="live-card sim-racing-card" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'})">
+        <div class="live-card-glow"></div>
+        <div class="live-card-header">
+          <span class="live-card-category"><span class="pulse-dot gold"></span>Sim Racing</span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+        <div class="live-card-hero">
+          <span class="hero-num gold-text">${raceAvail}</span>
+          <span class="hero-lbl">AVAILABLE STATIONS</span>
+        </div>
+        <div class="live-card-footer">
+          <span class="footer-stat">${raceOccupied}/4 Occupied</span>
+          <span class="hardware-preview">Fanatec DD · Cockpit</span>
+        </div>
       </div>
-      <div class="live-avail-item">
-        <span><i class="live-indicator ${raceAvail > 0 ? 'green' : 'red'}"></i>Racing Sim</span>
-        <b>${raceAvail > 0 ? raceAvail + ' Avail' : 'Full'}</b>
+
+      <div class="live-card vr-lounge-card ${vrAvail === 0 ? 'dimmed' : ''}" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'})">
+        <div class="live-card-glow"></div>
+        <div class="live-card-header">
+          <span class="live-card-category"><span class="pulse-dot red"></span>VR Lounge</span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+        <div class="live-card-hero">
+          <span class="hero-num red-text">${vrAvail === 0 ? 'WAIT' : vrAvail}</span>
+          <span class="hero-lbl">${vrAvail === 0 ? 'WAITING LIST ACTIVE' : 'AVAILABLE STATIONS'}</span>
+        </div>
+        <div class="live-card-footer">
+          <span class="footer-stat">${vrOccupied}/6 Occupied</span>
+          <span class="hardware-preview">Quest 3 · Pro Arena</span>
+        </div>
       </div>
     `;
 
