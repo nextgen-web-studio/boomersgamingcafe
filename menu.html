@@ -332,21 +332,25 @@
     .search-wrap {
       position: relative;
       width: 100%;
+      display: flex;
+      align-items: center;
     }
     .search-input {
       width: 100%;
       height: 52px;
-      background: rgba(255, 255, 255, 0.03) !important;
+      background: rgba(10, 10, 12, 0.6) !important; /* Riot Client style dark background */
       backdrop-filter: blur(10px) !important;
       -webkit-backdrop-filter: blur(10px) !important;
       color: #fff !important;
       border: 1px solid rgba(255, 255, 255, 0.08) !important;
-      border-radius: 12px !important;
-      padding: 0 52px 0 52px !important; /* Space for both left search and right filter icons */
-      font: 500 14px 'Manrope', sans-serif;
+      border-radius: 8px !important; /* Premium sharp corners */
+      padding: 0 180px 0 18px !important; /* Left aligned (no leading icon), space for keys + filters on right */
+      font: 500 13px var(--mono) !important; /* Monospace typography for gaming feel */
+      letter-spacing: 0.03em;
       outline: none;
       box-shadow: none !important;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      box-sizing: border-box !important;
     }
     .search-input::placeholder {
       color: rgba(255, 255, 255, 0.35) !important;
@@ -354,38 +358,63 @@
     }
     .search-input:focus {
       border-color: var(--menu-gold) !important;
-      box-shadow: 0 0 24px rgba(239, 189, 78, 0.15) !important;
-      background: rgba(255, 255, 255, 0.06) !important;
+      background: rgba(10, 10, 12, 0.8) !important;
+      box-shadow: 0 0 20px rgba(245, 198, 77, 0.15) !important;
     }
-    .search-icon {
+    
+    /* Command Palette Badge (CTRL + K) */
+    .search-kbd-shortcut {
       position: absolute;
-      left: 20px !important;
-      right: auto !important;
+      right: 120px;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 18px;
-      color: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      padding: 3px 6px;
+      font-size: 9px;
+      font-weight: 700;
+      font-family: var(--mono);
+      color: rgba(255, 255, 255, 0.4);
+      letter-spacing: 0.05em;
       pointer-events: none;
-      transition: color 0.2s;
-      z-index: 2;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      transition: opacity 0.2s ease;
     }
-    .filter-icon {
+    
+    /* Sleek Filter Button */
+    .search-filters-btn {
       position: absolute;
-      right: 20px !important;
+      right: 12px;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 18px;
-      color: rgba(255, 255, 255, 0.5);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 10px;
+      font-weight: 800;
+      font-family: var(--mono);
+      color: rgba(255, 255, 255, 0.7);
       cursor: pointer;
-      transition: color 0.2s, transform 0.2s;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
       z-index: 2;
     }
-    .search-input:focus ~ .search-icon {
-      color: var(--menu-gold);
+    .search-filters-btn:hover {
+      background: var(--lime) !important;
+      color: #000 !important;
+      border-color: var(--lime) !important;
+      box-shadow: 0 0 12px rgba(0, 219, 120, 0.25) !important;
     }
-    .filter-icon:hover {
-      color: var(--menu-gold);
-      transform: translateY(-50%) scale(1.1);
+    .search-filters-btn svg {
+      stroke: currentColor;
     }
     .filter-chips-row {
       display: flex;
@@ -1579,160 +1608,72 @@
       }
     }
     /* ====== MOBILE RESPONSIVE OVERRIDES ====== */
-    @media (max-width: 800px) {
-      /* Mobile Nav — consistent 72px, Book Now aligned */
-      .menu-nav { padding: 0 16px !important; height: 72px !important; }
-      .menu-nav .brand { font-size: 14px !important; max-width: 140px !important; overflow: hidden !important; text-overflow: ellipsis !important; white-space: nowrap !important; }
-      .menu-nav .brand img { width: 30px !important; height: 30px !important; flex-shrink: 0 !important; }
-      .mobile-nav-book { display: inline-flex !important; height: 44px !important; min-width: 100px !important; max-width: 110px !important; padding: 0 14px !important; font-size: 13px !important; }
-      
-      /* Hero Section */
-      .menu-hero { padding: 100px 0 36px !important; min-height: auto !important; }
-      .menu-hero .wrap { padding: 0 24px !important; gap: 20px; }
-      .menu-hero h1 { font-size: 32px !important; line-height: 0.95 !important; }
-      .menu-hero-lead { font-size: 16px !important; line-height: 1.7 !important; color: #B8B8B8 !important; }
-      .menu-hero-kicker { font-size: 10px !important; margin-bottom: 4px !important; }
-      .menu-feature-chips { gap: 10px; margin-top: 4px; }
-      .feature-chip { padding: 8px 14px; font-size: 12px; border-radius: 10px; }
-
-      /* Section Spacing */
-      .menu-page-grid { padding: 0 16px 48px !important; }
-
-      /* Search bar — full width, no clipping, proper padding */
-      .search-wrap { margin-top: 32px !important; max-width: 100% !important; }
-      .search-input { 
-        height: 56px !important; 
-        border-radius: 18px !important; 
-        font-size: 14px !important; 
-        padding: 0 56px 0 48px !important;
-        min-width: 0 !important;
+    @media (max-width: 768px) {
+      /* 1. Viewport & Scroll Safeguards */
+      body, .menu-page-grid, .menu-hero {
         width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
       }
-      .search-icon { left: 16px !important; font-size: 16px !important; }
-      .filter-icon { right: 16px !important; font-size: 16px !important; }
-
-      /* Search → Categories: 24px spacing, no clipping */
-      .menu-categories-row {
-        gap: 8px;
-        margin-top: 24px !important;
-        padding: 10px 0 !important;
-        top: 76px !important;
-        scroll-snap-type: x mandatory;
-        scroll-padding: 0 4px;
-        -webkit-overflow-scrolling: touch;
-      }
-      .menu-categories-row .menu-side-btn {
-        flex: 0 0 auto !important;
-        min-width: 90px !important;
-        height: 36px !important;
-        font-size: 10px !important;
-        padding: 0 14px !important;
-        opacity: 0.65 !important;
-      }
-      .menu-categories-row .menu-side-btn.active {
-        opacity: 1 !important;
-        box-shadow: 0 4px 24px rgba(245, 198, 77, 0.55), 0 0 16px rgba(245, 198, 77, 0.35) !important;
-        transform: scale(1.05) !important;
+      .menu-page-grid {
+        padding: 0 16px 48px !important;
       }
 
-      /* Categories → Food Grid: 28px spacing */
-      .menu-grid-view {
-        grid-template-columns: repeat(2, 1fr) !important;
-        column-gap: 16px !important;
-        row-gap: 20px !important;
-        margin-top: 28px !important;
-      }
-
-      .menu-food-card {
-        border-radius: 16px !important;
-      }
-      .menu-food-img {
-        aspect-ratio: 4 / 3 !important; /* 55-60% image height ratio */
-        height: auto !important;
-      }
-      .menu-food-info {
-        padding: 14px 14px 16px !important;
-      }
-      .menu-food-meta {
-        font-size: 13px !important;
-        margin-bottom: 6px !important;
-      }
-      .menu-food-name {
-        font-size: 18px !important;
-        margin-bottom: 6px !important;
-      }
-      .menu-food-desc {
-        font-size: 14px !important; /* 14px description */
-        color: rgba(255,255,255,0.72) !important; /* improved contrast */
-        margin-bottom: 14px !important;
-        -webkit-line-clamp: 2 !important;
-        line-height: 1.5 !important;
-      }
-      .menu-food-price {
-        font-size: 20px !important;
-      }
-      .menu-food-btn {
-        height: 38px !important;
-        font-size: 15px !important;
-        min-width: 0 !important;
-        width: 100% !important;
-        letter-spacing: 0.03em !important;
-      }
-      .menu-food-btn:hover {
-        transform: scale(1.03) !important;
-      }
-      .menu-food-footer {
-        flex-direction: column !important;
-        gap: 10px !important;
-        align-items: stretch !important;
-        padding-top: 12px !important;
-      }
-
-      /* Floating Cart CTA — now replaced by new order bar, hide old one */
-      .mobile-sticky-order {
-        display: none !important;
-      }
-      /* New floating order bar */
-      .mobile-order-bar {
+      /* 2. Header improvements */
+      .nav {
+        height: 68px !important; /* Navbar height: 68px */
+        padding: 0 16px !important;
         display: flex !important;
-      }
-
-      .menu-nav-back {
-        padding: 4px 8px !important;
-        font-size: 10px !important;
-        border-radius: 6px !important;
-      }
-
-      /* Spacing between food rows */
-      .menu-food-card {
-        margin-bottom: 0 !important;
-      }
-      .menu-grid-view > * {
-        margin-bottom: 0 !important;
-      }
-
-      /* Nav toggle */
-      .nav-toggle {
-        display: flex !important;
-        flex-direction: column !important;
+        align-items: center !important;
         justify-content: space-between !important;
-        width: 26px !important;
-        height: 18px !important;
-        background: transparent !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .nav .brand {
+        font-size: 15px !important; /* Site title font size: 14-16px */
+        white-space: nowrap !important; /* Prevent wrapping */
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        height: 100% !important;
+      }
+      .brand-mark {
+        width: 34px !important; /* Logo size: 34px */
+        height: 34px !important;
+        flex-shrink: 0 !important;
+      }
+
+      /* 3. Hamburger menu */
+      .nav-toggle, .mobile-menu-toggle {
+        width: 40px !important; /* Hamburger button container should be 40x40px */
+        height: 40px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        margin-right: 0 !important; /* Flush right */
         border: none !important;
+        background: transparent !important;
         cursor: pointer !important;
         z-index: 10001 !important;
-        padding: 0 !important;
-        outline: none !important;
       }
-      .nav-toggle .bar {
+      .nav-toggle .bar, .mobile-menu-toggle span {
+        width: 22px !important; /* Line width: 22px */
+        height: 2px !important; /* Line height: 2px */
+        margin: 2.5px 0 !important; /* Spacing gap between lines: 5px */
+        border-radius: 999px !important;
         display: block !important;
-        width: 100% !important;
-        height: 2px !important;
         background-color: #fff !important;
         transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
         transform-origin: left center !important;
       }
+      
+      /* Hamburger animations */
       .nav-toggle.active .bar:nth-child(1) {
         transform: rotate(45deg) translate3d(2px, -1px, 0) !important;
         background-color: var(--lime) !important;
@@ -1746,32 +1687,184 @@
         background-color: var(--lime) !important;
       }
 
-      /* Mobile menu overlay */
-      .mobile-menu-links {
-        gap: 8px !important;
-        width: 100% !important;
-        text-align: center !important;
+      /* 4. Navigation layout elements repositioning */
+      .nav-book-link, .mobile-nav-book {
+        display: none !important; /* Remove Book Now from header */
+      }
+      .menu-nav-back {
+        position: fixed !important;
+        top: 84px !important; /* Place Back button below 68px navbar as a floating pill */
+        left: 16px !important;
+        display: inline-flex !important;
         align-items: center !important;
-      }
-      .mobile-menu-links a {
-        font-size: 18px !important;
-        font-weight: 700 !important;
-        letter-spacing: 0.04em !important;
-        text-transform: uppercase !important;
+        justify-content: center !important;
+        background: rgba(20, 21, 25, 0.8) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-radius: 99px !important;
         color: #fff !important;
-        padding: 10px 0 !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-        font-family: var(--display) !important;
-        width: 100% !important;
-        text-align: center !important;
-      }
-      .mobile-menu-book-btn {
-        margin-top: 14px !important;
+        padding: 8px 16px !important;
         font-size: 11px !important;
-        font-weight: 800 !important;
-        padding: 12px 24px !important;
-        width: auto !important;
+        font-weight: 700 !important;
+        z-index: 999 !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+        text-decoration: none !important;
+        transition: all 0.2s ease !important;
+      }
+      
+      /* 5. Content wrapper */
+      .menu-hero {
+        padding: 90px 0 24px !important;
+        min-height: auto !important;
+      }
+      .menu-hero .wrap {
+        padding: 0 16px !important;
+        gap: 16px;
+      }
+      .menu-hero h1 {
+        font-size: 28px !important;
+        line-height: 1.0 !important;
+      }
+      .menu-hero-lead {
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+      }
+      .feature-chip {
+        padding: 6px 12px !important;
+        font-size: 11px !important;
+      }
+
+      /* 6. Search bar */
+      .search-wrap {
+        margin-top: 24px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .search-input {
+        width: 100% !important;
+        height: 52px !important; /* Height: 52px */
+        background: rgba(10, 10, 12, 0.65) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
         border-radius: 8px !important;
+        font-size: 13px !important;
+        padding: 0 100px 0 14px !important; /* No left icon, room for Filters on right */
+        color: #fff !important;
+        outline: none !important;
+        box-sizing: border-box !important;
+      }
+      .search-kbd-shortcut {
+        display: none !important;
+      }
+      .search-filters-btn {
+        right: 8px !important;
+        padding: 4px 8px !important;
+        font-size: 9px !important;
+        gap: 4px !important;
+      }
+
+      /* 7. Category chips horizontal scroll */
+      .menu-categories-row {
+        display: flex !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        scrollbar-width: none !important;
+        -webkit-overflow-scrolling: touch !important;
+        gap: 10px !important;
+        margin-top: 20px !important;
+        padding: 8px 16px !important;
+        margin: 0 -16px !important;
+        top: 68px !important; /* Sticky category bar below 68px navbar */
+        position: sticky !important;
+        background: #08090c !important;
+        z-index: 100 !important;
+      }
+      .menu-categories-row::-webkit-scrollbar {
+        display: none !important;
+      }
+      .menu-categories-row .menu-side-btn {
+        flex: 0 0 auto !important;
+        scroll-snap-align: start !important;
+        min-width: 120px !important; /* Minimum chip width around 120px */
+        height: 38px !important;
+        font-size: 11px !important;
+        padding: 0 16px !important;
+        opacity: 0.7 !important;
+        white-space: nowrap !important;
+      }
+      .menu-categories-row .menu-side-btn.active {
+        opacity: 1 !important;
+        box-shadow: 0 4px 20px rgba(245, 198, 77, 0.45) !important;
+        transform: scale(1.03) !important;
+      }
+
+      /* 8. Product cards spacing and sizes */
+      .menu-grid-view {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important; /* Two cards per row */
+        column-gap: 12px !important;
+        row-gap: 16px !important;
+        margin-top: 24px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      
+      /* One card per row below 360px viewports */
+      @media (max-width: 360px) {
+        .menu-grid-view {
+          grid-template-columns: 1fr !important;
+        }
+      }
+
+      .food-product-card {
+        height: 100% !important; /* Equal height cards */
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        border-radius: 12px !important;
+        background: rgba(20, 21, 25, 0.6) !important;
+      }
+      .food-image-container {
+        width: 100% !important;
+        aspect-ratio: 4 / 3 !important; /* Responsive image ratio */
+        height: auto !important;
+      }
+      .food-card-details {
+        flex-grow: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        padding: 12px !important;
+      }
+      .food-card-title {
+        font-size: 15px !important;
+        line-height: 1.2 !important;
+      }
+      .food-card-desc {
+        font-size: 11px !important;
+        line-height: 1.4 !important;
+        -webkit-line-clamp: 2 !important;
+      }
+      .cafe-add-btn {
+        width: 100% !important; /* Full width buttons */
+        height: 34px !important;
+        font-size: 11px !important;
+      }
+      .food-card-footer {
+        padding: 0 12px 12px !important;
+      }
+      
+      /* Mobile Menu Overlay adjustments */
+      .mobile-menu-links {
+        padding-top: 80px !important;
+      }
+      
+      .mobile-order-bar {
+        display: flex !important;
+      }
+      .mobile-sticky-order {
+        display: none !important;
       }
     }
     
@@ -1906,7 +1999,6 @@
     <a href="index.html#book" class="nav-book-link">Book Now</a>
     <div style="display: flex; align-items: center; gap: 12px;">
       <a class="menu-nav-back" href="index.html">← Back</a>
-      <a class="mobile-nav-book" href="index.html#book">Book Now</a>
       <!-- Hamburger Toggle Button for mobile viewports -->
       <button class="nav-toggle" id="mobileMenuBtn" aria-label="Toggle Navigation Menu">
         <span class="bar"></span>
@@ -1963,9 +2055,12 @@
         <!-- Search & Filter shelf -->
         <div class="menu-shelf-row">
           <div class="search-wrap">
-            <span class="search-icon">🔍</span>
-            <input type="text" id="menuSearchInput" class="search-input" placeholder="Search burgers, wraps, shakes..." oninput="handleSearch(this)">
-            <span class="filter-icon" onclick="event.stopPropagation();">🎛️</span>
+            <input type="text" id="menuSearchInput" class="search-input" placeholder="Search your next loadout..." oninput="handleSearch(this)">
+            <span class="search-kbd-shortcut">CTRL + K</span>
+            <div class="search-filters-btn" onclick="document.querySelector('.menu-categories-row').scrollIntoView({behavior:'smooth', block:'center'});">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sliders-horizontal"><line x1="21" x2="14" y1="4" y2="4"/><line x1="10" x2="3" y1="4" y2="4"/><line x1="21" x2="17" y1="12" y2="12"/><line x1="13" x2="3" y1="12" y2="12"/><line x1="21" x2="11" y1="20" y2="20"/><line x1="7" x2="3" y1="20" y2="20"/><line x1="14" x2="14" y1="2" y2="6"/><line x1="17" x2="17" y1="10" y2="14"/><line x1="7" x2="7" y1="18" y2="22"/></svg>
+              Filters
+            </div>
           </div>
 
           <!-- Category Pills horizontal scroll below search -->
@@ -2489,6 +2584,18 @@
     // Close modal on Escape key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeFoodDetailsModal();
+    });
+
+    // Ctrl + K listener to focus search bar
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        const searchInput = document.getElementById('menuSearchInput');
+        if (searchInput) {
+          searchInput.focus();
+          searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
     });
   </script>
 </body>

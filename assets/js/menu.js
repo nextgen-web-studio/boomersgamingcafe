@@ -399,13 +399,25 @@ window.openFoodDetailsModal = function(itemId) {
 
   contentWrap.innerHTML = `
     <div class="food-modal-grid">
-      <!-- Left: Image -->
+      <!-- Left: Image (Swipable Carousel on Mobile) -->
       <div class="food-modal-media">
         <div class="modal-food-badge-wrap">
           ${foundItem.popularity === 'Bestseller' || foundItem.popularity === 'Must Try' ? `<span class="modal-food-badge bestseller">🔥 ${foundItem.popularity}</span>` : ''}
           <span class="modal-food-veg-badge ${foundItem.isVeg ? 'veg' : 'nonveg'}">${foundItem.isVeg ? '🟢 Vegetarian' : '🔴 Non-Vegetarian'}</span>
         </div>
-        <img class="modal-food-img" src="${foundItem.image}" alt="${foundItem.name}">
+        
+        <div class="modal-image-carousel" id="modalImageCarousel">
+          <div class="carousel-slide" style="background-image: url('${foundItem.image}'); background-size: cover; background-position: center;"></div>
+          <div class="carousel-slide" style="background-image: url('${foundItem.image}'); background-size: cover; background-position: center; filter: brightness(1.1) contrast(1.05);"></div>
+          <div class="carousel-slide" style="background-image: url('${foundItem.image}'); background-size: cover; background-position: center; filter: saturate(1.25) brightness(0.95);"></div>
+        </div>
+        
+        <div class="carousel-dots-indicator" id="carouselDotsIndicator">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+
         <!-- Favourite Heart Icon overlay -->
         <button class="modal-fav-btn" onclick="this.classList.toggle('active')" aria-label="Favorite">❤️</button>
       </div>
@@ -431,7 +443,7 @@ window.openFoodDetailsModal = function(itemId) {
         </div>
 
         <!-- Ingredients tags -->
-        <div>
+        <div class="modal-extra-section">
           <div class="food-modal-section-title">⚙️ Loadout Ingredients</div>
           <div class="food-ingredient-tags">
             ${foundItem.ingredients ? foundItem.ingredients.map(ing => `<span class="food-ingredient-tag">${ing}</span>`).join('') : '<span class="food-ingredient-tag">Premium ingredients</span>'}
@@ -470,7 +482,7 @@ window.openFoodDetailsModal = function(itemId) {
 
         <!-- Related Items -->
         ${related.length > 0 ? `
-          <div>
+          <div class="modal-extra-section">
             <div class="food-modal-section-title">🎯 Customers Also Ordered</div>
             <div class="food-related-scroll">
               ${related.map(rel => `
@@ -490,7 +502,7 @@ window.openFoodDetailsModal = function(itemId) {
         ` : ''}
 
         <!-- Recommended Drink Pairing -->
-        <div class="recommended-pairing-block">
+        <div class="recommended-pairing-block modal-extra-section">
           <div class="food-modal-section-title">🥤 Recommended Pairing</div>
           <div style="font-size:12px; color:#B8B8B8; display:flex; align-items:center; gap:8px;">
             <span>Recommended Drink:</span>
@@ -499,7 +511,7 @@ window.openFoodDetailsModal = function(itemId) {
         </div>
 
         <!-- Gaming tags -->
-        <div style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 15px; font-size:11px; color:rgba(255,255,255,0.4); display:flex; gap:16px;">
+        <div class="modal-extra-section" style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 15px; font-size:11px; color:rgba(255,255,255,0.4); display:flex; gap:16px;">
           <span>🚀 Ready in ${foundItem.prep} minutes</span>
           <span>🎮 Perfect with PC Arena</span>
         </div>
@@ -509,6 +521,20 @@ window.openFoodDetailsModal = function(itemId) {
 
   modal.classList.add('active');
   document.body.classList.add('no-scroll');
+
+  // Bind carousel dots scroll listener
+  setTimeout(() => {
+    const carousel = document.getElementById('modalImageCarousel');
+    const dots = document.querySelectorAll('#carouselDotsIndicator .dot');
+    if (carousel && dots.length) {
+      carousel.addEventListener('scroll', () => {
+        const index = Math.round(carousel.scrollLeft / (carousel.offsetWidth || 1));
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === index);
+        });
+      });
+    }
+  }, 100);
 
   Tracker.track('Food Modal Opened', { item: foundItem.name });
 };
