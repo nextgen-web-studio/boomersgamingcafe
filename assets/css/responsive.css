@@ -622,17 +622,27 @@
 
   .reviews-track {
     display: flex !important;
-    transform: none !important; /* Deactivates javascript horizontal translations */
+    flex-wrap: nowrap !important;
+    transform: none !important;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
   }
+  .reviews-track::-webkit-scrollbar { display: none; }
 
   .review-slide {
-    flex: 0 0 88% !important;
+    flex: 0 0 85% !important;
     scroll-snap-align: start;
-    margin-right: 16px;
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 20px !important;
+    padding: 16px !important;
     border-radius: 18px;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .reviews-nav {
