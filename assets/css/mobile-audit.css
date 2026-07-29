@@ -1,0 +1,1114 @@
+/* Mobile-only responsive audit. Desktop styles are deliberately untouched. */
+@media (max-width:800px){
+  :root{--mobile-gutter:16px;--mobile-section-space:34px}
+  html,body{width:100%;max-width:100%;overflow-x:hidden!important}
+  body{padding-bottom:calc(76px + env(safe-area-inset-bottom))!important}
+  main,.hero,.section,.story,.happy,.modes,.cafe,.footer{max-width:100%;overflow:hidden}
+  .wrap{width:calc(100% - (var(--mobile-gutter) * 2))!important;margin-inline:auto!important}
+  .section{padding:var(--mobile-section-space) 0!important}
+  .section+.section{padding-top:var(--mobile-section-space)!important}
+  .section-kicker{margin-bottom:10px!important}.section-intro{font-size:13px!important;line-height:1.6!important;margin-top:14px!important}
+  .display{font-size:clamp(2.15rem,11vw,3.45rem)!important;line-height:.9!important;word-break:normal!important;overflow-wrap:anywhere}
+
+  /* Fixed, grid-aligned header and a true full-screen menu. */
+  .nav{position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;height:64px!important;padding:0 var(--mobile-gutter)!important;display:flex!important;align-items:center!important;z-index:10020!important;background:rgba(8,9,12,.88)!important;backdrop-filter:blur(15px)!important;border-bottom:1px solid rgba(255,255,255,.09)!important}
+  .brand{display:flex!important;align-items:center!important;gap:8px!important;min-width:0!important;font-size:18px!important;line-height:1!important}.brand-mark{width:30px!important;height:30px!important;flex:0 0 30px!important}.nav-cta{display:none!important}.nav-toggle{width:42px!important;height:42px!important;display:grid!important;place-items:center!important;margin:0!important;padding:0!important;flex:0 0 42px!important}
+  .mobile-menu-overlay{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;padding:88px var(--mobile-gutter) calc(28px + env(safe-area-inset-bottom))!important;display:flex!important;align-items:flex-start!important;justify-content:flex-start!important;background:rgba(7,8,10,.98)!important;backdrop-filter:blur(18px)!important;clip-path:inset(0 0 100% 0)!important;opacity:0!important;pointer-events:none!important;z-index:10010!important;transition:clip-path .42s cubic-bezier(.2,.8,.2,1),opacity .25s ease!important}
+  .mobile-menu-overlay.active{clip-path:inset(0)!important;opacity:1!important;pointer-events:auto!important}.mobile-menu-links{width:100%!important;display:flex!important;flex-direction:column!important;gap:5px!important}.mobile-menu-links a{font-size:clamp(1.55rem,8vw,2.35rem)!important;line-height:1.08!important;padding:12px 0!important;border-bottom:1px solid rgba(255,255,255,.1)!important}.mobile-menu-book-btn{margin-top:18px!important;text-align:center!important;border-radius:12px!important;padding:15px!important;font-size:12px!important;background:var(--lime)!important;color:#171008!important}
+
+  /* Hero: content-first, no crop/overlap, then live booking. */
+  .hero{display:block!important;min-height:0!important;padding:91px 0 28px!important}.hero-media,.hero-video{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:0!important;margin:0!important;border-radius:0!important;z-index:-2!important}.hero .wrap{width:calc(100% - 32px)!important}.hero-main{max-width:100%!important}.hero h1{font-size:clamp(3.1rem,15vw,4.8rem)!important;line-height:.82!important;letter-spacing:-.085em!important;margin:13px 0 17px!important;overflow:visible!important}.hero h1 span{overflow:visible!important}.hero-lead{font-size:13px!important;line-height:1.62!important;margin:0 0 19px!important;max-width:34rem!important}.hero-actions,.hero-secondary-ctas{display:grid!important;grid-template-columns:1fr!important;gap:9px!important;margin:0!important}.hero-actions .button{width:100%!important;min-height:46px!important;height:46px!important;border-radius:10px!important;padding:0 14px!important;font-size:11px!important}.hero-secondary-ctas .button{width:100%!important}.trust-strip-scroll{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important;overflow:visible!important;margin-top:16px!important;padding:0!important}.trust-item{display:block!important;min-width:0!important;white-space:normal!important;text-align:left!important;padding:9px!important;font-size:10px!important;line-height:1.35!important;border-radius:9px!important}.trust-icon{font-size:13px!important}.trust-sep{display:none!important}.hero-bottom{display:block!important;margin-top:18px!important}.hero-stats-card{display:none!important}.booking-float{display:none!important}
+
+  /* Live status is cards, not a ticker. */
+  .activity-ticker-wrap{height:auto!important;min-height:0!important;padding:0 var(--mobile-gutter)!important;background:#101114!important}.activity-ticker{display:none!important}
+
+  .mobile-live-grid{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+    padding:16px 0 20px;
+  }
+
+  /* Section header for the live grid */
+  .mobile-live-grid::before{
+    content:"🔴 LIVE STATUS";
+    display:block;
+    grid-column:1/-1;
+    font:700 9px var(--mono);
+    letter-spacing:.12em;
+    color:#ff4444;
+    padding-bottom:8px;
+    border-bottom:1px solid rgba(255,68,68,.15);
+    margin-bottom:2px;
+  }
+
+  .mobile-live-card{
+    min-width:0;
+    padding:14px 14px 12px;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:14px;
+    background:#13141a;
+    position:relative;
+    overflow:hidden;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+
+  /* Gradient accent in corner per zone */
+  .mobile-live-card::after{
+    content:"";
+    position:absolute;
+    top:-24px;
+    right:-24px;
+    width:72px;
+    height:72px;
+    border-radius:50%;
+    opacity:.12;
+    pointer-events:none;
+  }
+
+  .mobile-live-card.pc{border-left:3px solid #55dcff}
+  .mobile-live-card.ps{border-left:3px solid #9d74ff}
+  .mobile-live-card.vr{border-left:3px solid #e08cff}
+  .mobile-live-card.race{border-left:3px solid #efbd4e}
+
+  .mobile-live-card.pc::after{background:#55dcff}
+  .mobile-live-card.ps::after{background:#9d74ff}
+  .mobile-live-card.vr::after{background:#e08cff}
+  .mobile-live-card.race::after{background:#efbd4e}
+
+  /* Zone label row */
+  .mobile-live-card small{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    font:600 8px var(--mono);
+    letter-spacing:.08em;
+    color:#7a7e7c;
+    text-transform:uppercase;
+    margin-bottom:6px;
+  }
+
+  /* Status indicator dot */
+  .mobile-live-card small::before{
+    content:"";
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    flex-shrink:0;
+    animation:mlcPulse 2s infinite;
+  }
+
+  .mobile-live-card.pc small::before,.mobile-live-card.ps small::before,.mobile-live-card.race small::before{background:#00db78}
+  .mobile-live-card.vr small::before{background:#ff5555}
+
+  @keyframes mlcPulse{
+    0%,100%{opacity:1;box-shadow:0 0 0 0 currentColor}
+    50%{opacity:.6}
+  }
+
+  /* Availability number */
+  .mobile-live-card b{
+    display:block;
+    font:700 18px var(--display);
+    letter-spacing:-.055em;
+    line-height:1;
+    margin-top:2px;
+    transition:color .35s ease;
+  }
+
+  .mobile-live-card.pc b,.mobile-live-card.ps b{color:#00db78}
+  .mobile-live-card.vr b{color:#ff5555}
+  .mobile-live-card.race b{color:#efbd4e}
+
+  /* Fade update animation */
+  .mobile-live-card b.updating{
+    animation:mlcFadeUpdate .4s ease both;
+  }
+
+  @keyframes mlcFadeUpdate{
+    0%{opacity:0;transform:translateY(6px)}
+    100%{opacity:1;transform:none}
+  }
+
+
+  /* Launcher and arena cards stay within a 16px grid. */
+  .game-tabs{display:flex!important;overflow-x:auto!important;gap:8px!important;padding:0 0 8px!important;grid-template-columns:none!important;scroll-snap-type:x mandatory!important}.game-tab{flex:0 0 154px!important;min-height:145px!important;scroll-snap-align:start!important;border-radius:10px!important}.game-panel{padding:18px!important;min-height:0!important;border-radius:12px!important}.game-detail{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important}.game-detail b{font-size:14px!important}.arena-head{display:block!important}.arena-head>.section-intro{margin-top:13px!important}.pulse-line{margin-top:26px!important}.floor{display:block!important;margin-top:25px!important}.floor-plan{display:none!important}.arena-status{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important}.status-row,.status-row:first-child{border:1px solid rgba(255,255,255,.12)!important;border-radius:10px!important;padding:12px!important;display:block!important}.status-name b{font-size:15px!important}.status-right{text-align:left!important;margin-top:8px!important}.status-right b{font-size:16px!important}.arena-status>.button{grid-column:span 2!important;width:100%!important;min-height:44px!important;margin-top:4px!important}
+
+  /* Story, sim and VR: media first, low vertical overhead, accordions retained. */
+  .story-grid{display:flex!important;flex-direction:column!important;min-height:0!important}.story-copy{order:0!important;padding:34px var(--mobile-gutter) 18px!important}.story-image{order:1!important;min-height:240px!important;width:100%!important}.story-copy .display{font-size:clamp(2.2rem,10vw,3.2rem)!important}.story-numbers{gap:17px!important;margin-top:23px!important}.story-numbers b{font-size:25px!important}.watch-inside{margin-top:18px!important}.mode-grid{display:grid!important;grid-template-columns:1fr!important;gap:14px!important}.mode{min-height:0!important;padding:18px!important;border-radius:12px!important}.mode h3{font-size:2.8rem!important;margin:9px 0 11px!important}.mode p{font-size:13px!important;line-height:1.55!important}.mode>div[style*="aspect-ratio"]{margin:14px 0 11px!important;aspect-ratio:16/9!important}.mode-chip-row{max-height:64px!important;overflow:auto!important}.mode-accordion{margin-top:12px!important}.mode-accordion summary{padding:12px!important}.mode-status-panel{margin-top:12px!important}.mode-status-row{margin-top:12px!important}.mode-cta{width:100%!important;min-height:42px!important;justify-content:center!important}
+
+  /* Power-up station: compact controls, two-column menu, no empty rhythm. */
+  .cafe-grid{display:block!important}.cafe-copy{padding:0!important}.cafe-photo{display:none!important}.cafe .wrap{width:calc(100% - 32px)!important}.cafe-tabs,#foodFilterChipsWrap{display:flex!important;overflow-x:auto!important;flex-wrap:nowrap!important;gap:7px!important;scrollbar-width:none!important;padding:8px 0!important;position:sticky!important;top:64px!important;z-index:15!important;background:#26170f!important}.cafe-tabs::-webkit-scrollbar,#foodFilterChipsWrap::-webkit-scrollbar{display:none!important}.cafe-tab-btn,.food-filter-btn{flex:0 0 auto!important;white-space:nowrap!important;font-size:10px!important;padding:8px 10px!important;border-radius:99px!important}.cafe-items-list{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}.cafe-item-card,.menu-item-card{min-width:0!important;border-radius:10px!important}.cafe-item-card img,.menu-item-card img{height:118px!important;object-fit:cover!important}.food-detail-grid{grid-template-columns:1fr 1fr!important;gap:9px!important}.food-detail-card:first-child{grid-column:span 2!important;grid-row:auto!important;min-height:220px!important}.food-detail-card{min-height:175px!important}.food-detail-copy b{font-size:16px!important}.food-detail-copy small{font-size:8px!important}.bundle-grid,.loadout-grid{display:flex!important;overflow-x:auto!important;gap:12px!important;scroll-snap-type:x mandatory!important;padding:2px 0 8px!important}.bundle-card,.loadout-card{flex:0 0 calc(100% - 32px)!important;min-height:0!important;scroll-snap-align:start!important}
+
+  /* Booking/footer/floating controls respect the device safe area. */
+  .booking-grid{display:block!important}.booking-card{padding:18px!important;box-shadow:8px 8px 0 var(--lime)!important}.steps{margin-top:22px!important}.step{padding:12px 0!important}.slot-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important}.footer{padding-bottom:22px!important}.footer-quick{grid-template-columns:1fr 1fr!important;gap:20px!important;padding:28px 0!important}.footer-top{padding-bottom:32px!important}.footer .display{font-size:3.1rem!important}.mobile-book,#mobileBookBar{height:48px!important;left:16px!important;right:16px!important;bottom:calc(10px + env(safe-area-inset-bottom))!important;border-radius:14px!important;padding:0!important;z-index:1000!important}.mobile-hud-toggle{bottom:calc(70px + env(safe-area-inset-bottom))!important;right:16px!important;width:44px!important;height:44px!important;z-index:1001!important}.floating-avail-widget{display:none!important}
+
+  /* Low-cost motion on touch devices. */
+  .hero-scene,.hero-particles,.hero-orbit{animation-duration:18s!important}.reveal{transform:translateY(14px)!important}.button,.experience-preview-card,.game-tab,.food-detail-card{transition-duration:.2s!important}
+}
+@media (max-width:360px){.display{font-size:2.05rem!important}.hero h1{font-size:3rem!important}.trust-item{font-size:9px!important}.footer-quick{grid-template-columns:1fr!important}.arena-status{grid-template-columns:1fr!important}.arena-status>.button{grid-column:auto!important}}
+@media (prefers-reduced-motion:reduce) and (max-width:800px){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.hero-particles{display:none!important}}
+
+/* =============================================
+   GLOBAL — Eliminate horizontal scrollbar
+   ============================================= */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100% !important;
+}
+
+/* =============================================
+   BOOK NOW — Force gold fill on all viewports
+   Fixes invisible transparent button on mobile
+   ============================================= */
+.hero-primary-cta {
+  background: var(--accent, #efbd4e) !important;
+  color: #0a0700 !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+  animation-fill-mode: both !important;
+}
+
+.hero-primary-cta:hover {
+  background: #ffc800 !important;
+  color: #0a0700 !important;
+}
+
+/* Ensure the button is always rendered with gold bg even if JS hasn't run */
+a.button.hero-primary-cta,
+button.button.hero-primary-cta {
+  background: var(--accent, #efbd4e) !important;
+  color: #0a0700 !important;
+}
+
+/* =============================================
+   LIVE NOW — Red rounded pill badge
+   ============================================= */
+.live-now-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 44, 44, 0.15);
+  border: 1px solid rgba(255, 44, 44, 0.35);
+  color: #ff3333;
+  font: 700 9px var(--mono, monospace);
+  letter-spacing: 0.1em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+.live-now-pill::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ff3333;
+  box-shadow: 0 0 6px #ff3333;
+  animation: livePillPulse 1.4s infinite;
+  flex-shrink: 0;
+}
+
+@keyframes livePillPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.75); }
+}
+
+/* Hide the old separate dot since pill has its own */
+.live-card-header .live-dot-pulse {
+  display: none !important;
+}
+
+/* =============================================
+   LIVE CARD HEADER — Improve layout
+   ============================================= */
+.live-card-header {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0 !important;
+}
+
+/* =============================================
+   MOBILE LIVE CARDS — JS update animation helper
+   ============================================= */
+@media (max-width: 800px) {
+  /* Cards: subtle tap highlight */
+  .mobile-live-card:active {
+    transform: scale(0.97);
+  }
+
+  /* Book Now button on mobile: gold background */
+  .hero-actions .hero-primary-cta,
+  a.hero-primary-cta {
+    background: var(--accent, #efbd4e) !important;
+    color: #0a0700 !important;
+    font-weight: 800 !important;
+    opacity: 1 !important;
+  }
+
+  /* Secondary CTAs: proper glass style */
+  .hero-secondary-ctas .button {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    color: #fff !important;
+    opacity: 1 !important;
+  }
+
+  /* Remove the 3 food spotlight cards in mobile */
+  #cinematicFoodDetails {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   GLOBAL & MOBILE MENU OVERLAY / CAFE CARDS ALIGNMENT POLISH
+   ========================================================================== */
+
+/* 1. Global Food Card Square Aspect Ratio (Homepage & Menu) */
+.food-image-container,
+.food-image-bg,
+.cafe-items-list .food-image-container,
+.cafe-items-list .food-image-bg {
+  aspect-ratio: 1 / 1 !important;
+  height: auto !important;
+}
+
+@media (max-width: 800px) {
+  /* 2. Global Hamburger Toggle Button Fixes (All Pages) */
+  /* 2. Refined Global Hamburger Toggle Button (All Pages) */
+  .nav-toggle {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 36px !important; /* Reduced yellow circle size slightly */
+    height: 36px !important; /* Reduced yellow circle size slightly */
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer !important;
+    z-index: 10025 !important; /* Above overlay */
+    padding: 0 !important;
+    outline: none !important;
+    margin: 0 0 0 auto !important; /* Aligned to right */
+    border-radius: 50% !important;
+    transition: background-color 0.3s ease, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  }
+  .nav-toggle:hover,
+  .nav-toggle:active {
+    background-color: rgba(245, 198, 77, 0.08) !important;
+  }
+  .nav-toggle .bar {
+    display: block !important;
+    width: 18px !important; /* 18px width centered */
+    height: 2px !important; /* Thinner 2px stroke */
+    background-color: #fff !important;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    transform-origin: center !important;
+    margin: 0 !important;
+  }
+  .nav-toggle .bar:nth-child(2) {
+    margin-top: 5px !important; /* 5px spacing */
+    margin-bottom: 5px !important; /* 5px spacing */
+  }
+  .nav-toggle:hover .bar,
+  .nav-toggle:active .bar {
+    background-color: #F5C64D !important;
+  }
+  .nav-toggle.active {
+    background-color: #F5C64D !important; /* Yellow background on active */
+    transform: rotate(180deg) !important; /* Smooth rotate animation on open/close */
+  }
+  .nav-toggle.active .bar {
+    background-color: #000 !important; /* Black X inside yellow circle */
+  }
+  .nav-toggle.active .bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg) !important;
+  }
+  .nav-toggle.active .bar:nth-child(2) {
+    opacity: 0 !important;
+    transform: scaleX(0) !important;
+  }
+  .nav-toggle.active .bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg) !important;
+  }
+
+  /* 3. Refine Mobile Navigation Overlay Links Sizing (All Pages) */
+  .mobile-menu-links {
+    gap: 8px !important;
+    width: 100% !important;
+    text-align: center !important;
+    align-items: center !important;
+  }
+  .mobile-menu-links a {
+    font-size: 18px !important; /* Elegant letters */
+    font-weight: 700 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+    color: #fff !important;
+    padding: 10px 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    font-family: var(--display) !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+  .mobile-menu-book-btn {
+    margin-top: 14px !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    padding: 12px 24px !important;
+    width: auto !important;
+    border-radius: 8px !important;
+  }
+
+  /* 4. Food Card Compact Styling, Stacked Footer & Alignment (Homepage Mobile) */
+  .cafe-items-list .food-product-card {
+    border-radius: 16px !important;
+    background: #141414 !important; /* Match menu card bg */
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+  }
+  .cafe-items-list .food-card-details {
+    padding: 12px !important; /* Compact padding */
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1 !important;
+  }
+  .cafe-items-list .food-card-title {
+    font-size: 14px !important; /* Smaller title */
+    font-family: var(--display) !important;
+    color: #fff !important;
+    margin: 4px 0 6px !important;
+    line-height: 1.2 !important;
+  }
+  .cafe-items-list .food-card-desc {
+    font-size: 11px !important; /* Compact desc */
+    color: #B8B8B8 !important;
+    line-height: 1.45 !important;
+    margin-bottom: 12px !important;
+    min-height: 0 !important; /* Remove min-height to avoid stretching */
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important; /* Limit description to 2 lines */
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  .cafe-items-list .food-type-badge {
+    font-size: 10px !important;
+  }
+  .cafe-items-list .food-card-footer {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    padding: 0 12px 12px !important; /* Match padding */
+    border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+    padding-top: 10px !important;
+    margin-top: auto !important;
+  }
+  .cafe-items-list .food-card-price {
+    font-size: 16px !important; /* Clean, compact price */
+    color: #F5C64D !important; /* Gold: #F5C64D */
+    font-weight: 800 !important;
+    text-align: left !important;
+  }
+  .cafe-items-list .food-product-card .cafe-add-btn {
+    width: 100% !important;
+    margin: 0 !important;
+    height: 32px !important; /* Compact height */
+    font-size: 9px !important; /* Smaller label */
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    border-radius: 8px !important;
+    background: transparent !important;
+    border: 1px solid #F5C64D !important;
+    color: #F5C64D !important;
+    text-transform: uppercase !important;
+    font-family: var(--mono) !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+  .cafe-items-list .food-product-card .cafe-add-btn:hover {
+    background: #F5C64D !important;
+    color: #000 !important;
+  }
+
+  /* ==========================================================================
+     MOBILE FOOD DETAILS MODAL POLISH — NATIVE bottom sheet
+     ========================================================================== */
+
+  /* 1. Full-Screen Bottom Sheet Overlay container */
+  .food-modal-overlay,
+  .food-modal {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    background: rgba(0,0,0,0.6) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    z-index: 11000 !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+  .food-modal-overlay.active,
+  .food-modal.active {
+    opacity: 1 !important;
+    pointer-events: all !important;
+  }
+
+  /* 2. Slide-up bottom sheet container wrapper */
+  .food-modal-overlay .food-modal,
+  .food-modal-wrapper {
+    position: relative !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: 90dvh !important;
+    max-height: 90dvh !important;
+    background: #08090C !important;
+    border-top-left-radius: 24px !important;
+    border-top-right-radius: 24px !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-bottom: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    transform: translateY(100%) !important;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.5) !important;
+  }
+  .food-modal-overlay.active .food-modal,
+  .food-modal.active .food-modal-wrapper {
+    transform: translateY(0) !important;
+  }
+
+  /* 3. Hero Cover Image with Bottom Gradient */
+  .food-modal-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+  .food-modal-media {
+    position: relative !important;
+    width: 100% !important;
+    height: 250px !important;
+    flex-shrink: 0 !important;
+    overflow: hidden !important;
+    border-bottom-left-radius: 20px !important;
+    border-bottom-right-radius: 20px !important;
+    margin: 0 !important;
+    background: #08090C !important;
+    border: none !important;
+  }
+  .food-modal-media .modal-food-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    border-radius: 0 !important;
+  }
+  .food-modal-media::after {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background: linear-gradient(to top, rgba(8,9,12,0.95) 0%, rgba(8,9,12,0.4) 40%, transparent 100%) !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+  }
+
+  /* 4. Badges Overlay */
+  .modal-food-badge-wrap {
+    position: absolute !important;
+    bottom: 16px !important;
+    left: 16px !important;
+    z-index: 2 !important;
+    display: flex !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+    top: auto !important;
+    right: auto !important;
+  }
+  .modal-food-badge.bestseller {
+    background: #F5C64D !important;
+    color: #000 !important;
+    font: 800 10px var(--mono) !important;
+    padding: 6px 12px !important;
+    border-radius: 6px !important;
+    text-transform: uppercase !important;
+  }
+  .modal-food-veg-badge {
+    font: 800 10px var(--mono) !important;
+    padding: 6px 12px !important;
+    border-radius: 6px !important;
+    text-transform: uppercase !important;
+    color: #fff !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+  .modal-food-veg-badge.veg {
+    background: rgba(0, 219, 120, 0.2) !important;
+    border: 1px solid rgba(0, 219, 120, 0.4) !important;
+  }
+  .modal-food-veg-badge.nonveg {
+    background: rgba(255, 79, 112, 0.2) !important;
+    border: 1px solid rgba(255, 79, 112, 0.4) !important;
+  }
+
+  /* 5. Heart Favorite overlay & Close buttons */
+  .food-modal-close {
+    position: absolute !important;
+    top: 16px !important;
+    right: 16px !important;
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    background: rgba(0,0,0,0.5) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    color: #fff !important;
+    font-size: 18px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 1000 !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .modal-fav-btn {
+    position: absolute !important;
+    top: 16px !important;
+    left: 16px !important;
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    background: rgba(0,0,0,0.5) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+    font-size: 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 1000 !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    transition: all 0.25s ease !important;
+  }
+  .modal-fav-btn.active {
+    color: #ff3366 !important;
+    border-color: rgba(255, 51, 102, 0.4) !important;
+    transform: scale(1.1) !important;
+  }
+
+  /* 6. Modal Details Body (Scrollable area) */
+  .food-modal-body,
+  .food-modal-details {
+    padding: 24px 20px calc(110px + env(safe-area-inset-bottom)) !important;
+    overflow-y: auto !important;
+    flex-grow: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+    scrollbar-width: none !important;
+    max-height: calc(90dvh - 250px) !important;
+  }
+  .food-modal-body::-webkit-scrollbar,
+  .food-modal-details::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  /* Sticky Header Behavior on scroll */
+  .food-modal-header-block {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+  }
+  .food-modal-kicker {
+    font: 800 10px var(--mono) !important;
+    color: #F5C64D !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.12em !important;
+  }
+  .food-modal-title,
+  .food-modal-details h3 {
+    font: 800 32px var(--display) !important;
+    color: #fff !important;
+    line-height: 1.1 !important;
+    margin: 0 !important;
+    letter-spacing: -0.02em !important;
+  }
+  .food-modal-price-rating {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-top: 6px !important;
+  }
+  .food-modal-price {
+    font: 800 28px var(--display) !important;
+    color: #F5C64D !important;
+  }
+  .food-modal-rating {
+    font: 700 12px var(--mono) !important;
+    color: #fff !important;
+  }
+  .food-modal-desc,
+  .food-modal-details p {
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+    color: #B8B8B8 !important;
+    margin: 0 !important;
+  }
+
+  /* 7. Premium Stats Chips */
+  .food-stat-chips,
+  .food-modal-details > div[style*="display:flex; gap:16px"] {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 10px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+  .food-stat-chip {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 12px !important;
+    padding: 8px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    font-family: var(--mono) !important;
+    font-size: 12px !important;
+    color: #fff !important;
+    text-align: center !important;
+    line-height: 1.2 !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+  .food-stat-chip:active {
+    border-color: #F5C64D !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    box-shadow: 0 0 10px rgba(245, 198, 77, 0.15) !important;
+  }
+  .food-stat-chip .chip-icon {
+    font-size: 16px !important;
+  }
+  .food-stat-chip .chip-label {
+    font-size: 9px !important;
+    text-transform: uppercase !important;
+    color: rgba(255, 255, 255, 0.4) !important;
+    font-weight: 700 !important;
+  }
+
+  /* 8. Ingredients Tags list */
+  .food-modal-section-title,
+  .food-modal-details h4 {
+    font: 800 10px var(--mono) !important;
+    color: rgba(255, 255, 255, 0.4) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.12em !important;
+    margin: 0 0 12px !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+  .food-ingredient-tags,
+  .food-modal-details ul {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+  }
+  .food-ingredient-tag,
+  .food-modal-details ul li {
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid #F5C64D !important;
+    border-radius: 99px !important;
+    padding: 6px 14px !important;
+    font-size: 12px !important;
+    color: #F5C64D !important;
+    font-weight: 600 !important;
+    display: inline-block !important;
+  }
+
+  /* Hide Desktop controls on mobile modal */
+  .food-qty-section-desktop,
+  .food-modal-details > div[style*="align-items:center; gap:16px"] {
+    display: none !important;
+  }
+
+  /* 9. Mobile Sticky Bottom Action Bar */
+  .food-add-sticky-wrap {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    background: rgba(8, 9, 12, 0.96) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding: 16px 20px calc(16px + env(safe-area-inset-bottom)) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 16px !important;
+    z-index: 10000 !important;
+    margin: 0 !important;
+  }
+  .food-add-sticky-wrap .food-qty-selector,
+  .food-add-sticky-wrap .quantity-selector {
+    display: flex !important;
+    align-items: center !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 12px !important;
+    height: 52px !important;
+    padding: 0 4px !important;
+    box-sizing: border-box !important;
+  }
+  .food-add-sticky-wrap .food-qty-btn,
+  .food-add-sticky-wrap .quantity-selector button {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 8px !important;
+    background: transparent !important;
+    border: none !important;
+    color: #fff !important;
+    font-size: 18px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .food-add-sticky-wrap .food-qty-value,
+  .food-add-sticky-wrap .quantity-selector input {
+    width: 32px !important;
+    text-align: center !important;
+    font: 700 15px var(--mono) !important;
+    color: #fff !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .food-add-sticky-wrap .food-add-btn,
+  .food-add-sticky-wrap button.button {
+    flex-grow: 1 !important;
+    height: 52px !important;
+    background: #F5C64D !important;
+    border: none !important;
+    border-radius: 12px !important;
+    color: #000 !important;
+    font: 800 12px var(--mono) !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    box-shadow: 0 4px 20px rgba(245, 198, 77, 0.35) !important;
+    transition: all 0.2s ease !important;
+    padding: 0 16px !important;
+    margin: 0 !important;
+  }
+  .food-add-sticky-wrap .food-add-btn:active,
+  .food-add-sticky-wrap button.button:active {
+    background: #ffcc33 !important;
+    transform: translateY(1px) !important;
+  }
+
+  /* 10. Horizontally Scrollable Related items */
+  .food-related-scroll,
+  .related-items-wrap {
+    display: flex !important;
+    gap: 12px !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+    scroll-snap-type: x mandatory !important;
+    padding: 4px 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+  .food-related-scroll::-webkit-scrollbar,
+  .related-items-wrap::-webkit-scrollbar {
+    display: none !important;
+  }
+  .food-related-card,
+  .related-food-item {
+    flex: 0 0 160px !important;
+    background: #141414 !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    scroll-snap-align: start !important;
+    text-align: left !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+  }
+  .food-related-card img,
+  .related-food-item img {
+    width: 100% !important;
+    height: 100px !important;
+    object-fit: cover !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    aspect-ratio: 1/1 !important;
+  }
+  .food-related-card .rel-name,
+  .related-food-item b {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    color: #fff !important;
+    margin: 8px 10px 4px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  .food-related-info {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .food-related-card .rel-meta,
+  .related-food-item div {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0 10px 10px !important;
+    margin-top: auto !important;
+  }
+  .food-related-card .rel-price,
+  .related-food-item span {
+    font-size: 13px !important;
+    color: #F5C64D !important;
+    font-weight: 700 !important;
+  }
+  .food-related-card .rel-add {
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 6px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+    font-size: 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    transition: all 0.2s ease !important;
+  }
+  .food-related-card .rel-add:active {
+    background: #F5C64D !important;
+    color: #000 !important;
+    border-color: #F5C64D !important;
+  }
+
+  /* 11. Recommended Drink Pairing & Gaming tags */
+  .recommended-pairing-block {
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px dashed rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
+    padding: 14px 18px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    text-align: left !important;
+  }
+
+  /* ==========================================================================
+     MOBILE NAVIGATION DRAWER OVERLAY POLISH
+     ========================================================================== */
+  .mobile-menu-overlay {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: calc(90px + env(safe-area-inset-top)) 24px calc(24px + env(safe-area-inset-bottom)) 24px !important;
+    box-sizing: border-box !important;
+    background: rgba(8, 9, 12, 0.98) !important;
+    backdrop-filter: blur(25px) !important;
+    -webkit-backdrop-filter: blur(25px) !important;
+  }
+
+  .mobile-menu-links {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+    max-width: 320px !important;
+    margin: auto 0 !important;
+  }
+
+  /* Menu Items list style */
+  .mobile-menu-links a:not(.mobile-menu-book-btn) {
+    height: 56px !important; /* Reduced menu item height */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 20px !important;
+    border-radius: 14px !important;
+    background: rgba(255, 255, 255, 0.02) !important; /* Subtle glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    font-family: var(--display) !important;
+    font-size: 16px !important; /* Enhanced letters look sleek */
+    color: #fff !important;
+    text-transform: uppercase !important;
+    letter-spacing: -0.01em !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  /* Hover & tap states */
+  .mobile-menu-links a:not(.mobile-menu-book-btn):hover,
+  .mobile-menu-links a:not(.mobile-menu-book-btn):active {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(245, 198, 77, 0.3) !important;
+    box-shadow: 0 0 15px rgba(245, 198, 77, 0.05) !important;
+    color: #F5C64D !important;
+  }
+
+  /* Active page left accent bar */
+  .mobile-menu-links a:not(.mobile-menu-book-btn).active {
+    border-left: 4px solid #F5C64D !important;
+    background: rgba(245, 198, 77, 0.04) !important;
+    border-color: rgba(245, 198, 77, 0.15) !important;
+    color: #F5C64D !important;
+    padding-left: 24px !important;
+  }
+
+  /* Chevron arrow on the right */
+  .mobile-menu-links a:not(.mobile-menu-book-btn)::after {
+    content: '→' !important;
+    font-family: var(--mono) !important;
+    font-size: 16px !important;
+    color: #F5C64D !important;
+    opacity: 0 !important;
+    transform: translateX(-8px) !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+  
+  .mobile-menu-links a:not(.mobile-menu-book-btn):hover::after,
+  .mobile-menu-links a:not(.mobile-menu-book-btn):active::after,
+  .mobile-menu-links a:not(.mobile-menu-book-btn).active::after {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+  }
+
+  /* CTA Button (Book Now) */
+  .mobile-menu-links a.mobile-menu-book-btn {
+    height: 56px !important; /* Book Now button height to 56px */
+    border-radius: 16px !important;
+    background: linear-gradient(135deg, #F5C64D 0%, #d4a327 100%) !important; /* Stronger gold gradient */
+    color: #000 !important;
+    font: 800 13px var(--mono) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: none !important;
+    transition: all 0.3s ease !important;
+    box-shadow: none !important; /* Glow only on hover */
+    width: 100% !important;
+    margin-top: 10px !important;
+  }
+  
+  .mobile-menu-links a.mobile-menu-book-btn:hover,
+  .mobile-menu-links a.mobile-menu-book-btn:active {
+    background: linear-gradient(135deg, #ffcc33 0%, #e6b23c 100%) !important;
+    box-shadow: 0 0 25px rgba(245, 198, 77, 0.45) !important;
+    transform: translateY(-1px) !important;
+  }
+
+  /* Staggered load animation */
+  .mobile-menu-overlay .mobile-menu-links a {
+    opacity: 0 !important;
+    transform: translateY(15px) !important;
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    transition-delay: calc(var(--i) * 0.05s) !important;
+  }
+  
+  .mobile-menu-overlay.active .mobile-menu-links a {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  /* Social Icons and Drawer Footer styling */
+  .mobile-menu-footer {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 16px !important;
+    width: 100% !important;
+    margin-top: 20px !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+    padding-top: 20px !important;
+  }
+  
+  .mobile-menu-footer .social-links {
+    display: flex !important;
+    gap: 20px !important;
+  }
+  
+  .mobile-menu-footer .social-links a {
+    color: rgba(255, 255, 255, 0.6) !important;
+    text-decoration: none !important;
+    font-size: 13px !important;
+    font-family: var(--mono) !important;
+    transition: color 0.2s !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+  }
+  
+  .mobile-menu-footer .social-links a:hover {
+    color: #F5C64D !important;
+  }
+  
+  .mobile-menu-footer .footer-meta {
+    font-size: 11px !important;
+    font-family: var(--mono) !important;
+    color: rgba(255, 255, 255, 0.3) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+  }
+}
+
+
+
