@@ -90,17 +90,17 @@ function initReviewsSlider() {
           ${rev.author[0]}
         </div>
         <div>
-          <div style="font-weight: 700; color: #fff; display: flex; align-items: center; gap: 6px; font-family: var(--display);">
+          <div style="font-weight: 700; color: #1A1410; display: flex; align-items: center; gap: 6px; font-family: var(--display);">
             ${rev.author} 
             <span style="font-size: 8px; font-family: var(--mono); background: var(--lime); color: #000; padding: 2px 6px; border-radius: 99px; font-weight: bold; text-transform: uppercase; display: inline-flex; align-items: center; gap: 2px;">
               ✓ Verified Gamer
             </span>
           </div>
-          <small style="color: var(--muted); font-size: 11px; font-family: var(--mono);">${rev.date}</small>
+          <small style="color: #9A8D83; font-size: 11px; font-family: var(--mono);">${rev.date}</small>
         </div>
       </div>
-      <div style="color: #efbd4e; font-size: 14px; margin-bottom: 10px; letter-spacing: 2px;">★★★★★</div>
-      <p style="margin: 0; font-style: italic; color: #d0d3d1; line-height: 1.6; font-size: 13px;">“${rev.text}”</p>
+      <div style="color: #c27226; font-size: 14px; margin-bottom: 10px; letter-spacing: 2px;">★★★★★</div>
+      <p style="margin: 0; font-style: italic; color: #625950; line-height: 1.6; font-size: 13px;">“${rev.text}”</p>
     `;
     track.appendChild(slide);
 

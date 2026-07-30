@@ -11,33 +11,63 @@ html, body {
 @media (max-width: 800px) {
   /* Premium Mobile Search overrides */
   .search-wrap {
-    position: relative !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
     display: flex !important;
     align-items: center !important;
+    gap: 10px !important; /* 8-12px gap between search input and filters */
+    width: calc(100% - 24px) !important; /* Expanded breadth: 12px margins on both sides */
+    max-width: 100% !important;
+    margin: 24px auto 0 auto !important; /* Always centered, 24px margin-top */
+    background: rgba(10, 10, 12, 0.6) !important; /* Riot Client style dark background */
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 12px !important; /* 12px rounded borders */
+    padding: 0 16px !important; /* Symmetrical padding since filters button is removed on mobile */
+    box-sizing: border-box !important;
+    height: 44px !important; /* Reduced height on mobile */
+    position: relative !important;
+    overflow: visible !important;
+    transition: border-color 200ms ease, box-shadow 200ms ease, background-color 200ms ease !important;
+  }
+  .search-wrap:focus-within {
+    border-color: rgba(255, 199, 70, 0.5) !important; /* Subtle gold focus glow */
+    background: rgba(10, 10, 12, 0.8) !important;
+    box-shadow: 0 0 16px rgba(255, 199, 70, 0.15) !important;
+  }
+  .search-lead-icon {
+    color: rgba(255, 255, 255, 0.4) !important;
+    flex-shrink: 0 !important;
+    transition: color 200ms ease !important;
+    display: flex !important;
+    margin-right: 12px !important;
+    position: static !important; /* aligned naturally next to input */
+    transform: none !important;
+  }
+  .search-wrap:focus-within .search-lead-icon {
+    color: rgba(255, 199, 70, 0.9) !important;
   }
   .search-input {
-    width: 100% !important;
-    height: 52px !important;
-    background: rgba(10, 10, 12, 0.65) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: 8px !important;
-    font-size: 13px !important;
-    padding: 0 100px 0 14px !important; /* No left icon, room for Filters on right */
-    color: #fff !important;
+    flex: 1 !important; /* input takes up remaining space */
+    width: 0 !important;
+    height: 100% !important;
+    background: transparent !important;
+    border: none !important;
     outline: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    color: #fff !important;
+    font: 500 13px var(--mono) !important; /* Monospace typography */
+    letter-spacing: 0.03em !important;
     box-sizing: border-box !important;
+    line-height: normal !important; /* Vertically centered text input content */
+  }
+  .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-weight: 400 !important;
   }
   .search-kbd-shortcut {
     display: none !important;
   }
   .search-filters-btn {
-    right: 8px !important;
-    padding: 4px 8px !important;
-    font-size: 9px !important;
-    gap: 4px !important;
+    display: none !important;
   }
 
   /* Mobile stack for Live Capacity Cards */
@@ -345,11 +375,29 @@ html, body {
     flex: 0 0 85%;
   }
 
-  /* Mobile Floating HUD Toggle Button */
   .mobile-hud-toggle {
     display: flex !important;
-    bottom: 84px !important;
+    bottom: calc(75px + env(safe-area-inset-bottom)) !important;
     right: 16px !important;
+    width: auto !important;
+    height: 44px !important;
+    border-radius: 22px !important;
+    padding: 0 14px !important;
+    box-sizing: border-box !important;
+    gap: 8px !important;
+  }
+  .mobile-hud-toggle .badge {
+    position: static !important;
+    margin: 0 !important;
+    background: #ff4f70 !important;
+    color: #fff !important;
+    font: 800 11px var(--mono) !important;
+    padding: 2px 7px !important;
+    border-radius: 99px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
   }
 
   .hud-close-btn {
@@ -634,26 +682,7 @@ html, body {
     display: none;
   }
 
-  /* Café cards carousel swipes */
-  .cafe-items-list {
-    display: flex !important;
-    grid-template-columns: none !important;
-    overflow-x: auto !important;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    gap: 16px;
-    padding: 12px 4px;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  .cafe-items-list::-webkit-scrollbar {
-    display: none;
-  }
 
-  .cafe-items-list .badge-card {
-    flex: 0 0 85%;
-    scroll-snap-align: start;
-  }
 
   /* Interactive Floor Plan pinch / zoom hints */
   .floor-plan {
@@ -2027,21 +2056,7 @@ select:focus {
   }
 }
 
-/* 4. Menu list 2 columns (instead of carousel/1 column) */
-@media (max-width: 800px) {
-  .cafe-items-list {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    overflow-x: visible !important;
-    scroll-snap-type: none !important;
-    gap: 12px !important;
-    padding: 0 !important;
-  }
-  .cafe-items-list .badge-card {
-    flex: none !important;
-    min-width: 0 !important;
-  }
-}
+
 
 /* 5. Booking section congested UI, watermark fix, responsive fields */
 @media (max-width: 800px) {
@@ -2066,35 +2081,7 @@ select:focus {
   }
 }
 
-/* 6. Swiggy-style Search Bar (Dark Glass, Gold border on focus) */
-#foodSearchInput {
-  background: rgba(255, 255, 255, 0.03) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  color: #ffffff !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  border-radius: 12px !important;
-  box-shadow: none !important;
-  font-family: 'Manrope', sans-serif !important;
-  font-weight: 500 !important;
-  font-size: 14px !important;
-  height: 52px !important;
-  padding-left: 52px !important; /* Spacious left padding for search icon */
-  padding-right: 52px !important; /* Spacious right padding for filter icon */
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-}
-#foodSearchInput::placeholder {
-  color: rgba(255, 255, 255, 0.4) !important;
-  font-weight: 400 !important;
-}
-#foodSearchInput:focus {
-  border-color: #efbd4e !important;
-  box-shadow: 0 0 20px rgba(239, 189, 78, 0.15) !important;
-  background: rgba(255, 255, 255, 0.06) !important;
-  outline: none !important;
-}
+
 
 /* ================================================================
    BATCH 3 — COMPREHENSIVE POLISHES
@@ -2848,6 +2835,10 @@ select:focus {
   gap: 8px;
   cursor: pointer;
   transition: background 0.2s, border-color 0.2s;
+  width: 100% !important;
+  text-align: left !important;
+  font-family: inherit !important;
+  color: inherit !important;
 }
 
 .m-select-card:active {
