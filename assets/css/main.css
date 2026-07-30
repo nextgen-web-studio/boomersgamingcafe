@@ -1836,21 +1836,7 @@ button {
   display: none;
 }
 
-.cafe-tab-btn {
-  padding: 8px 16px;
-  font: 600 11px var(--mono);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #aeb1b4;
-  border-bottom: 2px solid transparent;
-  transition: 0.2s;
-  white-space: nowrap;
-}
 
-.cafe-tab-btn.active {
-  color: var(--lime);
-  border-bottom-color: var(--lime);
-}
 
 .cafe-items-list {
   margin-top: 15px;
@@ -3487,7 +3473,13 @@ button {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  transition: transform 0.2s, background 0.2s;
+  transition: transform 0.3s ease, background 0.2s, opacity 0.3s ease, visibility 0.3s ease;
+}
+.mobile-hud-toggle.fab-hidden {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translate3d(0, 20px, 0) !important;
+  visibility: hidden !important;
 }
 .mobile-hud-toggle:hover {
   background: #c3e83b;
@@ -4537,38 +4529,43 @@ button {
 /* Rounded Launcher Tabs Category Nav */
 .cafe-tabs {
   border-bottom: none !important;
+  background: transparent !important;
 }
 
 .cafe-tab-btn {
-  padding: 10px 20px !important;
-  font: 700 11px var(--mono);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #aeb1b4;
-  background: rgba(255, 255, 255, 0.01);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 100px !important;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  background: #ffffff !important;
+  color: #374151 !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  font-family: 'Manrope', sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 13px !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  padding: 8px 14px !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
+  transition: all 0.2s ease !important;
+  height: auto !important;
+  min-height: 36px !important;
   white-space: nowrap;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  height: auto !important;
-  min-height: 38px !important;
 }
 
 .cafe-tab-btn:hover {
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.03);
+  background: #f9fafb !important;
+  color: #111827 !important;
+  border-color: #9ca3af !important;
 }
 
 .cafe-tab-btn.active {
-  color: #000 !important;
-  background: var(--accent) !important; /* Gold background */
-  border-color: var(--accent) !important;
-  box-shadow: 0 0 20px rgba(255, 183, 3, 0.35);
+  background: #ffffff !important;
+  color: #111827 !important;
+  border-color: #111827 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08) !important;
 }
 
 /* ==========================================

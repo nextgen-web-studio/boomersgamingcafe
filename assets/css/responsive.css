@@ -385,6 +385,13 @@ html, body {
     padding: 0 14px !important;
     box-sizing: border-box !important;
     gap: 8px !important;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease !important;
+  }
+  .mobile-hud-toggle.fab-hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translate3d(0, 20px, 0) !important;
+    visibility: hidden !important;
   }
   .mobile-hud-toggle .badge {
     position: static !important;
