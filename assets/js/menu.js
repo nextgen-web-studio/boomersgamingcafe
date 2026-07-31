@@ -373,8 +373,10 @@ function initFoodMenuEngine() {
             <h4 class="food-card-title">${item.name}</h4>
             <div class="food-card-price">₹${item.price}</div>
             <p class="food-card-desc">${item.desc}</p>
-            <div class="food-card-meta">
-              <span class="meta-veg ${item.isVeg ? 'veg' : 'non-veg'}">${item.isVeg ? '🟢 Veg' : '🔴 Non-Veg'}</span>
+              <span class="meta-veg-wrap" style="display: inline-flex; align-items: center; gap: 6px;">
+                <span class="veg-badge-symbol ${item.isVeg ? 'veg' : 'nonveg'}"><span class="inner-symbol"></span></span>
+                <span style="font-size: 11px; font-weight: 600; color: ${item.isVeg ? '#00db78' : '#ff4f70'}">${item.isVeg ? 'Veg' : 'Non-Veg'}</span>
+              </span>
               <span class="meta-rating">★ ${item.rating}</span>
               <span class="meta-prep">⏱ ${item.prep}</span>
             </div>
@@ -479,7 +481,7 @@ window.openFoodDetailsModal = function(itemId) {
       <div class="food-modal-media">
         <div class="modal-food-badge-wrap">
           ${foundItem.popularity === 'Bestseller' || foundItem.popularity === 'Must Try' ? `<span class="modal-food-badge bestseller"><svg class="lucide lucide-flame" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px; vertical-align: middle;"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>${foundItem.popularity}</span>` : ''}
-          <span class="modal-food-veg-badge ${foundItem.isVeg ? 'veg' : 'nonveg'}">${foundItem.isVeg ? '<svg class="lucide lucide-leaf" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px; vertical-align: middle;"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.58 0 8a9 9 0 0 1-8 10z"/><path d="M19 2c-2.26 4.33-5.27 7.14-8 10"/></svg>Vegetarian' : '🔴 Non-Vegetarian'}</span>
+          <span class="modal-food-veg-badge ${foundItem.isVeg ? 'veg' : 'nonveg'}">${foundItem.isVeg ? '<svg class="lucide lucide-leaf" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px; vertical-align: middle;"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.58 0 8a9 9 0 0 1-8 10z"/><path d="M19 2c-2.26 4.33-5.27 7.14-8 10"/></svg>Vegetarian' : '<span class="veg-badge-symbol nonveg" style="margin-right: 4px; vertical-align: middle;"><span class="inner-symbol"></span></span>Non-Vegetarian'}</span>
         </div>
         
         <div class="modal-image-carousel" id="modalImageCarousel">

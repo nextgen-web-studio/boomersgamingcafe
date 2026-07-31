@@ -5260,6 +5260,10 @@ body.no-scroll {
   .food-modal-accordion summary {
     cursor: default !important;
     pointer-events: none !important;
+    list-style: none !important;
+  }
+  .food-modal-accordion summary::-webkit-details-marker {
+    display: none !important;
   }
   .food-modal-accordion .accordion-arrow {
     display: none !important;
@@ -5267,5 +5271,37 @@ body.no-scroll {
   .food-modal-accordion .accordion-content {
     padding-top: 0 !important;
   }
+}
+
+/* Swiggy/Zomato-style Veg/Non-veg symbol */
+.veg-badge-symbol {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 14px !important;
+  height: 14px !important;
+  border-radius: 3px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  flex-shrink: 0 !important;
+}
+.veg-badge-symbol.veg {
+  border: 1.5px solid #00db78 !important;
+}
+.veg-badge-symbol.nonveg {
+  border: 1.5px solid #ff4f70 !important;
+}
+.veg-badge-symbol .inner-symbol {
+  width: 6px !important;
+  height: 6px !important;
+  display: block !important;
+}
+.veg-badge-symbol.veg .inner-symbol {
+  background: #00db78 !important;
+  border-radius: 50% !important;
+}
+.veg-badge-symbol.nonveg .inner-symbol {
+  background: #ff4f70 !important;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%) !important;
 }
 
