@@ -302,27 +302,38 @@
    ========================================================================== */
 @media (min-width: 801px) {
 
-  /* NOTE: scrolling is handled by .food-modal-wrapper (main.css), which
-     already has overflow-y:auto + max-height:90vh. Do NOT repeat
-     overflow-y:auto/max-height here — a second scrollable ancestor with
-     the same height cap creates a nested scroll trap that swallows wheel
-     and touch scroll input, which is why the modal wouldn't scroll. */
+  .food-modal-wrapper {
+    height: 80vh !important;
+    max-height: 650px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  #foodModalContent {
+    height: 100% !important;
+    overflow: hidden !important;
+  }
   .food-modal-grid {
-    overflow: visible !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1.15fr !important;
+    height: 100% !important;
     min-height: 100% !important;
+    overflow: hidden !important;
   }
 
   /* Left column: image */
   .food-modal-media {
     position: relative !important;
+    height: 100% !important;
     min-height: 100% !important;
     background: #0c0d10 !important;
+    overflow: hidden !important;
   }
   .modal-image-carousel {
     position: relative !important;
     width: 100% !important;
     height: 100% !important;
-    min-height: 320px !important;
+    min-height: 100% !important;
   }
   .carousel-slide {
     position: absolute !important;
@@ -393,7 +404,22 @@
   /* Right column: content */
   .food-modal-body {
     padding: 40px !important;
-    overflow-y: visible !important;
+    height: 100% !important;
+    overflow-y: auto !important;
+  }
+  .food-modal-body::-webkit-scrollbar {
+    width: 6px !important;
+  }
+  .food-modal-body::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2) !important;
+    border-radius: 10px !important;
+  }
+  .food-modal-body::-webkit-scrollbar-thumb {
+    background: rgba(245, 198, 77, 0.25) !important;
+    border-radius: 10px !important;
+  }
+  .food-modal-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(245, 198, 77, 0.5) !important;
   }
   .food-modal-header-block { margin-bottom: 12px !important; }
   .food-modal-kicker {

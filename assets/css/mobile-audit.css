@@ -505,6 +505,7 @@ button.button.hero-primary-cta {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    touch-action: pan-y !important;
   }
   .food-modal-overlay.active,
   .food-modal.active {
@@ -531,6 +532,7 @@ button.button.hero-primary-cta {
     transform: translateY(100%) !important;
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
     box-shadow: none !important;
+    touch-action: pan-y !important;
   }
   .food-modal-overlay.active .food-modal,
   .food-modal.active .food-modal-wrapper {
@@ -543,6 +545,9 @@ button.button.hero-primary-cta {
     flex-direction: column !important;
     height: 100% !important;
     overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior-y: contain !important;
+    touch-action: pan-y !important;
     margin: 0 !important;
     padding: 0 !important;
     width: 100% !important;
