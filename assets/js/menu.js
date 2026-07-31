@@ -2,6 +2,16 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initFoodMenuEngine();
+
+  // Close food details bottom sheet/modal when clicking outside (on the blurred backdrop)
+  const foodModal = document.getElementById('foodDetailModal');
+  if (foodModal) {
+    foodModal.addEventListener('click', (e) => {
+      if (e.target === foodModal) {
+        closeFoodDetailsModal();
+      }
+    });
+  }
 });
 
 /**
