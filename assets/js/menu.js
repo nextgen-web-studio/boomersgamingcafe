@@ -593,6 +593,8 @@ window.openFoodDetailsModal = function(itemId) {
   `;
 
   modal.classList.add('active');
+
+  // Disable body scroll when modal is active (relying on global CSS body.no-scroll overflow lock)
   document.body.classList.add('no-scroll');
 
   // Bind carousel dots scroll listener

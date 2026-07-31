@@ -3456,6 +3456,10 @@ button {
   font-family: var(--mono);
 }
 
+body.no-scroll {
+  overflow: hidden !important;
+}
+
 /* Food Modal Content Styling (Base/Global) */
 .food-modal-body,
 .food-modal-details {

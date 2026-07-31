@@ -591,8 +591,6 @@ html, body {
   /* Lock body scrolling when overlay is active */
   body.no-scroll {
     overflow: hidden !important;
-    position: fixed;
-    width: 100%;
   }
 
   /* Hero Section stacks and heights */

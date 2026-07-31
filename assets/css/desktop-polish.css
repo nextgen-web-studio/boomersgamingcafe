@@ -302,10 +302,14 @@
    ========================================================================== */
 @media (min-width: 801px) {
 
-  /* Ensure the two-column grid actually scrolls internally */
+  /* NOTE: scrolling is handled by .food-modal-wrapper (main.css), which
+     already has overflow-y:auto + max-height:90vh. Do NOT repeat
+     overflow-y:auto/max-height here — a second scrollable ancestor with
+     the same height cap creates a nested scroll trap that swallows wheel
+     and touch scroll input, which is why the modal wouldn't scroll. */
   .food-modal-grid {
-    overflow-y: auto !important;
-    max-height: 90vh !important;
+    overflow: visible !important;
+    min-height: 100% !important;
   }
 
   /* Left column: image */
