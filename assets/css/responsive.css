@@ -379,10 +379,10 @@ html, body {
     display: flex !important;
     bottom: calc(75px + env(safe-area-inset-bottom)) !important;
     right: 16px !important;
-    width: auto !important;
+    width: 44px !important;
     height: 44px !important;
-    border-radius: 22px !important;
-    padding: 0 14px !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
     box-sizing: border-box !important;
     gap: 8px !important;
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease !important;
@@ -394,13 +394,15 @@ html, body {
     visibility: hidden !important;
   }
   .mobile-hud-toggle .badge {
-    position: static !important;
+    position: absolute !important;
+    top: -5px !important;
+    right: -5px !important;
     margin: 0 !important;
     background: #ff4f70 !important;
     color: #fff !important;
     font: 800 11px var(--mono) !important;
     padding: 2px 7px !important;
-    border-radius: 99px !important;
+    border-radius: 50% !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
