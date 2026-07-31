@@ -475,8 +475,8 @@ window.openFoodDetailsModal = function(itemId) {
       <!-- Left: Image (Swipable Carousel on Mobile) -->
       <div class="food-modal-media">
         <div class="modal-food-badge-wrap">
-          ${foundItem.popularity === 'Bestseller' || foundItem.popularity === 'Must Try' ? `<span class="modal-food-badge bestseller">🔥 ${foundItem.popularity}</span>` : ''}
-          <span class="modal-food-veg-badge ${foundItem.isVeg ? 'veg' : 'nonveg'}">${foundItem.isVeg ? '🟢 Vegetarian' : '🔴 Non-Vegetarian'}</span>
+          ${foundItem.popularity === 'Bestseller' || foundItem.popularity === 'Must Try' ? `<span class="modal-food-badge bestseller"><svg class="lucide lucide-flame" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px; vertical-align: middle;"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>${foundItem.popularity}</span>` : ''}
+          <span class="modal-food-veg-badge ${foundItem.isVeg ? 'veg' : 'nonveg'}">${foundItem.isVeg ? '<svg class="lucide lucide-leaf" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px; vertical-align: middle;"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.58 0 8a9 9 0 0 1-8 10z"/><path d="M19 2c-2.26 4.33-5.27 7.14-8 10"/></svg>Vegetarian' : '🔴 Non-Vegetarian'}</span>
         </div>
         
         <div class="modal-image-carousel" id="modalImageCarousel">
@@ -502,7 +502,7 @@ window.openFoodDetailsModal = function(itemId) {
           <h2 class="food-modal-title">${foundItem.name}</h2>
           <div class="food-modal-price-rating">
             <span class="food-modal-price">₹${foundItem.price}</span>
-            <span class="food-modal-rating">⭐⭐⭐⭐⭐ ${foundItem.rating}</span>
+            <span class="food-modal-rating"><svg class="lucide lucide-star" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px; vertical-align: -1px; color: #ffbb54;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>${foundItem.rating}</span>
           </div>
         </div>
         <!-- Description -->
@@ -510,14 +510,14 @@ window.openFoodDetailsModal = function(itemId) {
         
         <!-- Premium Stat Chips -->
         <div class="food-stat-chips">
-          <span class="food-stat-chip"><span class="chip-icon">⏱</span><span class="chip-label">Prep</span> ${foundItem.prep}</span>
-          <span class="food-stat-chip"><span class="chip-icon">🔥</span><span class="chip-label">Calories</span> ${foundItem.calories || '—'}</span>
-          <span class="food-stat-chip"><span class="chip-icon">⭐</span><span class="chip-label">Rating</span> ${foundItem.rating}</span>
+          <span class="food-stat-chip"><span class="chip-icon"><svg class="lucide lucide-clock" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><span class="chip-label">Prep</span> ${foundItem.prep}</span>
+          <span class="food-stat-chip"><span class="chip-icon"><svg class="lucide lucide-flame" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span><span class="chip-label">Calories</span> ${foundItem.calories || '—'}</span>
+          <span class="food-stat-chip"><span class="chip-icon"><svg class="lucide lucide-star" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="chip-label">Rating</span> ${foundItem.rating}</span>
         </div>
 
         <!-- Ingredients tags -->
         <div class="modal-extra-section">
-          <div class="food-modal-section-title">⚙️ Loadout Ingredients</div>
+          <div class="food-modal-section-title"><svg class="lucide lucide-chef-hat" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px; vertical-align: middle;"><path d="M6 18a4 4 0 0 1-1.196-7.853a6 6 0 0 1 11.392 0a4 4 0 0 1-.2 7.853H6z"/><path d="M18 18H6a4 4 0 0 0-4 4h20a4 4 0 0 0-4-4z"/></svg>Loadout Ingredients</div>
           <div class="food-ingredient-tags">
             ${foundItem.ingredients ? foundItem.ingredients.map(ing => `<span class="food-ingredient-tag">${ing}</span>`).join('') : '<span class="food-ingredient-tag">Premium ingredients</span>'}
           </div>
@@ -525,7 +525,7 @@ window.openFoodDetailsModal = function(itemId) {
 
         <!-- Desktop Quantity (hidden on mobile) -->
         <div class="food-qty-section-desktop">
-          <div class="food-modal-section-title">🛒 Quantities</div>
+          <div class="food-modal-section-title">Quantities</div>
           <div class="food-qty-row">
             <div class="food-qty-selector">
               <button class="food-qty-btn" onclick="decrementFoodQuantity()" aria-label="Decrease">−</button>
@@ -536,7 +536,7 @@ window.openFoodDetailsModal = function(itemId) {
           </div>
           <div class="food-add-btn-wrap">
             <button class="food-add-btn" id="modalAddBtn" onclick="addFoodQtyToCart('${foundItem.id}')">
-              Add to Order <span class="btn-price" id="modalBtnPrice">· ₹${foundItem.price}</span>
+              <svg class="lucide lucide-shopping-bag" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px; vertical-align: middle;"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" x2="21" y1="6" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Add to Order <span class="btn-price" id="modalBtnPrice">· ₹${foundItem.price}</span>
             </button>
           </div>
         </div>
@@ -549,14 +549,14 @@ window.openFoodDetailsModal = function(itemId) {
             <button class="food-qty-btn" onclick="incrementFoodQuantity()" aria-label="Increase">+</button>
           </div>
           <button class="food-add-btn" id="modalAddBtnMobile" onclick="addFoodQtyToCart('${foundItem.id}')">
-            Add to Order · <span id="modalBtnPriceMobile">₹${foundItem.price}</span>
+            <svg class="lucide lucide-shopping-bag" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px; vertical-align: middle;"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" x2="21" y1="6" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Add to Order · <span id="modalBtnPriceMobile">₹${foundItem.price}</span>
           </button>
         </div>
 
         <!-- Related Items -->
         ${related.length > 0 ? `
           <div class="modal-extra-section">
-            <div class="food-modal-section-title">🎯 Customers Also Ordered</div>
+            <div class="food-modal-section-title"><svg class="lucide lucide-shopping-cart" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px; vertical-align: middle;"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>Customers Also Ordered</div>
             <div class="food-related-scroll">
               ${related.map(rel => `
                 <div class="food-related-card" onclick="openFoodDetailsModal('${rel.id}')">
@@ -576,7 +576,7 @@ window.openFoodDetailsModal = function(itemId) {
 
         <!-- Recommended Drink Pairing -->
         <div class="recommended-pairing-block modal-extra-section">
-          <div class="food-modal-section-title">🥤 Recommended Pairing</div>
+          <div class="food-modal-section-title"><svg class="lucide lucide-utensils-crossed" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px; vertical-align: middle;"><path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8Z"/><path d="M13 15l-9 9"/><path d="M21 3l-9 9"/><path d="m3 14 2.3-2.3a3 3 0 0 1 4.2 0l1.8 1.8a3 3 0 0 1 0 4.2L9 20Z"/></svg>Recommended Pairing</div>
           <div style="font-size:12px; color:#B8B8B8; display:flex; align-items:center; gap:8px;">
             <span>Recommended Drink:</span>
             <span style="color:#F5C64D; font-weight:700;">Mana Potion Thick Milkshake 🥤</span>

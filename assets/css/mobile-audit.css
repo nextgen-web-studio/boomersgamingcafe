@@ -919,9 +919,6 @@ button.button.hero-primary-cta {
     transition: all 0.2s ease !important;
     padding: 0 16px !important;
     margin: 0 !important;
-    white-space: nowrap !important;
-    box-sizing: border-box !important;
-    line-height: 1 !important;
   }
   .food-add-sticky-wrap .food-add-btn:active,
   .food-add-sticky-wrap button.button:active {
