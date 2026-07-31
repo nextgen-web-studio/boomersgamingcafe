@@ -554,7 +554,7 @@ button.button.hero-primary-cta {
   .food-modal-media {
     position: relative !important;
     width: 100% !important;
-    height: 250px !important;
+    height: 200px !important;
     flex-shrink: 0 !important;
     overflow: hidden !important;
     border-bottom-left-radius: 20px !important;

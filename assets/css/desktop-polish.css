@@ -294,3 +294,151 @@
   box-shadow: 0 0 15px rgba(245, 198, 77, 0.15) !important;
   transform: translateY(-2px) !important;
 }
+
+/* ==========================================================================
+   FOOD DETAILS MODAL — Desktop layout
+   (Mirrors the mobile-audit.css treatment, scoped for min-width:801px so
+   the modal isn't unstyled/broken above the 800px mobile breakpoint.)
+   ========================================================================== */
+@media (min-width: 801px) {
+
+  /* Ensure the two-column grid actually scrolls internally */
+  .food-modal-grid {
+    overflow-y: auto !important;
+    max-height: 90vh !important;
+  }
+
+  /* Left column: image */
+  .food-modal-media {
+    position: relative !important;
+    min-height: 100% !important;
+    background: #0c0d10 !important;
+  }
+  .modal-image-carousel {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 320px !important;
+  }
+  .carousel-slide {
+    position: absolute !important;
+    inset: 0 !important;
+    opacity: 0 !important;
+    transition: opacity .4s ease !important;
+  }
+  .carousel-slide:first-child {
+    opacity: 1 !important;
+  }
+  .carousel-dots-indicator {
+    position: absolute !important;
+    bottom: 16px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    display: flex !important;
+    gap: 6px !important;
+    z-index: 5 !important;
+  }
+  .carousel-dots-indicator .dot {
+    width: 6px !important; height: 6px !important;
+    border-radius: 50% !important;
+    background: rgba(255,255,255,.4) !important;
+  }
+  .carousel-dots-indicator .dot.active {
+    background: #efbd4e !important;
+    transform: scale(1.2) !important;
+  }
+  .food-modal-media::after {
+    content: '' !important;
+    position: absolute !important; inset: 0 !important;
+    background: linear-gradient(0deg, rgba(8,9,12,.9) 0%, transparent 45%) !important;
+    pointer-events: none !important; z-index: 1 !important;
+  }
+
+  /* Badges + favourite heart, overlaid on the image */
+  .modal-food-badge-wrap {
+    position: absolute !important;
+    bottom: 20px !important; left: 20px !important;
+    z-index: 2 !important;
+    display: flex !important; gap: 8px !important; flex-wrap: wrap !important;
+  }
+  .modal-food-badge.bestseller {
+    background: #F5C64D !important; color: #000 !important;
+    font: 800 10px var(--mono) !important;
+    padding: 6px 12px !important; border-radius: 6px !important;
+    text-transform: uppercase !important;
+  }
+  .modal-food-veg-badge {
+    font: 800 10px var(--mono) !important;
+    padding: 6px 12px !important; border-radius: 6px !important;
+    text-transform: uppercase !important; color: #fff !important;
+  }
+  .modal-food-veg-badge.veg {
+    background: rgba(0,219,120,.2) !important; border: 1px solid rgba(0,219,120,.4) !important;
+  }
+  .modal-food-veg-badge.nonveg {
+    background: rgba(255,79,112,.2) !important; border: 1px solid rgba(255,79,112,.4) !important;
+  }
+  .modal-fav-btn {
+    position: absolute !important; top: 16px !important; right: 16px !important;
+    width: 40px !important; height: 40px !important; border-radius: 50% !important;
+    background: rgba(0,0,0,.5) !important; backdrop-filter: blur(5px) !important;
+    border: 1px solid rgba(255,255,255,.15) !important; z-index: 3 !important;
+    display: flex !important; align-items: center !important; justify-content: center !important;
+  }
+
+  /* Right column: content */
+  .food-modal-body {
+    padding: 40px !important;
+    overflow-y: visible !important;
+  }
+  .food-modal-header-block { margin-bottom: 12px !important; }
+  .food-modal-kicker {
+    font: 700 10px var(--mono) !important; letter-spacing: .1em !important;
+    text-transform: uppercase !important; color: var(--accent) !important;
+    margin-bottom: 6px !important;
+  }
+  .food-modal-title {
+    font: 700 30px var(--display) !important; color: #fff !important;
+    letter-spacing: -.03em !important; margin: 0 0 10px !important;
+  }
+  .food-modal-price-rating { display: flex !important; align-items: center !important; gap: 16px !important; }
+  .food-modal-price { font: 800 24px var(--mono) !important; color: #F5C64D !important; }
+  .food-modal-rating { font-size: 13px !important; color: #ffbb54 !important; }
+  .food-modal-desc { color: rgba(255,255,255,.65) !important; line-height: 1.6 !important; margin: 14px 0 20px !important; }
+
+  .food-stat-chips { display: flex !important; gap: 10px !important; margin-bottom: 24px !important; }
+  .food-stat-chip {
+    flex: 1 !important; display: flex !important; flex-direction: column !important; align-items: center !important; gap: 4px !important;
+    background: rgba(255,255,255,.03) !important; border: 1px solid rgba(255,255,255,.08) !important;
+    border-radius: 10px !important; padding: 12px !important; font: 700 13px var(--mono) !important; color: #fff !important;
+  }
+  .food-stat-chip .chip-label { font-size: 9px !important; color: rgba(255,255,255,.4) !important; text-transform: uppercase !important; }
+
+  .modal-extra-section { margin-bottom: 24px !important; }
+  .food-modal-section-title {
+    font: 700 11px var(--mono) !important; text-transform: uppercase !important; letter-spacing: .06em !important;
+    color: #fff !important; margin-bottom: 12px !important;
+  }
+  .food-ingredient-tags { display: flex !important; flex-wrap: wrap !important; gap: 8px !important; }
+  .food-ingredient-tag {
+    font: 600 11px var(--mono) !important; color: #F5C64D !important;
+    border: 1px solid rgba(245,198,77,.4) !important; border-radius: 99px !important; padding: 6px 14px !important;
+  }
+
+  /* Quantity + Add to Order: show desktop block, hide mobile sticky bar */
+  .food-qty-section-desktop { display: block !important; }
+  .food-add-sticky-wrap { display: none !important; }
+  .food-qty-row { display: flex !important; align-items: center !important; justify-content: space-between !important; margin-bottom: 14px !important; }
+  .food-qty-selector {
+    display: inline-flex !important; align-items: center !important; gap: 14px !important;
+    border: 1px solid rgba(255,255,255,.1) !important; border-radius: 10px !important; padding: 8px 16px !important;
+  }
+  .food-qty-btn { background: none !important; border: none !important; color: #fff !important; font-size: 16px !important; cursor: pointer !important; }
+  .food-qty-value { font: 700 15px var(--mono) !important; color: #fff !important; }
+  .food-prep-live { font-size: 11px !important; color: rgba(255,255,255,.5) !important; }
+  .food-add-btn {
+    width: 100% !important; background: var(--accent) !important; color: #000 !important;
+    border: none !important; border-radius: 10px !important; padding: 16px !important;
+    font: 800 13px var(--mono) !important; text-transform: uppercase !important; cursor: pointer !important;
+  }
+}

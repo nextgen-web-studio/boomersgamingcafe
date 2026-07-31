@@ -3456,6 +3456,238 @@ button {
   font-family: var(--mono);
 }
 
+/* Food Modal Content Styling (Base/Global) */
+.food-modal-body,
+.food-modal-details {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.food-modal-header-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.food-modal-kicker {
+  font: 800 10px var(--mono);
+  color: #F5C64D;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.food-modal-title,
+.food-modal-details h3 {
+  font: 800 32px var(--display);
+  color: #fff;
+  line-height: 1.1;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+.food-modal-price-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+}
+.food-modal-price {
+  font: 800 28px var(--display);
+  color: #F5C64D;
+}
+.food-modal-rating {
+  font: 700 12px var(--mono);
+  color: #fff;
+}
+.food-modal-desc,
+.food-modal-details p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #B8B8B8;
+  margin: 0;
+}
+
+/* Premium Stats Chips */
+.food-stat-chips,
+.food-modal-details > div[style*="display:flex; gap:16px"] {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+.food-stat-chip {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: #fff;
+  text-align: center;
+  line-height: 1.2;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.food-stat-chip:hover,
+.food-stat-chip:active {
+  border-color: #F5C64D;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 10px rgba(245, 198, 77, 0.15);
+}
+.food-stat-chip .chip-icon {
+  font-size: 16px;
+}
+.food-stat-chip .chip-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 700;
+}
+
+/* Ingredients Tags list */
+.food-modal-section-title,
+.food-modal-details h4 {
+  font: 800 10px var(--mono);
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 0 0 12px;
+  border: none;
+  padding: 0;
+}
+.food-ingredient-tags,
+.food-modal-details ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.food-ingredient-tag,
+.food-modal-details ul li {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid #F5C64D;
+  border-radius: 99px;
+  padding: 6px 14px;
+  font-size: 12px;
+  color: #F5C64D;
+  font-weight: 600;
+  display: inline-block;
+}
+
+/* Desktop-only Quantity & Action (hidden on mobile) */
+.food-qty-section-desktop {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 20px;
+}
+.food-qty-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.food-qty-selector {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  height: 48px;
+  padding: 0 4px;
+}
+.food-qty-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.food-qty-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+.food-qty-value {
+  width: 32px;
+  text-align: center;
+  font: 700 15px var(--mono);
+  color: #fff;
+}
+.food-prep-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 600 12px var(--mono);
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--lime);
+  display: inline-block;
+  box-shadow: 0 0 8px var(--lime);
+  animation: pulse-dot 1.5s infinite;
+}
+@keyframes pulse-dot {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.5; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.food-add-btn-wrap {
+  width: 100%;
+}
+.food-add-btn {
+  width: 100%;
+  height: 52px;
+  background: var(--lime);
+  color: #171008;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(167, 255, 0, 0.2);
+}
+.food-add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(167, 255, 0, 0.35);
+  filter: brightness(1.05);
+}
+.food-add-btn .btn-price {
+  font-family: var(--mono);
+  font-weight: 700;
+}
+
+/* Media query rules for show/hide behavior of desktop/mobile modal action elements */
+@media (min-width: 801px) {
+  .food-add-sticky-wrap { display: none !important; }
+}
+@media (max-width: 800px) {
+  .food-qty-section-desktop { display: none !important; }
+}
+
 /* Mobile HUD Toggle Button */
 .mobile-hud-toggle {
   display: none;
