@@ -3460,6 +3460,26 @@ body.no-scroll {
   overflow: hidden !important;
 }
 
+.mode-chip {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  padding: 6px 12px !important;
+  border-radius: 50px !important;
+  font: 500 10px var(--mono) !important;
+  color: #fff !important;
+}
+
+.feature-icon {
+  width: 12px;
+  height: 12px;
+  color: #F5C64D;
+  stroke-width: 2.5;
+  flex-shrink: 0;
+}
+
 /* Food Modal Content Styling (Base/Global) */
 .food-modal-body,
 .food-modal-details {
@@ -5228,5 +5248,24 @@ body.no-scroll {
 .food-product-card.loaded {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Desktop Accordion Overrides */
+@media (min-width: 801px) {
+  .food-modal-accordion {
+    border-bottom: none !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+  .food-modal-accordion summary {
+    cursor: default !important;
+    pointer-events: none !important;
+  }
+  .food-modal-accordion .accordion-arrow {
+    display: none !important;
+  }
+  .food-modal-accordion .accordion-content {
+    padding-top: 0 !important;
+  }
 }
 

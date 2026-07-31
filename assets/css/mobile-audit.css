@@ -512,21 +512,17 @@ button.button.hero-primary-cta {
     pointer-events: all !important;
   }
 
-  /* 2. Slide-up bottom sheet container wrapper */
+  /* 2. Full-screen mobile slide-up container wrapper */
   .food-modal-overlay .food-modal,
   .food-modal-wrapper {
     position: relative !important;
     width: 100vw !important;
     max-width: 100vw !important;
-    height: 90dvh !important;
-    max-height: 90dvh !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
     background: #08090C !important;
-    border-top-left-radius: 24px !important;
-    border-top-right-radius: 24px !important;
-    border-bottom-left-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-bottom: none !important;
+    border-radius: 0 !important;
+    border: none !important;
     display: flex !important;
     flex-direction: column !important;
     margin: 0 !important;
@@ -534,7 +530,7 @@ button.button.hero-primary-cta {
     overflow: hidden !important;
     transform: translateY(100%) !important;
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    box-shadow: 0 -10px 40px rgba(0,0,0,0.5) !important;
+    box-shadow: none !important;
   }
   .food-modal-overlay.active .food-modal,
   .food-modal.active .food-modal-wrapper {
@@ -1190,6 +1186,37 @@ button.button.hero-primary-cta {
     color: rgba(255, 255, 255, 0.3) !important;
     text-transform: uppercase !important;
     letter-spacing: 0.05em !important;
+  }
+
+  /* Collapsible Accordions for Mobile Detail Sections */
+  .food-modal-accordion {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding: 16px 0 !important;
+    display: block !important;
+  }
+  .food-modal-accordion summary {
+    list-style: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    cursor: pointer !important;
+    user-select: none !important;
+    outline: none !important;
+  }
+  .food-modal-accordion summary::-webkit-details-marker {
+    display: none !important;
+  }
+  .food-modal-accordion .accordion-arrow {
+    font-size: 10px !important;
+    color: var(--muted) !important;
+    transition: transform 0.2s ease !important;
+    display: inline-block !important;
+  }
+  .food-modal-accordion[open] .accordion-arrow {
+    transform: rotate(180deg) !important;
+  }
+  .food-modal-accordion .accordion-content {
+    padding-top: 14px !important;
   }
 }
 
