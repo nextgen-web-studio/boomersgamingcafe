@@ -5250,26 +5250,12 @@ body.no-scroll {
   transform: translateY(0);
 }
 
-/* Desktop Accordion Overrides */
+/* Desktop Detail Section Spacing */
 @media (min-width: 801px) {
-  .food-modal-accordion {
+  .food-modal-section {
     border-bottom: none !important;
     padding: 0 !important;
     display: block !important;
-  }
-  .food-modal-accordion summary {
-    cursor: default !important;
-    pointer-events: none !important;
-    list-style: none !important;
-  }
-  .food-modal-accordion summary::-webkit-details-marker {
-    display: none !important;
-  }
-  .food-modal-accordion .accordion-arrow {
-    display: none !important;
-  }
-  .food-modal-accordion .accordion-content {
-    padding-top: 0 !important;
   }
 }
 

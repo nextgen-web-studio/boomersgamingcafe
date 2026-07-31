@@ -539,6 +539,13 @@ button.button.hero-primary-cta {
     transform: translateY(0) !important;
   }
 
+  #foodModalContent {
+    height: 100% !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
   /* 3. Hero Cover Image with Bottom Gradient */
   .food-modal-grid {
     display: flex !important;
@@ -1193,35 +1200,11 @@ button.button.hero-primary-cta {
     letter-spacing: 0.05em !important;
   }
 
-  /* Collapsible Accordions for Mobile Detail Sections */
-  .food-modal-accordion {
+  /* Flat Detail Sections for Mobile */
+  .food-modal-section {
     border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
     padding: 16px 0 !important;
     display: block !important;
-  }
-  .food-modal-accordion summary {
-    list-style: none !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    cursor: pointer !important;
-    user-select: none !important;
-    outline: none !important;
-  }
-  .food-modal-accordion summary::-webkit-details-marker {
-    display: none !important;
-  }
-  .food-modal-accordion .accordion-arrow {
-    font-size: 10px !important;
-    color: var(--muted) !important;
-    transition: transform 0.2s ease !important;
-    display: inline-block !important;
-  }
-  .food-modal-accordion[open] .accordion-arrow {
-    transform: rotate(180deg) !important;
-  }
-  .food-modal-accordion .accordion-content {
-    padding-top: 14px !important;
   }
 }
 

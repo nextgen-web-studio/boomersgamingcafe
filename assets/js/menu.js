@@ -373,6 +373,7 @@ function initFoodMenuEngine() {
             <h4 class="food-card-title">${item.name}</h4>
             <div class="food-card-price">₹${item.price}</div>
             <p class="food-card-desc">${item.desc}</p>
+            <div class="food-card-meta">
               <span class="meta-veg-wrap" style="display: inline-flex; align-items: center; gap: 6px;">
                 <span class="veg-badge-symbol ${item.isVeg ? 'veg' : 'nonveg'}"><span class="inner-symbol"></span></span>
                 <span style="font-size: 11px; font-weight: 600; color: ${item.isVeg ? '#00db78' : '#ff4f70'}">${item.isVeg ? 'Veg' : 'Non-Veg'}</span>
@@ -521,20 +522,17 @@ window.openFoodDetailsModal = function(itemId) {
         </div>
 
         <!-- Ingredients tags -->
-        <details class="food-modal-accordion" ${accordionOpenAttr}>
-          <summary class="food-modal-section-title">
+        <div class="food-modal-section">
+          <div class="food-modal-section-title">
             <span style="display: flex; align-items: center; gap: 6px;">
               <svg class="lucide lucide-chef-hat" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><path d="M6 18a4 4 0 0 1-1.196-7.853a6 6 0 0 1 11.392 0a4 4 0 0 1-.2 7.853H6z"/><path d="M18 18H6a4 4 0 0 0-4 4h20a4 4 0 0 0-4-4z"/></svg>
               Loadout Ingredients
             </span>
-            <span class="accordion-arrow">▼</span>
-          </summary>
-          <div class="accordion-content">
-            <div class="food-ingredient-tags">
-              ${foundItem.ingredients ? foundItem.ingredients.map(ing => `<span class="food-ingredient-tag">${ing}</span>`).join('') : '<span class="food-ingredient-tag">Premium ingredients</span>'}
-            </div>
           </div>
-        </details>
+          <div class="food-ingredient-tags" style="margin-top: 10px;">
+            ${foundItem.ingredients ? foundItem.ingredients.map(ing => `<span class="food-ingredient-tag">${ing}</span>`).join('') : '<span class="food-ingredient-tag">Premium ingredients</span>'}
+          </div>
+        </div>
 
         <!-- Desktop Quantity (hidden on mobile) -->
         <div class="food-qty-section-desktop">
@@ -568,51 +566,45 @@ window.openFoodDetailsModal = function(itemId) {
 
         <!-- Related Items -->
         ${related.length > 0 ? `
-          <details class="food-modal-accordion" ${accordionOpenAttr}>
-            <summary class="food-modal-section-title">
+          <div class="food-modal-section">
+            <div class="food-modal-section-title">
               <span style="display: flex; align-items: center; gap: 6px;">
                 <svg class="lucide lucide-shopping-cart" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px; vertical-align: middle;"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
                 Customers Also Ordered
               </span>
-              <span class="accordion-arrow">▼</span>
-            </summary>
-            <div class="accordion-content">
-              <div class="food-related-scroll">
-                ${related.map(rel => `
-                  <div class="food-related-card" onclick="openFoodDetailsModal('${rel.id}')">
-                    <img src="${rel.image}" alt="${rel.name}" loading="lazy">
-                    <div class="food-related-info">
-                      <div class="rel-name">${rel.name}</div>
-                      <div class="rel-meta">
-                        <span class="rel-price">₹${rel.price}</span>
-                        <button class="rel-add" onclick="event.stopPropagation(); openFoodDetailsModal('${rel.id}')">+</button>
-                      </div>
+            </div>
+            <div class="food-related-scroll" style="margin-top: 10px;">
+              ${related.map(rel => `
+                <div class="food-related-card" onclick="openFoodDetailsModal('${rel.id}')">
+                  <img src="${rel.image}" alt="${rel.name}" loading="lazy">
+                  <div class="food-related-info">
+                    <div class="rel-name">${rel.name}</div>
+                    <div class="rel-meta">
+                      <span class="rel-price">₹${rel.price}</span>
+                      <button class="rel-add" onclick="event.stopPropagation(); openFoodDetailsModal('${rel.id}')">+</button>
                     </div>
                   </div>
-                `).join('')}
-              </div>
+                </div>
+              `).join('')}
             </div>
-          </details>
+          </div>
         ` : ''}
 
         <!-- Recommended Drink Pairing -->
-        <details class="food-modal-accordion" ${accordionOpenAttr}>
-          <summary class="food-modal-section-title">
+        <div class="food-modal-section">
+          <div class="food-modal-section-title">
             <span style="display: flex; align-items: center; gap: 6px;">
               <svg class="lucide lucide-utensils-crossed" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px; vertical-align: middle;"><path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8Z"/><path d="M13 15l-9 9"/><path d="M21 3l-9 9"/><path d="m3 14 2.3-2.3a3 3 0 0 1 4.2 0l1.8 1.8a3 3 0 0 1 0 4.2L9 20Z"/></svg>
               Recommended Pairing
             </span>
-            <span class="accordion-arrow">▼</span>
-          </summary>
-          <div class="accordion-content">
-            <div class="recommended-pairing-block">
-              <div style="font-size:12px; color:#B8B8B8; display:flex; align-items:center; gap:8px;">
-                <span>Recommended Drink:</span>
-                <span style="color:#F5C64D; font-weight:700;">Mana Potion Thick Milkshake 🥤</span>
-              </div>
+          </div>
+          <div class="recommended-pairing-block" style="margin-top: 10px;">
+            <div style="font-size:12px; color:#B8B8B8; display:flex; align-items:center; gap:8px;">
+              <span>Recommended Drink:</span>
+              <span style="color:#F5C64D; font-weight:700;">Mana Potion Thick Milkshake 🥤</span>
             </div>
           </div>
-        </details>
+        </div>
 
         <!-- Gaming tags -->
         <div class="modal-extra-section" style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 15px; font-size:11px; color:rgba(255,255,255,0.4); display:flex; gap:16px;">
