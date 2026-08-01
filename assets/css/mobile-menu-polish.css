@@ -273,4 +273,243 @@
   .cafe-items-list {
     margin-top: 16px !important;
   }
+
+  /* ===========================================================
+     PREMIUM HERO & SEARCH REFINEMENT
+     Denser hero, one connected search+tabs toolbar, glass search
+     field. Rules placed last in this file so they win the cascade
+     over everything above (same media query, equal specificity).
+     =========================================================== */
+
+  /* --- Hero copy: tighter rhythm, ~35% shorter block --- */
+  .section.cafe {
+    padding-top: 6px !important;
+    padding-bottom: 18px !important;
+  }
+  .section.cafe .menu-hero {
+    margin-bottom: 12px !important;
+  }
+  .section.cafe .menu-hero .section-kicker {
+    margin-bottom: 4px !important;
+    font-size: 10px !important;
+  }
+  .section.cafe .menu-hero h1.display {
+    font-size: 26px !important;
+    line-height: 1.12 !important;
+    margin: 4px 0 8px !important;
+    letter-spacing: -0.01em !important;
+  }
+  .section.cafe .menu-hero .section-intro {
+    font-size: 12.5px !important;
+    line-height: 1.55 !important;
+    margin: 0 auto !important;
+    max-width: 300px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+
+  /* --- Toolbar: search + tabs read as one connected component --- */
+  .sticky-menu-shelf {
+    top: 64px !important;
+    margin-bottom: 12px !important;
+    padding: 6px 0 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  .search-row {
+    margin-bottom: 0 !important;
+  }
+
+  /* --- Search bar: glass surface, integrated, premium focus state --- */
+  .search-wrap {
+    height: 50px !important;
+    border-radius: 14px !important;
+    padding: 0 14px !important;
+    gap: 10px !important;
+    background: linear-gradient(180deg, rgba(24,25,30,0.85), rgba(15,16,20,0.92)) !important;
+    border: 1px solid rgba(255,255,255,0.12) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), inset 0 -1px 6px rgba(0,0,0,0.22) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease, background 0.25s ease !important;
+  }
+  .search-wrap:focus-within {
+    border-color: rgba(245, 198, 77, 0.55) !important;
+    box-shadow: 0 0 0 3px rgba(245,198,77,0.12), 0 4px 18px rgba(245,198,77,0.18), inset 0 1px 0 rgba(255,255,255,0.06) !important;
+    transform: translateY(-1px) scale(1.003) !important;
+    background: linear-gradient(180deg, rgba(28,29,34,0.92), rgba(17,18,22,0.96)) !important;
+  }
+  .search-lead-icon {
+    width: 17px !important;
+    height: 17px !important;
+    stroke-width: 2.3 !important;
+    opacity: 0.85 !important;
+  }
+  .search-input {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.01em !important;
+  }
+  .search-input::placeholder {
+    color: rgba(255,255,255,0.42) !important;
+    font-weight: 400 !important;
+  }
+
+  /* --- Category tabs: equal-height pills, smoother active state --- */
+  .cafe-tabs {
+    padding: 2px 16px 4px !important;
+    margin: 0 -16px !important;
+    gap: 8px !important;
+  }
+  .cafe-tab-btn {
+    min-height: 32px !important;
+    height: 32px !important;
+    padding: 0 14px !important;
+    font-size: 11.5px !important;
+    border-radius: 9px !important;
+    transition: background-color 0.22s ease, color 0.22s ease, transform 0.18s ease, box-shadow 0.22s ease !important;
+  }
+  .cafe-tab-btn:active {
+    transform: scale(0.96) !important;
+  }
+  .cafe-tab-btn.active {
+    transform: scale(1.02) !important;
+    box-shadow: 0 3px 10px rgba(245,198,77,0.25) !important;
+  }
+
+  /* --- Food grid sits right under the toolbar --- */
+  .cafe-items-list {
+    margin-top: 10px !important;
+  }
+
+  /* --- Homepage mobile hero & Power-Up layout refinements --- */
+  .hero {
+    padding-top: 40px !important; /* Shrunk padding by 40px to lift hero higher */
+  }
+  .premium-feature-chips-container {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+    margin-top: 16px !important;
+    margin-bottom: 28px !important; /* Extra spacing before featured menu title */
+  }
+  .premium-feature-chips-container .premium-feature-chip {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 10px 14px !important; /* Larger horizontal/vertical padding */
+    background: rgba(255,255,255,0.03) !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+    border-radius: 10px !important;
+    font-size: 11px !important;
+    font-family: var(--mono) !important;
+    font-weight: 700 !important;
+    color: #fff !important;
+    white-space: nowrap !important;
+    justify-content: flex-start !important;
+  }
+  #featuredItemsContainer {
+    margin-top: 18px !important; /* Spacing before food cards */
+  }
+
+  /* --- Reverted Category Pills layout on mobile --- */
+  .cafe-tabs {
+    display: flex !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    padding: 8px 16px !important;
+    margin: 0 -16px !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .cafe-tabs::-webkit-scrollbar {
+    display: none !important;
+  }
+  .cafe-tabs .cafe-tab-btn {
+    flex: 0 0 auto !important;
+    min-height: 34px !important;
+    padding: 6px 14px !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 99px !important;
+    font-size: 11.5px !important;
+    font-weight: 600 !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    box-shadow: none !important;
+    transition: all 0.2s ease !important;
+  }
+  .cafe-tabs .cafe-tab-btn.active {
+    background: #F5C64D !important;
+    color: #000 !important;
+    border-color: #F5C64D !important;
+    box-shadow: 0 3px 10px rgba(245, 198, 77, 0.2) !important;
+    transform: scale(1.02) !important;
+  }
+  .cafe-tabs .cafe-tab-btn .cat-pill-count {
+    font-size: 9.5px !important;
+    margin-left: 3px !important;
+    opacity: 0.8 !important;
+  }
+
+  /* --- Mobile Section Sliders --- */
+  .menu-horizontal-slider {
+    display: flex !important;
+    gap: 12px !important;
+    overflow-x: auto !important;
+    padding: 8px 16px !important;
+    margin: 0 -16px !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-snap-type: x mandatory !important;
+  }
+  .menu-horizontal-slider::-webkit-scrollbar {
+    display: none !important;
+  }
+  .menu-horizontal-slider .food-related-card {
+    flex: 0 0 170px !important; /* Shows ~1.5 - 2 cards at once on mobile screen */
+    scroll-snap-align: start !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    box-shadow: none !important;
+  }
+  .menu-horizontal-slider .food-related-card img {
+    height: 135px !important; /* Image height upscaled so photography dominates on mobile */
+    object-fit: cover !important;
+    width: 100% !important;
+    border-radius: 12px 12px 0 0 !important;
+  }
+  
+  /* Active tab underline on mobile */
+  .cafe-tabs .cafe-tab-btn.active {
+    position: relative !important;
+    padding-bottom: 8px !important;
+    padding-top: 4px !important;
+  }
+  .cafe-tabs .cafe-tab-btn.active::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 3px !important;
+    left: 30% !important;
+    right: 30% !important;
+    height: 2px !important;
+    background: #000 !important;
+    border-radius: 99px !important;
+  }
+
+  /* Solid sticky shelf with blur to prevent content overlapping readability */
+  .sticky-menu-shelf {
+    background: rgba(8, 9, 12, 0.95) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  }
 }

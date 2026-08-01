@@ -177,63 +177,72 @@ function initFoodMenuEngine() {
 
   // Category tab button click handler
   window.switchCafeTab = function(category, btnElement) {
-    currentCategory = category;
-    
+    const targetSection = document.getElementById(`section-${category}`);
+    if (targetSection) {
+      targetSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }
+
     // Update active tab styles
-    tabButtons.forEach(btn => btn.classList.remove('active'));
+    const tabBtns = document.querySelectorAll('.cafe-tabs .cafe-tab-btn');
+    tabBtns.forEach(btn => btn.classList.remove('active'));
     if (btnElement) {
       btnElement.classList.add('active');
-    } else {
-      // Find button by onclick parameter matching the category
-      const targetBtn = Array.from(tabButtons).find(btn => btn.getAttribute('onclick').includes(category));
-      if (targetBtn) targetBtn.classList.add('active');
     }
 
-    // Clear search and other filters on tab change to prevent confusion
-    if (searchInput) searchInput.value = '';
-    activeSearchQuery = '';
-    if (clearSearchBtn) clearSearchBtn.style.display = 'none';
-    if (shortcut) shortcut.style.display = 'block';
-    
-    filterButtons.forEach(b => {
-      b.classList.remove('active');
-      b.textContent = b.dataset.original || b.textContent.replace('✓ ', '').trim();
-    });
-    const allFilterBtn = Array.from(filterButtons).find(b => b.dataset.filter === 'all');
-    if (allFilterBtn) {
-      allFilterBtn.classList.add('active');
-      allFilterBtn.textContent = '✓ ' + (allFilterBtn.dataset.original || 'All Items');
-    }
-    activeFilterType = 'all';
-
-    renderMenuGrid(true); // Show skeleton on category switch
-    Tracker.track('Cafe Tab Switched', { category });
+    Tracker.track('Cafe Scroll Switch', { category });
   };
 
-  // Helper to show skeleton loader shimmer state cards
-  function showSkeletons() {
-    container.innerHTML = '';
-    for (let i = 0; i < 6; i++) {
-      const skeleton = document.createElement('div');
-      skeleton.className = 'badge-card glass-card food-product-card skeleton-card loaded';
-      skeleton.innerHTML = `
-        <div class="food-image-container skeleton-shimmer" style="height:140px; background: rgba(255,255,255,0.03);"></div>
-        <div class="food-card-details" style="padding: 16px; display: flex; flex-direction: column; gap: 10px;">
-          <div class="skeleton-shimmer" style="height: 16px; width: 70%; background: rgba(255,255,255,0.03); border-radius: 4px;"></div>
-          <div class="skeleton-shimmer" style="height: 12px; width: 45%; background: rgba(255,255,255,0.03); border-radius: 4px;"></div>
-          <div class="skeleton-shimmer" style="height: 32px; width: 100%; background: rgba(255,255,255,0.03); border-radius: 4px;"></div>
-        </div>
-      `;
-      container.appendChild(skeleton);
+  window.scrollToCategory = function(category) {
+    const targetSection = document.getElementById(`section-${category}`);
+    if (targetSection) {
+      targetSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
     }
+  };
+
+  // Dynamic Category Cards compiler
+  const categoriesList = [
+    { key: "best-sellers", name: "Best Sellers", count: allFoodItems.filter(item => item.popularity === 'Must Try' || item.popularity === 'Bestseller').length, iconHtml: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cat-svg-icon"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"/><path d="M12 2a6 6 0 0 0-6 6v1a6 6 0 0 0 12 0V8a6 6 0 0 0-6-6z"/></svg>` },
+    { key: "xp-starters", name: "XP Starters", count: allFoodItems.filter(item => item.categoryKey === 'xp-starters').length, iconHtml: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cat-svg-icon"><polygon points="5 3 19 12 5 21 5 3"/></svg>` },
+    { key: "tactical-starters", name: "Tactical Starters", count: allFoodItems.filter(item => item.categoryKey === 'tactical-starters').length, iconHtml: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cat-svg-icon"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>` },
+    { key: "sandwich", name: "Sandwich Bay", count: allFoodItems.filter(item => item.categoryKey === 'sandwich').length, iconHtml: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cat-svg-icon"><path d="M5 6h14M3 10h18M3 14h18M5 18h14"/></svg>` },
+    { key: "burger", name: "Main Loadout", count: allFoodItems.filter(item => item.categoryKey === 'burger').length, iconHtml: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cat-svg-icon"><path d="M2 12a10 10 0 0 1 20 0v2H2v-2zM3 18h18M6 21h12"/></svg>` },
+    { key: "wrap", name: "Tactical Wraps", count: allFoodItems.filter(item => item.categoryKey === 'wrap').length, iconHtml: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cat-svg-icon"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.47.4.08.55-.17.55-.38v-1.48c-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.1-1.46-1.1-1.46-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .21.15.46.55.38A10 10 0 0 0 12 2z"/></svg>` },
+    { key: "pasta", name: "Energy Boost", count: allFoodItems.filter(item => item.categoryKey === 'pasta').length, iconHtml: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cat-svg-icon"><path d="M12 2v20M17 5H7M19 9H5M21 13H3"/></svg>` },
+    { key: "maggi", name: "Instant Respawn", count: allFoodItems.filter(item => item.categoryKey === 'maggi').length, iconHtml: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cat-svg-icon"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>` },
+    { key: "popcorn", name: "Side Quests", count: allFoodItems.filter(item => item.categoryKey === 'popcorn').length, iconHtml: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cat-svg-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>` },
+    { key: "milkshake", name: "Potion Bar", count: allFoodItems.filter(item => item.categoryKey === 'milkshake').length, iconHtml: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cat-svg-icon"><path d="M6 2h12v2H6zm3 4v16a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V6zm-4 4h14"/></svg>` },
+    { key: "hot-beverages", name: "Recharge Station", count: allFoodItems.filter(item => item.categoryKey === 'hot-beverages').length, iconHtml: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cat-svg-icon"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4Z"/><path d="M6 2v2M10 2v2M14 2v2"/></svg>` },
+    { key: "cold-beverages", name: "Cold Beverage Depot", count: allFoodItems.filter(item => item.categoryKey === 'cold-beverages').length, iconHtml: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cat-svg-icon"><path d="M17 2H7v16h10Z"/><path d="M5 6h14M5 12h14M9 18h6"/></svg>` },
+    { key: "mocktails", name: "Mocktail Lab", count: allFoodItems.filter(item => item.categoryKey === 'mocktails').length, iconHtml: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cat-svg-icon"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z"/><path d="m16.2 7.8-8.4 8.4"/></svg>` },
+    { key: "squad-combos", name: "Squad Combos", count: allFoodItems.filter(item => item.categoryKey === 'squad-combos').length, iconHtml: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cat-svg-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="12" y1="3" x2="12" y2="21"/></svg>` }
+  ];
+
+  function renderCategoryCards() {
+    const tabsContainer = document.querySelector('.cafe-tabs');
+    if (!tabsContainer) return;
+
+    tabsContainer.innerHTML = '';
+    categoriesList.forEach(cat => {
+      const card = document.createElement('button');
+      card.className = `cafe-tab-btn ${cat.key === currentCategory ? 'active' : ''}`;
+      card.onclick = () => switchCafeTab(cat.key, card);
+      card.innerHTML = `${cat.name} <span class="cat-pill-count">(${cat.count})</span>`;
+      tabsContainer.appendChild(card);
+    });
   }
 
+  // Trigger category cards rendering on start
+  renderCategoryCards();
   let activeRenderTimeout = null;
 
-  /**
-   * Evaluates filter conditions and renders matching cards
-   */
-  function renderMenuGrid(showSkeleton = false) {
+  // Refactored grid rendering function to show section-by-section sliders
+  window.renderMenuGrid = function(showSkeleton = false) {
     if (activeRenderTimeout) {
       clearTimeout(activeRenderTimeout);
       activeRenderTimeout = null;
@@ -250,160 +259,112 @@ function initFoodMenuEngine() {
 
     function executeRender() {
       container.innerHTML = '';
-      let filteredList = [];
+      container.style.display = 'block'; // Block layout for list of shelves
 
-      // 1. Filter by category first (unless doing search or combos/snacks queries)
-      if (currentCategory === 'best-sellers') {
-        filteredList = allFoodItems.filter(item => 
-          item.popularity === 'Must Try' || item.popularity === 'Bestseller' || parseFloat(item.rating) >= 4.9
-        );
-      } else {
-        filteredList = allFoodItems.filter(item => item.categoryKey === currentCategory);
-      }
-
-      // 2. Apply search text query
-      if (activeSearchQuery !== '') {
-        filteredList = allFoodItems.filter(item => 
-          item.name.toLowerCase().includes(activeSearchQuery) || 
-          item.desc.toLowerCase().includes(activeSearchQuery)
-        );
-      }
-
-      // 3. Apply tag filters
-      if (activeFilterType === 'veg') {
-        filteredList = filteredList.filter(item => item.isVeg === true);
-      } else if (activeFilterType === 'non-veg') {
-        filteredList = filteredList.filter(item => item.isVeg === false);
-      } else if (activeFilterType === 'under-200') {
-        filteredList = filteredList.filter(item => item.price < 200);
-      } else if (activeFilterType === 'bestseller') {
-        filteredList = filteredList.filter(item => item.popularity === 'Must Try' || item.popularity === 'Bestseller');
-      } else if (activeFilterType === 'snacks') {
-        filteredList = filteredList.filter(item => ['xp-starters', 'tactical-starters', 'popcorn'].includes(item.categoryKey));
-      } else if (activeFilterType === 'drinks') {
-        filteredList = filteredList.filter(item => ['milkshake', 'hot-beverages', 'cold-beverages', 'mocktails'].includes(item.categoryKey));
-      } else if (activeFilterType === 'combos') {
-        filteredList = allFoodItems.filter(item => item.categoryKey === 'squad-combos');
-      }
-
-      // 3.5 Apply sorting
+      // Check sorting configuration
       const sortVal = document.getElementById('foodSortSelect') ? document.getElementById('foodSortSelect').value : 'popular';
-      const sortLabels = {
-        'popular': 'Popular',
-        'price-asc': 'Price Low → High',
-        'price-desc': 'Price High → Low',
-        'prep': 'Prep Time',
-        'rating': 'Best Rated'
-      };
 
-      if (sortVal === 'price-asc') {
-        filteredList.sort((a, b) => a.price - b.price);
-      } else if (sortVal === 'price-desc') {
-        filteredList.sort((a, b) => b.price - a.price);
-      } else if (sortVal === 'prep') {
-        filteredList.sort((a, b) => {
-          const timeA = parseInt(a.prep) || 0;
-          const timeB = parseInt(b.prep) || 0;
-          return timeA - timeB;
-        });
-      } else if (sortVal === 'rating') {
-        filteredList.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
-      } else {
-        // popular (default)
-        filteredList.sort((a, b) => {
-          const popRank = { 'Must Try': 3, 'Bestseller': 2, 'Popular': 1 };
-          const rankA = popRank[a.popularity] || 0;
-          const rankB = popRank[b.popularity] || 0;
-          if (rankB !== rankA) return rankB - rankA;
-          return parseFloat(b.rating) - parseFloat(a.rating);
-        });
-      }
-
-      // Update search banner count & description
-      const banner = document.getElementById('searchResultsBanner');
-      const bannerText = document.getElementById('searchResultsCountText');
-      if (banner && bannerText) {
-        if (activeSearchQuery !== '' || activeFilterType !== 'all') {
-          banner.style.display = 'flex';
-          bannerText.textContent = `${filteredList.length} Results Found Sorted by ${sortLabels[sortVal]}`;
+      categoriesList.forEach(cat => {
+        let catItems = [];
+        if (cat.key === 'best-sellers') {
+          catItems = allFoodItems.filter(item => item.popularity === 'Must Try' || item.popularity === 'Bestseller' || parseFloat(item.rating) >= 4.9);
         } else {
-          banner.style.display = 'none';
+          catItems = allFoodItems.filter(item => item.categoryKey === cat.key);
         }
-      }
 
-      // Empty / No Results state
-      if (filteredList.length === 0) {
+        // Apply search filter
         if (activeSearchQuery !== '') {
-          container.innerHTML = `
-            <div style="grid-column: 1 / -1; text-align: center; padding: 60px 40px; color: var(--muted); font-family: var(--mono); font-size: 14px; background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.1); border-radius: 12px; display:flex; flex-direction:column; align-items:center; gap:16px;">
-              <span style="font-size: 32px;">🔍</span>
-              <strong>No search results for "${activeSearchQuery}"</strong>
-              <span>Check spelling or try searching for another loadout.</span>
-              <button class="button secondary" onclick="document.getElementById('clearSearchBtn').click();" style="padding: 6px 16px; font-size: 11px; border-radius: 6px; height:34px; min-height:34px !important; margin-top: 10px;">[ Clear Search ]</button>
-            </div>
-          `;
-        } else {
-          container.innerHTML = `
-            <div style="grid-column: 1 / -1; text-align: center; padding: 60px 40px; color: var(--muted); font-family: var(--mono); font-size: 14px; background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.1); border-radius: 12px; display:flex; flex-direction:column; align-items:center; gap:16px;">
-              <span style="font-size: 32px;">🎮</span>
-              <strong>No loadouts found in this category.</strong>
-              <span>Try another category or filter search terms.</span>
-              <button class="button secondary" onclick="if(window.clearAllFoodFilters) window.clearAllFoodFilters()" style="padding: 6px 16px; font-size: 11px; border-radius: 6px; height:34px; min-height:34px !important; margin-top: 10px;">[ Show All ]</button>
-            </div>
-          `;
+          catItems = catItems.filter(item => 
+            item.name.toLowerCase().includes(activeSearchQuery.toLowerCase()) || 
+            item.desc.toLowerCase().includes(activeSearchQuery.toLowerCase())
+          );
         }
-        return;
-      }
 
-      // 4. Render product cards
-      filteredList.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'badge-card glass-card food-product-card';
-        card.style.cursor = 'pointer';
-        card.setAttribute('tabindex', '0');
-        card.setAttribute('role', 'button');
-        card.setAttribute('aria-label', `${item.name}, Price: ₹${item.price}. ${item.desc}. Press Enter or Space to view details.`);
-        
-        card.onclick = () => openFoodDetailsModal(item.id);
-        card.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            openFoodDetailsModal(item.id);
-          }
-        });
+        // Apply quick tag filters
+        if (activeFilterType === 'veg') {
+          catItems = catItems.filter(item => item.isVeg === true);
+        } else if (activeFilterType === 'non-veg') {
+          catItems = catItems.filter(item => item.isVeg === false);
+        } else if (activeFilterType === 'under-200') {
+          catItems = catItems.filter(item => item.price < 200);
+        } else if (activeFilterType === 'bestseller') {
+          catItems = catItems.filter(item => item.popularity === 'Must Try' || item.popularity === 'Bestseller');
+        }
 
-        const popularityBadge = item.popularity ? `<span class="food-pop-badge">${item.popularity === 'Bestseller' ? '🔥 Bestseller' : item.popularity}</span>` : '';
-        card.innerHTML = `
-          <div class="food-image-container">
-            <img class="food-image-bg" src="${item.image}" alt="${item.name}" loading="lazy">
-            ${popularityBadge}
-            <button class="food-card-quick-add" onclick="event.stopPropagation(); addFoodToCart('${item.id}')" title="Quick Add" aria-label="Quick Add">+</button>
-          </div>
-          <div class="food-card-details">
-            <h4 class="food-card-title">${item.name}</h4>
-            <div class="food-card-price">₹${item.price}</div>
-            <div class="food-card-meta">
-              <span class="meta-veg-wrap" style="display: inline-flex; align-items: center; gap: 6px;">
-                <span class="veg-badge-symbol ${item.isVeg ? 'veg' : 'nonveg'}"><span class="inner-symbol"></span></span>
-                <span style="font-size: 11px; font-weight: 600; color: ${item.isVeg ? '#00db78' : '#ff4f70'}">${item.isVeg ? 'Veg' : 'Non-Veg'}</span>
-              </span>
-              <span class="meta-rating">★ ${item.rating}</span>
-              <span class="meta-prep">⏱ ${item.prep}</span>
+        // Apply sorting to category items
+        if (sortVal === 'price-asc') {
+          catItems.sort((a, b) => a.price - b.price);
+        } else if (sortVal === 'price-desc') {
+          catItems.sort((a, b) => b.price - a.price);
+        } else if (sortVal === 'prep') {
+          catItems.sort((a, b) => (parseInt(a.prep) || 0) - (parseInt(b.prep) || 0));
+        } else if (sortVal === 'rating') {
+          catItems.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
+        } else {
+          // Default sorting
+          catItems.sort((a, b) => {
+            const popRank = { 'Must Try': 3, 'Bestseller': 2, 'Popular': 1 };
+            const rA = popRank[a.popularity] || 0;
+            const rB = popRank[b.popularity] || 0;
+            if (rB !== rA) return rB - rA;
+            return parseFloat(b.rating) - parseFloat(a.rating);
+          });
+        }
+
+        // Skip rendering empty categories during active search/filters
+        if (catItems.length === 0 && (activeSearchQuery !== '' || activeFilterType !== 'all')) {
+          return;
+        }
+
+        // Skip category sections that have zero items entirely
+        if (catItems.length === 0) return;
+
+        const section = document.createElement('div');
+        section.className = 'menu-category-section loaded';
+        section.id = `section-${cat.key}`;
+
+        section.innerHTML = `
+          <div class="menu-section-header" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 12px;">
+            <div>
+              <h3 class="display" style="font-size: 20px; color: #fff; margin: 0 0 4px; display: inline-flex; align-items: center; gap: 8px;">
+                ${cat.iconHtml} ${cat.name}
+              </h3>
+              <div style="font-family: var(--mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;">${catItems.length} Items</div>
             </div>
+            <a href="#" onclick="event.preventDefault(); window.scrollToCategory('${cat.key}')" class="view-all-link" style="font-family: var(--mono); font-size: 11px; color: #F5C64D; text-decoration: none; text-transform: uppercase; font-weight: 700; transition: color 0.2s;">View All →</a>
           </div>
-          <div class="food-card-footer">
-            <button class="cafe-add-btn" onclick="event.stopPropagation(); openFoodDetailsModal('${item.id}')">Add to Order</button>
+          <div class="menu-horizontal-slider" id="slider-${cat.key}">
+            <!-- Cards populated here -->
           </div>
         `;
-        container.appendChild(card);
-        
-        // Trigger CSS transition
-        requestAnimationFrame(() => {
-          card.classList.add('loaded');
+
+        const slider = section.querySelector('.menu-horizontal-slider');
+
+        catItems.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'food-related-card loaded';
+          card.style.cursor = 'pointer';
+          card.onclick = () => openFoodDetailsModal(item.id);
+
+          const popTag = item.popularity === 'Bestseller' ? '🔥 Bestseller' : (item.popularity ? `★ ${item.popularity}` : '★ Popular');
+          card.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" loading="lazy" style="height: 140px; object-fit: cover; width: 100%; border-radius: 12px 12px 0 0;">
+            <div class="food-related-info" style="padding: 12px; display: flex; flex-direction: column; gap: 4px; background: #111217; border-radius: 0 0 12px 12px; border: 1px solid rgba(255,255,255,0.05); border-top: none; box-sizing: border-box;">
+              <span style="font-size: 9px; color: var(--accent); font-weight: 700; text-transform: uppercase;">${popTag}</span>
+              <h5 class="rel-name" style="font-size: 14px; font-weight: 700; margin: 0; color: #fff; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 36px; line-height: 1.3;">${item.name}</h5>
+              <div class="rel-meta" style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+                <span class="rel-price" style="font-weight: 700; font-family: var(--mono); color: #F5C64D; font-size: 13px;">₹${item.price}</span>
+                <span style="font-size: 11px; color: var(--muted);">★ ${item.rating}</span>
+              </div>
+            </div>
+          `;
+          slider.appendChild(card);
         });
+
+        container.appendChild(section);
       });
     }
-  }
+  };
 
   /**
    * Render horizontal slider of 3-6 featured items on the homepage
@@ -438,6 +399,27 @@ function initFoodMenuEngine() {
       `;
       container.appendChild(card);
     });
+  }
+
+  // Helper to show skeleton loader shimmer state cards
+  function showSkeletons() {
+    container.innerHTML = '';
+    for (let i = 0; i < 3; i++) {
+      const skeleton = document.createElement('div');
+      skeleton.className = 'menu-category-section loaded';
+      skeleton.innerHTML = `
+        <div class="menu-section-header" style="height: 20px; width: 200px; background: rgba(255,255,255,0.03); margin-bottom: 14px; border-radius: 4px;"></div>
+        <div class="menu-horizontal-slider">
+          <div class="badge-card glass-card food-product-card skeleton-card loaded" style="flex: 0 0 240px; min-height: 260px;">
+            <div class="food-image-container skeleton-shimmer" style="height:140px; background: rgba(255,255,255,0.03);"></div>
+          </div>
+          <div class="badge-card glass-card food-product-card skeleton-card loaded" style="flex: 0 0 240px; min-height: 260px;">
+            <div class="food-image-container skeleton-shimmer" style="height:140px; background: rgba(255,255,255,0.03);"></div>
+          </div>
+        </div>
+      `;
+      container.appendChild(skeleton);
+    }
   }
 
   // Initial menu render (called after all variables are fully declared)
