@@ -334,6 +334,62 @@
   }
 
   /* -----------------------------------------------------------
+     8b. MENU ITEM GRID — replaces the horizontal single-row
+     slider for the active category's full item list. Wraps into
+     rows so vertical swipe reaches every item, not just the ones
+     that fit in one screen-width strip.
+     ----------------------------------------------------------- */
+  .menu-item-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+    padding: 4px 0 10px !important;
+  }
+  .menu-item-grid .food-related-card {
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.24) !important;
+    transition: transform 0.15s ease !important;
+  }
+  .menu-item-grid .food-related-card:active {
+    transform: scale(0.97) !important;
+  }
+  .menu-item-grid .food-related-card img {
+    height: 120px !important;
+    object-fit: cover !important;
+    width: 100% !important;
+    border-radius: 12px 12px 0 0 !important;
+    flex: 0 0 auto !important;
+  }
+  .menu-item-grid .food-related-info {
+    flex: 1 1 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 5px !important;
+    padding: 10px !important;
+  }
+  .menu-item-grid .food-related-info .rel-name {
+    height: 36px !important;
+    font-size: 12.5px !important;
+    line-height: 1.3 !important;
+  }
+  .menu-item-grid .food-related-info .rel-meta {
+    margin-top: auto !important;
+    padding-top: 4px !important;
+  }
+  .menu-item-grid .food-related-info .rel-price {
+    font-size: 12.5px !important;
+  }
+  @media (max-width: 360px) {
+    .menu-item-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+
+  /* -----------------------------------------------------------
      9. FLOATING SESSION HUD BUTTON — clear of card content
      ----------------------------------------------------------- */
   .mobile-hud-toggle {

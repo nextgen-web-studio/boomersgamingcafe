@@ -26,8 +26,6 @@ function initFoodMenuEngine() {
   if (!container && !document.getElementById('featuredItemsContainer')) return;
 
   let currentCategory = 'best-sellers';
-  let categoryObserver = null;
-  let suppressObserverUntil = 0;
   let activeSearchQuery = '';
   let activeFilterType = 'all'; // all, veg, non-veg, under-200, bestseller, snacks, drinks, combos
 
@@ -198,81 +196,29 @@ function initFoodMenuEngine() {
     currentCategory = category;
   }
 
-  // Category tab button click handler (manual tap)
+  // Category tab button click handler — filters the grid down to just
+  // this category instead of scrolling past every other category.
   window.switchCafeTab = function(category, btnElement) {
-    // Ignore intersection updates for a moment while we smooth-scroll,
-    // otherwise a section passing through the viewport mid-scroll can
-    // steal the active state back before we arrive.
-    suppressObserverUntil = Date.now() + 700;
+    setActiveTab(category, btnElement);
+    renderMenuGrid(true);
 
-    const targetSection = document.getElementById(`section-${category}`);
-    if (targetSection) {
-      targetSection.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
+    const shelf = document.querySelector('.sticky-menu-shelf');
+    if (shelf) {
+      shelf.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    setActiveTab(category, btnElement);
-
-    Tracker.track('Cafe Scroll Switch', { category });
+    Tracker.track('Cafe Filter Switch', { category });
   };
 
   window.scrollToCategory = function(category) {
-    suppressObserverUntil = Date.now() + 700;
-    const targetSection = document.getElementById(`section-${category}`);
-    if (targetSection) {
-      targetSection.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
     setActiveTab(category, null);
-  };
-
-  // -----------------------------------------------------------
-  // Dynamic active category tracking (task #9 in the audit brief)
-  // As the user scrolls, whichever category section occupies the
-  // band just under the sticky shelf becomes "active" — pill
-  // updates instantly with no delay, and auto-centers in the rail.
-  // -----------------------------------------------------------
-  function refreshActiveCategoryObserver() {
-    if (categoryObserver) {
-      categoryObserver.disconnect();
-    }
+    renderMenuGrid(true);
 
     const shelf = document.querySelector('.sticky-menu-shelf');
-    const shelfHeight = shelf ? shelf.getBoundingClientRect().height : 120;
-
-    categoryObserver = new IntersectionObserver((entries) => {
-      if (Date.now() < suppressObserverUntil) return;
-
-      // Pick the entry closest to the top of the viewport among those
-      // currently intersecting the "active" band.
-      let best = null;
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        if (!best || entry.boundingClientRect.top < best.boundingClientRect.top) {
-          best = entry;
-        }
-      });
-
-      if (best) {
-        const category = best.target.id.replace('section-', '');
-        if (category !== currentCategory) {
-          setActiveTab(category, null);
-        }
-      }
-    }, {
-      root: null,
-      rootMargin: `-${Math.ceil(shelfHeight) + 4}px 0px -70% 0px`,
-      threshold: 0
-    });
-
-    document.querySelectorAll('.menu-category-section').forEach(section => {
-      categoryObserver.observe(section);
-    });
-  }
+    if (shelf) {
+      shelf.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   // Dynamic Category Cards compiler
   const categoriesList = [
@@ -338,6 +284,12 @@ function initFoodMenuEngine() {
       let firstMatchedCategoryKey = null;
 
       categoriesList.forEach(cat => {
+        // Tabs filter the grid down to one category at a time.
+        // A search, though, should still look across the whole menu.
+        if (activeSearchQuery === '' && cat.key !== currentCategory) {
+          return;
+        }
+
         let catItems = [];
         if (cat.key === 'best-sellers') {
           catItems = allFoodItems.filter(item => item.popularity === 'Must Try' || item.popularity === 'Bestseller' || parseFloat(item.rating) >= 4.9);
@@ -411,12 +363,12 @@ function initFoodMenuEngine() {
             </div>
             <a href="#" onclick="event.preventDefault(); window.scrollToCategory('${cat.key}')" class="view-all-link" style="font-family: var(--mono); font-size: 11px; color: #F5C64D; text-decoration: none; text-transform: uppercase; font-weight: 700; transition: color 0.2s;">View All →</a>
           </div>
-          <div class="menu-horizontal-slider" id="slider-${cat.key}">
+          <div class="menu-item-grid" id="slider-${cat.key}">
             <!-- Cards populated here -->
           </div>
         `;
 
-        const slider = section.querySelector('.menu-horizontal-slider');
+        const slider = section.querySelector('.menu-item-grid');
 
         catItems.forEach(item => {
           const card = document.createElement('div');
@@ -478,9 +430,6 @@ function initFoodMenuEngine() {
           }
         });
       }
-
-      // Re-observe the freshly rendered sections for active-pill tracking
-      refreshActiveCategoryObserver();
     }
   };
 

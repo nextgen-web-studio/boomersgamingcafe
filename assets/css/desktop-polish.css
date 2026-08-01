@@ -600,6 +600,31 @@
     border-color: rgba(245, 198, 77, 0.5) !important;
     box-shadow: 0 12px 30px rgba(245, 198, 77, 0.15), 0 8px 24px rgba(0,0,0,0.5) !important;
   }
+  .menu-item-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
+    gap: 20px !important;
+    padding: 10px 4px 20px !important;
+  }
+  .menu-item-grid .food-related-card {
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease !important;
+  }
+  .menu-item-grid .food-related-card img {
+    height: 160px !important;
+    object-fit: cover !important;
+    width: 100% !important;
+  }
+  .menu-item-grid .food-related-card:hover {
+    transform: translateY(-5px) !important;
+    border-color: rgba(245, 198, 77, 0.5) !important;
+    box-shadow: 0 12px 30px rgba(245, 198, 77, 0.15), 0 8px 24px rgba(0,0,0,0.5) !important;
+  }
   /* Active pill underline indicators */
   .cafe-tabs .cafe-tab-btn.active {
     position: relative !important;
