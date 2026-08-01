@@ -57,7 +57,7 @@ function initFoodMenuEngine() {
 
   // Search input handler
   const clearSearchBtn = document.getElementById('clearSearchBtn');
-  const shortcut = document.querySelector('.search-shortcut-badge');
+  const shortcut = document.querySelector('.search-kbd-shortcut');
   const sortSelect = document.getElementById('foodSortSelect');
   
   if (searchInput) {
@@ -1163,7 +1163,7 @@ document.addEventListener('DOMContentLoaded', () => {
 window.clearAllFoodFilters = function() {
   const searchInput = document.getElementById('foodSearchInput');
   const clearSearchBtn = document.getElementById('clearSearchBtn');
-  const shortcut = document.querySelector('.search-shortcut-badge');
+  const shortcut = document.querySelector('.search-kbd-shortcut');
   const filterButtons = document.querySelectorAll('.food-filter-btn');
   const tabButtons = document.querySelectorAll('.cafe-tab-btn');
   

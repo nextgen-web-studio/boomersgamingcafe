@@ -67,17 +67,23 @@ button {
   margin: auto;
 }
 
-/* Navigation */
+/* Navigation
+   Base/fallback rule — desktop-polish.css (>=801px) and mobile-audit.css
+   (<=800px) both fully re-declare position/height/background per
+   breakpoint with !important, so this is just a sane default. */
 .nav {
   height: 76px;
-  position: absolute;
-  z-index: 100;
-  inset: 0 0 auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: min(1440px, calc(100% - 56px));
-  margin: auto;
+  padding: 0 48px;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
 }
 
 .brand {
@@ -3076,21 +3082,6 @@ button {
    ========================================================================== */
 
 /* Navbar Active Underline style overrides */
-.nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  transition: background 0.3s ease, backdrop-filter 0.3s ease;
-  z-index: 999;
-}
-.nav.scrolled {
-  background: rgba(8, 9, 12, 0.9) !important;
-  backdrop-filter: blur(15px) !important;
-  -webkit-backdrop-filter: blur(15px) !important;
-  border-bottom: 1px solid var(--line);
-}
-
 .nav-links a {
   position: relative;
 }
@@ -3158,23 +3149,23 @@ button {
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(16, 17, 21, 0.65) !important;
-  border-radius: 12px !important;
-  transition: all 250ms ease !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: space-between !important;
-  height: 100% !important;
+  background: rgba(20, 21, 25, 0.65);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  transition: border-color 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
 }
 
 .food-product-card:hover {
-  transform: translateY(-8px) !important;
-  border-color: rgba(255, 199, 70, 0.6) !important;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 199, 70, 0.1) !important;
+  transform: translateY(-8px);
+  border-color: var(--accent);
+  box-shadow: 0 20px 40px rgba(255, 183, 3, 0.15);
 }
 
 .food-image-container {
-  height: 170px !important;
+  height: 200px !important;
   width: 100%;
   overflow: hidden;
   position: relative;
@@ -3243,6 +3234,7 @@ button {
 .food-card-price {
   color: #F5C54B !important; /* Boomer's gold */
   font: 800 16px var(--mono) !important; /* bold, slightly larger */
+  transition: transform 0.3s ease;
   margin: 8px 0 10px 0 !important; /* 8-12px spacing from title and description */
 }
 
@@ -4674,31 +4666,6 @@ body.no-scroll {
 }
 
 /* ==========================================
-   Desktop Header & Scrolled Blurs
-   ========================================== */
-.nav {
-  height: 72px; /* standard 72px */
-  transition: background-color 0.3s, border-color 0.3s, backdrop-filter 0.3s;
-}
-
-.nav.scrolled {
-  background: rgba(10, 10, 10, 0.75) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
-
-.brand-mark {
-  width: 30px !important;
-  height: 30px !important;
-}
-
-.brand {
-  font-size: 18px !important;
-  letter-spacing: -0.5px !important;
-}
-
-/* ==========================================
    Kitchen Sticky Search & Focus glows
    ========================================== */
 .sticky-menu-shelf {
@@ -4827,24 +4794,6 @@ body.no-scroll {
 /* ==========================================
    Food Product Cards Taller Images & Hover slides
    ========================================== */
-.food-image-container {
-  height: 200px !important; /* 25% height increase */
-}
-
-.food-product-card {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  background: rgba(20, 21, 25, 0.65) !important;
-  transition: border-color 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
-}
-
-.food-product-card:hover {
-  transform: translateY(-8px) !important;
-  border-color: var(--accent) !important;
-  box-shadow: 0 20px 40px rgba(255, 183, 3, 0.15) !important;
-}
-
 .food-product-card .cafe-add-btn {
   position: absolute;
   right: 16px;
@@ -4857,10 +4806,6 @@ body.no-scroll {
 .food-product-card:hover .cafe-add-btn {
   transform: translateY(0);
   opacity: 1;
-}
-
-.food-card-price {
-  transition: transform 0.3s ease;
 }
 
 .food-product-card:hover .food-card-price {
@@ -5239,10 +5184,11 @@ body.no-scroll {
   animation: shimmer 1.5s infinite linear !important;
 }
 
+/* Card fade-in-on-render state (JS adds .loaded once the card is populated) */
 .food-product-card {
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 300ms ease, transform 300ms ease !important;
+  transition: opacity 300ms ease, transform 300ms ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
 }
 
 .food-product-card.loaded {

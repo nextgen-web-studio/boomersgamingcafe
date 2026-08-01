@@ -750,8 +750,9 @@ button.button.hero-primary-cta {
   }
   .food-modal-price-rating {
     display: flex !important;
-    justify-content: space-between !important;
+    justify-content: flex-start !important;
     align-items: center !important;
+    gap: 10px !important;
     margin-top: 6px !important;
   }
   .food-modal-price {
@@ -759,8 +760,15 @@ button.button.hero-primary-cta {
     color: #F5C64D !important;
   }
   .food-modal-rating {
-    font: 700 12px var(--mono) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    background: #1fA855 !important;
     color: #fff !important;
+    font: 800 11px var(--mono) !important;
+    padding: 4px 9px !important;
+    border-radius: 6px !important;
+    box-shadow: 0 2px 8px rgba(31,168,85,.35) !important;
   }
   .food-modal-desc,
   .food-modal-details p {
@@ -872,22 +880,23 @@ button.button.hero-primary-cta {
   .food-add-sticky-wrap .quantity-selector {
     display: flex !important;
     align-items: center !important;
-    background: rgba(255, 255, 255, 0.05) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: 12px !important;
+    background: rgba(245, 198, 77, 0.06) !important;
+    border: 1.5px solid var(--accent) !important;
+    border-radius: 999px !important;
     height: 52px !important;
     padding: 0 4px !important;
     box-sizing: border-box !important;
   }
   .food-add-sticky-wrap .food-qty-btn,
   .food-add-sticky-wrap .quantity-selector button {
-    width: 44px !important;
-    height: 44px !important;
-    border-radius: 8px !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
     background: transparent !important;
     border: none !important;
-    color: #fff !important;
+    color: var(--accent) !important;
     font-size: 18px !important;
+    font-weight: 800 !important;
     cursor: pointer !important;
     display: flex !important;
     align-items: center !important;
@@ -912,7 +921,7 @@ button.button.hero-primary-cta {
     height: 52px !important;
     background: #F5C64D !important;
     border: none !important;
-    border-radius: 12px !important;
+    border-radius: 999px !important;
     color: #000 !important;
     font: 800 12px var(--mono) !important;
     letter-spacing: 0.05em !important;
