@@ -23,7 +23,7 @@ function initFoodMenuEngine() {
   const filterButtons = document.querySelectorAll('.food-filter-btn');
   const tabButtons = document.querySelectorAll('.cafe-tab-btn');
   
-  if (!container) return;
+  if (!container && !document.getElementById('featuredItemsContainer')) return;
 
   let currentCategory = 'xp-starters';
   let activeSearchQuery = '';
@@ -382,7 +382,6 @@ function initFoodMenuEngine() {
           <div class="food-card-details">
             <h4 class="food-card-title">${item.name}</h4>
             <div class="food-card-price">₹${item.price}</div>
-            <p class="food-card-desc">${item.desc}</p>
             <div class="food-card-meta">
               <span class="meta-veg-wrap" style="display: inline-flex; align-items: center; gap: 6px;">
                 <span class="veg-badge-symbol ${item.isVeg ? 'veg' : 'nonveg'}"><span class="inner-symbol"></span></span>
@@ -406,8 +405,47 @@ function initFoodMenuEngine() {
     }
   }
 
+  /**
+   * Render horizontal slider of 3-6 featured items on the homepage
+   */
+  function renderFeaturedSlider() {
+    const container = document.getElementById('featuredItemsContainer');
+    if (!container) return;
+
+    const featuredIds = ["f-2", "f-4", "f-9", "f-29", "f-32", "f-37"];
+    const featuredItems = allFoodItems.filter(item => featuredIds.includes(item.id));
+
+    container.innerHTML = '';
+
+    featuredItems.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'food-related-card';
+      card.style.flex = '0 0 180px';
+      card.style.cursor = 'pointer';
+      card.onclick = () => openFoodDetailsModal(item.id);
+
+      const popTag = item.popularity === 'Bestseller' ? '🔥 Bestseller' : '★ Popular';
+      card.innerHTML = `
+        <img src="${item.image}" alt="${item.name}" loading="lazy" style="height: 120px; object-fit: cover; width: 100%;">
+        <div class="food-related-info" style="padding: 10px; display: flex; flex-direction: column; gap: 4px;">
+          <span style="font-size: 9px; color: var(--accent); font-weight: 700; text-transform: uppercase;">${popTag}</span>
+          <h5 class="rel-name" style="font-size: 13px; font-weight: 700; margin: 0; color: #fff; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">${item.name}</h5>
+          <div class="rel-meta" style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+            <span class="rel-price" style="font-weight: 700; font-family: var(--mono); color: #F5C64D; font-size: 12px;">₹${item.price}</span>
+            <span style="font-size: 10px; color: var(--muted);">★ ${item.rating}</span>
+          </div>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
   // Initial menu render (called after all variables are fully declared)
-  renderMenuGrid(true);
+  if (document.getElementById('featuredItemsContainer')) {
+    renderFeaturedSlider();
+  } else {
+    renderMenuGrid(true);
+  }
 }
 
 /**

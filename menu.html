@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#08090c" />
+  <meta name="description" content="Enter the Arena at Boomer's Gaming Café. High-spec gaming setups, sim racing, VR, esports tournaments, and a premium power-up kitchen in Pune and Coimbatore." />
+  <title>Boomer's — Enter the Arena</title>
+  
+  <!-- Favicon link -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  
+  <!-- Preconnect and Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Libraries (GSAP & ScrollTrigger) -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  
+  <!-- Core Modular Stylesheets -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/animations.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+  <link rel="stylesheet" href="assets/css/cinematic.css" />
+  <link rel="stylesheet" href="assets/css/mobile-audit.css" />
+  <link rel="stylesheet" href="assets/css/desktop-polish.css" />
+  <link rel="stylesheet" href="assets/css/ivory-theme.css" />
+  <link rel="stylesheet" href="assets/css/mobile-menu-polish.css" />
+</head>
+<body>
+    
+
+    <!-- Dedicated Power-Up Station Menu Page -->
+    <main id="top" style="padding-top: 75px; background: #08090c radial-gradient(circle at top right, rgba(239, 189, 78, 0.04), transparent 45%) !important; min-height: 100vh;">
+      <section class="section cafe" style="padding-top: 0;">
+        <div class="wrap" style="max-width: 1200px;">
+          
+          <div class="reveal" style="margin-bottom: 30px; text-align: center;">
+            <div class="section-kicker" style="color: var(--lime); font-size: 14px; font-family: var(--mono); letter-spacing: 0.1em; text-transform: uppercase;">🍔 POWER-UP STATION</div>
+            <h1 class="display" style="font-size: 52px; line-height: 0.95; margin: 15px 0 20px;">Fuel your next<br><span>gaming session.</span></h1>
+            <p class="section-intro" style="max-width: 650px; margin: 0 auto 30px; font-size: 15px; color: var(--muted); line-height: 1.6;">
+              Select from BGC's gourmet kitchen loadouts. Real gaming setup snacks, thick potion milkshakes, and squad combo boxes prepared to keep you in the queue.
+            </p>
+          </div>
+
+          <!-- Sticky Search, Filters and Categories Navigation Shelf -->
+          <div class="sticky-menu-shelf reveal" style="position: sticky; top: 76px; z-index: 100; margin-bottom: 30px;">
+            <div style="margin-bottom: 16px;">
+              <div class="search-wrap">
+                <svg class="search-lead-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <input type="text" id="foodSearchInput" class="search-input" placeholder="Search your next loadout..." oninput="handleSearch(this)">
+                <button type="button" id="clearSearchBtn" class="search-clear-btn" aria-label="Clear search" style="display:none;">&times;</button>
+                <span class="search-kbd-shortcut">CTRL + K</span>
+                <div class="search-filters-btn" onclick="document.querySelector('.cafe-tabs').scrollIntoView({behavior:'smooth', block:'center'});">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sliders-horizontal"><line x1="21" x2="14" y1="4" y2="4"/><line x1="10" x2="3" y1="4" y2="4"/><line x1="21" x2="17" y1="12" y2="12"/><line x1="13" x2="3" y1="12" y2="12"/><line x1="21" x2="11" y1="20" y2="20"/><line x1="7" x2="3" y1="20" y2="20"/><line x1="14" x2="14" y1="2" y2="6"/><line x1="17" x2="17" y1="10" y2="14"/><line x1="7" x2="7" y1="18" y2="22"/></svg>
+                  Filters
+                </div>
+              </div>
+            </div>
+
+            <!-- Category Tab Selectors (12 categories) -->
+            <div class="cafe-tabs" role="tablist">
+              <button class="cafe-tab-btn active" onclick="switchCafeTab('best-sellers', this)"><svg class="lucide lucide-trophy" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px; vertical-align: -1px;"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"/><path d="M12 2a6 6 0 0 0-6 6v1a6 6 0 0 0 12 0V8a6 6 0 0 0-6-6z"/></svg>Best Sellers</button>
+              <button class="cafe-tab-btn" onclick="switchCafeTab('xp-starters', this)">XP Starters</button>
+              <button class="cafe-tab-btn" onclick="switchCafeTab('tactical-starters', this)">Tactical Starters</button>
+              <button class="cafe-tab-btn" onclick="switchCafeTab('sandwich', this)">Sandwich Bay</button>
+              <button class="cafe-tab-btn" onclick="switchCafeTab('burger', this)">Main Loadout</button>
+              <button class="cafe-tab-btn" onclick="switchCafeTab('wrap', this)">Tactical Wraps</button>
+              <button class="cafe-tab-btn" onclick="switchCafeTab('pasta', this)">Energy Boost</button>
+              <button class="cafe-tab-btn" onclick="switchCafeTab('maggi', this)">Instant Respawn</button>
+              <button class="cafe-tab-btn" onclick="switchCafeTab('popcorn', this)">Side Quests</button>
+              <button class="cafe-tab-btn" onclick="switchCafeTab('milkshake', this)">Potion Bar</button>
+              <button class="cafe-tab-btn" onclick="switchCafeTab('hot-beverages', this)">Recharge Station</button>
+              <button class="cafe-tab-btn" onclick="switchCafeTab('cold-beverages', this)">Cold Beverage Depot</button>
+              <button class="cafe-tab-btn" onclick="switchCafeTab('mocktails', this)">Mocktail Lab</button>
+              <button class="cafe-tab-btn" onclick="switchCafeTab('squad-combos', this)">Squad Combos</button>
+            </div>
+          </div>
+
+          <!-- Search Results Count Banner -->
+          <div id="searchResultsBanner" class="reveal" style="font-family: var(--mono); font-size: 11px; color: var(--muted); text-transform: uppercase; margin-bottom: 24px; display: none; align-items: center; gap: 8px;">
+            <span style="color: var(--lime);">●</span> <span id="searchResultsCountText">0 Results Found</span>
+          </div>
+          
+          <!-- Tab items content grid -->
+          <div class="cafe-items-list reveal" id="cafeItemsContainer">
+            <!-- Loaded Dynamically from menu.js -->
+          </div>
+
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div>
+          <div class="section-kicker">The game is waiting</div>
+          <h2 class="display">Meet you in<br>the <span>arena.</span></h2>
+        </div>
+        <a href="#book" class="button">Book a station →</a>
+      </div>
+      
+      <div class="footer-quick">
+        <div>
+          <h4>Quick booking</h4>
+          <p>Reserve a PC, PS5, sim racing cockpit, or VR session before you arrive.</p>
+          <a href="#book" style="color:var(--lime)">Start booking →</a>
+        </div>
+        <div>
+          <h4>Our branches</h4>
+          <p><b>Pune</b> · Viman Nagar<br><small style="color:var(--muted)">10:00 AM - 01:00 AM</small><br><a href="https://maps.google.com" target="_blank" style="color:var(--lime); display:inline; font-size:11px; margin-top:2px;">📍 View Map</a></p>
+          <p style="margin-top:10px;"><b>Coimbatore</b> · RS Puram<br><small style="color:var(--muted)">10:00 AM - 11:00 PM</small><br><a href="https://maps.google.com" target="_blank" style="color:var(--lime); display:inline; font-size:11px; margin-top:2px;">📍 View Map</a></p>
+        </div>
+        <div>
+          <h4>Connect</h4>
+          <a href="https://instagram.com" target="_blank">Instagram</a>
+          <a href="https://discord.gg" target="_blank">Discord</a>
+          <a href="https://wa.me/919999999999" target="_blank">WhatsApp Chat</a>
+          <a href="mailto:boomergamingcafe@gmail.com">Email Support</a>
+          <a href="tel:+919999999999">Call Pune: +91 99999 99999</a>
+        </div>
+        <div>
+          <h4>Stay in the loop</h4>
+          <p>New tournaments, drops, and Happy Hours.</p>
+          <form class="newsletter" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Done'" aria-label="Newsletter">
+            <input type="email" placeholder="Email address" required>
+            <button type="submit">Join</button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <span>&copy; 2026 Boomer's Gaming Café</span>
+        <div class="socials">
+          <a href="https://instagram.com" target="_blank">Instagram</a>
+          <a href="https://discord.gg" target="_blank">Discord</a>
+          <a href="https://wa.me/919999999999" target="_blank">WhatsApp</a>
+          <a href="#book">Terms & Privacy</a>
+        </div>
+        <span>Coimbatore · Pune</span>
+      </div>
+    </div>
+  </footer>
+    <!-- Food Details Popup Modal -->
+  <div class="food-modal" id="foodDetailModal">
+    <div class="food-modal-wrapper glass-card">
+      <span class="food-modal-close" onclick="closeFoodDetailsModal()">&times;</span>
+      <div id="foodModalContent">
+        <!-- Populated dynamically in menu.js -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Premium Session HUD Widget (Compact Redesign) -->
+  <aside class="premium-session-hud" id="premiumSessionHUD" aria-label="Premium Session HUD">
+    <!-- Close button for mobile drawer -->
+    <button class="hud-close-btn" id="hudCloseBtn" aria-label="Close HUD">&times;</button>
+
+    <!-- Header: Logo + Title + Live dot -->
+    <!-- Header: Logo + Title + Live dot -->
+    <div class="hud-header">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <img src="assets/images/logo.png" style="width:18px;height:18px;filter:drop-shadow(0 0 4px rgba(255,255,255,0.2));" alt="logo">
+        <h4 style="font:700 11px var(--mono);color:#fff;margin:0;text-transform:uppercase;letter-spacing:0.05em;">MISSION LOADOUT</h4>
+      </div>
+      <div style="display:flex;align-items:center;gap:5px;">
+        <span class="hud-status-dot"></span>
+        <span id="hudAvailBadge" style="font:700 9px var(--mono);color:#00db78;text-transform:uppercase;">12 Available</span>
+      </div>
+    </div>
+
+    <!-- Step progress bar -->
+    <div class="hud-progress-block">
+      <div class="hud-progress-label">
+        <span id="hudProgressText">STEP 1 OF 7</span>
+        <span id="hudProgressPercent">14%</span>
+      </div>
+      <div class="hud-progress-bar-wrap"><div class="hud-progress-bar" id="hudProgressBar" style="width:14%;"></div></div>
+    </div>
+
+    <!-- Station Card: thumb + name + branch + avail badge -->
+    <div class="hud-station-preview">
+      <div class="hud-station-thumb" id="hudStationThumb" style="background-image:url('assets/images/boomers_pc_lounge.jpg');"></div>
+      <div class="hud-station-info">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+          <h3 id="hudStationName" style="margin:0;">Browse Stations</h3>
+          <span class="hud-badge" id="hudZoneBadge">PC ARENA</span>
+        </div>
+        <p id="hudStationSpecs" style="margin:0 0 4px;">Select a station to continue</p>
+        <div style="display:flex;gap:8px;align-items:center;font-size:9px;color:var(--muted);">
+          <span>📍 <span id="hudBranchName">Coimbatore</span></span>
+          <span>•</span>
+          <span>👤 <span id="hudPlayersCount">1 Gamer</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick details: zone / time / duration in one row -->
+    <div class="hud-quick-row">
+      <div class="hud-quick-item">
+        <span>⏰</span>
+        <strong id="hudTimeSlot">7:00 PM</strong>
+      </div>
+      <div class="hud-quick-divider"></div>
+      <div class="hud-quick-item">
+        <span>⌛</span>
+        <strong id="hudDurationText">2 Hours</strong>
+      </div>
+      <div class="hud-quick-divider"></div>
+      <div class="hud-quick-item">
+        <span>💰</span>
+        <strong id="hudRateText">₹100/hr</strong>
+      </div>
+    </div>
+
+    <!-- Equipment chips -->
+    <div class="hud-chips-block">
+      <div class="hud-section-title">BATTLE RIG</div>
+      <div class="hud-chips" id="hudEqChips">
+        <span class="hud-chip">⚡ RTX 3070</span>
+        <span class="hud-chip">🖥 180Hz</span>
+        <span class="hud-chip">⌨ Mechanical</span>
+        <span class="hud-chip">🎧 HyperX</span>
+        <span class="hud-chip">🖱 Gaming Mouse</span>
+      </div>
+    </div>
+
+    <!-- Kitchen: show added items OR recommended combo if empty -->
+    <div class="hud-kitchen-compact" id="hudKitchenBlock">
+      <div class="hud-section-title">POWER-UP ADD-ONS</div>
+
+      <!-- Added food cards rendered here by JS -->
+      <div id="hudFoodCards">
+        <!-- Recommended combo shown when no food added -->
+        <div class="hud-combo-card" id="hudComboCard">
+          <div class="hud-combo-left">
+            <span class="hud-combo-tag">🔥 Popular Combo</span>
+            <strong>Burger + Fries + Drink</strong>
+            <span class="hud-combo-price">₹499</span>
+          </div>
+          <button class="hud-combo-btn" onclick="window.addFoodToCart && window.addFoodToCart('combo-1')" type="button">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pricing: condensed -->
+    <div class="hud-pricing-block">
+      <div class="hud-price-line">
+        <span>Arena Session</span>
+        <strong id="hudGamingCost">₹0</strong>
+      </div>
+      <div class="hud-price-line">
+        <span>Power-Up Add-ons</span>
+        <strong id="hudKitchenCost">₹0</strong>
+      </div>
+      <div class="hud-price-line">
+        <span>GST (18%)</span>
+        <strong id="hudGstCost">₹0</strong>
+      </div>
+      <div class="hud-price-line total">
+        <span>TOTAL</span>
+        <strong id="hudGrandTotal">₹0</strong>
+      </div>
+    </div>
+
+    <!-- Ticket Preview (only on step 7) -->
+    <div class="hud-ticket-preview" id="hudTicketPreview" style="display:none;">
+      <div class="hud-section-title">YOUR TICKET</div>
+      <div class="hud-ticket-card">
+        <div class="hud-ticket-details">
+          <strong id="hudTicketZone">PC Arena</strong>
+          <span id="hudTicketStation">Station 12</span>
+          <span id="hudTicketTime">Today • 7:00 PM</span>
+        </div>
+        <div class="hud-ticket-qr"><span style="font-size:28px;">🔲</span></div>
+      </div>
+      <a href="#book" class="hud-ticket-link" onclick="window.bookingWizardShowStep(6)">View Ticket →</a>
+    </div>
+
+    <!-- Primary CTA -->
+    <div class="hud-cta-wrap">
+      <button class="hud-reserve-btn" id="hudReserveBtn" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'}); if(window.bookingWizardShowStep){window.bookingWizardShowStep(5);}">
+        <span>RESERVE THIS STATION</span>
+        <span class="hud-btn-arrow">➔</span>
+      </button>
+    </div>
+
+    <!-- Achievement strip -->
+    <div class="hud-achievement-strip">
+      <div>⭐ 4.9 Rating</div>
+      <div>👥 14K Players</div>
+      <div>🏆 200+ Tourneys</div>
+      <div>⚡ Since 2018</div>
+    </div>
+  </aside>
+
+  <!-- Mobile Floating HUD Toggle Button (hidden until scrolled past hero) -->
+  <button class="mobile-hud-toggle fab-hidden" id="mobileHUDToggleBtn" aria-label="View Session HUD">
+    <span class="hud-icon">🎮</span>
+    <span class="badge" id="mobileHUDCountBadge">0</span>
+  </button>
+
+  <!-- Floating Availability Sidebar Widget -->
+  <aside class="floating-avail-widget" id="floatingAvailWidget" aria-label="Live availability sidebar">
+    <div class="floating-avail-title">Live Capacity</div>
+    <div class="floating-avail-row">
+      <span>🟢 PC Arena</span>
+      <b id="float-avail-pc">12 Available</b>
+    </div>
+    <div class="floating-avail-row">
+      <span>🟡 Console</span>
+      <b id="float-avail-ps">3 Available</b>
+    </div>
+    <div class="floating-avail-row">
+      <span>🔴 VR Lounge</span>
+      <b id="float-avail-vr">Full</b>
+    </div>
+    <div style="font-size: 8px; color: var(--muted); text-align: center; margin-top: 8px; font-family: var(--mono); text-transform: uppercase; letter-spacing:0.05em;">Updated Just Now</div>
+    <a href="#book" class="floating-avail-btn">Book Now</a>
+  </aside>
+
+  <!-- Audio Toggle hidden -->
+
+  <!-- Happy Hours Modal -->
+  <div id="happyHoursModal" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.75); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); display:none; align-items:center; justify-content:center; padding:20px;" onclick="closeHHModal(event)">
+    <div id="hhModalInner" style="background:linear-gradient(135deg,#0c0d12,#10080f); border:1px solid rgba(239,189,78,0.25); border-radius:24px; padding:40px; max-width:480px; width:100%; position:relative; box-shadow:0 40px 100px rgba(0,0,0,0.7), 0 0 80px rgba(239,189,78,0.06);">
+      <!-- Close -->
+      <button onclick="closeHappyHoursModal()" style="position:absolute;top:18px;right:18px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:50%;width:34px;height:34px;color:#fff;font-size:16px;cursor:pointer;display:grid;place-items:center;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.14)'" onmouseout="this.style.background='rgba(255,255,255,0.07)'">&times;</button>
+
+      <!-- Badge -->
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(239,189,78,0.1);border:1px solid rgba(239,189,78,0.25);border-radius:999px;padding:6px 14px;margin-bottom:18px;">
+        <span style="font:700 10px var(--mono,monospace);color:#efbd4e;letter-spacing:0.15em;text-transform:uppercase;">🔥 Happy Hours Deal</span>
+      </div>
+
+      <!-- Heading -->
+      <h2 style="font:800 2.4rem/0.92 var(--display,'Space Grotesk',sans-serif);letter-spacing:-0.05em;margin-bottom:8px;">Buy 1 Hour<br><span style="color:#efbd4e;">Get 1 Hour FREE</span></h2>
+      <p style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.65;margin-bottom:24px;">Every Monday, Tuesday &amp; Wednesday on PC and Console gaming. No code needed — just select your slot and book.</p>
+
+      <!-- Days -->
+      <div style="margin-bottom:22px;">
+        <div style="font:700 10px var(--mono,monospace);color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;">Available Days</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <span style="background:rgba(239,189,78,0.1);border:1px solid rgba(239,189,78,0.25);color:#efbd4e;font:700 11px var(--mono,monospace);padding:7px 14px;border-radius:8px;text-transform:uppercase;">Mon</span>
+          <span style="background:rgba(239,189,78,0.1);border:1px solid rgba(239,189,78,0.25);color:#efbd4e;font:700 11px var(--mono,monospace);padding:7px 14px;border-radius:8px;text-transform:uppercase;">Tue</span>
+          <span style="background:rgba(239,189,78,0.1);border:1px solid rgba(239,189,78,0.25);color:#efbd4e;font:700 11px var(--mono,monospace);padding:7px 14px;border-radius:8px;text-transform:uppercase;">Wed</span>
+        </div>
+      </div>
+
+      <!-- Branch select -->
+      <div style="margin-bottom:16px;">
+        <label style="font:700 10px var(--mono,monospace);color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:8px;">Select Branch</label>
+        <div style="display:flex;gap:10px;">
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;padding:10px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:10px;font:500 12px var(--mono,monospace);color:rgba(255,255,255,0.65);transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(239,189,78,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
+            <input type="radio" name="hh-branch" value="coimbatore" style="accent-color:#efbd4e;"> Coimbatore
+          </label>
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;padding:10px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:10px;font:500 12px var(--mono,monospace);color:rgba(255,255,255,0.65);transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(239,189,78,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
+            <input type="radio" name="hh-branch" value="pune" style="accent-color:#efbd4e;"> Pune
+          </label>
+        </div>
+      </div>
+
+      <!-- Time select -->
+      <div style="margin-bottom:22px;">
+        <label style="font:700 10px var(--mono,monospace);color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:8px;">Select Time Slot</label>
+        <select id="hhTimeSlot" style="width:100%;height:46px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:0 16px;color:#fff;font:500 13px var(--mono,monospace);outline:none;">
+          <option>10:00 AM – 12:00 PM (Morning Deal)</option>
+          <option>12:00 PM – 2:00 PM (Lunch Slot)</option>
+          <option>2:00 PM – 4:00 PM (Afternoon Deal)</option>
+          <option>4:00 PM – 6:00 PM (Evening Rush)</option>
+        </select>
+      </div>
+
+      <!-- CTA -->
+      <button onclick="bookHappyHours()" style="width:100%;height:50px;background:#efbd4e;color:#0a0700;border:none;border-radius:12px;font:800 12px var(--mono,monospace);letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:background 0.2s,transform 0.2s;" onmouseover="this.style.background='#ffc800'" onmouseout="this.style.background='#efbd4e'">Book Happy Hours →</button>
+
+      <p style="text-align:center;font:500 10px var(--mono,monospace);color:rgba(255,255,255,0.25);margin-top:14px;letter-spacing:0.05em;">OFFER VALID ON PC &amp; CONSOLE · NO CODE NEEDED</p>
+    </div>
+  </div>
+
+  
+    <script src="assets/js/tracker.js" defer></script>
+<script src="assets/js/data.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/launcher.js" defer></script>
+<script src="assets/js/booking.js" defer></script>
+<script src="assets/js/menu.js" defer></script>
+<script src="assets/js/gallery.js" defer></script>
+<script src="assets/js/audio.js" defer></script>
+<script src="assets/js/cinematic.js" defer></script>
+<script src="assets/js/mobile-audit.js" defer></script>
+<script>
+    // Activate the 20-second hero video once the page loads and video can play
+    const heroVid = document.querySelector('.hero-video');
+    if (heroVid) {
+      heroVid.addEventListener('canplaythrough', () => {
+        heroVid.classList.add('ready');
+        heroVid.play();
+      });
+      // Force trigger if already loaded in cache
+      if (heroVid.readyState >= 3) {
+        heroVid.classList.add('ready');
+        heroVid.play();
+      }
+    }
+
+    // Happy Hours Modal Functions
+    function openHappyHoursModal() {
+      document.getElementById('happyHoursModal').style.display = 'flex';
+    }
+    function closeHappyHoursModal() {
+      document.getElementById('happyHoursModal').style.display = 'none';
+    }
+    function closeHHModal(e) {
+      if (e.target === document.getElementById('happyHoursModal')) {
+        closeHappyHoursModal();
+      }
+    }
+    function bookHappyHours() {
+      const branches = document.getElementsByName('hh-branch');
+      let selectedBranch = 'coimbatore';
+      for (const b of branches) {
+        if (b.checked) {
+          selectedBranch = b.value;
+          break;
+        }
+      }
+
+      const branchSelect = document.getElementById('compact-branch');
+      if (branchSelect) {
+        branchSelect.value = selectedBranch;
+        branchSelect.dispatchEvent(new Event('change'));
+      }
+
+      const zoneSelect = document.getElementById('compact-zone');
+      if (zoneSelect) {
+        zoneSelect.value = 'pc'; // default to PC Arena for Happy Hours
+        zoneSelect.dispatchEvent(new Event('change'));
+      }
+
+      closeHappyHoursModal();
+
+      const bookSec = document.getElementById('book');
+      if (bookSec) {
+        bookSec.scrollIntoView({ behavior: 'smooth' });
+      }
+
+      setTimeout(() => {
+        if (window.startFullBookingFlow) {
+          window.startFullBookingFlow();
+        }
+      }, 600);
+    }
+
+    // Expose functions globally
+    window.openHappyHoursModal = openHappyHoursModal;
+    window.closeHappyHoursModal = closeHappyHoursModal;
+    window.closeHHModal = closeHHModal;
+    window.bookHappyHours = bookHappyHours;
+
+    // Countdown Timer for Live Tournament Ring Card
+    function initRingCardCountdown() {
+      const el = document.getElementById('ringCardCountdown');
+      if (!el) return;
+      
+      let seconds = 2 * 3600 + 15 * 60 + 44; // Starts from 02:15:44
+      
+      const interval = setInterval(() => {
+        if (seconds <= 0) {
+          clearInterval(interval);
+          el.textContent = "00:00:00";
+          return;
+        }
+        seconds--;
+        const h = Math.floor(seconds / 3600).toString().padStart(2, '0');
+        const m = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
+        const s = (seconds % 60).toString().padStart(2, '0');
+        el.textContent = `${h}:${m}:${s}`;
+      }, 1000);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initRingCardCountdown();
+      const searchInput = document.getElementById('foodSearchInput');
+      if (searchInput && window.innerWidth <= 768) {
+        searchInput.placeholder = 'Search burgers, fries...';
+      }
+    });
+  </script>
+    </body>
+</html>

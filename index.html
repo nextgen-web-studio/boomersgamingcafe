@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="assets/css/mobile-audit.css" />
   <link rel="stylesheet" href="assets/css/desktop-polish.css" />
   <link rel="stylesheet" href="assets/css/ivory-theme.css" />
+  <link rel="stylesheet" href="assets/css/mobile-menu-polish.css" />
 </head>
 <body>
 
@@ -402,52 +403,17 @@
         </div>
 
 
-        <!-- Premium Sticky Search, Filters and Categories Navigation Shelf -->
-        <div class="sticky-menu-shelf reveal">
-          <!-- Search Shelf -->
-          <div style="margin-bottom: 16px;">
-            <div class="search-wrap">
-              <svg class="search-lead-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-              <input type="text" id="foodSearchInput" class="search-input" placeholder="Search your next loadout..." oninput="handleSearch(this)">
-              <button type="button" id="clearSearchBtn" class="search-clear-btn" aria-label="Clear search" style="display:none;">&times;</button>
-              <span class="search-kbd-shortcut">CTRL + K</span>
-              <div class="search-filters-btn" onclick="document.querySelector('.cafe-tabs').scrollIntoView({behavior:'smooth', block:'center'});">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sliders-horizontal"><line x1="21" x2="14" y1="4" y2="4"/><line x1="10" x2="3" y1="4" y2="4"/><line x1="21" x2="17" y1="12" y2="12"/><line x1="13" x2="3" y1="12" y2="12"/><line x1="21" x2="11" y1="20" y2="20"/><line x1="7" x2="3" y1="20" y2="20"/><line x1="14" x2="14" y1="2" y2="6"/><line x1="17" x2="17" y1="10" y2="14"/><line x1="7" x2="7" y1="18" y2="22"/></svg>
-                Filters
-              </div>
-            </div>
-              
-          </div>
-
-          <!-- Category Tab Selectors (12 categories) -->
-          <div class="cafe-tabs" role="tablist">
-            <button class="cafe-tab-btn" onclick="switchCafeTab('best-sellers', this)"><svg class="lucide lucide-trophy" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px; vertical-align: -1px;"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"/><path d="M12 2a6 6 0 0 0-6 6v1a6 6 0 0 0 12 0V8a6 6 0 0 0-6-6z"/></svg>Best Sellers</button>
-            <button class="cafe-tab-btn active" onclick="switchCafeTab('xp-starters', this)">XP Starters</button>
-            <button class="cafe-tab-btn" onclick="switchCafeTab('tactical-starters', this)">Tactical Starters</button>
-            <button class="cafe-tab-btn" onclick="switchCafeTab('sandwich', this)">Sandwich Bay</button>
-            <button class="cafe-tab-btn" onclick="switchCafeTab('burger', this)">Main Loadout</button>
-            <button class="cafe-tab-btn" onclick="switchCafeTab('wrap', this)">Tactical Wraps</button>
-            <button class="cafe-tab-btn" onclick="switchCafeTab('pasta', this)">Energy Boost</button>
-            <button class="cafe-tab-btn" onclick="switchCafeTab('maggi', this)">Instant Respawn</button>
-            <button class="cafe-tab-btn" onclick="switchCafeTab('popcorn', this)">Side Quests</button>
-            <button class="cafe-tab-btn" onclick="switchCafeTab('milkshake', this)">Potion Bar</button>
-            <button class="cafe-tab-btn" onclick="switchCafeTab('hot-beverages', this)">Recharge Station</button>
-            <button class="cafe-tab-btn" onclick="switchCafeTab('cold-beverages', this)">Cold Beverage Depot</button>
-            <button class="cafe-tab-btn" onclick="switchCafeTab('mocktails', this)">Mocktail Lab</button>
-            <button class="cafe-tab-btn" onclick="switchCafeTab('squad-combos', this)">Squad Combos</button>
-          </div>
-        </div>
-
-        <!-- Search Results Count Banner -->
-        <div id="searchResultsBanner" class="reveal" style="font-family: var(--mono); font-size: 11px; color: var(--muted); text-transform: uppercase; margin-bottom: 24px; display: none; align-items: center; gap: 8px;">
-          <span style="color: var(--lime);">●</span> <span id="searchResultsCountText">0 Results Found</span>
+        <!-- Featured Menu Slider -->
+        <div class="section-kicker" style="color: var(--accent); margin-bottom: 16px; font-size: 12px;">🍔 FEATURED MENU</div>
+        <div class="food-related-scroll" id="featuredItemsContainer" style="display: flex !important; gap: 16px !important; overflow-x: auto !important; padding-bottom: 15px !important; scrollbar-width: thin !important;">
+          <!-- Loaded dynamically from menu.js -->
         </div>
         
-        <!-- Tab items content grid -->
-        <div class="cafe-items-list reveal" id="cafeItemsContainer">
-          <!-- Loaded Dynamically from menu.js -->
+        <div style="text-align: center; margin-top: 40px;" class="reveal">
+          <a href="menu.html" class="button" style="padding: 16px 36px !important; font-size: 13px !important; font-weight: 800 !important; background: #F5C64D !important; color: #171008 !important; border-radius: 99px !important; display: inline-flex !important; align-items: center !important; gap: 8px !important;">
+            🍽 View Full Menu <span>→</span>
+          </a>
         </div>
-
       </div>
     </section>
 

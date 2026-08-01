@@ -1,0 +1,276 @@
+/* =============================================================
+   MOBILE MENU / HEADER / FOOD CARD POLISH
+   Loaded LAST so it wins the cascade over mobile-audit.css.
+   Scope: mobile only (<=800px). Desktop is untouched.
+   ============================================================= */
+@media (max-width: 800px) {
+
+  /* -----------------------------------------------------------
+     1. HEADER — single line, 64px, no oversized CTA
+     The real "Book Now" pill is `.nav-book-link`, not `.nav-cta`
+     (mobile-audit.css was hiding the wrong class), which is why
+     it was still rendering and pushing the brand text to wrap.
+     ----------------------------------------------------------- */
+  .nav {
+    height: 64px !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+  }
+  .nav-book-link {
+    display: none !important;
+  }
+  .brand {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    font-size: 16px !important;
+    letter-spacing: -0.02em !important;
+  }
+  .brand-mark {
+    flex: 0 0 30px !important;
+    width: 30px !important;
+    height: 30px !important;
+  }
+  .nav-toggle {
+    flex: 0 0 40px !important;
+    width: 40px !important;
+    height: 40px !important;
+    margin-left: 4px !important;
+  }
+
+  /* -----------------------------------------------------------
+     2. CATEGORY TABS — edge cards no longer clipped, even gaps
+     mobile-audit.css stripped the horizontal edge padding that
+     responsive.css had set up, so the first/last pill sat flush
+     against the viewport edge and looked cut off.
+     ----------------------------------------------------------- */
+  .cafe-tabs,
+  #foodFilterChipsWrap {
+    padding: 8px 16px !important;
+    margin: 0 -16px !important;
+    gap: 8px !important;
+    scroll-padding-inline: 16px !important;
+    scroll-snap-type: x proximity !important;
+  }
+  .cafe-tab-btn,
+  .food-filter-btn {
+    box-sizing: border-box !important;
+    min-height: 34px !important;
+    padding: 7px 14px !important;
+    font-size: 12px !important;
+    scroll-snap-align: start !important;
+  }
+  .cafe-tab-btn.active,
+  .food-filter-btn.active {
+    box-shadow: none !important;
+  }
+
+  /* -----------------------------------------------------------
+     3. FOOD CARD GRID — wider cards, consistent height, breathing room
+     ----------------------------------------------------------- */
+  #cafeItemsContainer,
+  .cafe-items-list {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    align-items: stretch !important;
+  }
+
+  .cafe-items-list .food-product-card {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    border-radius: 14px !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+  }
+  .cafe-items-list .food-product-card:active {
+    transform: scale(0.98) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35) !important;
+    border-color: rgba(245, 198, 77, 0.35) !important;
+  }
+
+  /* Taller image, more presence */
+  .cafe-items-list .food-image-container,
+  .cafe-items-list .food-image-bg {
+    aspect-ratio: 4 / 5 !important;
+    height: auto !important;
+    width: 100% !important;
+  }
+
+  /* Card body — more breathing room between sections */
+  .cafe-items-list .food-card-details {
+    padding: 14px 14px 0 !important;
+    gap: 8px !important;
+  }
+  .cafe-items-list .food-card-title {
+    font-size: 15px !important;
+    line-height: 1.28 !important;
+    margin: 0 !important;
+    text-overflow: ellipsis !important;
+  }
+  .cafe-items-list .food-card-price {
+    font-size: 15px !important;
+    margin: 2px 0 0 !important;
+  }
+  .cafe-items-list .food-card-desc {
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+    margin: 4px 0 0 !important;
+  }
+
+  /* Stats row — single tidy line, no crowding */
+  .cafe-items-list .food-card-meta {
+    gap: 10px !important;
+    padding: 10px 0 0 !important;
+    margin-top: 10px !important;
+    font-size: 11px !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+  }
+  .cafe-items-list .food-card-meta .meta-veg-wrap span {
+    font-size: 10px !important;
+  }
+  .cafe-items-list .food-card-meta .meta-rating,
+  .cafe-items-list .food-card-meta .meta-prep {
+    font-size: 11px !important;
+    white-space: nowrap !important;
+  }
+
+  /* Footer + Add to Order button — bigger, bolder, filled */
+  .cafe-items-list .food-card-footer {
+    padding: 10px 14px 14px !important;
+    margin-top: 6px !important;
+  }
+  .cafe-items-list .food-product-card .cafe-add-btn {
+    height: 40px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.02em !important;
+    border-radius: 10px !important;
+    background: #F5C64D !important;
+    color: #171008 !important;
+    border: none !important;
+    gap: 6px !important;
+  }
+  .cafe-items-list .food-product-card .cafe-add-btn::before {
+    content: "🛒" !important;
+    font-size: 12px !important;
+  }
+  .cafe-items-list .food-product-card .cafe-add-btn:active {
+    background: #e0b23f !important;
+  }
+
+  /* -----------------------------------------------------------
+     4. SINGLE COLUMN on very small screens — cards get real width
+     instead of squeezing two cramped columns.
+     ----------------------------------------------------------- */
+  @media (max-width: 360px) {
+    #cafeItemsContainer,
+    .cafe-items-list {
+      grid-template-columns: 1fr !important;
+    }
+    .cafe-items-list .food-image-container,
+    .cafe-items-list .food-image-bg {
+      aspect-ratio: 16 / 9 !important;
+    }
+  }
+
+  /* -----------------------------------------------------------
+     5. FLOATING SESSION HUD BUTTON — clear of card content
+     ----------------------------------------------------------- */
+  .mobile-hud-toggle {
+    width: 48px !important;
+    height: 48px !important;
+    right: 12px !important;
+    bottom: calc(84px + env(safe-area-inset-bottom)) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  /* -----------------------------------------------------------
+     6. UI AUDIT DENSITY & VERTICAL SPACING FLOW
+     ----------------------------------------------------------- */
+  #top {
+    padding-top: 64px !important; /* Clear fixed navbar precisely */
+  }
+  .section.cafe {
+    padding-top: 12px !important;
+    padding-bottom: 24px !important;
+  }
+  /* Remove low-value background watermark to declutter view */
+  .cafe::after {
+    display: none !important;
+  }
+
+  /* Hero Section spacing */
+  .section.cafe .reveal:first-of-type {
+    margin-bottom: 16px !important;
+  }
+  .section.cafe .section-kicker {
+    margin-bottom: 2px !important;
+    font-size: 11px !important;
+  }
+  .section.cafe h1.display {
+    font-size: 32px !important; /* Density: 32px */
+    margin: 6px 0 10px !important;
+    line-height: 1.05 !important;
+  }
+  .section.cafe .section-intro {
+    font-size: 13px !important;
+    line-height: 1.45 !important;
+    margin-bottom: 16px !important;
+  }
+
+  /* Search Bar Refinements */
+  .search-wrap {
+    height: 48px !important; /* Height: 48px */
+    border-radius: 10px !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    background: rgba(18, 19, 23, 0.95) !important;
+    transition: all 0.25s ease !important;
+  }
+  .search-wrap:focus-within {
+    border-color: #F5C64D !important;
+    box-shadow: 0 0 12px rgba(245, 198, 77, 0.2) !important;
+    transform: translateY(-1px) !important;
+  }
+  .search-input {
+    font-size: 13px !important;
+  }
+  .search-lead-icon {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  /* Category tabs heights and paddings */
+  .cafe-tabs,
+  #foodFilterChipsWrap {
+    padding: 4px 16px !important; /* Reduced padding */
+    margin: 0 -16px !important;
+    gap: 6px !important;
+  }
+  .cafe-tab-btn,
+  .food-filter-btn {
+    min-height: 30px !important; /* Reduced button height */
+    padding: 6px 12px !important;
+    font-size: 11px !important;
+    border-radius: 8px !important;
+  }
+
+  /* Sticky Category shelf coordinate */
+  .sticky-menu-shelf {
+    position: sticky !important;
+    top: 64px !important;
+    margin-bottom: 12px !important;
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+  }
+
+  /* Food grid margin */
+  .cafe-items-list {
+    margin-top: 16px !important;
+  }
+}

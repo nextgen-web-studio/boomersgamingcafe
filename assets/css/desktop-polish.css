@@ -1,8 +1,44 @@
 /* Desktop polish only: preserves the established structure and visual system. */
 @media (min-width:801px){
   .hero{padding-bottom:54px}.hero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 24% 54%,rgba(7,8,10,.3),transparent 43%),linear-gradient(90deg,rgba(5,6,8,.36),transparent 60%)}
-  .hero-media{filter:brightness(.93) saturate(.65) contrast(1.08) sepia(.15);animation:desktopKenBurns 18s ease-in-out infinite alternate}.hero-media::after{background:linear-gradient(90deg,rgba(12,10,9,.9) 0%,rgba(12,10,9,.52) 45%,rgba(12,10,9,.15) 100%),radial-gradient(ellipse at center,transparent 35%,rgba(0,0,0,.38) 100%),linear-gradient(0deg,#100d0a 0%,transparent 45%)}
-  .hero .wrap{position:relative}.hero-main{max-width:650px}.hero h1{margin:15px 0 20px;line-height:.79}.hero-lead{max-width:570px;line-height:1.82;margin-bottom:25px}.hero-actions{align-items:flex-start}.hero-primary-cta{width:min(400px,100%);min-height:48px}.hero-secondary-ctas .button{min-height:43px}.button{transition:transform .22s ease,box-shadow .26s ease,background .26s ease,border-color .26s ease}.button:hover{transform:translateY(-4px);box-shadow:0 15px 42px rgba(239,189,78,.38)}.button.secondary:hover{border-color:rgba(239,189,78,.72);background:rgba(255,255,255,.13);box-shadow:0 12px 34px rgba(239,189,78,.1)}.button span{display:inline-block;transition:transform .22s ease}.button:hover span{transform:translateX(4px)}
+  .hero-media{filter:brightness(1.08) saturate(.75) contrast(1.1) sepia(.08) !important;animation:desktopKenBurns 18s ease-in-out infinite alternate}.hero-media::after{background:linear-gradient(90deg,rgba(12,10,9,.82) 0%,rgba(12,10,9,.45) 45%,rgba(12,10,9,.08) 100%),radial-gradient(ellipse at center,transparent 35%,rgba(0,0,0,.32) 100%),linear-gradient(0deg,#100d0a 0%,transparent 45%) !important;}
+  .hero .wrap{position:relative}.hero-main{max-width:650px}.hero h1{margin:15px 0 20px !important; line-height:.79 !important; animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: 0.2s;}
+  .hero-lead{max-width:570px !important; font-size: 15px !important; line-height:1.82 !important; margin-bottom:25px !important; animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: 0.3s;}
+  .hero-actions{align-items:flex-start; animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: 0.4s;}
+  .hero-primary-cta{width:min(400px,100%) !important; min-height:48px !important; height:48px !important; display: flex !important; align-items: center !important; justify-content: center !important; box-shadow: 0 8px 24px rgba(239, 189, 78, 0.25) !important;}
+  .hero-secondary-ctas .button{min-height:48px !important; height:48px !important; display: flex !important; align-items: center !important; justify-content: center !important; background: rgba(255, 255, 255, 0.04) !important; border: 1px solid rgba(255, 255, 255, 0.15) !important; color: #fff !important;}
+  .hero-secondary-ctas .button:hover{background: rgba(255, 255, 255, 0.12) !important; border-color: rgba(255, 255, 255, 0.4) !important;}
+  .button{transition:transform .22s ease,box-shadow .26s ease,background .26s ease,border-color .26s ease}.button:hover{transform:translateY(-4px);box-shadow:0 15px 42px rgba(239,189,78,.38) !important;}.button.secondary:hover{border-color:rgba(239,189,78,.72);background:rgba(255,255,255,.13);box-shadow:0 12px 34px rgba(239,189,78,.1)}.button span{display:inline-block;transition:transform .22s ease}.button:hover span{transform:translateX(4px)}
+  .hero-orbit {
+    border: 1px solid rgba(239, 189, 78, 0.12) !important;
+    box-shadow: 0 0 60px rgba(239, 189, 78, 0.04) !important, inset 0 0 40px rgba(239, 189, 78, 0.02) !important;
+  }
+  .hero-ring-card {
+    right: calc(8.5% + 17vw - 180px) !important;
+    width: 360px !important;
+    background: rgba(18, 16, 24, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    padding: 32px 34px !important;
+    box-shadow: 0 20px 55px rgba(0,0,0,0.5) !important;
+    animation: heroSlideIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) both, ringCardFloat 4s ease-in-out infinite 1.2s !important;
+    animation-delay: 0.3s, 1.5s;
+  }
+  .ring-card-countdown {
+    font-size: 54px !important;
+  }
+  .ring-card-stats {
+    gap: 28px !important;
+  }
+  @keyframes heroFadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes heroSlideIn {
+    from { opacity: 0; transform: translate3d(40px, 0, 0); }
+    to { opacity: 1; transform: translate3d(0, 0, 0); }
+  }
   .trust-strip-scroll{gap:21px;padding:12px 22px;background:rgba(8,9,12,.58);backdrop-filter:blur(13px)}.trust-item{display:inline-flex;align-items:center;gap:4px;transition:transform .2s ease,color .2s ease}.trust-item:hover{transform:translateY(-3px);color:#fff}.trust-icon{font-size:14px}.trust-item strong{font-size:12px}
   .nav {
     position: fixed !important;
@@ -11,13 +47,13 @@
     right: 0 !important;
     width: 100% !important;
     max-width: 100% !important;
-    height: 68px !important; /* Navbar: reduced from 84px for a tighter, more premium feel */
-    padding-left: 48px !important; /* Increased left padding for logo breathing room */
-    padding-right: 48px !important; /* Balanced right padding */
+    height: 60px !important; /* Reduced from 68px for a tighter, premium feel */
+    padding-left: 48px !important;
+    padding-right: 48px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-    background: rgba(10, 10, 10, 0.75) !important; /* Slightly transparent with blur */
+    background: rgba(10, 10, 10, 0.75) !important;
     backdrop-filter: blur(16px) !important;
     -webkit-backdrop-filter: blur(16px) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
