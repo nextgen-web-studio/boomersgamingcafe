@@ -79,7 +79,7 @@ function initStickyNavbar() {
   // CTRL + K shortcut to focus search input
   window.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
-      const searchInput = document.getElementById('foodSearchInput');
+      const searchInput = document.getElementById('bgcMenuSearch');
       if (searchInput) {
         e.preventDefault();
         searchInput.focus();

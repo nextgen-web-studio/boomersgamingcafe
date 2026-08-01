@@ -4663,7 +4663,7 @@ body.no-scroll {
   background: radial-gradient(circle at 50% 50%, rgba(255, 183, 3, 0.03) 0%, rgba(8, 9, 12, 0) 70%), #08090c;
 }
 
-#foodSearchInput {
+#bgcMenuSearch {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
@@ -4672,7 +4672,7 @@ body.no-scroll {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-#foodSearchInput:focus {
+#bgcMenuSearch:focus {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;

@@ -1,0 +1,159 @@
+/* =============================================================
+   BGC MENU — SEARCH BAR (built from scratch)
+
+   Fresh markup and fresh class names, built from scratch — no
+   reuse of the previous search bar's classes, IDs, or CSS rules.
+   Loaded last in menu.html.
+
+   Desktop: search field with a separate "Filters" button beside it.
+   Mobile:  full-width rounded search field only.
+   ============================================================= */
+
+.bgc-search-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+/* ---------- Search field ---------- */
+.bgc-search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 14px;
+  padding: 0 16px;
+  gap: 10px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.bgc-search-box:focus-within {
+  border-color: rgba(239, 189, 78, 0.5);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 3px rgba(239, 189, 78, 0.1);
+}
+.bgc-search-icon {
+  flex: 0 0 16px;
+  display: flex;
+  color: rgba(255, 255, 255, 0.4);
+  transition: color 0.2s ease;
+}
+.bgc-search-box:focus-within .bgc-search-icon {
+  color: var(--lime);
+}
+.bgc-search-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  color: #fff;
+  font: 500 14px var(--mono);
+  letter-spacing: 0.01em;
+  line-height: normal;
+}
+.bgc-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 400;
+}
+
+/* Clear (×) button — shown once the user has typed something */
+.bgc-search-clear {
+  display: none;
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+  text-align: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 15px;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.bgc-search-clear:hover {
+  background: rgba(239, 189, 78, 0.18);
+  color: var(--lime);
+}
+
+/* CTRL + K badge, sits inside the field on desktop only */
+.bgc-search-kbd {
+  flex: 0 0 auto;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  padding: 3px 7px;
+  font-size: 9px;
+  font-weight: 700;
+  font-family: var(--mono);
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.05em;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ---------- Filters button — its own box, beside the field ---------- */
+.bgc-filters-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  height: 48px;
+  padding: 0 18px;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 14px;
+  font-size: 11px;
+  font-weight: 800;
+  font-family: var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.bgc-filters-btn:hover {
+  background: var(--lime);
+  border-color: var(--lime);
+  color: #000;
+  box-shadow: 0 0 12px rgba(239, 189, 78, 0.35);
+}
+.bgc-filters-btn svg {
+  stroke: currentColor;
+}
+
+/* ---------- Mobile: full-width pill, icon + input only ---------- */
+@media (max-width: 800px) {
+  .bgc-search-row {
+    gap: 0;
+  }
+  .bgc-filters-btn {
+    display: none;
+  }
+  .bgc-search-kbd {
+    display: none;
+  }
+  .bgc-search-box {
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    padding: 0 18px;
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .bgc-search-input {
+    font-size: 13.5px;
+  }
+}

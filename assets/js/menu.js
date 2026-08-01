@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 function initFoodMenuEngine() {
   const container = document.getElementById('cafeItemsContainer');
-  const searchInput = document.getElementById('foodSearchInput');
+  const searchInput = document.getElementById('bgcMenuSearch');
   const filterButtons = document.querySelectorAll('.food-filter-btn');
   const tabButtons = document.querySelectorAll('.cafe-tab-btn');
   
@@ -58,8 +58,8 @@ function initFoodMenuEngine() {
 
 
   // Search input handler
-  const clearSearchBtn = document.getElementById('clearSearchBtn');
-  const shortcut = document.querySelector('.search-kbd-shortcut');
+  const clearSearchBtn = document.getElementById('bgcSearchClear');
+  const shortcut = document.querySelector('.bgc-search-kbd');
   const sortSelect = document.getElementById('foodSortSelect');
   
   if (searchInput) {
@@ -1275,9 +1275,9 @@ document.addEventListener('DOMContentLoaded', () => {
  * 13. Global Helper to Clear All Food Filters (for Empty States)
  */
 window.clearAllFoodFilters = function() {
-  const searchInput = document.getElementById('foodSearchInput');
-  const clearSearchBtn = document.getElementById('clearSearchBtn');
-  const shortcut = document.querySelector('.search-kbd-shortcut');
+  const searchInput = document.getElementById('bgcMenuSearch');
+  const clearSearchBtn = document.getElementById('bgcSearchClear');
+  const shortcut = document.querySelector('.bgc-search-kbd');
   const filterButtons = document.querySelectorAll('.food-filter-btn');
   const tabButtons = document.querySelectorAll('.cafe-tab-btn');
   
