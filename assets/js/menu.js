@@ -495,17 +495,7 @@ window.openFoodDetailsModal = function(itemId) {
           <span class="modal-food-veg-badge ${foundItem.isVeg ? 'veg' : 'nonveg'}">${foundItem.isVeg ? '<svg class="lucide lucide-leaf" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px; vertical-align: middle;"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.58 0 8a9 9 0 0 1-8 10z"/><path d="M19 2c-2.26 4.33-5.27 7.14-8 10"/></svg>Vegetarian' : '<span class="veg-badge-symbol nonveg" style="margin-right: 4px; vertical-align: middle;"><span class="inner-symbol"></span></span>Non-Vegetarian'}</span>
         </div>
         
-        <div class="modal-image-carousel" id="modalImageCarousel">
-          <div class="carousel-slide" style="background-image: url('${foundItem.image}'); background-size: cover; background-position: center;"></div>
-          <div class="carousel-slide" style="background-image: url('${foundItem.image}'); background-size: cover; background-position: center; filter: brightness(1.1) contrast(1.05);"></div>
-          <div class="carousel-slide" style="background-image: url('${foundItem.image}'); background-size: cover; background-position: center; filter: saturate(1.25) brightness(0.95);"></div>
-        </div>
-        
-        <div class="carousel-dots-indicator" id="carouselDotsIndicator">
-          <span class="dot active"></span>
-          <span class="dot"></span>
-          <span class="dot"></span>
-        </div>
+        <div class="food-modal-hero-img" style="background-image: url('${foundItem.image}');"></div>
 
         <!-- Favourite Heart Icon overlay -->
         <button class="modal-fav-btn" onclick="this.classList.toggle('active')" aria-label="Favorite">❤️</button>
@@ -629,20 +619,6 @@ window.openFoodDetailsModal = function(itemId) {
 
   // Disable body scroll when modal is active (relying on global CSS body.no-scroll overflow lock)
   document.body.classList.add('no-scroll');
-
-  // Bind carousel dots scroll listener
-  setTimeout(() => {
-    const carousel = document.getElementById('modalImageCarousel');
-    const dots = document.querySelectorAll('#carouselDotsIndicator .dot');
-    if (carousel && dots.length) {
-      carousel.addEventListener('scroll', () => {
-        const index = Math.round(carousel.scrollLeft / (carousel.offsetWidth || 1));
-        dots.forEach((dot, i) => {
-          dot.classList.toggle('active', i === index);
-        });
-      });
-    }
-  }, 100);
 
   Tracker.track('Food Modal Opened', { item: foundItem.name });
 };

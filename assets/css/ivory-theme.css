@@ -202,16 +202,23 @@
   color: var(--ink-muted);
 }
 
-.reviews-slider-wrap {
-  border-top-color: rgba(0, 0, 0, 0.1) !important;
-}
+/* Desktop only — the mobile viewport has its own complete, self-contained
+   override block in responsive.css (max-width: 767px). Previously these
+   rules had no media query, so on mobile they competed !important-for-
+   !important with that block, with the winner decided only by file load
+   order — fragile, even though the two sets of values happened to match. */
+@media (min-width: 801px) {
+  .reviews-slider-wrap {
+    border-top-color: rgba(0, 0, 0, 0.1) !important;
+  }
 
-.review-dot {
-  background: rgba(0, 0, 0, 0.15) !important;
-}
+  .review-dot {
+    background: rgba(0, 0, 0, 0.15) !important;
+  }
 
-.review-dot.active {
-  background: var(--accent) !important;
+  .review-dot.active {
+    background: var(--accent) !important;
+  }
 }
 
 /* ================================================================
@@ -481,9 +488,14 @@
 }
 
 .proof p,
-.proof .section-intro,
-.review-slide {
+.proof .section-intro {
   color: var(--ink-body) !important;
+}
+
+@media (min-width: 801px) {
+  .review-slide {
+    color: var(--ink-body) !important;
+  }
 }
 
 .proof h2,

@@ -675,8 +675,7 @@ button.button.hero-primary-cta {
   }
 
   /* 6. Modal Details Body (Scrollable details enabled) */
-  .food-modal-body,
-  .food-modal-details {
+  .food-modal-body {
     padding: 20px 20px calc(100px + env(safe-area-inset-bottom)) !important;
     overflow-y: visible !important; /* Let content expand and scroll inside the grid container */
     flex-grow: 1 !important;
@@ -692,8 +691,7 @@ button.button.hero-primary-cta {
   .modal-extra-section {
     display: none !important;
   }
-  .food-modal-body::-webkit-scrollbar,
-  .food-modal-details::-webkit-scrollbar {
+  .food-modal-body::-webkit-scrollbar {
     display: none !important;
   }
 
@@ -709,8 +707,7 @@ button.button.hero-primary-cta {
     text-transform: uppercase !important;
     letter-spacing: 0.12em !important;
   }
-  .food-modal-title,
-  .food-modal-details h3 {
+  .food-modal-title {
     font: 800 32px var(--display) !important;
     color: #fff !important;
     line-height: 1.1 !important;
@@ -739,8 +736,7 @@ button.button.hero-primary-cta {
     border-radius: 6px !important;
     box-shadow: 0 2px 8px rgba(31,168,85,.35) !important;
   }
-  .food-modal-desc,
-  .food-modal-details p {
+  .food-modal-desc {
     font-size: 15px !important;
     line-height: 1.6 !important;
     color: #B8B8B8 !important;
@@ -748,8 +744,7 @@ button.button.hero-primary-cta {
   }
 
   /* 7. Premium Stats Chips */
-  .food-stat-chips,
-  .food-modal-details > div[style*="display:flex; gap:16px"] {
+  .food-stat-chips {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr) !important;
     gap: 10px !important;
@@ -790,8 +785,7 @@ button.button.hero-primary-cta {
   }
 
   /* 8. Ingredients Tags list */
-  .food-modal-section-title,
-  .food-modal-details h4 {
+  .food-modal-section-title {
     font: 800 10px var(--mono) !important;
     color: rgba(255, 255, 255, 0.4) !important;
     text-transform: uppercase !important;
@@ -800,8 +794,7 @@ button.button.hero-primary-cta {
     border: none !important;
     padding: 0 !important;
   }
-  .food-ingredient-tags,
-  .food-modal-details ul {
+  .food-ingredient-tags {
     display: flex !important;
     flex-wrap: wrap !important;
     gap: 8px !important;
@@ -809,8 +802,7 @@ button.button.hero-primary-cta {
     margin: 0 !important;
     list-style: none !important;
   }
-  .food-ingredient-tag,
-  .food-modal-details ul li {
+  .food-ingredient-tag {
     background: rgba(255, 255, 255, 0.02) !important;
     border: 1px solid #F5C64D !important;
     border-radius: 99px !important;
@@ -822,8 +814,7 @@ button.button.hero-primary-cta {
   }
 
   /* Hide Desktop controls on mobile modal */
-  .food-qty-section-desktop,
-  .food-modal-details > div[style*="align-items:center; gap:16px"] {
+  .food-qty-section-desktop {
     display: none !important;
   }
 
