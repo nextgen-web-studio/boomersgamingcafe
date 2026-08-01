@@ -79,6 +79,28 @@
   }
 
   /* -----------------------------------------------------------
+     1c. CRITICAL FIX #2 — the shelf still detached after 1b
+     because the overflow chain goes one level higher than main:
+     mobile-audit.css (and the base body rule in main.css) also
+     set `overflow-x: hidden !important` on html AND body. Per
+     spec, when overflow-x is non-visible and overflow-y is left
+     at its default visible, the UA computes overflow-y to auto
+     too — so body silently became a scroll container on BOTH
+     axes, not just x, which is what was actually confining the
+     sticky positioning (not main or .section.cafe — those were
+     red herrings, they measured correctly as visible already).
+     Use overflow-x: clip, not visible, so the original intent
+     (no horizontal scrollbar) is preserved: unlike hidden, clip
+     does not trigger the visible->auto conversion on the other
+     axis, so it doesn't create a scroll container and doesn't
+     break sticky. Scoped to the menu page only, same as 1b.
+     ----------------------------------------------------------- */
+  html:has(.sticky-menu-shelf),
+  body:has(.sticky-menu-shelf) {
+    overflow-x: clip !important;
+  }
+
+  /* -----------------------------------------------------------
      2. HERO — compact, ~28% shorter than the original block,
      tight rhythm between kicker -> heading -> description.
      ----------------------------------------------------------- */
@@ -133,6 +155,9 @@
      premium focus animation (Apple/Zomato-style).
      ----------------------------------------------------------- */
   .search-wrap {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
     height: 48px !important;
     padding: 0 14px !important;
     gap: 10px !important;

@@ -27,10 +27,59 @@
   <link rel="stylesheet" href="assets/css/mobile-audit.css" />
   <link rel="stylesheet" href="assets/css/desktop-polish.css" />
   <link rel="stylesheet" href="assets/css/ivory-theme.css" />
-  <link rel="stylesheet" href="assets/css/mobile-menu-polish.css" />
+  <link rel="stylesheet" href="assets/css/mobile-menu-polish.css?v=2" />
 </head>
 <body>
-    
+
+    <!-- Navigation Bar (shared site nav — mobile-menu-polish.css section 0
+         and main.js already target this; it was just missing from the
+         page markup, leaving a blank reserved-space bar at the top) -->
+    <nav class="nav" aria-label="Main Navigation">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="assets/images/logo.png" alt="Boomer's Gaming Café logo">
+        BOOMERS Gaming Cafe
+      </a>
+      <div class="nav-links">
+        <a href="index.html#play">Games</a>
+        <a href="index.html#arena">Locations</a>
+        <a href="menu.html" aria-current="page">Power-Up Station</a>
+        <a href="index.html#calendar">Tournaments</a>
+        <a href="membership.html">Membership</a>
+        <a href="index.html#community">Events</a>
+      </div>
+      <a href="index.html#book" class="nav-book-link">Book Now</a>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <!-- Hamburger Toggle Button for mobile viewports -->
+        <button class="nav-toggle" id="mobileMenuBtn" aria-label="Toggle Navigation Menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Fullscreen Mobile Navigation Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+      <nav class="mobile-menu-links">
+        <a href="index.html#play" onclick="window.toggleMobileMenu()" style="--i:0">Games</a>
+        <a href="index.html#arena" onclick="window.toggleMobileMenu()" style="--i:1">Locations</a>
+        <a href="menu.html" onclick="window.toggleMobileMenu()" style="--i:2">Power-Up Station</a>
+        <a href="index.html#calendar" onclick="window.toggleMobileMenu()" style="--i:3">Tournaments</a>
+        <a href="membership.html" onclick="window.toggleMobileMenu()" style="--i:4">Membership</a>
+        <a href="index.html#community" onclick="window.toggleMobileMenu()" style="--i:5">Events</a>
+        <a href="index.html#book" class="mobile-menu-book-btn" onclick="window.toggleMobileMenu()" style="--i:6">Book Now ↗</a>
+      </nav>
+      <div class="mobile-menu-footer">
+        <div class="social-links">
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram">📸 Instagram</a>
+          <a href="https://wa.me" target="_blank" aria-label="WhatsApp">💬 WhatsApp</a>
+          <a href="https://maps.google.com" target="_blank" aria-label="Google Maps">📍 Maps</a>
+        </div>
+        <div class="footer-meta">
+          Coimbatore • Pune • EST. 2018
+        </div>
+      </div>
+    </div>
 
     <!-- Dedicated Power-Up Station Menu Page -->
     <main id="top" style="padding-top: 75px; background: #08090c radial-gradient(circle at top right, rgba(239, 189, 78, 0.04), transparent 45%) !important; min-height: 100vh;">
