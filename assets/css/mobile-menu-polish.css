@@ -1,15 +1,18 @@
 /* =============================================================
-   MOBILE MENU / HEADER / FOOD CARD POLISH
+   MOBILE MENU PAGE — HEADER / HERO / SEARCH / TABS / CARDS POLISH
    Loaded LAST so it wins the cascade over mobile-audit.css.
-   Scope: mobile only (<=800px). Desktop is untouched.
+   Scope: mobile only (<=800px). Desktop and other pages untouched.
+
+   REWRITTEN as a single source of truth — every selector below
+   appears exactly once. (The previous version redeclared
+   .cafe-tabs / .search-wrap / .section.cafe three separate times
+   with !important, so only the last block ever actually rendered
+   and the rest was dead, confusing weight.)
    ============================================================= */
 @media (max-width: 800px) {
 
   /* -----------------------------------------------------------
-     1. HEADER — single line, 64px, no oversized CTA
-     The real "Book Now" pill is `.nav-book-link`, not `.nav-cta`
-     (mobile-audit.css was hiding the wrong class), which is why
-     it was still rendering and pushing the brand text to wrap.
+     0. NAV — single line, 64px, no oversized CTA
      ----------------------------------------------------------- */
   .nav {
     height: 64px !important;
@@ -42,145 +45,317 @@
   }
 
   /* -----------------------------------------------------------
-     2. CATEGORY TABS — edge cards no longer clipped, even gaps
-     mobile-audit.css stripped the horizontal edge padding that
-     responsive.css had set up, so the first/last pill sat flush
-     against the viewport edge and looked cut off.
+     1. PAGE SHELL — clears fixed nav, removes stray watermark
      ----------------------------------------------------------- */
-  .cafe-tabs,
-  #foodFilterChipsWrap {
-    padding: 8px 16px !important;
-    margin: 0 -16px !important;
-    gap: 8px !important;
-    scroll-padding-inline: 16px !important;
-    scroll-snap-type: x proximity !important;
+  #top {
+    padding-top: 64px !important;
   }
-  .cafe-tab-btn,
-  .food-filter-btn {
-    box-sizing: border-box !important;
-    min-height: 34px !important;
-    padding: 7px 14px !important;
-    font-size: 12px !important;
-    scroll-snap-align: start !important;
+  .section.cafe {
+    padding-top: 6px !important;
+    padding-bottom: 20px !important;
   }
-  .cafe-tab-btn.active,
-  .food-filter-btn.active {
-    box-shadow: none !important;
+  .cafe::after {
+    display: none !important;
   }
 
   /* -----------------------------------------------------------
-     3. FOOD CARD GRID — wider cards, consistent height, breathing room
+     1b. CRITICAL FIX — restore position:sticky on the category
+     shelf. mobile-audit.css carries a blanket rule:
+       main, .hero, .section, .story, .happy, .modes, .cafe,
+       .footer { overflow: hidden }
+     which — because ANY ancestor with overflow other than
+     visible breaks position:sticky in every browser — was
+     silently disabling the sticky shelf entirely after the
+     first screen of scroll. This is the real cause behind
+     "categories stop midway" / "hard to reach": the whole nav
+     just scrolled away instead of sticking. Horizontal clipping
+     is preserved; only vertical is restored, and only on the
+     menu page (:has(.sticky-menu-shelf) scopes this so nothing
+     on other pages is affected).
+     ----------------------------------------------------------- */
+  main:has(.sticky-menu-shelf),
+  .section.cafe:has(.sticky-menu-shelf) {
+    overflow: visible !important;
+  }
+
+  /* -----------------------------------------------------------
+     2. HERO — compact, ~28% shorter than the original block,
+     tight rhythm between kicker -> heading -> description.
+     ----------------------------------------------------------- */
+  .section.cafe .menu-hero {
+    margin-bottom: 14px !important;
+  }
+  .section.cafe .menu-hero .section-kicker {
+    margin-bottom: 4px !important;
+    font-size: 10px !important;
+  }
+  .section.cafe .menu-hero h1.display {
+    font-size: 27px !important;
+    line-height: 1.1 !important;
+    margin: 4px 0 8px !important;
+    letter-spacing: -0.01em !important;
+  }
+  .section.cafe .menu-hero .section-intro {
+    font-size: 12.5px !important;
+    line-height: 1.5 !important;
+    margin: 0 auto !important;
+    max-width: 300px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+
+  /* -----------------------------------------------------------
+     3. STICKY SHELF — search + tabs read as one connected
+     toolbar (not a floating dark box), with a real blurred
+     backdrop so content doesn't show through while stuck.
+     ----------------------------------------------------------- */
+  .sticky-menu-shelf {
+    top: 64px !important;
+    margin-bottom: 14px !important;
+    padding: 8px 0 8px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    background: rgba(8, 9, 12, 0.92) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  }
+  .search-row {
+    margin-bottom: 0 !important;
+  }
+
+  /* -----------------------------------------------------------
+     4. SEARCH BAR — integrated glass field, no oversized outer
+     padding, full usable width, clipping-proof placeholder,
+     premium focus animation (Apple/Zomato-style).
+     ----------------------------------------------------------- */
+  .search-wrap {
+    height: 48px !important;
+    padding: 0 14px !important;
+    gap: 10px !important;
+    border-radius: 13px !important;
+    background: linear-gradient(180deg, rgba(24,25,30,0.85), rgba(15,16,20,0.92)) !important;
+    border: 1px solid rgba(255,255,255,0.12) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), inset 0 -1px 6px rgba(0,0,0,0.22) !important;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease, background 0.25s ease !important;
+  }
+  .search-wrap:focus-within {
+    border-color: rgba(245, 198, 77, 0.55) !important;
+    box-shadow: 0 0 0 3px rgba(245,198,77,0.12), 0 4px 18px rgba(245,198,77,0.18), inset 0 1px 0 rgba(255,255,255,0.06) !important;
+    transform: translateY(-1px) !important;
+    background: linear-gradient(180deg, rgba(28,29,34,0.92), rgba(17,18,22,0.96)) !important;
+  }
+  .search-lead-icon {
+    flex: 0 0 17px !important;
+    width: 17px !important;
+    height: 17px !important;
+    stroke-width: 2.3 !important;
+    opacity: 0.85 !important;
+  }
+  .search-input {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    font-size: 13.5px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.005em !important;
+  }
+  .search-input::placeholder {
+    color: rgba(255,255,255,0.42) !important;
+    font-weight: 400 !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+  }
+  .search-kbd-shortcut {
+    flex: 0 0 auto !important;
+  }
+  .search-filters-btn {
+    flex: 0 0 auto !important;
+  }
+
+  /* -----------------------------------------------------------
+     5. CATEGORY RAIL — premium horizontal swipe. This is the
+     fix for the "swipe is difficult / last pills unreachable"
+     bug: no position:sticky duplicated here (the shelf wrapper
+     already handles sticky), no mask-image fade eating the
+     last pill, real scroll-snap + momentum + edge padding so
+     every one of the 14 categories is fully reachable.
+     ----------------------------------------------------------- */
+  .cafe-tabs {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding: 2px 16px 6px !important;
+    margin: 0 -16px !important;
+    scroll-snap-type: x proximity !important;
+    scroll-padding-inline: 16px !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-x !important;
+    overscroll-behavior-x: contain !important;
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+  }
+  .cafe-tabs::-webkit-scrollbar {
+    display: none !important;
+    height: 0 !important;
+  }
+  .cafe-tab-btn {
+    flex: 0 0 auto !important;
+    scroll-snap-align: start !important;
+    min-height: 34px !important;
+    height: 34px !important;
+    padding: 0 14px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    white-space: nowrap !important;
+    font-size: 11.5px !important;
+    font-weight: 600 !important;
+    border-radius: 10px !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    box-shadow: none !important;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.18s ease, box-shadow 0.2s ease, border-color 0.2s ease !important;
+  }
+  .cafe-tab-btn:active {
+    transform: scale(0.96) !important;
+  }
+  .cafe-tab-btn.active {
+    background: #F5C64D !important;
+    color: #171008 !important;
+    border-color: #F5C64D !important;
+    box-shadow: 0 3px 10px rgba(245, 198, 77, 0.25) !important;
+    transform: scale(1.02) !important;
+  }
+  .cafe-tab-btn .cat-pill-count {
+    font-size: 9.5px !important;
+    margin-left: 3px !important;
+    opacity: 0.8 !important;
+  }
+
+  /* -----------------------------------------------------------
+     6. SEARCH RESULTS BANNER
+     ----------------------------------------------------------- */
+  #searchResultsBanner {
+    margin-bottom: 16px !important;
+  }
+
+  /* -----------------------------------------------------------
+     6b. CRITICAL FIX — #cafeItemsContainer / .cafe-items-list
+     was still carrying a stale 2-column CSS grid (from
+     responsive.css, written for a flat grid of individual food
+     cards). menu.js now renders whole category-section blocks
+     (header + horizontal card slider) into this same container,
+     so that 2-col grid was placing each *entire section* into a
+     grid cell — auto-sizing the two columns to ~3948px/1248px
+     and pushing every other category clean off-screen to the
+     right (only reachable by scrolling the whole page
+     horizontally). Force it back to natural block stacking.
      ----------------------------------------------------------- */
   #cafeItemsContainer,
   .cafe-items-list {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 10px !important;
-    align-items: stretch !important;
+    display: block !important;
+    overflow-x: visible !important;
   }
 
-  .cafe-items-list .food-product-card {
-    height: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    border-radius: 14px !important;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28) !important;
-    border-color: rgba(255, 255, 255, 0.1) !important;
-    transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+  /* -----------------------------------------------------------
+     7. SECTION HEADERS — cleaner hierarchy: icon + title on one
+     line, item count decoupled underneath, thin divider, even
+     breathing room above/below (matches "🏆 Best Sellers / 22
+     Items" example in the brief).
+     ----------------------------------------------------------- */
+  .menu-category-section {
+    margin-bottom: 26px !important;
   }
-  .cafe-items-list .food-product-card:active {
-    transform: scale(0.98) !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35) !important;
-    border-color: rgba(245, 198, 77, 0.35) !important;
+  .menu-section-header {
+    margin-bottom: 14px !important;
+    padding-bottom: 10px !important;
+    border-bottom: 1px solid rgba(255,255,255,0.06) !important;
   }
-
-  /* Taller image, more presence */
-  .cafe-items-list .food-image-container,
-  .cafe-items-list .food-image-bg {
-    aspect-ratio: 4 / 5 !important;
-    height: auto !important;
-    width: 100% !important;
+  .menu-section-header h3.display {
+    font-size: 17px !important;
+    gap: 7px !important;
+    margin: 0 0 3px !important;
   }
-
-  /* Card body — more breathing room between sections */
-  .cafe-items-list .food-card-details {
-    padding: 14px 14px 0 !important;
-    gap: 8px !important;
+  .menu-section-header svg.cat-svg-icon,
+  .menu-section-header svg {
+    width: 16px !important;
+    height: 16px !important;
   }
-  .cafe-items-list .food-card-title {
-    font-size: 15px !important;
-    line-height: 1.28 !important;
-    margin: 0 !important;
-    text-overflow: ellipsis !important;
-  }
-  .cafe-items-list .food-card-price {
-    font-size: 15px !important;
-    margin: 2px 0 0 !important;
-  }
-  .cafe-items-list .food-card-desc {
-    font-size: 12px !important;
-    line-height: 1.5 !important;
-    margin: 4px 0 0 !important;
-  }
-
-  /* Stats row — single tidy line, no crowding */
-  .cafe-items-list .food-card-meta {
-    gap: 10px !important;
-    padding: 10px 0 0 !important;
-    margin-top: 10px !important;
-    font-size: 11px !important;
-    flex-wrap: nowrap !important;
-    justify-content: space-between !important;
-  }
-  .cafe-items-list .food-card-meta .meta-veg-wrap span {
+  .menu-section-header .view-all-link {
     font-size: 10px !important;
   }
-  .cafe-items-list .food-card-meta .meta-rating,
-  .cafe-items-list .food-card-meta .meta-prep {
-    font-size: 11px !important;
-    white-space: nowrap !important;
-  }
-
-  /* Footer + Add to Order button — bigger, bolder, filled */
-  .cafe-items-list .food-card-footer {
-    padding: 10px 14px 14px !important;
-    margin-top: 6px !important;
-  }
-  .cafe-items-list .food-product-card .cafe-add-btn {
-    height: 40px !important;
-    font-size: 12px !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.02em !important;
-    border-radius: 10px !important;
-    background: #F5C64D !important;
-    color: #171008 !important;
-    border: none !important;
-    gap: 6px !important;
-  }
-  .cafe-items-list .food-product-card .cafe-add-btn::before {
-    content: "🛒" !important;
-    font-size: 12px !important;
-  }
-  .cafe-items-list .food-product-card .cafe-add-btn:active {
-    background: #e0b23f !important;
-  }
 
   /* -----------------------------------------------------------
-     4. SINGLE COLUMN on very small screens — cards get real width
-     instead of squeezing two cramped columns.
+     8. FOOD CARDS — .food-related-card inside the horizontal
+     slider is the only card type actually rendered on this
+     page. Taller image, even card heights, calmer padding,
+     cleaner price/rating alignment.
      ----------------------------------------------------------- */
-  @media (max-width: 360px) {
-    #cafeItemsContainer,
-    .cafe-items-list {
-      grid-template-columns: 1fr !important;
-    }
-    .cafe-items-list .food-image-container,
-    .cafe-items-list .food-image-bg {
-      aspect-ratio: 16 / 9 !important;
-    }
+  .menu-horizontal-slider {
+    display: flex !important;
+    gap: 12px !important;
+    overflow-x: auto !important;
+    padding: 4px 16px 10px !important;
+    margin: 0 -16px !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-snap-type: x proximity !important;
+    scroll-padding-inline: 16px !important;
+  }
+  .menu-horizontal-slider::-webkit-scrollbar {
+    display: none !important;
+  }
+  .menu-horizontal-slider .food-related-card {
+    flex: 0 0 168px !important;
+    scroll-snap-align: start !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.24) !important;
+    transition: transform 0.15s ease !important;
+  }
+  .menu-horizontal-slider .food-related-card:active {
+    transform: scale(0.97) !important;
+  }
+  .menu-horizontal-slider .food-related-card img {
+    height: 150px !important;
+    object-fit: cover !important;
+    width: 100% !important;
+    border-radius: 12px 12px 0 0 !important;
+    flex: 0 0 auto !important;
+  }
+  .menu-horizontal-slider .food-related-info {
+    flex: 1 1 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 5px !important;
+    padding: 12px !important;
+  }
+  .menu-horizontal-slider .food-related-info .rel-name {
+    height: 36px !important;
+    font-size: 13.5px !important;
+    line-height: 1.3 !important;
+  }
+  .menu-horizontal-slider .food-related-info .rel-meta {
+    margin-top: auto !important;
+    padding-top: 4px !important;
+  }
+  .menu-horizontal-slider .food-related-info .rel-price {
+    font-size: 13px !important;
   }
 
   /* -----------------------------------------------------------
-     5. FLOATING SESSION HUD BUTTON — clear of card content
+     9. FLOATING SESSION HUD BUTTON — clear of card content
      ----------------------------------------------------------- */
   .mobile-hud-toggle {
     width: 48px !important;
@@ -191,216 +366,33 @@
   }
 
   /* -----------------------------------------------------------
-     6. UI AUDIT DENSITY & VERTICAL SPACING FLOW
+     10. SINGLE COLUMN on very small screens (below 360px)
      ----------------------------------------------------------- */
-  #top {
-    padding-top: 64px !important; /* Clear fixed navbar precisely */
-  }
-  .section.cafe {
-    padding-top: 12px !important;
-    padding-bottom: 24px !important;
-  }
-  /* Remove low-value background watermark to declutter view */
-  .cafe::after {
-    display: none !important;
+  @media (max-width: 360px) {
+    .menu-horizontal-slider .food-related-card {
+      flex-basis: 152px !important;
+    }
   }
 
-  /* Hero Section spacing */
-  .section.cafe .reveal:first-of-type {
-    margin-bottom: 16px !important;
-  }
-  .section.cafe .section-kicker {
-    margin-bottom: 2px !important;
-    font-size: 11px !important;
-  }
-  .section.cafe h1.display {
-    font-size: 32px !important; /* Density: 32px */
-    margin: 6px 0 10px !important;
-    line-height: 1.05 !important;
-  }
-  .section.cafe .section-intro {
-    font-size: 13px !important;
-    line-height: 1.45 !important;
-    margin-bottom: 16px !important;
-  }
-
-  /* Search Bar Refinements */
-  .search-wrap {
-    height: 48px !important; /* Height: 48px */
-    border-radius: 10px !important;
-    border-color: rgba(255, 255, 255, 0.15) !important;
-    background: rgba(18, 19, 23, 0.95) !important;
-    transition: all 0.25s ease !important;
-  }
-  .search-wrap:focus-within {
-    border-color: #F5C64D !important;
-    box-shadow: 0 0 12px rgba(245, 198, 77, 0.2) !important;
-    transform: translateY(-1px) !important;
-  }
-  .search-input {
-    font-size: 13px !important;
-  }
-  .search-lead-icon {
-    width: 18px !important;
-    height: 18px !important;
-  }
-
-  /* Category tabs heights and paddings */
-  .cafe-tabs,
-  #foodFilterChipsWrap {
-    padding: 4px 16px !important; /* Reduced padding */
-    margin: 0 -16px !important;
-    gap: 6px !important;
-  }
-  .cafe-tab-btn,
-  .food-filter-btn {
-    min-height: 30px !important; /* Reduced button height */
-    padding: 6px 12px !important;
-    font-size: 11px !important;
-    border-radius: 8px !important;
-  }
-
-  /* Sticky Category shelf coordinate */
-  .sticky-menu-shelf {
-    position: sticky !important;
-    top: 64px !important;
-    margin-bottom: 12px !important;
-    padding-top: 4px !important;
-    padding-bottom: 4px !important;
-  }
-
-  /* Food grid margin */
-  .cafe-items-list {
-    margin-top: 16px !important;
-  }
-
-  /* ===========================================================
-     PREMIUM HERO & SEARCH REFINEMENT
-     Denser hero, one connected search+tabs toolbar, glass search
-     field. Rules placed last in this file so they win the cascade
-     over everything above (same media query, equal specificity).
-     =========================================================== */
-
-  /* --- Hero copy: tighter rhythm, ~35% shorter block --- */
-  .section.cafe {
-    padding-top: 6px !important;
-    padding-bottom: 18px !important;
-  }
-  .section.cafe .menu-hero {
-    margin-bottom: 12px !important;
-  }
-  .section.cafe .menu-hero .section-kicker {
-    margin-bottom: 4px !important;
-    font-size: 10px !important;
-  }
-  .section.cafe .menu-hero h1.display {
-    font-size: 26px !important;
-    line-height: 1.12 !important;
-    margin: 4px 0 8px !important;
-    letter-spacing: -0.01em !important;
-  }
-  .section.cafe .menu-hero .section-intro {
-    font-size: 12.5px !important;
-    line-height: 1.55 !important;
-    margin: 0 auto !important;
-    max-width: 300px !important;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 3 !important;
-    -webkit-box-orient: vertical !important;
-    overflow: hidden !important;
-  }
-
-  /* --- Toolbar: search + tabs read as one connected component --- */
-  .sticky-menu-shelf {
-    top: 64px !important;
-    margin-bottom: 12px !important;
-    padding: 6px 0 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 8px !important;
-  }
-  .search-row {
-    margin-bottom: 0 !important;
-  }
-
-  /* --- Search bar: glass surface, integrated, premium focus state --- */
-  .search-wrap {
-    height: 50px !important;
-    border-radius: 14px !important;
-    padding: 0 14px !important;
-    gap: 10px !important;
-    background: linear-gradient(180deg, rgba(24,25,30,0.85), rgba(15,16,20,0.92)) !important;
-    border: 1px solid rgba(255,255,255,0.12) !important;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), inset 0 -1px 6px rgba(0,0,0,0.22) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease, background 0.25s ease !important;
-  }
-  .search-wrap:focus-within {
-    border-color: rgba(245, 198, 77, 0.55) !important;
-    box-shadow: 0 0 0 3px rgba(245,198,77,0.12), 0 4px 18px rgba(245,198,77,0.18), inset 0 1px 0 rgba(255,255,255,0.06) !important;
-    transform: translateY(-1px) scale(1.003) !important;
-    background: linear-gradient(180deg, rgba(28,29,34,0.92), rgba(17,18,22,0.96)) !important;
-  }
-  .search-lead-icon {
-    width: 17px !important;
-    height: 17px !important;
-    stroke-width: 2.3 !important;
-    opacity: 0.85 !important;
-  }
-  .search-input {
-    font-size: 13px !important;
-    font-weight: 500 !important;
-    letter-spacing: 0.01em !important;
-  }
-  .search-input::placeholder {
-    color: rgba(255,255,255,0.42) !important;
-    font-weight: 400 !important;
-  }
-
-  /* --- Category tabs: equal-height pills, smoother active state --- */
-  .cafe-tabs {
-    padding: 2px 16px 4px !important;
-    margin: 0 -16px !important;
-    gap: 8px !important;
-  }
-  .cafe-tab-btn {
-    min-height: 32px !important;
-    height: 32px !important;
-    padding: 0 14px !important;
-    font-size: 11.5px !important;
-    border-radius: 9px !important;
-    transition: background-color 0.22s ease, color 0.22s ease, transform 0.18s ease, box-shadow 0.22s ease !important;
-  }
-  .cafe-tab-btn:active {
-    transform: scale(0.96) !important;
-  }
-  .cafe-tab-btn.active {
-    transform: scale(1.02) !important;
-    box-shadow: 0 3px 10px rgba(245,198,77,0.25) !important;
-  }
-
-  /* --- Food grid sits right under the toolbar --- */
-  .cafe-items-list {
-    margin-top: 10px !important;
-  }
-
-  /* --- Homepage mobile hero & Power-Up layout refinements --- */
+  /* -----------------------------------------------------------
+     11. HOMEPAGE-ONLY mobile bits (unrelated to the menu-page
+     audit above, kept as-is so the homepage isn't regressed)
+     ----------------------------------------------------------- */
   .hero {
-    padding-top: 40px !important; /* Shrunk padding by 40px to lift hero higher */
+    padding-top: 40px !important;
   }
   .premium-feature-chips-container {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 8px !important;
     margin-top: 16px !important;
-    margin-bottom: 28px !important; /* Extra spacing before featured menu title */
+    margin-bottom: 28px !important;
   }
   .premium-feature-chips-container .premium-feature-chip {
     display: flex !important;
     align-items: center !important;
     gap: 8px !important;
-    padding: 10px 14px !important; /* Larger horizontal/vertical padding */
+    padding: 10px 14px !important;
     background: rgba(255,255,255,0.03) !important;
     border: 1px solid rgba(255,255,255,0.08) !important;
     border-radius: 10px !important;
@@ -412,104 +404,6 @@
     justify-content: flex-start !important;
   }
   #featuredItemsContainer {
-    margin-top: 18px !important; /* Spacing before food cards */
-  }
-
-  /* --- Reverted Category Pills layout on mobile --- */
-  .cafe-tabs {
-    display: flex !important;
-    gap: 8px !important;
-    overflow-x: auto !important;
-    padding: 8px 16px !important;
-    margin: 0 -16px !important;
-    scrollbar-width: none !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
-  .cafe-tabs::-webkit-scrollbar {
-    display: none !important;
-  }
-  .cafe-tabs .cafe-tab-btn {
-    flex: 0 0 auto !important;
-    min-height: 34px !important;
-    padding: 6px 14px !important;
-    background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: 99px !important;
-    font-size: 11.5px !important;
-    font-weight: 600 !important;
-    color: rgba(255, 255, 255, 0.7) !important;
-    cursor: pointer !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    box-shadow: none !important;
-    transition: all 0.2s ease !important;
-  }
-  .cafe-tabs .cafe-tab-btn.active {
-    background: #F5C64D !important;
-    color: #000 !important;
-    border-color: #F5C64D !important;
-    box-shadow: 0 3px 10px rgba(245, 198, 77, 0.2) !important;
-    transform: scale(1.02) !important;
-  }
-  .cafe-tabs .cafe-tab-btn .cat-pill-count {
-    font-size: 9.5px !important;
-    margin-left: 3px !important;
-    opacity: 0.8 !important;
-  }
-
-  /* --- Mobile Section Sliders --- */
-  .menu-horizontal-slider {
-    display: flex !important;
-    gap: 12px !important;
-    overflow-x: auto !important;
-    padding: 8px 16px !important;
-    margin: 0 -16px !important;
-    scrollbar-width: none !important;
-    -webkit-overflow-scrolling: touch !important;
-    scroll-snap-type: x mandatory !important;
-  }
-  .menu-horizontal-slider::-webkit-scrollbar {
-    display: none !important;
-  }
-  .menu-horizontal-slider .food-related-card {
-    flex: 0 0 170px !important; /* Shows ~1.5 - 2 cards at once on mobile screen */
-    scroll-snap-align: start !important;
-    height: auto !important;
-    display: flex !important;
-    flex-direction: column !important;
-    box-shadow: none !important;
-  }
-  .menu-horizontal-slider .food-related-card img {
-    height: 135px !important; /* Image height upscaled so photography dominates on mobile */
-    object-fit: cover !important;
-    width: 100% !important;
-    border-radius: 12px 12px 0 0 !important;
-  }
-  
-  /* Active tab underline on mobile */
-  .cafe-tabs .cafe-tab-btn.active {
-    position: relative !important;
-    padding-bottom: 8px !important;
-    padding-top: 4px !important;
-  }
-  .cafe-tabs .cafe-tab-btn.active::after {
-    content: '' !important;
-    position: absolute !important;
-    bottom: 3px !important;
-    left: 30% !important;
-    right: 30% !important;
-    height: 2px !important;
-    background: #000 !important;
-    border-radius: 99px !important;
-  }
-
-  /* Solid sticky shelf with blur to prevent content overlapping readability */
-  .sticky-menu-shelf {
-    background: rgba(8, 9, 12, 0.95) !important;
-    backdrop-filter: blur(14px) !important;
-    -webkit-backdrop-filter: blur(14px) !important;
-    padding-top: 8px !important;
-    padding-bottom: 8px !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    margin-top: 18px !important;
   }
 }

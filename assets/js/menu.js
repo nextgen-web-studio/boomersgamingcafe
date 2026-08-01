@@ -25,7 +25,9 @@ function initFoodMenuEngine() {
   
   if (!container && !document.getElementById('featuredItemsContainer')) return;
 
-  let currentCategory = 'xp-starters';
+  let currentCategory = 'best-sellers';
+  let categoryObserver = null;
+  let suppressObserverUntil = 0;
   let activeSearchQuery = '';
   let activeFilterType = 'all'; // all, veg, non-veg, under-200, bestseller, snacks, drinks, combos
 
@@ -63,7 +65,7 @@ function initFoodMenuEngine() {
   if (searchInput) {
     const debouncedSearch = debounce((query) => {
       activeSearchQuery = query;
-      renderMenuGrid();
+      renderMenuGrid(false, !!query);
     }, 200);
 
     searchInput.addEventListener('input', (e) => {
@@ -137,8 +139,8 @@ function initFoodMenuEngine() {
       if (shortcut) {
         shortcut.style.display = 'none';
       }
-      renderMenuGrid();
-      
+      renderMenuGrid(false, true);
+
       // Focus and scroll
       searchInput.focus();
       searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -175,35 +177,102 @@ function initFoodMenuEngine() {
     });
   }
 
-  // Category tab button click handler
+  // Smoothly scroll the given tab pill to the horizontal center of the rail
+  function centerTabInRail(btnElement) {
+    const rail = document.querySelector('.cafe-tabs');
+    if (!rail || !btnElement) return;
+    const railRect = rail.getBoundingClientRect();
+    const btnRect = btnElement.getBoundingClientRect();
+    const delta = (btnRect.left + btnRect.width / 2) - (railRect.left + railRect.width / 2);
+    rail.scrollBy({ left: delta, behavior: 'smooth' });
+  }
+
+  function setActiveTab(category, btnElement) {
+    const tabBtns = document.querySelectorAll('.cafe-tabs .cafe-tab-btn');
+    tabBtns.forEach(btn => btn.classList.remove('active'));
+    const target = btnElement || document.querySelector(`.cafe-tabs .cafe-tab-btn[data-category="${category}"]`);
+    if (target) {
+      target.classList.add('active');
+      centerTabInRail(target);
+    }
+    currentCategory = category;
+  }
+
+  // Category tab button click handler (manual tap)
   window.switchCafeTab = function(category, btnElement) {
+    // Ignore intersection updates for a moment while we smooth-scroll,
+    // otherwise a section passing through the viewport mid-scroll can
+    // steal the active state back before we arrive.
+    suppressObserverUntil = Date.now() + 700;
+
     const targetSection = document.getElementById(`section-${category}`);
     if (targetSection) {
       targetSection.scrollIntoView({
         behavior: 'smooth',
-        block: 'center'
+        block: 'start'
       });
     }
 
-    // Update active tab styles
-    const tabBtns = document.querySelectorAll('.cafe-tabs .cafe-tab-btn');
-    tabBtns.forEach(btn => btn.classList.remove('active'));
-    if (btnElement) {
-      btnElement.classList.add('active');
-    }
+    setActiveTab(category, btnElement);
 
     Tracker.track('Cafe Scroll Switch', { category });
   };
 
   window.scrollToCategory = function(category) {
+    suppressObserverUntil = Date.now() + 700;
     const targetSection = document.getElementById(`section-${category}`);
     if (targetSection) {
       targetSection.scrollIntoView({
         behavior: 'smooth',
-        block: 'center'
+        block: 'start'
       });
     }
+    setActiveTab(category, null);
   };
+
+  // -----------------------------------------------------------
+  // Dynamic active category tracking (task #9 in the audit brief)
+  // As the user scrolls, whichever category section occupies the
+  // band just under the sticky shelf becomes "active" — pill
+  // updates instantly with no delay, and auto-centers in the rail.
+  // -----------------------------------------------------------
+  function refreshActiveCategoryObserver() {
+    if (categoryObserver) {
+      categoryObserver.disconnect();
+    }
+
+    const shelf = document.querySelector('.sticky-menu-shelf');
+    const shelfHeight = shelf ? shelf.getBoundingClientRect().height : 120;
+
+    categoryObserver = new IntersectionObserver((entries) => {
+      if (Date.now() < suppressObserverUntil) return;
+
+      // Pick the entry closest to the top of the viewport among those
+      // currently intersecting the "active" band.
+      let best = null;
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        if (!best || entry.boundingClientRect.top < best.boundingClientRect.top) {
+          best = entry;
+        }
+      });
+
+      if (best) {
+        const category = best.target.id.replace('section-', '');
+        if (category !== currentCategory) {
+          setActiveTab(category, null);
+        }
+      }
+    }, {
+      root: null,
+      rootMargin: `-${Math.ceil(shelfHeight) + 4}px 0px -70% 0px`,
+      threshold: 0
+    });
+
+    document.querySelectorAll('.menu-category-section').forEach(section => {
+      categoryObserver.observe(section);
+    });
+  }
 
   // Dynamic Category Cards compiler
   const categoriesList = [
@@ -231,6 +300,7 @@ function initFoodMenuEngine() {
     categoriesList.forEach(cat => {
       const card = document.createElement('button');
       card.className = `cafe-tab-btn ${cat.key === currentCategory ? 'active' : ''}`;
+      card.dataset.category = cat.key;
       card.onclick = () => switchCafeTab(cat.key, card);
       card.innerHTML = `${cat.name} <span class="cat-pill-count">(${cat.count})</span>`;
       tabsContainer.appendChild(card);
@@ -242,7 +312,7 @@ function initFoodMenuEngine() {
   let activeRenderTimeout = null;
 
   // Refactored grid rendering function to show section-by-section sliders
-  window.renderMenuGrid = function(showSkeleton = false) {
+  window.renderMenuGrid = function(showSkeleton = false, scrollToFirstResult = false) {
     if (activeRenderTimeout) {
       clearTimeout(activeRenderTimeout);
       activeRenderTimeout = null;
@@ -263,6 +333,9 @@ function initFoodMenuEngine() {
 
       // Check sorting configuration
       const sortVal = document.getElementById('foodSortSelect') ? document.getElementById('foodSortSelect').value : 'popular';
+
+      let totalMatched = 0;
+      let firstMatchedCategoryKey = null;
 
       categoriesList.forEach(cat => {
         let catItems = [];
@@ -319,6 +392,11 @@ function initFoodMenuEngine() {
         // Skip category sections that have zero items entirely
         if (catItems.length === 0) return;
 
+        totalMatched += catItems.length;
+        if (firstMatchedCategoryKey === null) {
+          firstMatchedCategoryKey = cat.key;
+        }
+
         const section = document.createElement('div');
         section.className = 'menu-category-section loaded';
         section.id = `section-${cat.key}`;
@@ -363,6 +441,46 @@ function initFoodMenuEngine() {
 
         container.appendChild(section);
       });
+
+      // --- Search results banner: count + empty state ---
+      const banner = document.getElementById('searchResultsBanner');
+      const bannerText = document.getElementById('searchResultsCountText');
+      if (banner && bannerText) {
+        if (activeSearchQuery !== '') {
+          banner.style.display = 'flex';
+          bannerText.textContent = totalMatched === 1
+            ? '1 Result Found'
+            : `${totalMatched} Results Found`;
+        } else {
+          banner.style.display = 'none';
+        }
+      }
+
+      if (totalMatched === 0 && (activeSearchQuery !== '' || activeFilterType !== 'all')) {
+        const empty = document.createElement('div');
+        empty.className = 'menu-empty-state';
+        empty.style.cssText = 'text-align:center; padding:48px 20px; color:var(--muted);';
+        empty.innerHTML = activeSearchQuery !== ''
+          ? `<div style="font-size:32px; margin-bottom:10px;">🔍</div>
+             <div style="font-family:var(--mono); font-size:13px; color:#fff; margin-bottom:4px;">No matches for "${activeSearchQuery}"</div>
+             <div style="font-size:12px;">Try a different loadout name or clear your search.</div>`
+          : `<div style="font-size:32px; margin-bottom:10px;">🎮</div>
+             <div style="font-family:var(--mono); font-size:13px; color:#fff;">No items match this filter</div>`;
+        container.appendChild(empty);
+      }
+
+      // Scroll to the first matching section once results settle
+      if (scrollToFirstResult && firstMatchedCategoryKey) {
+        requestAnimationFrame(() => {
+          const target = document.getElementById(`section-${firstMatchedCategoryKey}`);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      }
+
+      // Re-observe the freshly rendered sections for active-pill tracking
+      refreshActiveCategoryObserver();
     }
   };
 
