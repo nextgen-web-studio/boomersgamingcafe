@@ -570,43 +570,12 @@ button.button.hero-primary-cta {
     background: #08090C !important;
     border: none !important;
   }
-  .modal-image-carousel {
-    display: flex !important;
+  .food-modal-hero-img {
+    display: block !important;
     width: 100% !important;
     height: 100% !important;
-    overflow-x: auto !important;
-    scroll-snap-type: x mandatory !important;
-    scrollbar-width: none !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
-  .modal-image-carousel::-webkit-scrollbar {
-    display: none !important;
-  }
-  .carousel-slide {
-    flex: 0 0 100% !important;
-    width: 100% !important;
-    height: 100% !important;
-    scroll-snap-align: start !important;
-  }
-  .carousel-dots-indicator {
-    position: absolute;
-    bottom: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 6px;
-    z-index: 5;
-  }
-  .carousel-dots-indicator .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.4);
-    transition: all 0.25s ease;
-  }
-  .carousel-dots-indicator .dot.active {
-    background: #efbd4e;
-    transform: scale(1.2);
+    background-size: cover !important;
+    background-position: center !important;
   }
   .food-modal-media::after {
     content: '' !important;

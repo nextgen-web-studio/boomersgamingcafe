@@ -11,7 +11,7 @@
     right: 0 !important;
     width: 100% !important;
     max-width: 100% !important;
-    height: 84px !important; /* Navbar: 84px height */
+    height: 68px !important; /* Navbar: reduced from 84px for a tighter, more premium feel */
     padding-left: 48px !important; /* Increased left padding for logo breathing room */
     padding-right: 48px !important; /* Balanced right padding */
     display: flex !important;
@@ -149,7 +149,7 @@
     justify-content: center !important;
   }
   .sticky-menu-shelf {
-    top: 84px !important; /* Align perfectly with the 84px PC navbar */
+    top: 68px !important; /* Align perfectly with the 68px PC navbar */
   }
   /* Desktop Search, Categories & Food Grid Proportions */
   .search-wrap {
@@ -352,38 +352,13 @@
     background: #0c0d10 !important;
     overflow: hidden !important;
   }
-  .modal-image-carousel {
+  .food-modal-hero-img {
     position: relative !important;
     width: 100% !important;
     height: 100% !important;
     min-height: 100% !important;
-  }
-  .carousel-slide {
-    position: absolute !important;
-    inset: 0 !important;
-    opacity: 0 !important;
-    transition: opacity .4s ease !important;
-  }
-  .carousel-slide:first-child {
-    opacity: 1 !important;
-  }
-  .carousel-dots-indicator {
-    position: absolute !important;
-    bottom: 16px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    display: flex !important;
-    gap: 6px !important;
-    z-index: 5 !important;
-  }
-  .carousel-dots-indicator .dot {
-    width: 6px !important; height: 6px !important;
-    border-radius: 50% !important;
-    background: rgba(255,255,255,.4) !important;
-  }
-  .carousel-dots-indicator .dot.active {
-    background: #efbd4e !important;
-    transform: scale(1.2) !important;
+    background-size: cover !important;
+    background-position: center !important;
   }
   .food-modal-media::after {
     content: '' !important;
@@ -514,5 +489,106 @@
   .food-add-btn:hover {
     transform: translateY(-2px) !important;
     box-shadow: 0 12px 26px rgba(245,198,77,.35) !important;
+  }
+
+  /* "Customers Also Ordered" + "Recommended Pairing" — these had ZERO
+     desktop rules anywhere in the codebase (only existed inside the
+     max-width:800px mobile block in mobile-audit.css), so on desktop
+     they rendered as raw unstyled browser defaults: full-resolution
+     images, no card layout, no spacing — the source of the reported
+     "empty spaces" / alignment issues in these two sections. */
+  .food-related-scroll {
+    display: flex !important;
+    gap: 12px !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    padding: 4px 2px 10px !important;
+    margin: 0 !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: rgba(245, 198, 77, .35) transparent !important;
+  }
+  .food-related-scroll::-webkit-scrollbar { height: 6px !important; }
+  .food-related-scroll::-webkit-scrollbar-thumb {
+    background: rgba(245, 198, 77, .3) !important;
+    border-radius: 10px !important;
+  }
+  .food-related-card {
+    flex: 0 0 132px !important;
+    background: rgba(255, 255, 255, .03) !important;
+    border: 1px solid rgba(255, 255, 255, .08) !important;
+    border-radius: 14px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    cursor: pointer !important;
+    scroll-snap-align: start !important;
+    transition: border-color .2s ease, transform .2s ease !important;
+  }
+  .food-related-card:hover {
+    border-color: var(--accent) !important;
+    transform: translateY(-3px) !important;
+  }
+  .food-related-card img {
+    width: 100% !important;
+    height: 90px !important;
+    object-fit: cover !important;
+    display: block !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+  .food-related-info {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    padding: 10px !important;
+  }
+  .food-related-card .rel-name {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    color: #fff !important;
+    line-height: 1.3 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+  }
+  .food-related-card .rel-meta {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .food-related-card .rel-price {
+    font: 700 12px var(--mono) !important;
+    color: #F5C64D !important;
+  }
+  .food-related-card .rel-add {
+    width: 24px !important;
+    height: 24px !important;
+    border-radius: 6px !important;
+    background: rgba(245, 198, 77, .12) !important;
+    border: 1px solid rgba(245, 198, 77, .35) !important;
+    color: #F5C64D !important;
+    font-size: 13px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    transition: all .2s ease !important;
+  }
+  .food-related-card .rel-add:hover {
+    background: #F5C64D !important;
+    color: #000 !important;
+  }
+
+  .recommended-pairing-block {
+    background: rgba(255, 255, 255, .03) !important;
+    border: 1px dashed rgba(255, 255, 255, .15) !important;
+    border-radius: 12px !important;
+    padding: 12px 16px !important;
   }
 }

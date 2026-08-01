@@ -5080,7 +5080,7 @@ body.no-scroll {
 /* Premium BGC Gaming Toast Notification */
 .bgc-toast {
   position: fixed;
-  top: 104px; /* 20px below desktop 84px navbar */
+  top: 88px; /* 20px below desktop 68px navbar */
   left: 50%;
   transform: translate(-50%, -15px) scale(0.97);
   width: 320px !important; /* Smaller, more compact */
