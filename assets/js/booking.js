@@ -776,8 +776,44 @@ function initCostCalculator() {
 /**
  * Global Razorpay Payment Trigger
  */
+function renderBookingFailedTicket(message) {
+  const successDiv = document.getElementById('bookingSuccessTicket');
+  if (window.renderBookingFailureCard && successDiv) {
+    window.renderBookingFailureCard(successDiv, message, () => {
+      if (window.bookingWizardShowStep) window.bookingWizardShowStep(5);
+    });
+  } else if (successDiv) {
+    successDiv.innerHTML = `
+      <div style="padding:28px; text-align:center; background:#181214; border:1px solid #ff4f70; border-radius:12px; margin-top:10px;">
+        <h4 style="color:#ff4f70; font-size:22px;">Payment Unverified</h4>
+        <p style="color:#bbb; font-size:13px; margin:12px 0;">${message || 'Payment could not be confirmed. Please try again.'}</p>
+        <button class="button" onclick="window.bookingWizardShowStep && window.bookingWizardShowStep(5)" style="background:#efbd4e; color:#000;">Retry Payment ➔</button>
+      </div>
+    `;
+  }
+  if (window.bookingWizardShowStep) window.bookingWizardShowStep(6);
+}
+
 window.triggerRazorpayPayment = async function() {
   const station = activeBooking.station;
+  const stationId = (station && station.id) ? station.id : 1;
+  const firstSlot = (activeBooking.slots && activeBooking.slots[0]) ? activeBooking.slots[0] : '10:00 AM';
+  const isoRange = window.slotToIsoRange ? window.slotToIsoRange(activeBooking.date, firstSlot, activeBooking.duration) : { startIso: new Date().toISOString(), endIso: new Date(Date.now() + 7200000).toISOString() };
+
+  let holdRes;
+  try {
+    if (window.BGCApi && window.BGCApi.createHold) {
+      holdRes = await BGCApi.createHold(stationId, isoRange.startIso, isoRange.endIso);
+    }
+  } catch (err) {
+    alert('This station/slot is currently unavailable. Please select another time or station.');
+    if (window.bookingWizardShowStep) window.bookingWizardShowStep(3);
+    return;
+  }
+
+  const holdId = (holdRes && (holdRes.holdId || holdRes.id || (holdRes.data && (holdRes.data.holdId || holdRes.data.id)))) || ('hold_' + Date.now());
+  activeBooking.holdId = holdId;
+
   const branchName = activeBooking.branch === 'pune' ? 'Pune (Viman Nagar)' : 'Coimbatore (RS Puram)';
   
   const hrs = activeBooking.duration || 2;
@@ -808,6 +844,8 @@ window.triggerRazorpayPayment = async function() {
         const orderRes = await BGCApi.createPaymentOrder(activeBooking.holdId, activeBooking.addedFood);
         if (orderRes && orderRes.data && orderRes.data.razorpay_order_id) {
           orderId = orderRes.data.razorpay_order_id;
+        } else if (orderRes && orderRes.razorpay_order_id) {
+          orderId = orderRes.razorpay_order_id;
         }
       }
     } catch(e) {
@@ -830,20 +868,21 @@ window.triggerRazorpayPayment = async function() {
               response.razorpay_payment_id || ('pay_' + Date.now()),
               response.razorpay_signature || 'mock_sig',
               activeBooking.holdId,
-              activeBooking.addedFood
+              activeBooking.addedFood ? activeBooking.addedFood.map(f => f.name || f.id) : []
             );
-            if (verifyRes && verifyRes.success && verifyRes.data) {
-              renderSuccessTicket(verifyRes.data);
+            const bookingData = (verifyRes && verifyRes.data) ? verifyRes.data : verifyRes;
+            if (verifyRes && (verifyRes.success || bookingData.id || bookingData.booking_id)) {
+              renderSuccessTicket(bookingData);
+              if (window.bookingWizardShowStep) window.bookingWizardShowStep(6);
             } else {
-              renderSuccessTicket({ booking_id: 'BMR-2026-' + Math.floor(100000 + Math.random() * 900000) });
+              renderBookingFailedTicket('Payment verification was rejected by the server.');
             }
           } else {
-            renderSuccessTicket({ booking_id: 'BMR-2026-' + Math.floor(100000 + Math.random() * 900000) });
+            renderBookingFailedTicket('Payment verification service is unavailable.');
           }
         } catch(e) {
-          renderSuccessTicket({ booking_id: 'BMR-2026-000012' });
+          renderBookingFailedTicket('An error occurred during verification. If charged, funds will be refunded in 5-7 days.');
         }
-        if (window.bookingWizardShowStep) window.bookingWizardShowStep(6);
       },
       prefill: {
         name: 'Gamer',
@@ -857,7 +896,7 @@ window.triggerRazorpayPayment = async function() {
       rzp.open();
     } catch(e) {
       console.warn('Razorpay popup blocked/closed:', e);
-      if (window.bookingWizardShowStep) window.bookingWizardShowStep(6);
+      renderBookingFailedTicket('Razorpay checkout window could not open or was blocked.');
     }
   }
 };

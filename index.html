@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="assets/css/desktop-polish.css" />
   <link rel="stylesheet" href="assets/css/ivory-theme.css" />
   <link rel="stylesheet" href="assets/css/mobile-menu-polish.css" />
+  <link rel="stylesheet" href="assets/css/header-fix.css" />
 </head>
 <body>
 
@@ -461,7 +462,7 @@
           <!-- Card 1 -->
           <div class="bundle-card">
             <div class="bundle-img-wrap">
-              <img src="assets/images/boomers_cafe_food.jpg" alt="Solo Grinder Combo">
+              <img src="assets/images/boomers_cafe_food.jpg" alt="Solo Grinder Combo" loading="lazy">
               <span class="bundle-badge badge-red">🔥 Popular</span>
             </div>
             <div class="bundle-content">
@@ -479,7 +480,7 @@
           <!-- Card 2 -->
           <div class="bundle-card">
             <div class="bundle-img-wrap">
-              <img src="assets/images/cheesefries.jpeg" alt="Console Co-Op Combo">
+              <img src="assets/images/cheesefries.jpeg" alt="Console Co-Op Combo" loading="lazy">
               <span class="bundle-badge badge-purple">⚡ Best Seller</span>
             </div>
             <div class="bundle-content">
@@ -497,7 +498,7 @@
           <!-- Card 3 -->
           <div class="bundle-card">
             <div class="bundle-img-wrap">
-              <img src="assets/images/food-wrap.png" alt="Pro Racer Pack">
+              <img src="assets/images/food-wrap.png" alt="Pro Racer Pack" loading="lazy">
               <span class="bundle-badge badge-green">🏎️ Pro Racer</span>
             </div>
             <div class="bundle-content">
@@ -746,16 +747,16 @@
         <div class="gallery-grid reveal" id="venueGallery">
           <!-- Loaded dynamically with full screen lightbox triggers -->
           <div class="gallery-item" onclick="openLightbox(0)">
-            <img src="assets/images/boomers_pc_lounge.jpg" alt="PC Gaming Setup Lounge">
+            <img src="assets/images/boomers_pc_lounge.jpg" alt="PC Gaming Setup Lounge" loading="lazy">
           </div>
           <div class="gallery-item" onclick="openLightbox(1)">
-            <img src="assets/images/cafe-background.jpg" alt="Esports Cafe Kitchen">
+            <img src="assets/images/cafe-background.jpg" alt="Esports Cafe Kitchen" loading="lazy">
           </div>
           <div class="gallery-item" onclick="openLightbox(2)">
-            <img src="assets/images/boomers_racing_sim.jpg" alt="Sim Racing cockpit">
+            <img src="assets/images/boomers_racing_sim.jpg" alt="Sim Racing cockpit" loading="lazy">
           </div>
           <div class="gallery-item" onclick="openLightbox(3)">
-            <img src="assets/images/boomers_vr_lounge.jpg" alt="VR Lounge Experience">
+            <img src="assets/images/boomers_vr_lounge.jpg" alt="VR Lounge Experience" loading="lazy">
           </div>
         </div>
       </div>
@@ -1416,18 +1417,19 @@
 
   <!-- Script Modules loading progressively -->
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-  <script src="assets/js/tracker.js?v=3.0"></script>
-  <script src="assets/js/data.js?v=3.0"></script>
-  <script src="assets/js/api-client.js?v=3.0"></script>
-  <script src="assets/js/tournament.js?v=3.0"></script>
-  <script src="assets/js/main.js?v=3.0"></script>
-  <script src="assets/js/launcher.js?v=3.0"></script>
-  <script src="assets/js/booking.js?v=3.0"></script>
-  <script src="assets/js/menu.js?v=3.0"></script>
-  <script src="assets/js/gallery.js?v=3.0"></script>
-  <script src="assets/js/audio.js?v=3.0"></script>
-  <script src="assets/js/cinematic.js?v=3.0"></script>
-  <script src="assets/js/mobile-audit.js?v=3.0"></script>
+  <script src="assets/js/tracker.js?v=3.0" defer></script>
+  <script src="assets/js/data.js?v=3.0" defer></script>
+  <script src="assets/js/api-client.js?v=3.0" defer></script>
+  <script src="assets/js/booking-utils.js?v=3.0" defer></script>
+  <script src="assets/js/tournament.js?v=3.0" defer></script>
+  <script src="assets/js/main.js?v=3.0" defer></script>
+  <script src="assets/js/launcher.js?v=3.0" defer></script>
+  <script src="assets/js/booking.js?v=3.0" defer></script>
+  <script src="assets/js/menu.js?v=3.0" defer></script>
+  <script src="assets/js/gallery.js?v=3.0" defer></script>
+  <script src="assets/js/audio.js?v=3.0" defer></script>
+  <script src="assets/js/cinematic.js?v=3.0" defer></script>
+  <script src="assets/js/mobile-audit.js?v=3.0" defer></script>
   
   <script>
     // Activate the 20-second hero video once the page loads and video can play
@@ -1634,98 +1636,8 @@
         if (googleBtnText) googleBtnText.textContent = 'Sign up with Google';
       }
     }
-    function updateHeaderAuthUI() {
-      const user = window.BGCApi ? window.BGCApi.getCurrentUser() : null;
-      const authContainer = document.getElementById('navAuthContainer');
-      if (!authContainer) return;
-
-      let cartCount = 0;
-      try {
-        const cartRaw = localStorage.getItem('bgc_saved_cart');
-        if (cartRaw) {
-          const parsed = JSON.parse(cartRaw);
-          if (parsed.addedFood) {
-            cartCount = parsed.addedFood.reduce((sum, item) => sum + (item.qty || 1), 0);
-          }
-        }
-      } catch(e) {}
-
-      if (user && (user.name || user.email)) {
-        const displayName = user.name || user.email.split('@')[0];
-        authContainer.innerHTML = `
-          <div class="nav-user-chip">
-            <a href="booking.html" class="nav-tickets-btn" title="View Booking Tickets">🎟️ Tickets</a>
-            <a href="menu.html" class="nav-cart-btn" title="View Food Cart">🛒 Cart <span class="nav-cart-badge">${cartCount}</span></a>
-            <div style="display:flex; align-items:center; gap:6px; background:rgba(239, 189, 78, 0.12); border:1px solid rgba(239, 189, 78, 0.4); border-radius:6px; padding:4px 10px; font:700 10px var(--mono); color:#efbd4e;">
-              <span>👋 Hi, <b>${displayName}</b></span>
-              <button onclick="BGCApi.logoutUser()" title="Logout" style="background:none; border:none; color:var(--muted); cursor:pointer; font-size:12px; margin-left:4px;">✕</button>
-            </div>
-          </div>
-        `;
-      } else {
-        authContainer.innerHTML = `
-          <div style="display:flex; align-items:center; gap:8px;">
-            <a href="menu.html" class="nav-cart-btn" title="View Food Cart">🛒 <span class="nav-cart-badge">${cartCount}</span></a>
-            <button class="nav-auth-btn" onclick="openAuthModal('login')">🔑 Login</button>
-          </div>
-        `;
-      }
-    }
-
-    function handleGoogleAuth() {
-      const user = window.BGCApi.loginUser("Google Gamer", "gamer@google.com");
-      if (window.showBgcNotification) {
-        window.showBgcNotification("✔ Google Auth Success", `Welcome back, <strong>${user.name}</strong>!`);
-      } else {
-        alert(`Welcome back, ${user.name}!`);
-      }
-      closeAuthModal();
-    }
-
-    function submitAuthForm(e, mode) {
-      e.preventDefault();
-      const form = e.target;
-      const inputs = form.querySelectorAll('input');
-      
-      let name = 'Pro Gamer';
-      let email = 'gamer@boomers.in';
-      let password = '';
-      let confirmPassword = '';
-
-      inputs.forEach(input => {
-        if (input.type === 'text') name = input.value.trim() || name;
-        if (input.type === 'email') email = input.value.trim() || email;
-        if (input.placeholder && input.placeholder.includes('Minimum')) password = input.value;
-        if (input.placeholder && input.placeholder.includes('Repeat')) confirmPassword = input.value;
-      });
-
-      if (mode === 'signup') {
-        if (password && confirmPassword && password !== confirmPassword) {
-          alert('Passwords do not match! Please check your password input.');
-          return;
-        }
-      }
-
-      if (!name || name === 'Pro Gamer') {
-        name = email.split('@')[0];
-        name = name.charAt(0).toUpperCase() + name.slice(1);
-      }
-
-      const user = window.BGCApi.loginUser(name, email);
-      const msg = mode === 'login' ? `Logged in successfully as ${user.name}!` : `Account created! Welcome to BOOMERS, ${user.name}!`;
-      
-      if (window.showBgcNotification) {
-        window.showBgcNotification("✔ Authentication Success", msg);
-      } else {
-        alert(msg);
-      }
-      closeAuthModal();
-    }
-
-    document.addEventListener('DOMContentLoaded', updateHeaderAuthUI);
     window.openAuthModal = openAuthModal;
     window.closeAuthModal = closeAuthModal;
-    window.updateHeaderAuthUI = updateHeaderAuthUI;
   </script>
 </body>
 </html>

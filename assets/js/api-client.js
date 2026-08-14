@@ -173,13 +173,17 @@ const BGCApi = {
           else if (path.includes('/admin/menu') || path.includes('/menu')) {
             data = db.menu;
           }
+          else if (path.includes('/holds') && method === 'POST') {
+            const holdId = 'hold_' + Date.now();
+            data = { success: true, id: holdId, holdId: holdId, data: { holdId: holdId, id: holdId } };
+          }
           else if (path.includes('/payments/create-order') && method === 'POST') {
-            data = { razorpay_order_id: 'order_mock_' + Date.now(), razorpay_key: 'rzp_test_TOtY2DlTFj5Q5M', amount: 50000, currency: 'INR' };
+            data = { success: true, razorpay_order_id: 'order_mock_' + Date.now(), razorpay_key: 'rzp_test_TOtY2DlTFj5Q5M', amount: 50000, currency: 'INR' };
           }
           else if (path.includes('/payments/verify') && method === 'POST') {
             const date = new Date();
             const bId = 'BMR-' + date.getFullYear() + '-' + String(db.bookings.length + 1).padStart(6, '0');
-            const booking = { id: bId, orderId: body.orderId, status: 'CONFIRMED', verification_token: 'uuid-' + Date.now() };
+            const booking = { success: true, id: bId, booking_id: bId, orderId: body.orderId, status: 'CONFIRMED', verification_token: 'uuid-' + Date.now(), data: { booking_id: bId, id: bId } };
             db.bookings.push(booking);
             this._setMockDB(db);
             data = booking;

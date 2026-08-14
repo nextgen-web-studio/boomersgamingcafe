@@ -1,0 +1,100 @@
+/* ==========================================================================
+   HEADER / NAV — CONSOLIDATED FIX
+   --------------------------------------------------------------------------
+   This file is the single source of truth for header alignment. It must be
+   loaded LAST (after main.css, desktop-polish.css, responsive.css,
+   mobile-audit.css, mobile-menu-polish.css) so it wins the cascade without
+   fighting the older, scattered !important rules in those files.
+
+   Root cause fixed here: the logged-in "profile chip" in the header
+   (#navAuthContainer -> .nav-user-chip: Tickets + Cart + "Hi, name" + logout)
+   had ZERO mobile/responsive rules anywhere in the codebase. On phones the
+   nav is only 64px tall, so that chip's real (unshrunk) content width
+   overflowed the bar, pushing the hamburger off-screen / breaking alignment.
+   ========================================================================== */
+
+/* Let the right-hand nav cluster actually shrink instead of overflowing.
+   Flex children default to min-width:auto, which is what allowed the
+   profile chip to force layout overflow. */
+.nav > div:last-child {
+  min-width: 0;
+  flex-shrink: 1;
+}
+
+#navAuthContainer {
+  min-width: 0;
+  flex-shrink: 1;
+  overflow: hidden;
+}
+
+.nav-user-chip {
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 800px) {
+  .nav {
+    gap: 6px !important;
+  }
+
+  .nav > div:last-child {
+    gap: 6px !important;
+  }
+
+  #navAuthContainer {
+    max-width: calc(100vw - 150px); /* leaves room for brand + hamburger */
+  }
+
+  .nav-user-chip {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    max-width: 100%;
+  }
+
+  /* Tickets button: text label doesn't fit on phones — icon only */
+  .nav-user-chip .nav-tickets-btn {
+    padding: 5px 8px !important;
+    font-size: 0 !important; /* hide the text node, keep the emoji glyph */
+  }
+  .nav-user-chip .nav-tickets-btn::before {
+    content: "🎟️";
+    font-size: 13px;
+  }
+
+  /* Cart button: icon + badge only, drop the "Cart" label */
+  .nav-user-chip .nav-cart-btn {
+    padding: 5px 8px !important;
+    gap: 3px !important;
+  }
+
+  /* "Hi, name" chip: truncate long names instead of overflowing */
+  .nav-user-chip > div {
+    max-width: 92px;
+    padding: 4px 6px !important;
+  }
+  .nav-user-chip > div span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    max-width: 62px;
+    vertical-align: middle;
+  }
+
+  .nav-auth-btn {
+    padding: 5px 10px !important;
+    font-size: 9px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  /* Smallest phones: drop the tickets shortcut entirely, it's reachable
+     from the mobile menu / booking page tabs. */
+  .nav-user-chip .nav-tickets-btn {
+    display: none !important;
+  }
+  #navAuthContainer {
+    max-width: calc(100vw - 130px);
+  }
+}

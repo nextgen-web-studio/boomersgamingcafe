@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="assets/css/mobile-audit.css?v=3.0" />
   <link rel="stylesheet" href="assets/css/desktop-polish.css?v=3.0" />
   <link rel="stylesheet" href="assets/css/mobile-menu-polish.css?v=3.0" />
+  <link rel="stylesheet" href="assets/css/header-fix.css?v=3.0" />
 
   <style>
     /* Dedicated Page Polish Styles */
@@ -596,10 +597,11 @@
 
   <!-- Scripts -->
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-  <script src="assets/js/tracker.js?v=3.0"></script>
-  <script src="assets/js/data.js?v=3.0"></script>
-  <script src="assets/js/api-client.js?v=3.0"></script>
-  <script src="assets/js/main.js?v=3.0"></script>
+  <script src="assets/js/tracker.js?v=3.0" defer></script>
+  <script src="assets/js/data.js?v=3.0" defer></script>
+  <script src="assets/js/api-client.js?v=3.0" defer></script>
+  <script src="assets/js/booking-utils.js?v=3.0" defer></script>
+  <script src="assets/js/main.js?v=3.0" defer></script>
 
   <script>
     // State synchronized with BGCApi / STATIONS_DATA
@@ -859,15 +861,80 @@
       }
     }
 
-    function stepNav(dir) {
+    async function stepNav(dir) {
       if (dir === 1 && bookingState.step === 5) {
-        openRazorpayModal();
+        await openRazorpayModal();
         return;
       }
       jumpToStep(bookingState.step + dir);
     }
 
-    function openRazorpayModal() {
+    function renderConfirmedPass(bookingData, paymentId) {
+      const passWrap = document.getElementById('finalPassWrapper');
+      if (!passWrap) return;
+      
+      const realBookingId = (bookingData && (bookingData.booking_id || bookingData.id)) ? (bookingData.booking_id || bookingData.id) : ('BMR-2026-' + Date.now().toString().slice(-6));
+      const custName = document.getElementById('cust-fullname')?.value || 'Gamer';
+      const payId = paymentId || (bookingData && bookingData.razorpay_payment_id) || 'pay_test_verified';
+
+      passWrap.innerHTML = `
+        <div style="font-family:var(--mono); font-size:12px; color:var(--lime); margin-bottom:8px;">VERIFIED BOOKING PASS</div>
+        <h3 style="font-family:var(--display); font-size:18px; color:#fff; margin-bottom:12px;">Booking ID: ${realBookingId}</h3>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:6px;">Name: <strong style="color:#fff;">${custName}</strong></p>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:6px;">Station: <strong style="color:#fff;">${bookingState.station ? bookingState.station.name : 'Station 01'}</strong></p>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:6px;">Date & Slot: <strong style="color:#fff;">${bookingState.date} • ${bookingState.slot}</strong></p>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:14px;">Razorpay Payment ID: <strong style="color:#fff;">${payId}</strong></p>
+        <button class="button" onclick="alert('Ticket PNG Downloaded!')" style="width:100%; text-align:center; justify-content:center; background:var(--lime); color:#000;">Download Pass PNG</button>
+      `;
+    }
+
+    function renderBookingFailedState(message) {
+      const passWrap = document.getElementById('finalPassWrapper');
+      if (window.renderBookingFailureCard && passWrap) {
+        window.renderBookingFailureCard(passWrap, message, () => jumpToStep(5));
+      } else if (passWrap) {
+        passWrap.innerHTML = `
+          <div style="padding:24px; text-align:center; background:#181214; border:1px solid #ff4f70; border-radius:12px;">
+            <h3 style="color:#ff4f70;">Payment Unverified</h3>
+            <p style="color:#bbb; font-size:13px; margin:12px 0;">${message || 'Payment could not be confirmed. Please try again.'}</p>
+            <button class="button" onclick="jumpToStep(5)" style="background:#efbd4e; color:#000;">Retry Payment ➔</button>
+          </div>
+        `;
+      }
+      jumpToStep(6);
+    }
+
+    async function openRazorpayModal() {
+      const btnNext = document.getElementById('btnNext');
+      if (btnNext) {
+        btnNext.disabled = true;
+        btnNext.innerText = 'Creating Hold... ⏳';
+      }
+
+      const stationId = (bookingState.station && bookingState.station.id) ? bookingState.station.id : 1;
+      const isoRange = window.slotToIsoRange ? window.slotToIsoRange(bookingState.date, bookingState.slot, bookingState.duration) : { startIso: new Date().toISOString(), endIso: new Date(Date.now() + 7200000).toISOString() };
+
+      let holdRes;
+      try {
+        holdRes = await BGCApi.createHold(stationId, isoRange.startIso, isoRange.endIso);
+      } catch (err) {
+        if (btnNext) {
+          btnNext.disabled = false;
+          btnNext.innerText = 'Pay & Confirm via Razorpay ➔';
+        }
+        alert('This station/slot was just reserved by another gamer. Please select another time or station.');
+        jumpToStep(3);
+        return;
+      }
+
+      if (btnNext) {
+        btnNext.disabled = false;
+        btnNext.innerText = 'Pay & Confirm via Razorpay ➔';
+      }
+
+      const holdId = (holdRes && (holdRes.holdId || holdRes.id || (holdRes.data && (holdRes.data.holdId || holdRes.data.id)))) || ('hold_' + Date.now());
+      bookingState.holdId = holdId;
+
       const rate = bookingState.station ? bookingState.station.price : 120;
       const gamingCost = rate * bookingState.duration * bookingState.players;
       let foodCost = 0;
@@ -884,20 +951,25 @@
         name: "Boomer's Gaming Cafe",
         description: `${bookingState.station ? bookingState.station.name : 'Rig'} Booking (${bookingState.duration}h)`,
         image: 'assets/images/logo.png',
-        handler: function (response) {
-          const passWrap = document.getElementById('finalPassWrapper');
-          if (passWrap) {
-            passWrap.innerHTML = `
-              <div style="font-family:var(--mono); font-size:12px; color:var(--lime); margin-bottom:8px;">VERIFIED BOOKING PASS</div>
-              <h3 style="font-family:var(--display); font-size:18px; color:#fff; margin-bottom:12px;">Booking ID: BMR-2026-${Math.floor(100000 + Math.random()*900000)}</h3>
-              <p style="font-size:13px; color:var(--muted); margin-bottom:6px;">Name: <strong style="color:#fff;">${custName}</strong></p>
-              <p style="font-size:13px; color:var(--muted); margin-bottom:6px;">Station: <strong style="color:#fff;">${bookingState.station ? bookingState.station.name : 'Station 01'}</strong></p>
-              <p style="font-size:13px; color:var(--muted); margin-bottom:6px;">Date & Slot: <strong style="color:#fff;">${bookingState.date} • ${bookingState.slot}</strong></p>
-              <p style="font-size:13px; color:var(--muted); margin-bottom:14px;">Razorpay Payment ID: <strong style="color:#fff;">${response.razorpay_payment_id || 'pay_test_1234'}</strong></p>
-              <button class="button" onclick="alert('Ticket PNG Downloaded!')" style="width:100%; text-align:center; justify-content:center; background:var(--lime); color:#000;">Download Pass PNG</button>
-            `;
+        handler: async function (response) {
+          try {
+            const verifyRes = await BGCApi.verifyPayment(
+              response.razorpay_order_id || 'order_mock',
+              response.razorpay_payment_id || 'pay_mock',
+              response.razorpay_signature || 'sig_mock',
+              bookingState.holdId,
+              bookingState.addedFood.map(f => f.name || f.id)
+            );
+            const bookingData = (verifyRes && verifyRes.data) ? verifyRes.data : verifyRes;
+            if (verifyRes && (verifyRes.success || bookingData.id || bookingData.booking_id)) {
+              renderConfirmedPass(bookingData, response.razorpay_payment_id);
+              jumpToStep(6);
+            } else {
+              renderBookingFailedState('Payment verification was rejected by the server.');
+            }
+          } catch (e) {
+            renderBookingFailedState('An error occurred during verification. If charged, funds will be refunded in 5-7 days.');
           }
-          jumpToStep(6);
         },
         prefill: {
           name: custName,
@@ -910,50 +982,11 @@
         const rzp = new Razorpay(options);
         rzp.open();
       } catch (e) {
-        console.warn('Razorpay popup prevented, completing pass:', e);
-        jumpToStep(6);
+        console.warn('Razorpay popup prevented or closed:', e);
+        renderBookingFailedState('Razorpay checkout window could not open or was blocked.');
       }
     }
 
-    function updateHeaderAuthUI() {
-      const user = window.BGCApi ? window.BGCApi.getCurrentUser() : null;
-      const authContainer = document.getElementById('navAuthContainer');
-      if (!authContainer) return;
-
-      let cartCount = 0;
-      try {
-        const cartRaw = localStorage.getItem('bgc_saved_cart');
-        if (cartRaw) {
-          const parsed = JSON.parse(cartRaw);
-          if (parsed.addedFood) {
-            cartCount = parsed.addedFood.reduce((sum, item) => sum + (item.qty || 1), 0);
-          }
-        }
-      } catch(e) {}
-
-      if (user && (user.name || user.email)) {
-        const displayName = user.name || user.email.split('@')[0];
-        authContainer.innerHTML = `
-          <div class="nav-user-chip">
-            <a href="booking.html" class="nav-tickets-btn" title="View Booking Tickets">🎟️ Tickets</a>
-            <a href="menu.html" class="nav-cart-btn" title="View Food Cart">🛒 Cart <span class="nav-cart-badge">${cartCount}</span></a>
-            <div style="display:flex; align-items:center; gap:6px; background:rgba(239, 189, 78, 0.12); border:1px solid rgba(239, 189, 78, 0.4); border-radius:6px; padding:4px 10px; font:700 10px var(--mono); color:#efbd4e;">
-              <span>👋 Hi, <b>${displayName}</b></span>
-              <button onclick="BGCApi.logoutUser()" title="Logout" style="background:none; border:none; color:var(--muted); cursor:pointer; font-size:12px; margin-left:4px;">✕</button>
-            </div>
-          </div>
-        `;
-      } else {
-        authContainer.innerHTML = `
-          <div style="display:flex; align-items:center; gap:8px;">
-            <a href="menu.html" class="nav-cart-btn" title="View Food Cart">🛒 <span class="nav-cart-badge">${cartCount}</span></a>
-            <button class="nav-auth-btn" onclick="openAuthModal('login')">🔑 Login</button>
-          </div>
-        `;
-      }
-    }
-    document.addEventListener('DOMContentLoaded', updateHeaderAuthUI);
-    window.updateHeaderAuthUI = updateHeaderAuthUI;
   </script>
 </body>
 </html>

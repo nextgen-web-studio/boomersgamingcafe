@@ -944,3 +944,47 @@ window.openZoneDetailsModal = function(zoneKey) {
   modal.style.display = 'flex';
 };
 
+/**
+ * 23. Universal Header Auth UI Sync
+ */
+function updateHeaderAuthUI() {
+  const user = window.BGCApi ? window.BGCApi.getCurrentUser() : null;
+  const authContainer = document.getElementById('navAuthContainer');
+  if (!authContainer) return;
+
+  let cartCount = 0;
+  try {
+    const cartRaw = localStorage.getItem('bgc_saved_cart');
+    if (cartRaw) {
+      const parsed = JSON.parse(cartRaw);
+      if (parsed.addedFood) {
+        cartCount = parsed.addedFood.reduce((sum, item) => sum + (item.qty || 1), 0);
+      }
+    }
+  } catch(e) {}
+
+  if (user && (user.name || user.email)) {
+    const displayName = user.name || user.email.split('@')[0];
+    authContainer.innerHTML = `
+      <div class="nav-user-chip">
+        <a href="booking.html" class="nav-tickets-btn" title="View Booking Tickets">🎟️ Tickets</a>
+        <a href="menu.html" class="nav-cart-btn" title="View Food Cart">🛒 Cart <span class="nav-cart-badge">${cartCount}</span></a>
+        <div style="display:flex; align-items:center; gap:6px; background:rgba(239, 189, 78, 0.12); border:1px solid rgba(239, 189, 78, 0.4); border-radius:6px; padding:4px 10px; font:700 10px var(--mono); color:#efbd4e;">
+          <span>👋 Hi, <b>${displayName}</b></span>
+          <button onclick="BGCApi.logoutUser()" title="Logout" style="background:none; border:none; color:var(--muted); cursor:pointer; font-size:12px; margin-left:4px;">✕</button>
+        </div>
+      </div>
+    `;
+  } else {
+    authContainer.innerHTML = `
+      <div style="display:flex; align-items:center; gap:8px;">
+        <a href="menu.html" class="nav-cart-btn" title="View Food Cart">🛒 <span class="nav-cart-badge">${cartCount}</span></a>
+        <button class="nav-auth-btn" onclick="openAuthModal('login')">🔑 Login</button>
+      </div>
+    `;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', updateHeaderAuthUI);
+window.updateHeaderAuthUI = updateHeaderAuthUI;
+
