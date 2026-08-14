@@ -1599,45 +1599,6 @@
     </div>
   </div>
 
-  <script>
-    function openAuthModal(mode = 'login') {
-      const modal = document.getElementById('globalAuthModal');
-      if (modal) {
-        modal.style.display = 'flex';
-        switchAuthTab(mode);
-      }
-    }
-    function closeAuthModal() {
-      const modal = document.getElementById('globalAuthModal');
-      if (modal) modal.style.display = 'none';
-    }
-    function switchAuthTab(mode) {
-      const loginForm = document.getElementById('authLoginForm');
-      const signupForm = document.getElementById('authSignupForm');
-      const tabLogin = document.getElementById('authTabLogin');
-      const tabSignup = document.getElementById('authTabSignup');
-      const googleBtnText = document.getElementById('googleBtnText');
 
-      if (mode === 'login') {
-        loginForm.style.display = 'block';
-        signupForm.style.display = 'none';
-        tabLogin.style.borderBottomColor = '#efbd4e';
-        tabLogin.style.color = '#fff';
-        tabSignup.style.borderBottomColor = 'transparent';
-        tabSignup.style.color = 'var(--muted)';
-        if (googleBtnText) googleBtnText.textContent = 'Sign in with Google';
-      } else {
-        loginForm.style.display = 'none';
-        signupForm.style.display = 'block';
-        tabSignup.style.borderBottomColor = '#efbd4e';
-        tabSignup.style.color = '#fff';
-        tabLogin.style.borderBottomColor = 'transparent';
-        tabLogin.style.color = 'var(--muted)';
-        if (googleBtnText) googleBtnText.textContent = 'Sign up with Google';
-      }
-    }
-    window.openAuthModal = openAuthModal;
-    window.closeAuthModal = closeAuthModal;
-  </script>
 </body>
 </html>

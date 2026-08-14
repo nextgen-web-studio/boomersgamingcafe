@@ -629,20 +629,7 @@
       recalculateTotals();
     });
 
-    function openAuthModal() {
-      document.getElementById('authModalOverlay').classList.add('active');
-    }
-    function closeAuthModal() {
-      document.getElementById('authModalOverlay').classList.remove('active');
-    }
-    function closeAuthModalOnBg(e) {
-      if (e.target === document.getElementById('authModalOverlay')) closeAuthModal();
-    }
-    function handleAuthSubmit(e) {
-      e.preventDefault();
-      alert('OTP sent successfully!');
-      closeAuthModal();
-    }
+
 
     function chooseBranch(b) {
       bookingState.branch = b;
