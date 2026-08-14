@@ -362,31 +362,31 @@
     <!-- Wizard Steps Nav Bar -->
     <div class="wizard-steps-container">
       <div class="wizard-steps-flex">
-        <div class="wizard-step-item active" id="st-0" onclick="jumpToStep(0)">
+        <div class="wizard-step-item active" id="st-0" role="button" tabindex="0" onclick="jumpToStep(0)" onkeydown="if(event.key==='Enter'||event.key===' ')jumpToStep(0)">
           <div class="step-circle">1</div>
           <div class="step-title">Branch</div>
         </div>
-        <div class="wizard-step-item" id="st-1" onclick="jumpToStep(1)">
+        <div class="wizard-step-item" id="st-1" role="button" tabindex="0" onclick="jumpToStep(1)" onkeydown="if(event.key==='Enter'||event.key===' ')jumpToStep(1)">
           <div class="step-circle">2</div>
           <div class="step-title">Zone</div>
         </div>
-        <div class="wizard-step-item" id="st-2" onclick="jumpToStep(2)">
+        <div class="wizard-step-item" id="st-2" role="button" tabindex="0" onclick="jumpToStep(2)" onkeydown="if(event.key==='Enter'||event.key===' ')jumpToStep(2)">
           <div class="step-circle">3</div>
           <div class="step-title">Station</div>
         </div>
-        <div class="wizard-step-item" id="st-3" onclick="jumpToStep(3)">
+        <div class="wizard-step-item" id="st-3" role="button" tabindex="0" onclick="jumpToStep(3)" onkeydown="if(event.key==='Enter'||event.key===' ')jumpToStep(3)">
           <div class="step-circle">4</div>
           <div class="step-title">Time & Date</div>
         </div>
-        <div class="wizard-step-item" id="st-4" onclick="jumpToStep(4)">
+        <div class="wizard-step-item" id="st-4" role="button" tabindex="0" onclick="jumpToStep(4)" onkeydown="if(event.key==='Enter'||event.key===' ')jumpToStep(4)">
           <div class="step-circle">5</div>
           <div class="step-title">Food Refills</div>
         </div>
-        <div class="wizard-step-item" id="st-5" onclick="jumpToStep(5)">
+        <div class="wizard-step-item" id="st-5" role="button" tabindex="0" onclick="jumpToStep(5)" onkeydown="if(event.key==='Enter'||event.key===' ')jumpToStep(5)">
           <div class="step-circle">6</div>
           <div class="step-title">Summary & Pay</div>
         </div>
-        <div class="wizard-step-item" id="st-6">
+        <div class="wizard-step-item" id="st-6" role="button" tabindex="0">
           <div class="step-circle">7</div>
           <div class="step-title">Ticket</div>
         </div>
@@ -679,41 +679,34 @@
           })
         : [];
 
-      // Fallback default stations if list is empty
       if (list.length === 0) {
-        const basePrice = currentBranch === 'pune' ? 120 : 100;
-        const gpu = currentZone === 'console' ? 'PS5 + 4K OLED' : (currentZone === 'vip' ? 'RTX 4070 SUPER' : 'RTX 3070');
-        const monitor = currentZone === 'console' ? '65" OLED' : '180Hz Esports';
-        list = [
-          { id: 901, name: 'Station 01', branch: currentBranch, zone: currentZone, gpu, monitor, price: basePrice, status: 'available' },
-          { id: 902, name: 'Station 02', branch: currentBranch, zone: currentZone, gpu, monitor, price: basePrice, status: 'available' },
-          { id: 903, name: 'Station 03', branch: currentBranch, zone: currentZone, gpu, monitor, price: basePrice, status: 'busy' },
-          { id: 904, name: 'Station 04', branch: currentBranch, zone: currentZone, gpu, monitor, price: basePrice, status: 'available' }
-        ];
+        grid.innerHTML = `
+          <div class="empty-stations-card" style="grid-column: 1 / -1; padding: 28px; text-align: center; background: #13151b; border: 1px dashed rgba(255,255,255,0.15); border-radius: 12px; color: var(--muted); font-size: 13px;">
+            ⚠️ No stations available for this zone right now — try another zone or time slot.
+          </div>
+        `;
+        return;
       }
 
       list.forEach(s => {
         const item = document.createElement('div');
         const isBusy = s.status === 'busy';
         const isSelected = bookingState.station && bookingState.station.id === s.id;
-        item.className = `station-unit-item ${isBusy ? 'busy' : ''} ${isSelected ? 'selected' : ''}`;
-        item.style.cssText = `background:#181a20; border:1px solid ${isSelected ? 'var(--lime)' : 'rgba(255,255,255,0.1)'}; border-radius:12px; padding:16px; cursor:${isBusy ? 'not-allowed' : 'pointer'}; transition:all 0.2s ease; opacity:${isBusy ? '0.5' : '1'};`;
+        item.className = `station-unit-card ${isBusy ? 'busy' : ''} ${isSelected ? 'selected' : ''}`;
         item.innerHTML = `
           <strong style="display:block; font-size:15px; color:#fff; font-family:var(--display);">${s.name}</strong>
-          <small style="color:var(--muted); display:block; margin:4px 0 8px; font-size:12px;">${s.gpu} · ${s.monitor}</small>
-          <span style="font-family:var(--mono); font-size:11px; font-weight:700; color:${isBusy ? '#ff4f70' : 'var(--lime)'};">
+          <small style="color:var(--muted); display:block; font-size:12px;">${s.gpu} · ${s.monitor}</small>
+          <span class="status-pill ${isBusy ? 'busy' : 'available'}">
             ${isBusy ? '● BUSY' : '● AVAILABLE · ₹' + s.price + '/hr'}
           </span>
         `;
         if (!isBusy) {
           item.onclick = () => {
             bookingState.station = s;
-            document.querySelectorAll('#syncStationsGrid .station-unit-item').forEach(x => {
-              x.style.borderColor = 'rgba(255,255,255,0.1)';
-              x.style.background = '#181a20';
+            document.querySelectorAll('#syncStationsGrid .station-unit-card').forEach(x => {
+              x.classList.remove('selected');
             });
-            item.style.borderColor = 'var(--lime)';
-            item.style.background = 'rgba(239, 189, 78, 0.1)';
+            item.classList.add('selected');
             recalculateTotals();
           };
         }
@@ -767,7 +760,8 @@
       sampleItems.forEach(item => {
         const isAdded = bookingState.addedFood.some(f => f.id === item.id);
         const card = document.createElement('div');
-        card.style.cssText = `background:#181a20; border:1px solid ${isAdded ? 'var(--lime)' : 'rgba(255,255,255,0.08)'}; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center;`;
+        card.className = `food-addon-card ${isAdded ? 'added' : ''}`;
+        card.style.justifyContent = 'space-between';
         card.innerHTML = `
           <div>
             <strong style="display:block; font-size:13px; color:#fff;">${item.name}</strong>

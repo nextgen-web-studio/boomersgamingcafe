@@ -5305,3 +5305,144 @@ body.no-scroll {
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%) !important;
 }
 
+/* ================================================================
+   TASK 2, 3, 4 & 6: REUSABLE CLASSES, ACCESSIBILITY & UI STATES
+   ================================================================ */
+
+/* Global focus-visible baseline (Task 4) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent) !important;
+  outline-offset: 2px !important;
+  border-radius: 4px;
+}
+
+/* Station Unit Cards (Task 2) */
+.station-unit-card {
+  background: #13151b;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.station-unit-card:hover {
+  border-color: #efbd4e;
+  background: rgba(239, 189, 78, 0.05);
+  box-shadow: 0 4px 16px rgba(239, 189, 78, 0.15);
+}
+.station-unit-card.selected {
+  border-color: #efbd4e !important;
+  background: rgba(239, 189, 78, 0.12) !important;
+  box-shadow: 0 0 20px rgba(239, 189, 78, 0.3) !important;
+}
+.station-unit-card.busy,
+.station-unit-card.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Food Addon Cards (Task 2) */
+.food-addon-card {
+  background: #13151b;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+.food-addon-card.added {
+  border-color: #efbd4e;
+  background: rgba(239, 189, 78, 0.08);
+}
+
+/* Confirmation & Failure Cards (Task 2 & 3) */
+.confirmation-card {
+  padding: 28px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  background: rgba(16, 13, 10, 0.95);
+  backdrop-filter: blur(10px);
+}
+.booking-error-card {
+  background: #181214;
+  border: 1px solid #ff4f70;
+  border-radius: 16px;
+  padding: 28px;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(255, 79, 112, 0.15);
+}
+.ticket-field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  text-align: left;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 20px 0;
+  margin-bottom: 24px;
+}
+.ticket-field {
+  font-size: 11px;
+  color: var(--muted);
+  font-family: var(--mono);
+  text-transform: uppercase;
+}
+.ticket-field b {
+  display: block;
+  font-size: 14px;
+  color: #fff;
+  font-family: var(--sans);
+  margin-top: 2px;
+  text-transform: none;
+}
+
+/* Unified Status Pills (Task 6) */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 700 10px var(--mono);
+  padding: 3px 8px;
+  border-radius: 99px;
+  text-transform: uppercase;
+}
+.status-pill.available {
+  background: rgba(0, 219, 120, 0.12);
+  color: #00db78;
+  border: 1px solid rgba(0, 219, 120, 0.3);
+}
+.status-pill.busy {
+  background: rgba(255, 79, 112, 0.12);
+  color: #ff4f70;
+  border: 1px solid rgba(255, 79, 112, 0.3);
+}
+
+/* Inline Spinner Keyframes & Loading State (Task 3) */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.btn-spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
