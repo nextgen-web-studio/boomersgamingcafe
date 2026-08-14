@@ -21,6 +21,7 @@
   
   <!-- Core Modular Stylesheets -->
   <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/tournament.css" />
   <link rel="stylesheet" href="assets/css/animations.css" />
   <link rel="stylesheet" href="assets/css/responsive.css" />
   <link rel="stylesheet" href="assets/css/cinematic.css" />
@@ -45,7 +46,7 @@
         <span>Station: <b id="sticky-val-station">Not Selected</b></span>
         <span>Time: <b id="sticky-val-time">7:00 PM</b></span>
       </div>
-      <a href="#book" class="button">Book Now ↗</a>
+      <a href="booking.html" class="button">Book Now ↗</a>
     </div>
   </div>
 
@@ -58,14 +59,16 @@
     <div class="nav-links">
       <a href="#play">Games</a>
       <a href="#arena">Locations</a>
-      <a href="#power-up">Power-Up Station</a>
+      <a href="menu.html">Power-Up Station</a>
       <a href="#calendar">Tournaments</a>
       <a href="membership.html">Membership</a>
       <a href="#community">Events</a>
     </div>
-    <a href="#book" class="nav-book-link">Book Now</a>
-    <div style="display: flex; align-items: center; gap: 15px;">
-      <!-- Hamburger Toggle Button for mobile viewports -->
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div id="navAuthContainer">
+        <button class="nav-auth-btn" onclick="openAuthModal('login')">Login</button>
+      </div>
+      <a href="booking.html" class="nav-book-link">Book Now</a>
       <button class="nav-toggle" id="mobileMenuBtn" aria-label="Toggle Navigation Menu">
         <span class="bar"></span>
         <span class="bar"></span>
@@ -83,7 +86,7 @@
       <a href="#calendar" onclick="window.toggleMobileMenu()" style="--i:3">Tournaments</a>
       <a href="membership.html" onclick="window.toggleMobileMenu()" style="--i:4">Membership</a>
       <a href="#community" onclick="window.toggleMobileMenu()" style="--i:5">Events</a>
-      <a href="#book" class="mobile-menu-book-btn" onclick="window.toggleMobileMenu()" style="--i:6">Book Now ↗</a>
+      <a href="booking.html" class="mobile-menu-book-btn" onclick="window.toggleMobileMenu()" style="--i:6">Book Now ↗</a>
     </nav>
     <div class="mobile-menu-footer">
       <div class="social-links">
@@ -140,7 +143,7 @@
           <p class="hero-lead">High-spec battlestations, a pulse you can feel, and a community that plays to win. This is gaming, switched all the way on.</p>
           
           <div class="hero-actions" style="margin-bottom: 20px;">
-            <a class="button hero-primary-cta" href="#book">Book Now <span>↗</span></a>
+            <a class="button hero-primary-cta" href="booking.html">Book Now <span>↗</span></a>
             <div class="hero-secondary-ctas">
               <a class="button secondary" href="#arena">Explore Arena <span>↓</span></a>
               <a class="button secondary" href="#membership" style="border-color: rgba(255,255,255,0.15); color: #fff;">View Pricing <span>↓</span></a>
@@ -182,7 +185,7 @@
               <button class="select" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'})">Location<b>Coimbatore ⌄</b></button>
               <button class="select" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'})">From<b>7:30 PM ⌄</b></button>
             </div>
-            <a class="button" href="#book">Find a station →</a>
+            <a class="button" href="booking.html">Find a station →</a>
           </aside>
 
           <!-- Mobile-only Quick Booking Card (Redesigned) -->
@@ -215,7 +218,7 @@
               </div>
             </div>
             
-            <a class="m-booking-cta" href="#book">FIND A STATION →</a>
+            <a class="m-booking-cta" href="booking.html">FIND A STATION →</a>
           </div>
         </div>
       </div>
@@ -308,7 +311,7 @@
             <div>Avg Wait<b id="gameWaitTime">4 mins</b></div>
             <div>Recommended Setup<b id="gameSetup" style="font-size: 11px;">RTX 4070 SUPER / 240Hz</b></div>
           </div>
-          <a class="button" href="#book">Lock a seat →</a>
+          <a class="button" href="booking.html">Lock a seat →</a>
         </div>
       </div>
     </section>
@@ -329,10 +332,10 @@
         <div class="floor">
           <!-- SVG Map with dynamic dots rendered by JS -->
           <div class="floor-plan reveal" id="arenaFloorPlan">
-            <span class="zone pc z1">PC ARENA</span>
-            <span class="zone ps z2">CONSOLE LOUNGE</span>
-            <span class="zone vip z3">VIP SQUAD ROOM</span>
-            <span class="zone pc z4">RACING</span>
+            <span class="zone pc z1" onclick="openZoneDetailsModal('pc')" style="cursor:pointer;" title="Click for PC Arena details">PC ARENA</span>
+            <span class="zone ps z2" onclick="openZoneDetailsModal('console')" style="cursor:pointer;" title="Click for Console Lounge details">CONSOLE LOUNGE</span>
+            <span class="zone vip z3" onclick="openZoneDetailsModal('vip')" style="cursor:pointer;" title="Click for VIP Squad Room details">VIP SQUAD ROOM</span>
+            <span class="zone pc z4" onclick="openZoneDetailsModal('racing')" style="cursor:pointer;" title="Click for Sim Racing details">RACING</span>
           </div>
           
           <div class="arena-status reveal">
@@ -359,7 +362,7 @@
               <div class="status-name"><b>VIP Squad Room</b><small>Private · 5 seats</small></div>
               <div class="status-right"><b style="color:var(--violet)">1 / 3</b><small>Available</small></div>
             </div>
-            <a class="button secondary" style="margin-top:25px" href="#book">Reserve exact station →</a>
+            <a class="button secondary" style="margin-top:25px" href="booking.html">Reserve exact station →</a>
           </div>
         </div>
       </div>
@@ -515,7 +518,7 @@
               <span class="custom-deal-icon">🎁</span>
               <h3 class="bundle-title">Custom Deal?</h3>
               <p class="bundle-desc">Select your station and stack food items during booking.</p>
-              <a class="button secondary bundle-btn" href="#book">Configure Live →</a>
+              <a class="button secondary bundle-btn" href="booking.html">Configure Live →</a>
             </div>
           </div>
         </div>
@@ -596,7 +599,7 @@
           </div>
 
           <div class="mode-status-row" style="width: 100%;">
-            <a href="#book" class="button mode-cta" data-zone="racing" onclick="if(window.bookingWizardShowStep){window.bookingWizardShowStep(2);}" style="width: 100%; text-align: center; justify-content: center; background: #00db78; color: #000; box-shadow: 0 4px 15px rgba(0, 219, 120, 0.25); height: 46px; min-height: 46px; border-radius: 12px; font-weight: 700;">Reserve Sim Racing →</a>
+            <a href="booking.html" class="button mode-cta" data-zone="racing" onclick="if(window.bookingWizardShowStep){window.bookingWizardShowStep(2);}" style="width: 100%; text-align: center; justify-content: center; background: #00db78; color: #000; box-shadow: 0 4px 15px rgba(0, 219, 120, 0.25); height: 46px; min-height: 46px; border-radius: 12px; font-weight: 700;">Reserve Sim Racing →</a>
           </div>
         </article>
 
@@ -652,7 +655,7 @@
           </div>
 
           <div class="mode-status-row" style="width: 100%;">
-            <a href="#book" class="button mode-cta" data-zone="vr" onclick="if(window.bookingWizardShowStep){window.bookingWizardShowStep(2);}" style="width: 100%; text-align: center; justify-content: center; background: #00c8ff; color: #000; box-shadow: 0 4px 15px rgba(0, 200, 255, 0.25); height: 46px; min-height: 46px; border-radius: 12px; font-weight: 700;">Book VR Session →</a>
+            <a href="booking.html" class="button mode-cta" data-zone="vr" onclick="if(window.bookingWizardShowStep){window.bookingWizardShowStep(2);}" style="width: 100%; text-align: center; justify-content: center; background: #00c8ff; color: #000; box-shadow: 0 4px 15px rgba(0, 200, 255, 0.25); height: 46px; min-height: 46px; border-radius: 12px; font-weight: 700;">Book VR Session →</a>
           </div>
         </article>
       </div>
@@ -684,7 +687,7 @@
               <div style="display: flex; justify-content: space-between;"><span>🍟 Kitchen</span><b>Full Menu</b></div>
             </div>
             
-            <a href="#book" class="button" onclick="activeBooking.branch='pune'; if(window.bookingWizardShowStep){window.bookingWizardShowStep(1);}" style="width: 100%; text-align: center; text-transform: uppercase; font-family: var(--mono); font-size: 11px;">Reserve Pune Setup →</a>
+            <a href="booking.html" class="button" onclick="activeBooking.branch='pune'; if(window.bookingWizardShowStep){window.bookingWizardShowStep(1);}" style="width: 100%; text-align: center; text-transform: uppercase; font-family: var(--mono); font-size: 11px;">Reserve Pune Setup →</a>
           </div>
           
           <!-- Coimbatore Card -->
@@ -702,12 +705,15 @@
               <div style="display: flex; justify-content: space-between;"><span>💻 Graphics Engine</span><b>RTX 3070</b></div>
               <div style="display: flex; justify-content: space-between;"><span>⚡ Display Hz</span><b>180Hz Pro</b></div>
               <div style="display: flex; justify-content: space-between;"><span>📺 Playrooms</span><b>PS5 + 4K TV</b></div>
-              <div style="display: flex; justify-content: space-between;"><span>🏎️ Simulators</span><b>Logitech G29 Setup</b></div>
-              <div style="display: flex; justify-content: space-between;"><span>🥽 VR Lounges</span><span style="color:var(--muted)">❌ Coming Soon</span></div>
+              <div style="display: flex; justify-content: space-between;"><span>🏎️ Cockpit Simulators</span><span style="color:#ffb703; font-weight:700;">⏳ Coming Soon</span></div>
+              <div style="display: flex; justify-content: space-between;"><span>🥽 VR Arena</span><span style="color:#ffb703; font-weight:700;">⏳ Coming Soon</span></div>
               <div style="display: flex; justify-content: space-between;"><span>🍟 Kitchen</span><b>Full Menu</b></div>
             </div>
             
-            <a href="#book" class="button secondary" onclick="activeBooking.branch='coimbatore'; if(window.bookingWizardShowStep){window.bookingWizardShowStep(1);}" style="width: 100%; text-align: center; border-color: rgba(255,255,255,0.15); color: #fff; text-transform: uppercase; font-family: var(--mono); font-size: 11px;">Reserve Coimbatore Setup →</a>
+            <div style="display:flex; gap:10px;">
+              <a href="booking.html" class="button secondary" style="flex:1; text-align: center; border-color: rgba(255,255,255,0.15); color: #fff; text-transform: uppercase; font-family: var(--mono); font-size: 11px;">Reserve Setup →</a>
+              <button type="button" class="button" onclick="alert('You will be notified when Cockpit Simulators & VR Arena launch in Coimbatore!')" style="background:#ffb703; color:#000; padding:0 14px; font-family:var(--mono); font-size:11px; font-weight:700;">Notify Me</button>
+            </div>
           </div>
         </div>
       </div>
@@ -721,26 +727,9 @@
         <p class="section-intro">College clashes, late-night ranked sessions, and tournament finals under the lights. Find your people, then find your game.</p>
         
         <div class="moment-fact" id="communityLiveEvent" style="border-left: 2px solid var(--lime); padding-left: 16px;">
-          LIVE STREAM DROPS<br>
-          <b style="color:#fff">Campus Clash: Valorant</b><br>
-          Starting soon...
-        </div>
-      </div>
-    </section>
-
-    <!-- Tournament Live Schedule Timeline (Phase 3) -->
-    <section class="section" style="background:#090b0d;">
-      <div class="wrap">
-        <div class="arena-head reveal">
-          <div>
-            <div class="section-kicker">Hourly timeline</div>
-            <h2 class="display">Today's live<br><span>schedule.</span></h2>
-          </div>
-          <div class="live">Pulsing live</div>
-        </div>
-        
-        <div class="schedule-timeline reveal" id="liveScheduleContainer">
-          <!-- Loaded Dynamically from data.js -->
+          BGC ARENA<br>
+          <b style="color:#fff">Coimbatore & Pune Locations</b><br>
+          Open 10:00 AM - 1:00 AM Daily
         </div>
       </div>
     </section>
@@ -865,7 +854,7 @@
         <!-- Right Column: Booking Card & Venue Status -->
         <div class="booking-right-col" style="display: flex; flex-direction: column; gap: 24px;">
           <!-- Compact Floating Booking Card -->
-          <div class="booking-card reveal" id="compactBookingCard" style="display: block;">
+          <div class="booking-card reveal" id="compactBookingCard" style="display: none;">
             <div class="hud-header" style="border: none; padding-bottom: 0; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
               <div style="display: flex; align-items: center; gap: 8px;">
                 <span class="hud-icon" style="font-size: 16px;">🎮</span>
@@ -912,21 +901,8 @@
             </button>
           </div>
 
-          <!-- Venue Image with Info Overlay -->
-          <div style="position: relative; border-radius: 18px; overflow: hidden; height: 200px; background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 100%), url('assets/images/boomers_pc_lounge.jpg') center/cover;">
-            <div class="booking-image-overlay">
-              <h4>RTX Arena</h4>
-              <div class="overlay-stats">
-                <span>💻 64 Elite Stations</span>
-                <span>🖥️ 240Hz Monitors</span>
-              </div>
-              <div class="overlay-status">● Available Now</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Multi-Step Wizard Panel Card (also inside right col for desktop) -->
-        <div class="booking-card reveal" id="bookingCardForm" style="display: none;">
+          <!-- Multi-Step Wizard Panel Card (also inside right col for desktop) -->
+          <div class="booking-card reveal" id="bookingCardForm" style="display: block;">
           
           <!-- Step 1: Branch Selection -->
           <div class="booking-step-panel active" id="step-0">
@@ -987,8 +963,12 @@
 
           <!-- Step 4: Session Settings -->
           <div class="booking-step-panel" id="step-3">
-            <h3>Arena Session</h3>
-            <div class="calc-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 20px;">
+            <h3>Date & Time Slot</h3>
+            <div class="calc-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 15px;">
+              <div class="calc-field" style="grid-column: span 2;">
+                <label for="w-date">Booking Date</label>
+                <input type="date" id="w-date" class="form-input" style="width:100%; height:45px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); color:#fff; padding:0 12px; border-radius:6px;" required>
+              </div>
               <div class="calc-field">
                 <label for="w-duration">Duration (Hours)</label>
                 <input type="number" id="w-duration" value="2" min="1" max="10">
@@ -999,25 +979,28 @@
               </div>
             </div>
             
-            <label style="font: 500 9px var(--mono); color: var(--muted); text-transform: uppercase; margin-bottom: 6px; display:block;">Select Slot Time</label>
+            <label style="font: 500 9px var(--mono); color: var(--muted); text-transform: uppercase; margin-bottom: 6px; display:block;">Select Start Time</label>
             <div class="slot-grid" id="slotsSelectorWrap">
               <label class="slot active">
-                6:00 PM <input type="checkbox" name="w-slot" value="6:00 PM" checked style="display:none;">
+                10:00 AM <input type="checkbox" name="w-slot" value="10:00 AM" checked style="display:none;">
               </label>
               <label class="slot">
-                6:30 PM <input type="checkbox" name="w-slot" value="6:30 PM" style="display:none;">
+                12:00 PM <input type="checkbox" name="w-slot" value="12:00 PM" style="display:none;">
+              </label>
+              <label class="slot">
+                2:00 PM <input type="checkbox" name="w-slot" value="2:00 PM" style="display:none;">
+              </label>
+              <label class="slot">
+                4:00 PM <input type="checkbox" name="w-slot" value="4:00 PM" style="display:none;">
+              </label>
+              <label class="slot">
+                6:00 PM <input type="checkbox" name="w-slot" value="6:00 PM" style="display:none;">
               </label>
               <label class="slot active">
-                7:00 PM <input type="checkbox" name="w-slot" value="7:00 PM" checked style="display:none;">
+                8:00 PM <input type="checkbox" name="w-slot" value="8:00 PM" checked style="display:none;">
               </label>
               <label class="slot">
-                7:30 PM <input type="checkbox" name="w-slot" value="7:30 PM" style="display:none;">
-              </label>
-              <label class="slot">
-                8:00 PM <input type="checkbox" name="w-slot" value="8:00 PM" style="display:none;">
-              </label>
-              <label class="slot">
-                8:30 PM <input type="checkbox" name="w-slot" value="8:30 PM" style="display:none;">
+                10:00 PM <input type="checkbox" name="w-slot" value="10:00 PM" style="display:none;">
               </label>
             </div>
           </div>
@@ -1076,9 +1059,7 @@
           <p class="section-intro">A clear launchpad for registrations, brackets, reminders, and live results.</p>
         </div>
         
-        <div class="calendar-grid reveal" id="tournamentsCalendarContainer">
-          <!-- Calendar items generated dynamically from data.js -->
-        </div>
+        <div id="tournament-dynamic-block" class="tournament-dynamic-wrap"></div>
       </div>
     </section>
 
@@ -1145,14 +1126,14 @@
           <div class="section-kicker">The game is waiting</div>
           <h2 class="display">Meet you in<br>the <span>arena.</span></h2>
         </div>
-        <a href="#book" class="button">Book a station →</a>
+        <a href="booking.html" class="button">Book a station →</a>
       </div>
       
       <div class="footer-quick">
         <div>
           <h4>Quick booking</h4>
           <p>Reserve a PC, PS5, sim racing cockpit, or VR session before you arrive.</p>
-          <a href="#book" style="color:var(--lime)">Start booking →</a>
+          <a href="booking.html" style="color:var(--lime)">Start booking →</a>
         </div>
         <div>
           <h4>Our branches</h4>
@@ -1183,7 +1164,7 @@
           <a href="https://instagram.com" target="_blank">Instagram</a>
           <a href="https://discord.gg" target="_blank">Discord</a>
           <a href="https://wa.me/919999999999" target="_blank">WhatsApp</a>
-          <a href="#book">Terms & Privacy</a>
+          <a href="booking.html">Terms & Privacy</a>
         </div>
         <span>Coimbatore · Pune</span>
       </div>
@@ -1324,7 +1305,7 @@
         </div>
         <div class="hud-ticket-qr"><span style="font-size:28px;">🔲</span></div>
       </div>
-      <a href="#book" class="hud-ticket-link" onclick="window.bookingWizardShowStep(6)">View Ticket →</a>
+      <a href="booking.html" class="hud-ticket-link" onclick="window.bookingWizardShowStep(6)">View Ticket →</a>
     </div>
 
     <!-- Primary CTA -->
@@ -1366,7 +1347,7 @@
       <b id="float-avail-vr">Full</b>
     </div>
     <div style="font-size: 8px; color: var(--muted); text-align: center; margin-top: 8px; font-family: var(--mono); text-transform: uppercase; letter-spacing:0.05em;">Updated Just Now</div>
-    <a href="#book" class="floating-avail-btn">Book Now</a>
+    <a href="booking.html" class="floating-avail-btn">Book Now</a>
   </aside>
 
   <!-- Audio Toggle hidden -->
@@ -1428,22 +1409,25 @@
   </div>
 
   <!-- Mobile Sticky Bottom Booking Trigger (context-aware) -->
-  <a class="mobile-book" id="mobileBookBar" href="#book">
+  <a class="mobile-book" id="mobileBookBar" href="booking.html">
     <span id="mobileBookLabel">Book a Station</span>
     <span class="mobile-book-price" id="mobileBookPrice">→</span>
   </a>
 
   <!-- Script Modules loading progressively -->
-  <script src="assets/js/tracker.js" defer></script>
-  <script src="assets/js/data.js" defer></script>
-  <script src="assets/js/main.js" defer></script>
-  <script src="assets/js/launcher.js" defer></script>
-  <script src="assets/js/booking.js" defer></script>
-  <script src="assets/js/menu.js" defer></script>
-  <script src="assets/js/gallery.js" defer></script>
-  <script src="assets/js/audio.js" defer></script>
-  <script src="assets/js/cinematic.js" defer></script>
-  <script src="assets/js/mobile-audit.js" defer></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="assets/js/tracker.js?v=3.0"></script>
+  <script src="assets/js/data.js?v=3.0"></script>
+  <script src="assets/js/api-client.js?v=3.0"></script>
+  <script src="assets/js/tournament.js?v=3.0"></script>
+  <script src="assets/js/main.js?v=3.0"></script>
+  <script src="assets/js/launcher.js?v=3.0"></script>
+  <script src="assets/js/booking.js?v=3.0"></script>
+  <script src="assets/js/menu.js?v=3.0"></script>
+  <script src="assets/js/gallery.js?v=3.0"></script>
+  <script src="assets/js/audio.js?v=3.0"></script>
+  <script src="assets/js/cinematic.js?v=3.0"></script>
+  <script src="assets/js/mobile-audit.js?v=3.0"></script>
   
   <script>
     // Activate the 20-second hero video once the page loads and video can play
@@ -1541,7 +1525,207 @@
       if (searchInput && window.innerWidth <= 768) {
         searchInput.placeholder = 'Search burgers, fries...';
       }
-    });
+  </script>
+
+  <!-- Google Authentication & Sign Up / Login Modal -->
+  <div class="auth-modal-overlay" id="globalAuthModal" onclick="if(event.target===this)closeAuthModal();" style="position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(10px); z-index:99999; display:none; align-items:center; justify-content:center;">
+    <div style="background:#141519; border:1px solid rgba(255,255,255,0.1); border-radius:18px; padding:36px; max-width:440px; width:90%; position:relative; box-shadow:0 25px 50px rgba(0,0,0,0.5);">
+      <button onclick="closeAuthModal()" style="position:absolute; top:18px; right:18px; background:none; border:none; color:var(--muted); font-size:24px; cursor:pointer;">&times;</button>
+      
+      <!-- Tab Switcher -->
+      <div style="display:flex; border-bottom:1px solid var(--line); margin-bottom:24px;">
+        <button id="authTabLogin" onclick="switchAuthTab('login')" style="flex:1; padding:12px; background:none; border:none; border-bottom:2px solid #efbd4e; color:#fff; font:700 13px var(--mono); cursor:pointer;">LOGIN</button>
+        <button id="authTabSignup" onclick="switchAuthTab('signup')" style="flex:1; padding:12px; background:none; border:none; border-bottom:2px solid transparent; color:var(--muted); font:700 13px var(--mono); cursor:pointer;">SIGN UP</button>
+      </div>
+
+      <!-- Google Sign In Button -->
+      <button onclick="handleGoogleAuth()" style="width:100%; height:48px; background:#fff; color:#000; border:none; border-radius:8px; font:700 13px var(--body); display:flex; align-items:center; justify-content:center; gap:10px; cursor:pointer; margin-bottom:20px; box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+        <span id="googleBtnText">Continue with Google</span>
+      </button>
+
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+        <div style="flex:1; height:1px; background:var(--line);"></div>
+        <span style="font-size:11px; color:var(--muted); font-family:var(--mono);">OR EMAIL</span>
+        <div style="flex:1; height:1px; background:var(--line);"></div>
+      </div>
+
+      <!-- Login Form -->
+      <form id="authLoginForm" onsubmit="submitAuthForm(event, 'login')">
+        <div style="margin-bottom:14px;">
+          <label style="font:700 10px var(--mono); color:var(--muted); display:block; margin-bottom:6px;">EMAIL ADDRESS</label>
+          <input type="email" required placeholder="gamer@boomers.in" style="width:100%; height:44px; background:#090b0d; border:1px solid var(--line); border-radius:8px; padding:0 14px; color:#fff; font-size:13px;">
+        </div>
+        <div style="margin-bottom:14px;">
+          <label style="font:700 10px var(--mono); color:var(--muted); display:block; margin-bottom:6px;">PASSWORD</label>
+          <input type="password" required placeholder="••••••••" style="width:100%; height:44px; background:#090b0d; border:1px solid var(--line); border-radius:8px; padding:0 14px; color:#fff; font-size:13px;">
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; font-size:12px;">
+          <label style="color:var(--muted); cursor:pointer;"><input type="checkbox" checked style="margin-right:6px;">Remember Me</label>
+          <a href="#" onclick="alert('Password reset link sent to your email!')" style="color:#efbd4e; text-decoration:none;">Forgot Password?</a>
+        </div>
+        <button type="submit" class="button" style="width:100%; justify-content:center; background:#efbd4e; color:#000;">LOG IN ➔</button>
+        <div style="text-align:center; margin-top:16px;">
+          <a href="#" onclick="closeAuthModal()" style="font-size:12px; color:var(--muted);">Continue as Guest →</a>
+        </div>
+      </form>
+
+      <!-- Sign Up Form (hidden by default) -->
+      <form id="authSignupForm" onsubmit="submitAuthForm(event, 'signup')" style="display:none;">
+        <div style="margin-bottom:12px;">
+          <label style="font:700 10px var(--mono); color:var(--muted); display:block; margin-bottom:6px;">FULL NAME</label>
+          <input type="text" required placeholder="Rohan Sharma" style="width:100%; height:42px; background:#090b0d; border:1px solid var(--line); border-radius:8px; padding:0 14px; color:#fff; font-size:13px;">
+        </div>
+        <div style="margin-bottom:12px;">
+          <label style="font:700 10px var(--mono); color:var(--muted); display:block; margin-bottom:6px;">EMAIL ADDRESS</label>
+          <input type="email" required placeholder="gamer@boomers.in" style="width:100%; height:42px; background:#090b0d; border:1px solid var(--line); border-radius:8px; padding:0 14px; color:#fff; font-size:13px;">
+        </div>
+        <div style="margin-bottom:12px;">
+          <label style="font:700 10px var(--mono); color:var(--muted); display:block; margin-bottom:6px;">PASSWORD</label>
+          <input type="password" required placeholder="Minimum 8 characters" style="width:100%; height:42px; background:#090b0d; border:1px solid var(--line); border-radius:8px; padding:0 14px; color:#fff; font-size:13px;">
+        </div>
+        <div style="margin-bottom:12px;">
+          <label style="font:700 10px var(--mono); color:var(--muted); display:block; margin-bottom:6px;">CONFIRM PASSWORD</label>
+          <input type="password" required placeholder="Repeat password" style="width:100%; height:42px; background:#090b0d; border:1px solid var(--line); border-radius:8px; padding:0 14px; color:#fff; font-size:13px;">
+        </div>
+        <div style="margin-bottom:16px;">
+          <label style="font:700 10px var(--mono); color:var(--muted); display:block; margin-bottom:6px;">MOBILE NUMBER (OPTIONAL)</label>
+          <input type="tel" placeholder="+91 98765 43210" style="width:100%; height:42px; background:#090b0d; border:1px solid var(--line); border-radius:8px; padding:0 14px; color:#fff; font-size:13px;">
+        </div>
+        <button type="submit" class="button" style="width:100%; justify-content:center; background:#efbd4e; color:#000;">CREATE ACCOUNT ➔</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function openAuthModal(mode = 'login') {
+      const modal = document.getElementById('globalAuthModal');
+      if (modal) {
+        modal.style.display = 'flex';
+        switchAuthTab(mode);
+      }
+    }
+    function closeAuthModal() {
+      const modal = document.getElementById('globalAuthModal');
+      if (modal) modal.style.display = 'none';
+    }
+    function switchAuthTab(mode) {
+      const loginForm = document.getElementById('authLoginForm');
+      const signupForm = document.getElementById('authSignupForm');
+      const tabLogin = document.getElementById('authTabLogin');
+      const tabSignup = document.getElementById('authTabSignup');
+      const googleBtnText = document.getElementById('googleBtnText');
+
+      if (mode === 'login') {
+        loginForm.style.display = 'block';
+        signupForm.style.display = 'none';
+        tabLogin.style.borderBottomColor = '#efbd4e';
+        tabLogin.style.color = '#fff';
+        tabSignup.style.borderBottomColor = 'transparent';
+        tabSignup.style.color = 'var(--muted)';
+        if (googleBtnText) googleBtnText.textContent = 'Sign in with Google';
+      } else {
+        loginForm.style.display = 'none';
+        signupForm.style.display = 'block';
+        tabSignup.style.borderBottomColor = '#efbd4e';
+        tabSignup.style.color = '#fff';
+        tabLogin.style.borderBottomColor = 'transparent';
+        tabLogin.style.color = 'var(--muted)';
+        if (googleBtnText) googleBtnText.textContent = 'Sign up with Google';
+      }
+    }
+    function updateHeaderAuthUI() {
+      const user = window.BGCApi ? window.BGCApi.getCurrentUser() : null;
+      const authContainer = document.getElementById('navAuthContainer');
+      if (!authContainer) return;
+
+      let cartCount = 0;
+      try {
+        const cartRaw = localStorage.getItem('bgc_saved_cart');
+        if (cartRaw) {
+          const parsed = JSON.parse(cartRaw);
+          if (parsed.addedFood) {
+            cartCount = parsed.addedFood.reduce((sum, item) => sum + (item.qty || 1), 0);
+          }
+        }
+      } catch(e) {}
+
+      if (user && (user.name || user.email)) {
+        const displayName = user.name || user.email.split('@')[0];
+        authContainer.innerHTML = `
+          <div class="nav-user-chip">
+            <a href="booking.html" class="nav-tickets-btn" title="View Booking Tickets">🎟️ Tickets</a>
+            <a href="menu.html" class="nav-cart-btn" title="View Food Cart">🛒 Cart <span class="nav-cart-badge">${cartCount}</span></a>
+            <div style="display:flex; align-items:center; gap:6px; background:rgba(239, 189, 78, 0.12); border:1px solid rgba(239, 189, 78, 0.4); border-radius:6px; padding:4px 10px; font:700 10px var(--mono); color:#efbd4e;">
+              <span>👋 Hi, <b>${displayName}</b></span>
+              <button onclick="BGCApi.logoutUser()" title="Logout" style="background:none; border:none; color:var(--muted); cursor:pointer; font-size:12px; margin-left:4px;">✕</button>
+            </div>
+          </div>
+        `;
+      } else {
+        authContainer.innerHTML = `
+          <div style="display:flex; align-items:center; gap:8px;">
+            <a href="menu.html" class="nav-cart-btn" title="View Food Cart">🛒 <span class="nav-cart-badge">${cartCount}</span></a>
+            <button class="nav-auth-btn" onclick="openAuthModal('login')">🔑 Login</button>
+          </div>
+        `;
+      }
+    }
+
+    function handleGoogleAuth() {
+      const user = window.BGCApi.loginUser("Google Gamer", "gamer@google.com");
+      if (window.showBgcNotification) {
+        window.showBgcNotification("✔ Google Auth Success", `Welcome back, <strong>${user.name}</strong>!`);
+      } else {
+        alert(`Welcome back, ${user.name}!`);
+      }
+      closeAuthModal();
+    }
+
+    function submitAuthForm(e, mode) {
+      e.preventDefault();
+      const form = e.target;
+      const inputs = form.querySelectorAll('input');
+      
+      let name = 'Pro Gamer';
+      let email = 'gamer@boomers.in';
+      let password = '';
+      let confirmPassword = '';
+
+      inputs.forEach(input => {
+        if (input.type === 'text') name = input.value.trim() || name;
+        if (input.type === 'email') email = input.value.trim() || email;
+        if (input.placeholder && input.placeholder.includes('Minimum')) password = input.value;
+        if (input.placeholder && input.placeholder.includes('Repeat')) confirmPassword = input.value;
+      });
+
+      if (mode === 'signup') {
+        if (password && confirmPassword && password !== confirmPassword) {
+          alert('Passwords do not match! Please check your password input.');
+          return;
+        }
+      }
+
+      if (!name || name === 'Pro Gamer') {
+        name = email.split('@')[0];
+        name = name.charAt(0).toUpperCase() + name.slice(1);
+      }
+
+      const user = window.BGCApi.loginUser(name, email);
+      const msg = mode === 'login' ? `Logged in successfully as ${user.name}!` : `Account created! Welcome to BOOMERS, ${user.name}!`;
+      
+      if (window.showBgcNotification) {
+        window.showBgcNotification("✔ Authentication Success", msg);
+      } else {
+        alert(msg);
+      }
+      closeAuthModal();
+    }
+
+    document.addEventListener('DOMContentLoaded', updateHeaderAuthUI);
+    window.openAuthModal = openAuthModal;
+    window.closeAuthModal = closeAuthModal;
+    window.updateHeaderAuthUI = updateHeaderAuthUI;
   </script>
 </body>
 </html>

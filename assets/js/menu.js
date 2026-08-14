@@ -758,23 +758,41 @@ window.decrementFoodQuantity = function() {
 /**
  * Cart logic and sticky booking sidebar operations
  */
-const cartState = {
-  gamingRate: 120, // default rate
+const savedCart = (() => {
+  try {
+    const raw = localStorage.getItem('bgc_saved_cart');
+    return raw ? JSON.parse(raw) : null;
+  } catch(e) { return null; }
+})();
+
+const cartState = savedCart || {
+  gamingRate: 120,
   gamingHrs: 2,
   gamingPlayers: 1,
-  stationName: "Station 12",
+  stationName: "Station 01",
   addedFood: [],
-  selectedBundle: null
+  couponCode: null,
+  discountAmount: 0
 };
 
-// Listen to station / duration changes from booking wizard to sync
-document.addEventListener('change', () => {
-  const durationInput = document.getElementById('w-duration');
-  const playersInput = document.getElementById('w-players');
-  if (durationInput) cartState.gamingHrs = parseInt(durationInput.value) || 2;
-  if (playersInput) cartState.gamingPlayers = parseInt(playersInput.value) || 1;
+function saveCartToStorage() {
+  try {
+    localStorage.setItem('bgc_saved_cart', JSON.stringify(cartState));
+    if (window.updateHeaderAuthUI) window.updateHeaderAuthUI();
+  } catch(e) {}
+}
+
+window.applyCartCoupon = function(code) {
+  const cleanCode = (code || '').trim().toUpperCase();
+  if (cleanCode === 'BOOMER20') {
+    cartState.couponCode = 'BOOMER20';
+    if (window.showBgcNotification) window.showBgcNotification('✔ Coupon Applied', '20% discount applied to your order!');
+  } else {
+    alert('Invalid coupon code. Try BOOMER20 for 20% off!');
+  }
+  saveCartToStorage();
   updatePremiumSessionHUD();
-});
+};
 
 // Intercept booking wizard selections to sync station rates
 window.addEventListener('stationSelected', (e) => {

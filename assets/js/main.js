@@ -97,11 +97,11 @@ function initLoadingScreen() {
   const loader = document.getElementById('loader');
   if (!loader) return;
 
-  // Fade out loader after 1.8 seconds of logo pulsing
+  // Dismiss loader immediately for instant rendering
   setTimeout(() => {
     loader.classList.add('loaded');
-    Tracker.track('Loading Complete');
-  }, 1800);
+    if (window.Tracker) window.Tracker.track('Loading Complete');
+  }, 150);
 }
 
 /**
@@ -902,4 +902,45 @@ function initButtonRipples() {
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 })();
+
+/**
+ * 22. Interactive Arena Zone Details Modal
+ */
+window.openZoneDetailsModal = function(zoneKey) {
+  let modal = document.getElementById('zoneDetailsModal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'zoneDetailsModal';
+    modal.style.cssText = 'position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); z-index:99999; display:none; align-items:center; justify-content:center;';
+    modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+    modal.innerHTML = `
+      <div style="background:#141519; border:1px solid var(--line); border-radius:18px; padding:28px; max-width:420px; width:90%; position:relative; box-shadow:0 25px 50px rgba(0,0,0,0.5);">
+        <button onclick="document.getElementById('zoneDetailsModal').style.display='none'" style="position:absolute; top:14px; right:14px; background:none; border:none; color:var(--muted); font-size:24px; cursor:pointer;">&times;</button>
+        <div id="zoneModalContent"></div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+  }
+  
+  const zoneInfo = {
+    pc: { title: "PC Arena", spec: "NVIDIA RTX 4070 SUPER · 240Hz Monitors · Ryzen 7 9700X", avail: "12 / 30 Rigs Available", img: "assets/images/boomers_pc_lounge.jpg" },
+    console: { title: "Console Lounge", spec: "PlayStation 5 · 4K OLED Displays · Dolby Atmos Sound", avail: "3 / 12 Stations Available", img: "assets/images/boomers_vr_lounge.jpg" },
+    vip: { title: "VIP Squad Room", spec: "Private Soundproof Pod · 5 Rigs · Ultra-wide Screens", avail: "1 / 3 Pods Available", img: "assets/images/boomers_pc_lounge.jpg" },
+    racing: { title: "Sim Racing Cockpit", spec: "Logitech G923 Pro Cockpit · Triple Curved Screens", avail: "2 / 4 Cockpits Available", img: "assets/images/boomers_racing_sim.jpg" }
+  };
+  
+  const info = zoneInfo[zoneKey] || zoneInfo.pc;
+  const content = document.getElementById('zoneModalContent');
+  if (content) {
+    content.innerHTML = `
+      <div style="background-image:url('${info.img}'); height:160px; background-size:cover; background-position:center; border-radius:12px; margin-bottom:16px; position:relative;">
+        <span style="position:absolute; top:12px; right:12px; background:var(--lime); color:#000; font-family:var(--mono); font-size:10px; font-weight:700; padding:4px 8px; border-radius:4px;">🟢 ${info.avail}</span>
+      </div>
+      <h3 style="font-family:var(--display); font-size:22px; color:#fff; margin-bottom:6px;">${info.title}</h3>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:20px;">${info.spec}</p>
+      <a href="booking.html" class="button" style="width:100%; text-align:center; justify-content:center; background:var(--lime); color:#000;">Book This Zone ➔</a>
+    `;
+  }
+  modal.style.display = 'flex';
+};
 

@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#08090c" />
+  <meta name="description" content="Reserve high-spec PC arena rigs, PS5 console lounges, sim racing setups, and VIP squad rooms at Boomer's Gaming Cafe." />
+  <title>Boomer's — Book Your Gaming Station</title>
+  
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  
+  <!-- Preconnect and Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Core Modular Stylesheets -->
+  <link rel="stylesheet" href="assets/css/main.css?v=3.0" />
+  <link rel="stylesheet" href="assets/css/tournament.css?v=3.0" />
+  <link rel="stylesheet" href="assets/css/animations.css?v=3.0" />
+  <link rel="stylesheet" href="assets/css/responsive.css?v=3.0" />
+  <link rel="stylesheet" href="assets/css/cinematic.css?v=3.0" />
+  <link rel="stylesheet" href="assets/css/mobile-audit.css?v=3.0" />
+  <link rel="stylesheet" href="assets/css/desktop-polish.css?v=3.0" />
+  <link rel="stylesheet" href="assets/css/mobile-menu-polish.css?v=3.0" />
+
+  <style>
+    /* Dedicated Page Polish Styles */
+    .booking-hero-head {
+      padding: 120px 0 40px;
+      text-align: center;
+      background: radial-gradient(circle at top center, rgba(239, 189, 78, 0.08) 0%, transparent 70%);
+      border-bottom: 1px solid var(--line);
+    }
+    .booking-hero-head h1 {
+      font-family: var(--display);
+      font-size: clamp(32px, 5vw, 54px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+    .booking-hero-head h1 span {
+      color: var(--lime);
+    }
+    .booking-hero-head p {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Wizard Step Bar */
+    .wizard-steps-container {
+      max-width: 1000px;
+      margin: 30px auto 0;
+      padding: 0 20px;
+    }
+    .wizard-steps-flex {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+    }
+    .wizard-steps-flex::before {
+      content: '';
+      position: absolute;
+      top: 18px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--line);
+      z-index: 1;
+    }
+    .wizard-step-item {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+    .step-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #141519;
+      border: 2px solid var(--line);
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 13px;
+      transition: all 0.3s ease;
+    }
+    .step-title {
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+    .wizard-step-item.active .step-circle {
+      background: var(--lime);
+      border-color: var(--lime);
+      color: #000;
+      box-shadow: 0 0 15px rgba(239, 189, 78, 0.4);
+    }
+    .wizard-step-item.active .step-title {
+      color: #fff;
+      font-weight: 700;
+    }
+    .wizard-step-item.completed .step-circle {
+      background: #00db78;
+      border-color: #00db78;
+      color: #000;
+    }
+
+    /* Page Layout */
+    .page-booking-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+    @media (max-width: 992px) {
+      .page-booking-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .main-wizard-box {
+      background: #141519;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 36px;
+      min-height: 540px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .panel-step {
+      display: none;
+    }
+    .panel-step.active {
+      display: block;
+      animation: fadeIn 0.3s ease forwards;
+    }
+
+    /* Selection Cards */
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .selection-card {
+      background: rgba(255,255,255,0.02);
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 24px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    .selection-card:hover {
+      border-color: var(--lime);
+      background: rgba(239, 189, 78, 0.03);
+    }
+    .selection-card.selected {
+      border-color: var(--lime);
+      background: rgba(239, 189, 78, 0.08);
+      box-shadow: 0 0 20px rgba(239, 189, 78, 0.15);
+    }
+
+    /* Form Fields */
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .form-group-custom label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .form-input-custom {
+      width: 100%;
+      height: 48px;
+      background: #090b0d;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0 16px;
+      color: #fff;
+      font-family: var(--body);
+      font-size: 14px;
+      outline: none;
+    }
+    .form-input-custom:focus {
+      border-color: var(--lime);
+    }
+
+    .slots-grid-custom {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .slot-item-btn {
+      padding: 12px;
+      background: #090b0d;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: #fff;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .slot-item-btn:hover {
+      border-color: var(--lime);
+    }
+    .slot-item-btn.selected {
+      background: var(--lime);
+      color: #000;
+      border-color: var(--lime);
+      font-weight: 700;
+    }
+
+    /* Footer Navigation */
+    .wizard-nav-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+
+    /* Station Items */
+    .stations-scroll-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 14px;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+    .station-unit-item {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .station-unit-item:hover:not(.busy) {
+      border-color: var(--lime);
+    }
+    .station-unit-item.selected {
+      border-color: var(--lime);
+      background: rgba(239, 189, 78, 0.1);
+    }
+    .station-unit-item.busy {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* Login Modal Overlay */
+    .auth-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .auth-modal-overlay.active {
+      display: flex;
+    }
+    .auth-modal-card {
+      background: #141519;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 36px;
+      max-width: 420px;
+      width: 90%;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="nav" aria-label="Main Navigation">
+    <a class="brand" href="index.html">
+      <img class="brand-mark" src="assets/images/logo.png" alt="Boomer's Gaming Café logo">
+      BOOMERS Gaming Cafe
+    </a>
+    <div class="nav-links">
+      <a href="index.html#play">Games</a>
+      <a href="index.html#arena">Locations</a>
+      <a href="menu.html">Power-Up Station</a>
+      <a href="index.html#calendar">Tournaments</a>
+      <a href="membership.html">Membership</a>
+      <a href="index.html#community">Events</a>
+    </div>
+    <div id="navAuthContainer">
+      <button class="nav-auth-btn" onclick="openAuthModal('login')">Login</button>
+    </div>
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <button class="nav-toggle" id="mobileMenuBtn" aria-label="Toggle Navigation Menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Fullscreen Navigation Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay" aria-hidden="true">
+    <div class="mobile-menu-header">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="assets/images/logo.png" alt="Boomer's Gaming Café logo">
+        BOOMERS
+      </a>
+      <button class="mobile-menu-close" id="mobileMenuCloseBtn" aria-label="Close Navigation Menu">&times;</button>
+    </div>
+    <nav class="mobile-menu-links">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Power-Up Menu</a>
+      <a href="membership.html">Membership</a>
+      <a href="admin.html">Admin Console</a>
+      <a href="#" onclick="openAuthModal(); window.toggleMobileMenu();" class="mobile-menu-book-btn">Login ↗</a>
+    </nav>
+  </div>
+
+  <!-- Booking Hero Kicker Header -->
+  <section class="booking-hero-head">
+    <div class="wrap">
+      <h1>Reserve Your <span>Gaming Rig</span></h1>
+      <p>Select your location, pick high-spec GPUs, lock your start time, and order refills directly to your station.</p>
+    </div>
+
+    <!-- Wizard Steps Nav Bar -->
+    <div class="wizard-steps-container">
+      <div class="wizard-steps-flex">
+        <div class="wizard-step-item active" id="st-0" onclick="jumpToStep(0)">
+          <div class="step-circle">1</div>
+          <div class="step-title">Branch</div>
+        </div>
+        <div class="wizard-step-item" id="st-1" onclick="jumpToStep(1)">
+          <div class="step-circle">2</div>
+          <div class="step-title">Zone</div>
+        </div>
+        <div class="wizard-step-item" id="st-2" onclick="jumpToStep(2)">
+          <div class="step-circle">3</div>
+          <div class="step-title">Station</div>
+        </div>
+        <div class="wizard-step-item" id="st-3" onclick="jumpToStep(3)">
+          <div class="step-circle">4</div>
+          <div class="step-title">Time & Date</div>
+        </div>
+        <div class="wizard-step-item" id="st-4" onclick="jumpToStep(4)">
+          <div class="step-circle">5</div>
+          <div class="step-title">Food Refills</div>
+        </div>
+        <div class="wizard-step-item" id="st-5" onclick="jumpToStep(5)">
+          <div class="step-circle">6</div>
+          <div class="step-title">Summary & Pay</div>
+        </div>
+        <div class="wizard-step-item" id="st-6">
+          <div class="step-circle">7</div>
+          <div class="step-title">Ticket</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Page Main Grid -->
+  <main class="page-booking-grid">
+    
+    <!-- Main Interactive Step Box -->
+    <div class="main-wizard-box">
+      <div>
+        
+        <!-- STEP 1: Branch -->
+        <div class="panel-step active" id="step-panel-0">
+          <h2 style="font-family:var(--display); font-size:22px; color:#fff; margin-bottom:20px;">📍 Select Location Branch</h2>
+          <div class="grid-2col">
+            <div class="selection-card selected" id="card-cbe" onclick="chooseBranch('coimbatore')">
+              <span style="position:absolute; top:16px; right:16px; font-family:var(--mono); font-size:10px; color:#00db78; font-weight:700; text-transform:uppercase;">🟢 OPEN ARENA</span>
+              <h3 style="font-family:var(--display); font-size:20px; color:#fff; margin-bottom:4px;">Coimbatore</h3>
+              <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">RS Puram · 64 High-Spec Stations</p>
+              <span style="font-family:var(--mono); font-size:12px; color:var(--lime);">RTX Rigs from ₹100/hr</span>
+            </div>
+            <div class="selection-card" id="card-pune" onclick="chooseBranch('pune')">
+              <span style="position:absolute; top:16px; right:16px; font-family:var(--mono); font-size:10px; color:#00db78; font-weight:700; text-transform:uppercase;">🟢 OPEN ARENA</span>
+              <h3 style="font-family:var(--display); font-size:20px; color:#fff; margin-bottom:4px;">Pune</h3>
+              <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">Viman Nagar · 240Hz Esports Arena</p>
+              <span style="font-family:var(--mono); font-size:12px; color:var(--lime);">RTX 4070 Rigs from ₹120/hr</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2: Zone -->
+        <div class="panel-step" id="step-panel-1">
+          <h2 style="font-family:var(--display); font-size:22px; color:#fff; margin-bottom:20px;">🎮 Choose Experience Zone</h2>
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:16px;">
+            <div class="selection-card selected" id="zone-card-pc" onclick="chooseZone('pc')">
+              <div style="font-size:28px; margin-bottom:10px;">💻</div>
+              <h4 style="font-family:var(--display); font-size:16px; color:#fff; margin-bottom:4px;">PC Arena</h4>
+              <p style="font-size:12px; color:var(--muted); margin-bottom:8px;">240Hz Esports & RTX GPUs</p>
+              <div style="font-family:var(--mono); color:var(--lime); font-size:13px; font-weight:700;">₹100 - ₹120 / hr</div>
+            </div>
+            <div class="selection-card" id="zone-card-console" onclick="chooseZone('console')">
+              <div style="font-size:28px; margin-bottom:10px;">🎮</div>
+              <h4 style="font-family:var(--display); font-size:16px; color:#fff; margin-bottom:4px;">Console Lounge</h4>
+              <p style="font-size:12px; color:var(--muted); margin-bottom:8px;">PS5 + 4K OLED TV</p>
+              <div style="font-family:var(--mono); color:var(--lime); font-size:13px; font-weight:700;">₹120 - ₹150 / hr</div>
+            </div>
+            <div class="selection-card" id="zone-card-vip" onclick="chooseZone('vip')">
+              <div style="font-size:28px; margin-bottom:10px;">🏆</div>
+              <h4 style="font-family:var(--display); font-size:16px; color:#fff; margin-bottom:4px;">VIP Squad Room</h4>
+              <p style="font-size:12px; color:var(--muted); margin-bottom:8px;">Private Soundproof Pod</p>
+              <div style="font-family:var(--mono); color:var(--lime); font-size:13px; font-weight:700;">₹250 - ₹300 / hr</div>
+            </div>
+            <div class="selection-card" id="zone-card-racing" onclick="chooseZone('racing')">
+              <div style="font-size:28px; margin-bottom:10px;">🏎️</div>
+              <h4 style="font-family:var(--display); font-size:16px; color:#fff; margin-bottom:4px;">Sim Racing</h4>
+              <p style="font-size:12px; color:var(--muted); margin-bottom:8px;">Logitech Cockpit Rig</p>
+              <div style="font-family:var(--mono); color:var(--lime); font-size:13px; font-weight:700;">₹150 - ₹200 / hr</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3: Stations (Synced with BGCApi / Admin) -->
+        <div class="panel-step" id="step-panel-2">
+          <h2 style="font-family:var(--display); font-size:22px; color:#fff; margin-bottom:20px;">🖥️ Select Station Unit (Live Synced with Admin)</h2>
+          <div class="stations-scroll-grid" id="syncStationsGrid">
+            <!-- Rendered dynamically from window.STATIONS_DATA -->
+          </div>
+        </div>
+
+        <!-- STEP 4: Date & Time -->
+        <div class="panel-step" id="step-panel-3">
+          <h2 style="font-family:var(--display); font-size:22px; color:#fff; margin-bottom:20px;">📅 Select Session Date & Time Slot</h2>
+          <div class="form-grid-2">
+            <div class="form-group-custom">
+              <label for="book-date-input">Booking Date</label>
+              <input type="date" id="book-date-input" class="form-input-custom" required>
+            </div>
+            <div class="form-group-custom">
+              <label for="book-duration-input">Duration (Hours)</label>
+              <input type="number" id="book-duration-input" class="form-input-custom" value="2" min="1" max="10" onchange="recalculateTotals()">
+            </div>
+          </div>
+
+          <div class="form-group-custom" style="margin-bottom:20px;">
+            <label for="book-gamers-input">Number of Gamers</label>
+            <input type="number" id="book-gamers-input" class="form-input-custom" value="1" min="1" max="5" onchange="recalculateTotals()">
+          </div>
+
+          <div class="form-group-custom">
+            <label>Start Time Slots</label>
+            <div class="slots-grid-custom">
+              <div class="slot-item-btn selected" onclick="pickSlotTime(this, '10:00 AM')">10:00 AM</div>
+              <div class="slot-item-btn" onclick="pickSlotTime(this, '12:00 PM')">12:00 PM</div>
+              <div class="slot-item-btn" onclick="pickSlotTime(this, '02:00 PM')">02:00 PM</div>
+              <div class="slot-item-btn" onclick="pickSlotTime(this, '04:00 PM')">04:00 PM</div>
+              <div class="slot-item-btn" onclick="pickSlotTime(this, '06:00 PM')">06:00 PM</div>
+              <div class="slot-item-btn selected" onclick="pickSlotTime(this, '08:00 PM')">08:00 PM</div>
+              <div class="slot-item-btn" onclick="pickSlotTime(this, '10:00 PM')">10:00 PM</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 5: Food Add-ons -->
+        <div class="panel-step" id="step-panel-4">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <h2 style="font-family:var(--display); font-size:22px; color:#fff; margin:0;">🍔 Power-Up Refills & Snacks</h2>
+            <a href="menu.html" target="_blank" class="button secondary" style="font-size:11px; padding:6px 14px;">View Full Menu ↗</a>
+          </div>
+          <div id="foodAddonCardsGrid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:12px; max-height:300px; overflow-y:auto;">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- STEP 6: Summary & Razorpay -->
+        <div class="panel-step" id="step-panel-5">
+          <h2 style="font-family:var(--display); font-size:22px; color:#fff; margin-bottom:20px;">💳 Booking Summary & Checkout</h2>
+          
+          <div class="form-grid-2">
+            <div class="form-group-custom">
+              <label>Gamer Name</label>
+              <input type="text" id="cust-fullname" class="form-input-custom" value="Rohan Sharma" required>
+            </div>
+            <div class="form-group-custom">
+              <label>Mobile Number</label>
+              <input type="text" id="cust-phone-num" class="form-input-custom" value="+91 98765 43210" required>
+            </div>
+          </div>
+
+          <div style="background:#090b0d; border:1px solid var(--line); border-radius:12px; padding:20px; margin-top:20px;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:13px; color:var(--muted);"><span>Location</span><strong style="color:#fff;" id="sum-loc">Coimbatore</strong></div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:13px; color:var(--muted);"><span>Station Unit</span><strong style="color:#fff;" id="sum-unit">Station 01</strong></div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:13px; color:var(--muted);"><span>Date & Slot</span><strong style="color:#fff;" id="sum-datetime">Today • 08:00 PM</strong></div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:13px; color:var(--muted);"><span>Gaming Rate</span><strong style="color:#fff;" id="sum-g-cost">₹200</strong></div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:13px; color:var(--muted);"><span>Food Cart</span><strong style="color:#fff;" id="sum-f-cost">₹0</strong></div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:13px; color:var(--muted);"><span>GST (18%)</span><strong style="color:#fff;" id="sum-tax">₹36</strong></div>
+            <div style="height:1px; background:var(--line); margin:14px 0;"></div>
+            <div style="display:flex; justify-content:space-between; font-family:var(--display); font-size:20px; font-weight:800; color:var(--lime);"><span>Total Amount</span><span id="sum-final-total">₹236</span></div>
+          </div>
+        </div>
+
+        <!-- STEP 7: Pass Ticket -->
+        <div class="panel-step" id="step-panel-6">
+          <div style="text-align:center; padding:30px 0;">
+            <div style="font-size:56px; margin-bottom:16px;">🎟️</div>
+            <h2 style="font-family:var(--display); font-size:28px; color:var(--lime); margin-bottom:8px;">BOOKING CONFIRMED!</h2>
+            <p style="color:var(--muted); font-size:14px; margin-bottom:24px;">Show this pass at reception to claim your station.</p>
+            <div id="finalPassWrapper" style="background:#090b0d; border:1px dashed var(--lime); border-radius:12px; padding:24px; max-width:400px; margin:0 auto; text-align:left;">
+              <!-- Pass injected -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Action Buttons -->
+      <div class="wizard-nav-footer">
+        <button type="button" class="button secondary" id="btnStepPrev" onclick="stepNav(-1)">← Back</button>
+        <button type="button" class="button" id="btnStepNext" onclick="stepNav(1)" style="background:var(--lime); color:#000;">Continue →</button>
+      </div>
+    </div>
+
+    <!-- Right Side HUD Bar -->
+    <aside style="background:#141519; border:1px solid var(--line); border-radius:18px; padding:24px; height:fit-content; position:sticky; top:100px;">
+      <div style="font-family:var(--display); font-size:18px; font-weight:700; color:#fff; margin-bottom:20px; display:flex; justify-content:space-between; align-items:center;">
+        <span>Session HUD</span>
+        <span style="font-family:var(--mono); font-size:11px; color:#00db78;">● LIVE SYNCED</span>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; margin-bottom:12px; font-size:13px; color:var(--muted);"><span>Location</span><strong style="color:#fff;" id="hud-b-name">Coimbatore</strong></div>
+      <div style="display:flex; justify-content:space-between; margin-bottom:12px; font-size:13px; color:var(--muted);"><span>Zone</span><strong style="color:#fff;" id="hud-z-name">PC Arena</strong></div>
+      <div style="display:flex; justify-content:space-between; margin-bottom:12px; font-size:13px; color:var(--muted);"><span>Selected Station</span><strong style="color:#fff;" id="hud-s-name">Station 01</strong></div>
+      <div style="display:flex; justify-content:space-between; margin-bottom:12px; font-size:13px; color:var(--muted);"><span>Duration</span><strong style="color:#fff;" id="hud-d-val">2 Hours</strong></div>
+
+      <div style="height:1px; background:var(--line); margin:16px 0;"></div>
+
+      <div style="display:flex; justify-content:space-between; margin-bottom:12px; font-size:13px; color:var(--muted);"><span>Gaming Fee</span><strong style="color:#fff;" id="hud-g-val">₹200</strong></div>
+      <div style="display:flex; justify-content:space-between; margin-bottom:12px; font-size:13px; color:var(--muted);"><span>Food Items</span><strong style="color:#fff;" id="hud-f-val">₹0</strong></div>
+      <div style="display:flex; justify-content:space-between; margin-bottom:12px; font-size:13px; color:var(--muted);"><span>GST (18%)</span><strong style="color:#fff;" id="hud-tax-val">₹36</strong></div>
+
+      <div style="height:1px; background:var(--line); margin:16px 0;"></div>
+
+      <div style="display:flex; justify-content:space-between; font-family:var(--display); font-size:20px; font-weight:800; color:var(--lime);">
+        <span>Total</span>
+        <span id="hud-tot-val">₹236</span>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- Login Modal Popup Overlay -->
+  <div class="auth-modal-overlay" id="authModalOverlay" onclick="closeAuthModalOnBg(event)">
+    <div class="auth-modal-card">
+      <button class="mobile-menu-close" onclick="closeAuthModal()" style="position:absolute; top:16px; right:16px;">&times;</button>
+      <h2 style="font-family:var(--display); font-size:22px; color:#fff; margin-bottom:6px;">Gamer Login</h2>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:20px;">Enter your registered mobile number for instant OTP verification.</p>
+      <form onsubmit="handleAuthSubmit(event)">
+        <div class="form-group-custom" style="margin-bottom:16px;">
+          <label for="auth-phone">Mobile Number</label>
+          <input type="text" id="auth-phone" class="form-input-custom" placeholder="+91 98765 43210" required>
+        </div>
+        <button type="submit" class="button" style="width:100%; text-align:center; justify-content:center; background:var(--lime); color:#000;">Send Login OTP →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="assets/js/tracker.js?v=3.0"></script>
+  <script src="assets/js/data.js?v=3.0"></script>
+  <script src="assets/js/api-client.js?v=3.0"></script>
+  <script src="assets/js/main.js?v=3.0"></script>
+
+  <script>
+    // State synchronized with BGCApi / STATIONS_DATA
+    const bookingState = {
+      step: 0,
+      branch: 'coimbatore',
+      zone: 'pc',
+      station: null,
+      date: new Date().toISOString().split('T')[0],
+      duration: 2,
+      players: 1,
+      slot: '08:00 PM',
+      addedFood: []
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const dateEl = document.getElementById('book-date-input');
+      if (dateEl) {
+        dateEl.min = bookingState.date;
+        dateEl.value = bookingState.date;
+        dateEl.addEventListener('change', (e) => bookingState.date = e.target.value);
+      }
+      syncStationsFromData();
+      renderFoodOptions();
+      recalculateTotals();
+    });
+
+    function openAuthModal() {
+      document.getElementById('authModalOverlay').classList.add('active');
+    }
+    function closeAuthModal() {
+      document.getElementById('authModalOverlay').classList.remove('active');
+    }
+    function closeAuthModalOnBg(e) {
+      if (e.target === document.getElementById('authModalOverlay')) closeAuthModal();
+    }
+    function handleAuthSubmit(e) {
+      e.preventDefault();
+      alert('OTP sent successfully!');
+      closeAuthModal();
+    }
+
+    function chooseBranch(b) {
+      bookingState.branch = b;
+      bookingState.station = null;
+      document.getElementById('card-cbe').classList.toggle('selected', b === 'coimbatore');
+      document.getElementById('card-pune').classList.toggle('selected', b === 'pune');
+      syncStationsFromData();
+      recalculateTotals();
+    }
+
+    function chooseZone(z) {
+      bookingState.zone = z;
+      bookingState.station = null;
+      document.querySelectorAll('#step-panel-1 .selection-card').forEach(c => c.classList.remove('selected'));
+      document.getElementById(`zone-card-${z}`)?.classList.add('selected');
+      syncStationsFromData();
+      recalculateTotals();
+    }
+
+    function syncStationsFromData() {
+      const grid = document.getElementById('syncStationsGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      grid.style.cssText = 'display:grid; grid-template-columns:repeat(auto-fill, minmax(210px, 1fr)); gap:14px; max-height:360px; overflow-y:auto; padding:4px;';
+
+      const currentBranch = (bookingState.branch || 'coimbatore').toLowerCase();
+      const currentZone = (bookingState.zone || 'pc').toLowerCase();
+
+      let list = window.STATIONS_DATA
+        ? window.STATIONS_DATA.filter(s => {
+            const sBranch = (s.branch || '').toLowerCase();
+            const sZone = (s.zone || '').toLowerCase();
+            return (sBranch === currentBranch || sBranch === 'all') && (sZone === currentZone || currentZone.includes(sZone) || sZone.includes(currentZone));
+          })
+        : [];
+
+      // Fallback default stations if list is empty
+      if (list.length === 0) {
+        const basePrice = currentBranch === 'pune' ? 120 : 100;
+        const gpu = currentZone === 'console' ? 'PS5 + 4K OLED' : (currentZone === 'vip' ? 'RTX 4070 SUPER' : 'RTX 3070');
+        const monitor = currentZone === 'console' ? '65" OLED' : '180Hz Esports';
+        list = [
+          { id: 901, name: 'Station 01', branch: currentBranch, zone: currentZone, gpu, monitor, price: basePrice, status: 'available' },
+          { id: 902, name: 'Station 02', branch: currentBranch, zone: currentZone, gpu, monitor, price: basePrice, status: 'available' },
+          { id: 903, name: 'Station 03', branch: currentBranch, zone: currentZone, gpu, monitor, price: basePrice, status: 'busy' },
+          { id: 904, name: 'Station 04', branch: currentBranch, zone: currentZone, gpu, monitor, price: basePrice, status: 'available' }
+        ];
+      }
+
+      list.forEach(s => {
+        const item = document.createElement('div');
+        const isBusy = s.status === 'busy';
+        const isSelected = bookingState.station && bookingState.station.id === s.id;
+        item.className = `station-unit-item ${isBusy ? 'busy' : ''} ${isSelected ? 'selected' : ''}`;
+        item.style.cssText = `background:#181a20; border:1px solid ${isSelected ? 'var(--lime)' : 'rgba(255,255,255,0.1)'}; border-radius:12px; padding:16px; cursor:${isBusy ? 'not-allowed' : 'pointer'}; transition:all 0.2s ease; opacity:${isBusy ? '0.5' : '1'};`;
+        item.innerHTML = `
+          <strong style="display:block; font-size:15px; color:#fff; font-family:var(--display);">${s.name}</strong>
+          <small style="color:var(--muted); display:block; margin:4px 0 8px; font-size:12px;">${s.gpu} · ${s.monitor}</small>
+          <span style="font-family:var(--mono); font-size:11px; font-weight:700; color:${isBusy ? '#ff4f70' : 'var(--lime)'};">
+            ${isBusy ? '● BUSY' : '● AVAILABLE · ₹' + s.price + '/hr'}
+          </span>
+        `;
+        if (!isBusy) {
+          item.onclick = () => {
+            bookingState.station = s;
+            document.querySelectorAll('#syncStationsGrid .station-unit-item').forEach(x => {
+              x.style.borderColor = 'rgba(255,255,255,0.1)';
+              x.style.background = '#181a20';
+            });
+            item.style.borderColor = 'var(--lime)';
+            item.style.background = 'rgba(239, 189, 78, 0.1)';
+            recalculateTotals();
+          };
+        }
+        grid.appendChild(item);
+      });
+
+      if (!bookingState.station && list.length > 0) {
+        bookingState.station = list[0];
+      }
+    }
+
+    function calculateEndTimeSpan(startSlot, durationHours) {
+      const match = (startSlot || '02:00 PM').match(/(\d+):(\d+)\s*(AM|PM)/i);
+      if (!match) return startSlot;
+      let hrs = parseInt(match[1]);
+      const mins = match[2];
+      let ampm = match[3].toUpperCase();
+      if (ampm === 'PM' && hrs < 12) hrs += 12;
+      if (ampm === 'AM' && hrs === 12) hrs = 0;
+      
+      let endHrs = (hrs + durationHours) % 24;
+      let endAmpm = endHrs >= 12 ? 'PM' : 'AM';
+      let end12 = endHrs % 12;
+      if (end12 === 0) end12 = 12;
+      
+      const endFormatted = `${end12.toString().padStart(2,'0')}:${mins} ${endAmpm}`;
+      return `${startSlot} – ${endFormatted}`;
+    }
+
+    function pickSlotTime(btn, slotTime) {
+      bookingState.slot = slotTime;
+      document.querySelectorAll('.slot-item-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      recalculateTotals();
+    }
+
+    function renderFoodOptions() {
+      const grid = document.getElementById('foodAddonCardsGrid');
+      if (!grid) return;
+      
+      const sampleItems = [
+        { id: 'f1', name: 'Peri Peri Chicken Wrap', price: 285 },
+        { id: 'f2', name: 'Chocolate Milkshake', price: 175 },
+        { id: 'f3', name: 'Crispy French Fries', price: 165 },
+        { id: 'f4', name: 'BGC Big Fat Burger', price: 295 },
+        { id: 'f5', name: 'Loaded Cheese Nachos', price: 225 },
+        { id: 'f6', name: 'Red Bull Energy Can', price: 135 }
+      ];
+
+      grid.innerHTML = '';
+      sampleItems.forEach(item => {
+        const isAdded = bookingState.addedFood.some(f => f.id === item.id);
+        const card = document.createElement('div');
+        card.style.cssText = `background:#181a20; border:1px solid ${isAdded ? 'var(--lime)' : 'rgba(255,255,255,0.08)'}; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center;`;
+        card.innerHTML = `
+          <div>
+            <strong style="display:block; font-size:13px; color:#fff;">${item.name}</strong>
+            <small style="color:var(--lime); font-family:var(--mono); font-weight:700;">₹${item.price}</small>
+          </div>
+          <button type="button" class="button ${isAdded ? '' : 'secondary'}" style="font-size:10px; padding:4px 10px;">${isAdded ? 'Added ✓' : '+ Add'}</button>
+        `;
+        card.querySelector('button').onclick = () => {
+          if (isAdded) {
+            bookingState.addedFood = bookingState.addedFood.filter(f => f.id !== item.id);
+          } else {
+            bookingState.addedFood.push(item);
+          }
+          renderFoodOptions();
+          recalculateTotals();
+        };
+        grid.appendChild(card);
+      });
+    }
+
+    function recalculateTotals() {
+      const duration = parseInt(document.getElementById('book-duration-input')?.value) || bookingState.duration;
+      const gamers = parseInt(document.getElementById('book-gamers-input')?.value) || bookingState.players;
+      bookingState.duration = duration;
+      bookingState.players = gamers;
+
+      const rate = bookingState.station ? bookingState.station.price : (bookingState.branch === 'pune' ? 120 : 100);
+      const gamingFee = rate * duration * gamers;
+      let foodFee = 0;
+      bookingState.addedFood.forEach(f => foodFee += f.price);
+
+      const baseTotal = gamingFee + foodFee;
+      const gst = Math.round(baseTotal * 0.18);
+      const grandTotal = baseTotal + gst;
+
+      const slotSpan = calculateEndTimeSpan(bookingState.slot, duration);
+
+      document.getElementById('hud-b-name').textContent = bookingState.branch === 'pune' ? 'Pune' : 'Coimbatore';
+      document.getElementById('hud-z-name').textContent = bookingState.zone.toUpperCase();
+      document.getElementById('hud-s-name').textContent = bookingState.station ? bookingState.station.name : 'Station 01';
+      document.getElementById('hud-d-val').textContent = `${duration} Hours (${slotSpan})`;
+
+      document.getElementById('hud-g-val').textContent = `₹${gamingFee}`;
+      document.getElementById('hud-f-val').textContent = `₹${foodFee}`;
+      document.getElementById('hud-tax-val').textContent = `₹${gst}`;
+      document.getElementById('hud-tot-val').textContent = `₹${grandTotal}`;
+
+      // Summary Step
+      document.getElementById('sum-loc').textContent = bookingState.branch === 'pune' ? 'Pune (Viman Nagar)' : 'Coimbatore (RS Puram)';
+      document.getElementById('sum-unit').textContent = bookingState.station ? `${bookingState.station.name} (${bookingState.station.gpu})` : 'Station 01';
+      document.getElementById('sum-datetime').textContent = `${bookingState.date} • ${slotSpan} (${duration} Hours)`;
+      document.getElementById('sum-g-cost').textContent = `₹${gamingFee}`;
+      document.getElementById('sum-f-cost').textContent = `₹${foodFee}`;
+      document.getElementById('sum-tax').textContent = `₹${gst}`;
+      document.getElementById('sum-final-total').textContent = `₹${grandTotal}`;
+    }
+
+    function jumpToStep(idx) {
+      if (idx < 0 || idx > 6) return;
+      bookingState.step = idx;
+
+      document.querySelectorAll('.wizard-step-item').forEach((item, i) => {
+        item.classList.toggle('active', i === idx);
+        if (i < idx) item.classList.add('completed');
+        else item.classList.remove('completed');
+      });
+
+      document.querySelectorAll('.panel-step').forEach((panel, i) => {
+        panel.classList.toggle('active', i === idx);
+      });
+
+      const btnPrev = document.getElementById('btnStepPrev');
+      const btnNext = document.getElementById('btnStepNext');
+      
+      if (idx === 6) {
+        if (btnPrev) btnPrev.style.display = 'none';
+        if (btnNext) btnNext.style.display = 'none';
+      } else {
+        if (btnPrev) {
+          btnPrev.style.display = 'inline-flex';
+          btnPrev.style.visibility = idx === 0 ? 'hidden' : 'visible';
+        }
+        if (btnNext) {
+          btnNext.style.display = 'inline-flex';
+          if (idx === 5) {
+            btnNext.textContent = 'Pay & Confirm via Razorpay ➔';
+          } else {
+            btnNext.textContent = 'Continue ➔';
+          }
+        }
+      }
+    }
+
+    function stepNav(dir) {
+      if (dir === 1 && bookingState.step === 5) {
+        openRazorpayModal();
+        return;
+      }
+      jumpToStep(bookingState.step + dir);
+    }
+
+    function openRazorpayModal() {
+      const rate = bookingState.station ? bookingState.station.price : 120;
+      const gamingCost = rate * bookingState.duration * bookingState.players;
+      let foodCost = 0;
+      bookingState.addedFood.forEach(f => foodCost += f.price);
+      const grandTotal = Math.round((gamingCost + foodCost) * 1.18);
+
+      const custName = document.getElementById('cust-fullname')?.value || 'Gamer';
+      const custPhone = document.getElementById('cust-phone-num')?.value || '9876543210';
+
+      const options = {
+        key: 'rzp_test_TOtY2DlTFj5Q5M',
+        amount: grandTotal * 100,
+        currency: 'INR',
+        name: "Boomer's Gaming Cafe",
+        description: `${bookingState.station ? bookingState.station.name : 'Rig'} Booking (${bookingState.duration}h)`,
+        image: 'assets/images/logo.png',
+        handler: function (response) {
+          const passWrap = document.getElementById('finalPassWrapper');
+          if (passWrap) {
+            passWrap.innerHTML = `
+              <div style="font-family:var(--mono); font-size:12px; color:var(--lime); margin-bottom:8px;">VERIFIED BOOKING PASS</div>
+              <h3 style="font-family:var(--display); font-size:18px; color:#fff; margin-bottom:12px;">Booking ID: BMR-2026-${Math.floor(100000 + Math.random()*900000)}</h3>
+              <p style="font-size:13px; color:var(--muted); margin-bottom:6px;">Name: <strong style="color:#fff;">${custName}</strong></p>
+              <p style="font-size:13px; color:var(--muted); margin-bottom:6px;">Station: <strong style="color:#fff;">${bookingState.station ? bookingState.station.name : 'Station 01'}</strong></p>
+              <p style="font-size:13px; color:var(--muted); margin-bottom:6px;">Date & Slot: <strong style="color:#fff;">${bookingState.date} • ${bookingState.slot}</strong></p>
+              <p style="font-size:13px; color:var(--muted); margin-bottom:14px;">Razorpay Payment ID: <strong style="color:#fff;">${response.razorpay_payment_id || 'pay_test_1234'}</strong></p>
+              <button class="button" onclick="alert('Ticket PNG Downloaded!')" style="width:100%; text-align:center; justify-content:center; background:var(--lime); color:#000;">Download Pass PNG</button>
+            `;
+          }
+          jumpToStep(6);
+        },
+        prefill: {
+          name: custName,
+          contact: custPhone
+        },
+        theme: { color: '#efbd4e' }
+      };
+
+      try {
+        const rzp = new Razorpay(options);
+        rzp.open();
+      } catch (e) {
+        console.warn('Razorpay popup prevented, completing pass:', e);
+        jumpToStep(6);
+      }
+    }
+
+    function updateHeaderAuthUI() {
+      const user = window.BGCApi ? window.BGCApi.getCurrentUser() : null;
+      const authContainer = document.getElementById('navAuthContainer');
+      if (!authContainer) return;
+
+      let cartCount = 0;
+      try {
+        const cartRaw = localStorage.getItem('bgc_saved_cart');
+        if (cartRaw) {
+          const parsed = JSON.parse(cartRaw);
+          if (parsed.addedFood) {
+            cartCount = parsed.addedFood.reduce((sum, item) => sum + (item.qty || 1), 0);
+          }
+        }
+      } catch(e) {}
+
+      if (user && (user.name || user.email)) {
+        const displayName = user.name || user.email.split('@')[0];
+        authContainer.innerHTML = `
+          <div class="nav-user-chip">
+            <a href="booking.html" class="nav-tickets-btn" title="View Booking Tickets">🎟️ Tickets</a>
+            <a href="menu.html" class="nav-cart-btn" title="View Food Cart">🛒 Cart <span class="nav-cart-badge">${cartCount}</span></a>
+            <div style="display:flex; align-items:center; gap:6px; background:rgba(239, 189, 78, 0.12); border:1px solid rgba(239, 189, 78, 0.4); border-radius:6px; padding:4px 10px; font:700 10px var(--mono); color:#efbd4e;">
+              <span>👋 Hi, <b>${displayName}</b></span>
+              <button onclick="BGCApi.logoutUser()" title="Logout" style="background:none; border:none; color:var(--muted); cursor:pointer; font-size:12px; margin-left:4px;">✕</button>
+            </div>
+          </div>
+        `;
+      } else {
+        authContainer.innerHTML = `
+          <div style="display:flex; align-items:center; gap:8px;">
+            <a href="menu.html" class="nav-cart-btn" title="View Food Cart">🛒 <span class="nav-cart-badge">${cartCount}</span></a>
+            <button class="nav-auth-btn" onclick="openAuthModal('login')">🔑 Login</button>
+          </div>
+        `;
+      }
+    }
+    document.addEventListener('DOMContentLoaded', updateHeaderAuthUI);
+    window.updateHeaderAuthUI = updateHeaderAuthUI;
+  </script>
+</body>
+</html>

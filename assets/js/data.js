@@ -101,7 +101,7 @@ const GAMES_DATA = [
   }
 ];
 
-const STATIONS_DATA = [
+const DEFAULT_STATIONS_DATA = [
   // Coimbatore Stations
   { id: 1, name: "Station 01", branch: "coimbatore", zone: "pc", gpu: "RTX 3070", monitor: "180Hz", price: 100, status: "available", game: "Valorant" },
   { id: 2, name: "Station 02", branch: "coimbatore", zone: "pc", gpu: "RTX 3070", monitor: "180Hz", price: 100, status: "busy", game: "CS2" },
@@ -128,6 +128,15 @@ const STATIONS_DATA = [
   { id: 110, name: "Station 22", branch: "pune", zone: "vip", gpu: "RTX 4070 SUPER", monitor: "240Hz", price: 300, status: "available", game: "Valorant" },
   { id: 111, name: "Station 31", branch: "pune", zone: "racing", gpu: "Logitech G923 Pro", monitor: "Triple Screen", price: 200, status: "available", game: "Racing" }
 ];
+
+let STATIONS_DATA = DEFAULT_STATIONS_DATA;
+try {
+  const saved = localStorage.getItem('bgc_synced_stations');
+  if (saved) {
+    STATIONS_DATA = JSON.parse(saved);
+  }
+} catch(e) {}
+window.STATIONS_DATA = STATIONS_DATA;
 
 const POWER_UP_MENU = {
   "xp-starters": [
@@ -230,9 +239,10 @@ const POWER_UP_MENU = {
   ],
   "squad-combos": [
     { id: "f-75", name: "Duo Queue Pack", price: 399, desc: "2 Soft Drinks + 1 Loaded French Fries + 1 Classic Sandwich. Save ₹100", popularity: "Save 20%", prep: "12 min", isVeg: false, calories: "850 kcal", rating: "4.7", spice: 1, ingredients: ["2 Coca Cola Cans", "1 Loaded Nachos/Fries", "1 Chicken Club Sandwich"], image: "assets/images/food-burger.png" },
-    { id: "f-76", name: "5v5 Lan Party Box", price: 999, desc: "5 Potion Mojitos + 2 Large Burgers + 2 Loaded Fries. Save ₹310", popularity: "Squad Value", prep: "20 min", isVeg: false, calories: "2400 kcal", rating: "4.9", spice: 2, ingredients: ["5 Virgin Mojitos", "2 BGC OG Big Fat Burgers", "2 Large Signature Cheese Fries"], image: "assets/images/food-burger.png" }
   ]
 };
+
+
 
 const FOOD_GAMING_BUNDLES = [
   { id: "bundle-1", name: "Solo Grinder Bundle", price: 349, originalPrice: 440, desc: "2 Hours PC Gaming + 1 Burger + 1 Soft Drink.", badge: "🔥 Popular", discount: "Save ₹91" },

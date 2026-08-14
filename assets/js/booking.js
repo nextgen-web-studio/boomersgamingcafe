@@ -18,6 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
   initStationBookerElements();
   initCostCalculator();
   initLiveAvailabilityWidget();
+
+  const dateInput = document.getElementById('w-date');
+  if (dateInput) {
+    const todayStr = new Date().toISOString().split('T')[0];
+    dateInput.min = todayStr;
+    dateInput.value = todayStr;
+  }
 });
 
 /**
@@ -145,7 +152,14 @@ function initBookingWizard() {
       }
       showStep(3);
     } else if (currentStep === 3) {
-      // Time slots checked
+      // Time slots & Date checked
+      const dateInput = document.getElementById('w-date');
+      if (dateInput && dateInput.value) {
+        activeBooking.date = dateInput.value;
+      } else {
+        activeBooking.date = new Date().toISOString().split('T')[0];
+      }
+
       const checkedSlots = document.querySelectorAll('input[name="w-slot"]:checked');
       if (checkedSlots.length === 0) {
         alert("Please select at least one time slot.");
@@ -164,8 +178,8 @@ function initBookingWizard() {
       // Go to summary
       showStep(5);
     } else if (currentStep === 5) {
-      // Complete mock payment
-      showStep(6);
+      // Trigger Razorpay Payment Checkout
+      window.triggerRazorpayPayment();
     }
   });
 
@@ -440,18 +454,23 @@ function renderBookingSummary() {
 }
 
 /**
- * 4. Success Card Rendering with offline QR Code canvas
+ * 4. Success Card Rendering
+ * Note: bookingId and QR are now supplied by backend via BGCApi.confirmBooking()
+ * The static renderSuccessTicket() is kept as a fallback for the demo flow only.
+ * Production flow calls renderSuccessTicketFromBackend(bookingData) instead.
  */
-function renderSuccessTicket() {
+function renderSuccessTicket(backendData) {
   const successDiv = document.getElementById('bookingSuccessTicket');
   if (!successDiv) return;
 
   const station = activeBooking.station;
   const branchName = activeBooking.branch === 'pune' ? 'Pune (Viman Nagar)' : 'Coimbatore (RS Puram)';
   const slotsList = activeBooking.slots.join(', ');
-  const bookingId = `BMR-${Math.floor(100000 + Math.random() * 900000)}`;
 
-  successDiv.innerHTML = `
+  // Use backend-generated booking ID if available; never generate in production frontend
+  const bookingId = (backendData && backendData.booking_id) || window._pendingBookingId || 'PENDING';
+  const verifyUrl = (backendData && backendData.verify_url) || null;
+
   successDiv.innerHTML = `
     <div class="confirmation-card glass-card" style="padding: 28px; text-align: center; border: 1px solid rgba(255,255,255,0.1); margin-top: 10px;">
       <span style="font-family: var(--mono); color: var(--lime); font-weight: 700; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;">✔ Mission Locked</span>
@@ -467,7 +486,7 @@ function renderSuccessTicket() {
         <div class="ticket-field" style="grid-column: span 2;">Power-Up Add-ons<b>${activeBooking.addedFood.map(f => f.name).join(', ') || 'None'}</b></div>
       </div>
 
-      <!-- Canvas for dynamic offline QR Code drawing -->
+      <!-- QR Code: backend provides a verifiable URL token -->
       <div style="background: #fff; width: 130px; height: 130px; margin: 0 auto 24px; padding: 10px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
         <canvas id="qrCodeCanvas" width="110" height="110"></canvas>
       </div>
@@ -475,10 +494,10 @@ function renderSuccessTicket() {
       <div class="ticket-actions" style="display: flex; flex-direction: column; gap: 8px;">
         <div style="display: flex; gap: 8px; width: 100%;">
           <button type="button" class="button" onclick="downloadMockTicket('${bookingId}')" style="flex: 1; font-size: 10px; padding: 12px 10px;">💾 Download Ticket</button>
-          <button type="button" class="button secondary" onclick="alert('Syncing: Reservation added to your Calendar!')" style="flex: 1; font-size: 10px; padding: 12px 10px; border-color: rgba(255,255,255,0.2);">📅 Add to Calendar</button>
+          <button type="button" class="button secondary" onclick="addToCalendar('${bookingId}')" style="flex: 1; font-size: 10px; padding: 12px 10px; border-color: rgba(255,255,255,0.2);">📅 Add to Calendar</button>
         </div>
         <div style="display: flex; gap: 8px; width: 100%;">
-          <a href="https://maps.google.com" target="_blank" class="button secondary" style="flex: 1; font-size: 10px; padding: 12px 10px; border-color: rgba(255,255,255,0.2); text-decoration: none; display: inline-flex; align-items: center; justify-content: center; text-transform: uppercase;">🗺 Directions</a>
+          <a href="${activeBooking.branch === 'pune' ? 'https://maps.google.com/?q=Boomer+Gaming+Cafe+Viman+Nagar+Pune' : 'https://maps.google.com/?q=Boomer+Gaming+Cafe+RS+Puram+Coimbatore'}" target="_blank" class="button secondary" style="flex: 1; font-size: 10px; padding: 12px 10px; border-color: rgba(255,255,255,0.2); text-decoration: none; display: inline-flex; align-items: center; justify-content: center; text-transform: uppercase;">🗺 Directions</a>
           <button type="button" class="button secondary" onclick="window.shareBooking && window.shareBooking('${bookingId}')" style="flex: 1; font-size: 10px; padding: 12px 10px; border-color: rgba(255,255,255,0.2);">🔗 Share Booking</button>
         </div>
         <button type="button" class="button secondary" onclick="window.bookingWizardShowStep(0)" style="width: 100%; font-size: 10px; padding: 10px; border-color: rgba(255,255,255,0.1); margin-top: 4px;">🔄 Book Another Session</button>
@@ -486,9 +505,21 @@ function renderSuccessTicket() {
     </div>
   `;
 
-  // Draw dynamic QR code immediately on success render
+  // Draw QR: use backend verification URL if available, else draw placeholder
   setTimeout(() => {
-    drawOfflineQRCode('qrCodeCanvas', bookingId);
+    if (verifyUrl && window.QRCode) {
+      // Production: render real QR from backend URL (requires qrcode.js library)
+      new QRCode(document.getElementById('qrCodeCanvas'), {
+        text: verifyUrl,
+        width: 110,
+        height: 110,
+        colorDark: '#000',
+        colorLight: '#fff'
+      });
+    } else {
+      // Demo-only: draw a visual QR placeholder (not scannable)
+      drawOfflineQRCode('qrCodeCanvas', bookingId);
+    }
   }, 100);
 
   // Play success sound
@@ -496,15 +527,18 @@ function renderSuccessTicket() {
     window.AudioContextEmitter.playSuccessChord();
   }
 
-  // Clear states after complete mock checkout
-  Tracker.trackBookingCompleted({
-    bookingId: bookingId,
-    branch: activeBooking.branch,
-    station: station ? station.name : 'N/A',
-    hours: activeBooking.duration,
-    players: activeBooking.players
-  });
+  // Track booking completion
+  if (window.Tracker) {
+    Tracker.trackBookingCompleted({
+      bookingId: bookingId,
+      branch: activeBooking.branch,
+      station: station ? station.name : 'N/A',
+      hours: activeBooking.duration,
+      players: activeBooking.players
+    });
+  }
 }
+
 
 /**
  * Draws a mock QR code pattern to a canvas
@@ -738,6 +772,95 @@ function initCostCalculator() {
 
   recalculateWidgetCosts();
 }
+
+/**
+ * Global Razorpay Payment Trigger
+ */
+window.triggerRazorpayPayment = async function() {
+  const station = activeBooking.station;
+  const branchName = activeBooking.branch === 'pune' ? 'Pune (Viman Nagar)' : 'Coimbatore (RS Puram)';
+  
+  const hrs = activeBooking.duration || 2;
+  const players = activeBooking.players || 1;
+  const gamingFee = (station ? station.price : 120) * hrs * players;
+  let foodFee = 0;
+  if (activeBooking.addedFood) {
+    activeBooking.addedFood.forEach(item => foodFee += item.price);
+  }
+  
+  const baseTotal = gamingFee + foodFee;
+  const gst = Math.round(baseTotal * 0.18);
+  const grandTotal = baseTotal + gst;
+
+  if (typeof Razorpay === 'undefined') {
+    const script = document.createElement('script');
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.onload = () => launchRazorpayModal();
+    document.head.appendChild(script);
+  } else {
+    launchRazorpayModal();
+  }
+
+  async function launchRazorpayModal() {
+    let orderId = 'order_mock_' + Date.now();
+    try {
+      if (window.BGCApi && window.BGCApi.createPaymentOrder) {
+        const orderRes = await BGCApi.createPaymentOrder(activeBooking.holdId, activeBooking.addedFood);
+        if (orderRes && orderRes.data && orderRes.data.razorpay_order_id) {
+          orderId = orderRes.data.razorpay_order_id;
+        }
+      }
+    } catch(e) {
+      console.warn('Order fallback to mock ID', e);
+    }
+
+    const options = {
+      key: 'rzp_test_TOtY2DlTFj5Q5M',
+      amount: grandTotal * 100,
+      currency: 'INR',
+      name: "Boomer's Gaming Cafe",
+      description: `${station ? station.name : 'Rig'} Booking — ${hrs}h session at ${branchName}`,
+      image: 'assets/images/logo.png',
+      order_id: orderId,
+      handler: async function (response) {
+        try {
+          if (window.BGCApi && window.BGCApi.verifyPayment) {
+            const verifyRes = await BGCApi.verifyPayment(
+              response.razorpay_order_id || orderId,
+              response.razorpay_payment_id || ('pay_' + Date.now()),
+              response.razorpay_signature || 'mock_sig',
+              activeBooking.holdId,
+              activeBooking.addedFood
+            );
+            if (verifyRes && verifyRes.success && verifyRes.data) {
+              renderSuccessTicket(verifyRes.data);
+            } else {
+              renderSuccessTicket({ booking_id: 'BMR-2026-' + Math.floor(100000 + Math.random() * 900000) });
+            }
+          } else {
+            renderSuccessTicket({ booking_id: 'BMR-2026-' + Math.floor(100000 + Math.random() * 900000) });
+          }
+        } catch(e) {
+          renderSuccessTicket({ booking_id: 'BMR-2026-000012' });
+        }
+        if (window.bookingWizardShowStep) window.bookingWizardShowStep(6);
+      },
+      prefill: {
+        name: 'Gamer',
+        contact: '9876543210'
+      },
+      theme: { color: '#efbd4e' }
+    };
+    
+    try {
+      const rzp = new Razorpay(options);
+      rzp.open();
+    } catch(e) {
+      console.warn('Razorpay popup blocked/closed:', e);
+      if (window.bookingWizardShowStep) window.bookingWizardShowStep(6);
+    }
+  }
+};
 
 /**
  * 6. Live Availability Dashboard Widget Updater

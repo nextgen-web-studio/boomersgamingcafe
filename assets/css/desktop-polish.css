@@ -103,8 +103,13 @@
     position: relative !important;
     text-decoration: none !important;
   }
-  .nav-links a::after {
+  .nav-links a::after,
+  .nav-links a::before,
+  .nav-links a.active::before,
+  .nav-links a.active::after {
     display: none !important;
+    content: none !important;
+    border-bottom: none !important;
   }
   .nav-links a:hover {
     color: #F5C64D !important;
@@ -114,36 +119,20 @@
     color: #F5C64D !important;
     text-shadow: 0 0 15px rgba(245, 198, 77, 0.4) !important;
     font-weight: 700 !important;
-  }
-  .nav-links a.active::before {
-    content: '' !important;
-    position: absolute !important;
-    bottom: 24px !important; /* Active gold underline */
-    left: 0 !important;
-    right: 0 !important;
-    height: 2px !important;
-    background: #F5C64D !important;
-    box-shadow: 0 0 8px #F5C64D !important;
-    border-radius: 99px !important;
+    border-bottom: none !important;
   }
   .nav-book-link {
-    height: 3rem !important;
-    width: 9.2rem !important;
-    min-width: 9.2rem !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 0 !important;
-    background: var(--lime) !important;
-    color: #181006 !important;
-    border-radius: 0.875rem !important;
-    flex: 0 0 auto !important;
-    align-self: center !important;
-    font-size: 0.9375rem !important;
+    background: #efbd4e !important;
+    color: #000 !important;
+    border-radius: 8px !important;
+    padding: 8px 18px !important; /* Reduced button size by ~35% */
+    height: auto !important;
+    font-size: 11px !important;
     font-weight: 700 !important;
     text-transform: uppercase !important;
-    border: 1px solid transparent !important;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    border: none !important;
+    box-shadow: 0 2px 8px rgba(239, 189, 78, 0.25) !important;
+    transition: all 0.2s ease !important;
     margin: 0 0 0 16px !important; /* Consistent spacing with navigation links */
     line-height: 1 !important;
   }

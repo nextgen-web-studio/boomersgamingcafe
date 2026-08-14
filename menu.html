@@ -48,7 +48,11 @@
         <a href="membership.html">Membership</a>
         <a href="index.html#community">Events</a>
       </div>
-      <a href="index.html#book" class="nav-book-link">Book Now</a>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div id="navAuthContainer">
+          <button class="nav-auth-btn" onclick="openAuthModal('login')">🔑 Login</button>
+        </div>
+        <a href="booking.html" class="nav-book-link">Book Now</a>
       <div style="display: flex; align-items: center; gap: 15px;">
         <!-- Hamburger Toggle Button for mobile viewports -->
         <button class="nav-toggle" id="mobileMenuBtn" aria-label="Toggle Navigation Menu">
@@ -152,14 +156,14 @@
           <div class="section-kicker">The game is waiting</div>
           <h2 class="display">Meet you in<br>the <span>arena.</span></h2>
         </div>
-        <a href="#book" class="button">Book a station →</a>
+        <a href="booking.html" class="button">Book a station →</a>
       </div>
       
       <div class="footer-quick">
         <div>
           <h4>Quick booking</h4>
           <p>Reserve a PC, PS5, sim racing cockpit, or VR session before you arrive.</p>
-          <a href="#book" style="color:var(--lime)">Start booking →</a>
+          <a href="booking.html" style="color:var(--lime)">Start booking →</a>
         </div>
         <div>
           <h4>Our branches</h4>
@@ -190,7 +194,7 @@
           <a href="https://instagram.com" target="_blank">Instagram</a>
           <a href="https://discord.gg" target="_blank">Discord</a>
           <a href="https://wa.me/919999999999" target="_blank">WhatsApp</a>
-          <a href="#book">Terms & Privacy</a>
+          <a href="booking.html">Terms & Privacy</a>
         </div>
         <span>Coimbatore · Pune</span>
       </div>
@@ -330,7 +334,7 @@
         </div>
         <div class="hud-ticket-qr"><span style="font-size:28px;">🔲</span></div>
       </div>
-      <a href="#book" class="hud-ticket-link" onclick="window.bookingWizardShowStep(6)">View Ticket →</a>
+      <a href="booking.html" class="hud-ticket-link" onclick="window.bookingWizardShowStep(6)">View Ticket →</a>
     </div>
 
     <!-- Primary CTA -->
@@ -372,7 +376,7 @@
       <b id="float-avail-vr">Full</b>
     </div>
     <div style="font-size: 8px; color: var(--muted); text-align: center; margin-top: 8px; font-family: var(--mono); text-transform: uppercase; letter-spacing:0.05em;">Updated Just Now</div>
-    <a href="#book" class="floating-avail-btn">Book Now</a>
+    <a href="booking.html" class="floating-avail-btn">Book Now</a>
   </aside>
 
   <!-- Audio Toggle hidden -->
@@ -434,16 +438,19 @@
   </div>
 
   
-    <script src="assets/js/tracker.js" defer></script>
-<script src="assets/js/data.js" defer></script>
-<script src="assets/js/main.js" defer></script>
-<script src="assets/js/launcher.js" defer></script>
-<script src="assets/js/booking.js" defer></script>
-<script src="assets/js/menu.js" defer></script>
-<script src="assets/js/gallery.js" defer></script>
-<script src="assets/js/audio.js" defer></script>
-<script src="assets/js/cinematic.js" defer></script>
-<script src="assets/js/mobile-audit.js" defer></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="assets/js/tracker.js?v=3.0"></script>
+    <script src="assets/js/data.js?v=3.0"></script>
+    <script src="assets/js/api-client.js?v=3.0"></script>
+    <script src="assets/js/tournament.js?v=3.0"></script>
+    <script src="assets/js/main.js?v=3.0"></script>
+    <script src="assets/js/launcher.js?v=3.0"></script>
+    <script src="assets/js/booking.js?v=3.0"></script>
+    <script src="assets/js/menu.js?v=3.0"></script>
+    <script src="assets/js/gallery.js?v=3.0"></script>
+    <script src="assets/js/audio.js?v=3.0"></script>
+    <script src="assets/js/cinematic.js?v=3.0"></script>
+    <script src="assets/js/mobile-audit.js?v=3.0"></script>
 <script>
     // Activate the 20-second hero video once the page loads and video can play
     const heroVid = document.querySelector('.hero-video');
@@ -534,13 +541,53 @@
       }, 1000);
     }
 
+    function updateHeaderAuthUI() {
+      const user = window.BGCApi ? window.BGCApi.getCurrentUser() : null;
+      const authContainer = document.getElementById('navAuthContainer');
+      if (!authContainer) return;
+
+      let cartCount = 0;
+      try {
+        const cartRaw = localStorage.getItem('bgc_saved_cart');
+        if (cartRaw) {
+          const parsed = JSON.parse(cartRaw);
+          if (parsed.addedFood) {
+            cartCount = parsed.addedFood.reduce((sum, item) => sum + (item.qty || 1), 0);
+          }
+        }
+      } catch(e) {}
+
+      if (user && (user.name || user.email)) {
+        const displayName = user.name || user.email.split('@')[0];
+        authContainer.innerHTML = `
+          <div class="nav-user-chip">
+            <a href="booking.html" class="nav-tickets-btn" title="View Booking Tickets">🎟️ Tickets</a>
+            <a href="menu.html" class="nav-cart-btn" title="View Food Cart">🛒 Cart <span class="nav-cart-badge">${cartCount}</span></a>
+            <div style="display:flex; align-items:center; gap:6px; background:rgba(239, 189, 78, 0.12); border:1px solid rgba(239, 189, 78, 0.4); border-radius:6px; padding:4px 10px; font:700 10px var(--mono); color:#efbd4e;">
+              <span>👋 Hi, <b>${displayName}</b></span>
+              <button onclick="BGCApi.logoutUser()" title="Logout" style="background:none; border:none; color:var(--muted); cursor:pointer; font-size:12px; margin-left:4px;">✕</button>
+            </div>
+          </div>
+        `;
+      } else {
+        authContainer.innerHTML = `
+          <div style="display:flex; align-items:center; gap:8px;">
+            <a href="menu.html" class="nav-cart-btn" title="View Food Cart">🛒 <span class="nav-cart-badge">${cartCount}</span></a>
+            <button class="nav-auth-btn" onclick="openAuthModal('login')">🔑 Login</button>
+          </div>
+        `;
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       initRingCardCountdown();
+      updateHeaderAuthUI();
       const searchInput = document.getElementById('bgcMenuSearch');
       if (searchInput && window.innerWidth <= 768) {
         searchInput.placeholder = 'Search burgers, fries...';
       }
     });
+    window.updateHeaderAuthUI = updateHeaderAuthUI;
   </script>
-    </body>
+</body>
 </html>
