@@ -978,7 +978,7 @@ function updateHeaderAuthUI() {
   } else {
     authContainer.innerHTML = `
       <div style="display:flex; align-items:center; gap:8px;">
-        <a href="menu.html" class="nav-cart-btn" title="View Food Cart">🛒 <span class="nav-cart-badge">${cartCount}</span></a>
+        <a href="menu.html" class="nav-cart-btn" title="View Food Cart">🛒 Cart <span class="nav-cart-badge">${cartCount}</span></a>
         <button class="nav-auth-btn" onclick="openAuthModal('login')">🔑 Login</button>
       </div>
     `;
