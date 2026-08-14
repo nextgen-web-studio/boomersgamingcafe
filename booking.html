@@ -322,10 +322,11 @@
       <a href="membership.html">Membership</a>
       <a href="index.html#community">Events</a>
     </div>
-    <div id="navAuthContainer">
-      <button class="nav-auth-btn" onclick="openAuthModal('login')">Login</button>
-    </div>
-    <div style="display: flex; align-items: center; gap: 15px;">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div id="navAuthContainer">
+        <button class="nav-auth-btn" onclick="openAuthModal('login')">🔑 Login</button>
+      </div>
+      <a href="booking.html" class="nav-book-link">Book Now</a>
       <button class="nav-toggle" id="mobileMenuBtn" aria-label="Toggle Navigation Menu">
         <span class="bar"></span>
         <span class="bar"></span>
@@ -344,11 +345,13 @@
       <button class="mobile-menu-close" id="mobileMenuCloseBtn" aria-label="Close Navigation Menu">&times;</button>
     </div>
     <nav class="mobile-menu-links">
-      <a href="index.html">Home</a>
-      <a href="menu.html">Power-Up Menu</a>
+      <a href="index.html#play">Games</a>
+      <a href="index.html#arena">Locations</a>
+      <a href="menu.html">Power-Up Station</a>
+      <a href="index.html#calendar">Tournaments</a>
       <a href="membership.html">Membership</a>
-      <a href="admin.html">Admin Console</a>
-      <a href="#" onclick="openAuthModal(); window.toggleMobileMenu();" class="mobile-menu-book-btn">Login ↗</a>
+      <a href="index.html#community">Events</a>
+      <a href="booking.html" class="mobile-menu-book-btn">Book Now ➔</a>
     </nav>
   </div>
 

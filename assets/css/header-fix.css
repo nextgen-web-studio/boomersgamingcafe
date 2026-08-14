@@ -320,3 +320,78 @@
     max-width: calc(100vw - 130px);
   }
 }
+
+/* ==========================================================================
+   BOOKING PAGE & GENERAL MOBILE RESPONSIVE POLISH
+   ========================================================================== */
+@media (max-width: 840px) {
+  .booking-hero-head {
+    padding: 85px 16px 20px !important;
+  }
+  .booking-hero-head h1 {
+    font-size: 26px !important;
+  }
+  .booking-hero-head p {
+    font-size: 13px !important;
+  }
+
+  .wizard-steps-container {
+    padding: 0 12px !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin: 16px auto 0 !important;
+  }
+  .wizard-steps-container::-webkit-scrollbar {
+    display: none;
+  }
+  .wizard-steps-flex {
+    min-width: 540px !important;
+    padding: 6px 4px !important;
+  }
+
+  .page-booking-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    margin: 20px auto !important;
+    padding: 0 12px !important;
+  }
+
+  .main-wizard-box {
+    padding: 16px !important;
+    min-height: auto !important;
+    border-radius: 14px !important;
+  }
+
+  .grid-2col {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .selection-card {
+    padding: 16px !important;
+  }
+
+  .form-grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .slots-grid-custom {
+    grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)) !important;
+    gap: 8px !important;
+  }
+  .slot-item-btn {
+    padding: 10px 6px !important;
+    font-size: 11px !important;
+  }
+
+  .wizard-nav-footer {
+    flex-direction: column-reverse !important;
+    gap: 12px !important;
+  }
+  .wizard-nav-footer button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
