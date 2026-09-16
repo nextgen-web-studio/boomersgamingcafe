@@ -195,6 +195,11 @@ function initBookingWizard() {
     radio.addEventListener('change', (e) => {
       activeBooking.branch = e.target.value;
       activeBooking.station = null; // Reset station when branch changes
+      activeBooking.slots = [];
+      activeBooking.addedFood = [];
+      activeBooking.bundle = null;
+      document.querySelectorAll('.station-card').forEach(c => c.classList.remove('selected'));
+      document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected', 'unavailable'));
     });
   });
 
@@ -203,6 +208,11 @@ function initBookingWizard() {
     radio.addEventListener('change', (e) => {
       activeBooking.zone = e.target.value;
       activeBooking.station = null; // Reset station when zone changes
+      activeBooking.slots = [];
+      activeBooking.addedFood = [];
+      activeBooking.bundle = null;
+      document.querySelectorAll('.station-card').forEach(c => c.classList.remove('selected'));
+      document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected', 'unavailable'));
     });
   });
 
