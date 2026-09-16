@@ -1,4 +1,23 @@
-export const DEMO_GAMES_DETAIL = {
+export interface GameDetail {
+  title: string;
+  slug: string;
+  developer: string;
+  publisher: string;
+  releaseDate: string;
+  genre: string;
+  platform: string;
+  rating: string;
+  ageRating: string;
+  price: string;
+  rentPrice?: string;
+  description: string;
+  heroImage: string;
+  coverImage: string;
+  features: string[];
+  tags: string[];
+}
+
+export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
   // NEW & TOP GAMES
   "spiderman-remastered": {
     title: "Marvel's Spider-Man Remastered",

@@ -27,6 +27,7 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
   };
 
   const handleRent = () => {
+    if (!game.rentPrice) return;
     const numericRent = parseInt(game.rentPrice.replace(/[^0-9]/g, ''), 10);
     addToCart({
       gameId: game.slug,
@@ -140,7 +141,8 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
                 </Button>
               </div>
 
-              {/* Rental Option */}
+              {/* Rental Option - only show if rentPrice exists */}
+              {game.rentPrice && (
               <div onClick={handleRent} className="rounded-lg border border-white/10 bg-white/5 p-4 cursor-pointer hover:bg-white/10 transition-colors">
                 <div className="flex justify-between items-center mb-2">
                   <span className="font-bold text-white">Rent Game</span>
@@ -154,6 +156,7 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
                   <ShoppingCart className="h-4 w-4" /> Add to Cart
                 </Button>
               </div>
+              )}
 
               {/* Action Links */}
               <div className="flex justify-between items-center mt-6 pt-6 border-t border-white/10">

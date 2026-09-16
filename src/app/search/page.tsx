@@ -53,7 +53,7 @@ export default function SearchPage() {
                 coverImage={game.coverImage}
                 platform={game.platform}
                 price={game.price}
-                rentPrice={game.rentPrice}
+                rentPrice={game.rentPrice ?? undefined}
               />
             ))}
           </div>
