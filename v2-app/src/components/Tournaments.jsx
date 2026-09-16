@@ -17,7 +17,7 @@ export default function Tournaments() {
           {tournament.status}
         </div>
         <h3 className="text-3xl font-bold mb-2">{tournament.name}</h3>
-        <p className="text-white/60 mb-6">Starting in 2 Days • Pune Arena</p>
+        <p className="text-white/60 mb-6">Starting in 2 Days â€¢ Pune Arena</p>
         
         <div className="flex gap-4">
           <button className="flex-1 bg-bgc-lime text-black font-bold py-3 rounded-lg hover:bg-white transition-colors">Register Team</button>
