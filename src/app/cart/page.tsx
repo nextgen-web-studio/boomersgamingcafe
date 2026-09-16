@@ -30,7 +30,7 @@ export default function CartPage() {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_test_TccMP6YnZ6PZD9", 
         amount: order.amount,
         currency: order.currency,
-        name: "PlayStation Store (Clone)",
+        name: "NextGen Gaming Store",
         description: "Game Purchase / Rental",
         order_id: order.id,
         handler: function (response: any) {
