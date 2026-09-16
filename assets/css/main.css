@@ -5446,3 +5446,56 @@ textarea:focus-visible,
   margin-right: 6px;
 }
 
+
+/* --- RECENT FIXES --- */
+/* Smooth scrolling and lag fix */
+html {
+    scroll-behavior: smooth;
+}
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overscroll-behavior-y: none;
+}
+
+/* Blinking Logo Loader */
+@keyframes blinkLogo {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.2; transform: scale(0.95); filter: drop-shadow(0 0 10px rgba(0, 219, 120, 0.5)); }
+}
+.loader-logo-img {
+    animation: blinkLogo 1.2s infinite ease-in-out;
+}
+
+/* Mobile Header Layout Fixes */
+@media (max-width: 768px) {
+    header, .mobile-header, #desktop-sticky-book {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    header .logo img {
+        max-width: 120px;
+        height: auto;
+    }
+}
+
+/* Ensure nav stays correctly laid out on mobile */
+@media (max-width: 768px) {
+    .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .brand-mark {
+        max-width: 80px;
+        height: auto;
+    }
+}
