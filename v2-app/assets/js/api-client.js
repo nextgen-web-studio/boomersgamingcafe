@@ -5,7 +5,7 @@
 
 const BGC_CONFIG = {
   API_BASE: window.BGC_API_URL || 'http://127.0.0.1:8000',
-  USE_MOCK: window.BGC_USE_MOCK === true, // Default to real backend API first, fallback to mock on error
+  USE_MOCK: window.BGC_USE_MOCK !== false, // Force mock by default // Default to real backend API first, fallback to mock on error
   MOCK_KEY: 'bgc_api_mock',
   TOKEN_KEY: 'bgc_auth_token',
   ADMIN_TOKEN_KEY: 'bgc_admin_token',
@@ -294,3 +294,4 @@ const BGCApi = {
 };
 
 window.BGCApi = BGCApi;
+
