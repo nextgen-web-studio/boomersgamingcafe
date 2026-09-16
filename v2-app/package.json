@@ -1,0 +1,7 @@
+{
+  "name": "boomers-static",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "mkdir -p dist && cp -r *.html assets dist/ || true"
+  }
+}
