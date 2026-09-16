@@ -71,31 +71,31 @@ export function GameCard({
       </Link>
 
       {/* Content */}
-      <div className="flex flex-1 flex-col justify-between p-4">
+      <div className="flex flex-1 flex-col justify-between p-3 md:p-4">
         <Link href={`/games/${slug}`}>
-          <h3 className="line-clamp-2 text-lg font-bold leading-tight text-white transition-colors hover:text-primary">
+          <h3 className="line-clamp-2 text-base md:text-lg font-bold leading-tight text-white transition-colors hover:text-primary min-h-[2.5rem]">
             {title}
           </h3>
         </Link>
         
-        <div className="mt-4 flex flex-col gap-3">
+        <div className="mt-3 md:mt-4 flex flex-col gap-2 md:gap-3">
           {/* Pricing */}
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-0.5">
             {originalPrice && (
               <span className="text-xs text-muted-foreground line-through">
                 {originalPrice}
               </span>
             )}
-            <span className="text-lg font-semibold text-white">{price}</span>
+            <span className="text-base md:text-lg font-semibold text-white">{price}</span>
             {rentPrice && (
-              <span className="text-sm text-white/60">Rent: {rentPrice}</span>
+              <span className="text-xs md:text-sm text-white/60">Rent: {rentPrice}</span>
             )}
           </div>
 
           {/* Add to Cart */}
-          <Button onClick={handleAddToCart} className="w-full gap-2 transition-transform active:scale-95 bg-white text-black hover:bg-white/90">
-            <ShoppingCart className="h-4 w-4" />
-            Add to Cart
+          <Button onClick={handleAddToCart} className="w-full gap-2 transition-transform active:scale-95 bg-white text-black hover:bg-white/90 text-sm h-9 md:h-10 mt-1">
+            <ShoppingCart className="h-3 w-3 md:h-4 md:w-4 shrink-0" />
+            <span className="truncate">Add to Cart</span>
           </Button>
         </div>
       </div>

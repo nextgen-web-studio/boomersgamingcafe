@@ -134,7 +134,7 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
           </div>
 
           {/* Right Column: Purchase Sticky Box */}
-          <div className="space-y-6">
+          <div className="space-y-6 hidden md:block">
             <div className="sticky top-24 rounded-xl border border-white/10 bg-card p-6 shadow-2xl">
               <h2 className="text-2xl font-bold text-white mb-6">Choose Edition</h2>
               

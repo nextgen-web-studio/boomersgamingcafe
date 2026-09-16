@@ -93,12 +93,12 @@ export function Hero() {
                 {HERO_GAMES[currentIndex].description}
               </p>
               
-              <div className="flex items-center gap-3">
-                <Button size="lg" className="bg-white text-black hover:bg-white/90 text-sm md:text-base px-4 md:px-6">
+              <div className="flex flex-wrap items-center gap-2 md:gap-3">
+                <Button size="lg" className="bg-white text-black hover:bg-white/90 text-sm md:text-base px-3 md:px-6 flex-1 sm:flex-none">
                   Buy {HERO_GAMES[currentIndex].price}
                 </Button>
-                <Button size="lg" variant="secondary" className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 text-sm md:text-base px-4 md:px-6">
-                  Rent {HERO_GAMES[currentIndex].rentPrice}
+                <Button size="lg" variant="secondary" className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 text-sm md:text-base px-3 md:px-6 flex-1 sm:flex-none">
+                  Rent {HERO_GAMES[currentIndex].rentPrice?.split(' /')[0]}
                 </Button>
                 <Button size="icon" variant="ghost" className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-white/10 backdrop-blur-md hover:bg-white/20 border border-white/20 shrink-0">
                   <ShoppingCart className="h-4 w-4 md:h-5 md:w-5" />

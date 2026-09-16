@@ -86,20 +86,20 @@ export default function CartPage() {
             <div className="lg:col-span-2 space-y-4">
               {items.map((item) => (
                 <div key={item.id} className="flex gap-4 bg-card border border-white/10 rounded-xl p-4 relative group">
-                  <div className="w-24 md:w-32 aspect-[3/4] shrink-0 rounded-md overflow-hidden relative">
+                  <div className="w-20 md:w-32 aspect-[3/4] shrink-0 rounded-md overflow-hidden relative">
                     <img src={item.coverImage} alt={item.title} className="w-full h-full object-cover" />
                   </div>
                   
                   <div className="flex flex-col justify-between flex-1 py-1">
                     <div>
                       <div className="flex justify-between items-start pr-8">
-                        <h3 className="text-lg md:text-xl font-bold text-white line-clamp-2">{item.title}</h3>
+                        <h3 className="text-base md:text-xl font-bold text-white line-clamp-2 leading-snug">{item.title}</h3>
                       </div>
-                      <div className="flex items-center gap-2 mt-2">
-                        <span className="text-xs font-semibold bg-white/10 text-white px-2 py-1 rounded backdrop-blur-md">
+                      <div className="flex flex-wrap items-center gap-1.5 md:gap-2 mt-2">
+                        <span className="text-[10px] md:text-xs font-semibold bg-white/10 text-white px-2 py-1 rounded backdrop-blur-md">
                           {item.platform}
                         </span>
-                        <span className={`text-xs font-semibold px-2 py-1 rounded ${item.purchaseType === 'rental' ? 'bg-primary/20 text-primary' : 'bg-green-500/20 text-green-400'}`}>
+                        <span className={`text-[10px] md:text-xs font-semibold px-2 py-1 rounded ${item.purchaseType === 'rental' ? 'bg-primary/20 text-primary' : 'bg-green-500/20 text-green-400'}`}>
                           {item.purchaseType === 'rental' ? '7-Day Rental' : 'Permanent'}
                         </span>
                       </div>
