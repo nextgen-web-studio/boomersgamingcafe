@@ -2,9 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Heart, ShoppingCart } from "lucide-react";
+import { Heart } from "lucide-react";
 import { Button } from "./ui/Button";
-import { useCart } from "@/context/CartContext";
 
 interface GameCardProps {
   id: string;
@@ -27,21 +26,6 @@ export function GameCard({
   rentPrice,
   originalPrice,
 }: GameCardProps) {
-  const { addToCart } = useCart();
-
-  const handleAddToCart = () => {
-    // Basic parse price from string '₹3,999' to number 3999
-    const numericPrice = parseInt(price.replace(/[^0-9]/g, ''), 10);
-    addToCart({
-      gameId: id,
-      title,
-      platform,
-      coverImage,
-      purchaseType: "permanent",
-      price: numericPrice
-    });
-  };
-
   return (
     <div className="group relative flex flex-col overflow-hidden rounded-xl bg-card transition-all hover:scale-[1.02] hover:shadow-xl hover:shadow-black/50 hover:z-10 border border-white/5">
       {/* Cover Image */}
@@ -92,11 +76,12 @@ export function GameCard({
             )}
           </div>
 
-          {/* Add to Cart */}
-          <Button onClick={handleAddToCart} className="w-full gap-2 transition-transform active:scale-95 bg-white text-black hover:bg-white/90 text-sm h-9 md:h-10 mt-1">
-            <ShoppingCart className="h-3 w-3 md:h-4 md:w-4 shrink-0" />
-            <span className="truncate">Add to Cart</span>
-          </Button>
+          {/* Buy Now / View Details */}
+          <Link href={`/games/${slug}`} className="w-full mt-1">
+            <Button className="w-full gap-2 transition-transform active:scale-95 bg-white text-black hover:bg-white/90 text-sm h-9 md:h-10">
+              <span className="truncate font-bold">Buy Now</span>
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
