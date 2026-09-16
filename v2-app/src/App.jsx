@@ -4,10 +4,6 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import Tournaments from './components/Tournaments';
 import BookingWizard from './components/BookingWizard';
-import Menu from './components/Menu';
-import Membership from './components/Membership';
-import Corporate from './components/Corporate';
-import Admin from './components/Admin';
 
 function Home() {
   return (
@@ -23,23 +19,15 @@ function Home() {
   );
 }
 
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen">
+      <div className="min-h-screen flex flex-col">
         <Header />
-        <div className="pt-24">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/membership" element={<Membership />} />
-            <Route path="/corporate" element={<Corporate />} />
-            <Route path="/admin" element={<Admin />} />
-          </Routes>
-        </div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
       </div>
     </BrowserRouter>
   );
 }
-
-export default App;
