@@ -121,6 +121,15 @@ const BGCApi = {
         }
       } catch (e) {
         console.warn('Real API unavailable, resolving via mock fallback:', path, e);
+        
+        // Show visual banner to developer so they know they are in mock mode
+        if (!document.getElementById('mock-warning-banner')) {
+            const banner = document.createElement('div');
+            banner.id = 'mock-warning-banner';
+            banner.style.cssText = 'position:fixed;bottom:10px;right:10px;background:#ff3333;color:white;padding:10px 15px;border-radius:5px;font-family:monospace;font-size:12px;z-index:999999;box-shadow:0 4px 6px rgba(0,0,0,0.3);';
+            banner.innerHTML = '⚠️ BACKEND OFFLINE: Using Mock Data. Changes to backend won\'t reflect.';
+            document.body.appendChild(banner);
+        }
       }
     }
 
