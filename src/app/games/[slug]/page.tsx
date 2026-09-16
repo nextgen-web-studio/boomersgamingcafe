@@ -40,9 +40,21 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
   };
 
   return (
-    <div className="min-h-screen bg-background pb-20">
+    <div className="min-h-screen bg-background pb-20 md:pb-20">
+      {/* Mobile Sticky Bottom Bar */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-background/95 backdrop-blur-xl border-t border-white/10 px-4 py-3 flex gap-3">
+        <Button onClick={handleBuy} className="flex-1 bg-white text-black hover:bg-white/90 font-bold text-sm">
+          Buy {game.price}
+        </Button>
+        {game.rentPrice && (
+          <Button onClick={handleRent} variant="secondary" className="flex-1 bg-white/10 text-white border border-white/20 text-sm">
+            Rent {game.rentPrice}
+          </Button>
+        )}
+      </div>
+
       {/* Hero Header Section */}
-      <div className="relative h-[60vh] min-h-[500px] w-full bg-black">
+      <div className="relative h-[45vh] md:h-[60vh] min-h-[300px] md:min-h-[500px] w-full bg-black">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60"
           style={{ backgroundImage: `url('${game.heroImage}')` }}

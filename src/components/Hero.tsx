@@ -73,7 +73,7 @@ export function Hero() {
       </AnimatePresence>
 
       {/* Content */}
-      <div className="absolute inset-0 container mx-auto px-6 flex flex-col justify-center">
+      <div className="absolute inset-0 container mx-auto px-4 md:px-6 flex flex-col justify-end md:justify-center pb-20 md:pb-0">
         <div className="max-w-2xl z-10">
           <AnimatePresence mode="wait">
             <motion.div
@@ -83,25 +83,25 @@ export function Hero() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <div className="mb-4 inline-flex items-center rounded-sm bg-white/20 backdrop-blur-md px-3 py-1 text-sm font-semibold text-white">
+              <div className="mb-3 inline-flex items-center rounded-sm bg-white/20 backdrop-blur-md px-3 py-1 text-xs md:text-sm font-semibold text-white">
                 {HERO_GAMES[currentIndex].platform}
               </div>
-              <h1 className="mb-4 text-5xl md:text-7xl font-bold tracking-tight text-white drop-shadow-lg">
+              <h1 className="mb-3 text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white drop-shadow-lg leading-tight">
                 {HERO_GAMES[currentIndex].title}
               </h1>
-              <p className="mb-8 text-lg text-white/80 line-clamp-3">
+              <p className="mb-6 text-sm md:text-lg text-white/80 line-clamp-2 md:line-clamp-3 max-w-lg">
                 {HERO_GAMES[currentIndex].description}
               </p>
               
-              <div className="flex flex-wrap items-center gap-4">
-                <Button size="lg" className="bg-white text-black hover:bg-white/90">
+              <div className="flex items-center gap-3">
+                <Button size="lg" className="bg-white text-black hover:bg-white/90 text-sm md:text-base px-4 md:px-6">
                   Buy {HERO_GAMES[currentIndex].price}
                 </Button>
-                <Button size="lg" variant="secondary" className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20">
+                <Button size="lg" variant="secondary" className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 text-sm md:text-base px-4 md:px-6">
                   Rent {HERO_GAMES[currentIndex].rentPrice}
                 </Button>
-                <Button size="icon" variant="ghost" className="h-12 w-12 rounded-full bg-white/10 backdrop-blur-md hover:bg-white/20 border border-white/20">
-                  <ShoppingCart className="h-5 w-5" />
+                <Button size="icon" variant="ghost" className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-white/10 backdrop-blur-md hover:bg-white/20 border border-white/20 shrink-0">
+                  <ShoppingCart className="h-4 w-4 md:h-5 md:w-5" />
                 </Button>
               </div>
             </motion.div>

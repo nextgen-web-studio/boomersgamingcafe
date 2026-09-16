@@ -28,7 +28,7 @@ export default function SubscriptionPage() {
     <div className="min-h-screen bg-[#1F1F1F] text-white pb-24 font-sans">
       {/* Hero Section */}
       <div 
-        className="relative overflow-hidden py-32 bg-black flex flex-col items-center justify-center text-center bg-cover bg-center"
+        className="relative overflow-hidden py-24 md:py-32 bg-black flex flex-col items-center justify-center text-center bg-cover bg-center"
         style={{ backgroundImage: `url('/images/gow-hero.jpg')` }}
       >
         {/* Placeholder for official PS Plus background */}
@@ -39,13 +39,13 @@ export default function SubscriptionPage() {
             <div className="bg-yellow-500 w-8 h-8 flex items-center justify-center rounded-sm">
               <div className="w-5 h-5 bg-black rounded-full mix-blend-screen" />
             </div>
-            <h1 className="text-4xl font-bold tracking-tight">PlayStation Plus</h1>
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight">PlayStation Plus</h1>
           </div>
           
-          <h2 className="text-4xl md:text-6xl font-light mb-6 tracking-tight max-w-3xl">
+          <h2 className="text-3xl md:text-6xl font-light mb-4 md:mb-6 tracking-tight max-w-3xl leading-tight">
             Choose your PlayStation Plus plan
           </h2>
-          <p className="text-lg md:text-xl text-gray-300 max-w-2xl font-light mb-10">
+          <p className="text-base md:text-xl text-gray-300 max-w-2xl font-light mb-8 md:mb-10">
             Enjoy all the core PlayStation Plus benefits, hundreds of games in the Game Catalog, as well as exclusive benefits like game trials, cloud streaming, and the Classics Catalog.
           </p>
         </div>
