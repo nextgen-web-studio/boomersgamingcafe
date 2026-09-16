@@ -61,11 +61,14 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
         
-        <div className="absolute inset-0 container mx-auto px-4 md:px-6 flex flex-col justify-end pb-12">
-          <Link href="/" className="inline-flex items-center text-sm font-medium text-white/60 hover:text-white mb-6 w-fit transition-colors">
+        <div className="absolute top-6 left-4 md:left-6 z-10">
+          <Link href="/" className="inline-flex items-center text-sm font-medium text-white/80 hover:text-white transition-colors bg-black/40 px-3 py-1.5 rounded-full backdrop-blur-md">
             <ChevronLeft className="mr-1 h-4 w-4" />
             Back to Store
           </Link>
+        </div>
+        
+        <div className="absolute inset-0 container mx-auto px-4 md:px-6 flex flex-col justify-end pb-8 md:pb-12">
           
           <div className="flex flex-col md:flex-row gap-8 items-end">
             <div className="w-48 hidden md:block shrink-0 overflow-hidden rounded-lg shadow-2xl border border-white/10">
