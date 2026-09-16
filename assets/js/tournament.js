@@ -223,9 +223,9 @@ const BGCTournament = {
   },
   
   startCountdown(targetDateStr, elementId) {
-    const target = new Date(targetDateStr).getTime();
+    const target = (this.parseDateUTC(targetDateStr)).getTime();
     this.countdownInterval = setInterval(() => {
-      const now = new Date().getTime();
+      const now = (this.parseDateUTC()).getTime();
       const diff = target - now;
       if (diff <= 0) {
         this.stopTimers();
@@ -252,9 +252,9 @@ const BGCTournament = {
   },
   
   startElapsed(startDateStr, elementId) {
-    const start = new Date(startDateStr).getTime();
+    const start = (this.parseDateUTC(startDateStr)).getTime();
     this.countdownInterval = setInterval(() => {
-      const now = new Date().getTime();
+      const now = (this.parseDateUTC()).getTime();
       const diff = now - start;
       const h = Math.floor(diff / (1000 * 60 * 60));
       const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
@@ -267,6 +267,7 @@ const BGCTournament = {
   
   stopTimers() {
     if (this.countdownInterval) clearInterval(this.countdownInterval);
+    if (this.refreshInterval) clearInterval(this.refreshInterval);
   },
 
   openRegistrationModal(tournamentId) {
@@ -314,13 +315,21 @@ const BGCTournament = {
     }
   },
 
+    parseDateUTC(dateStr) {
+    if (!dateStr) return new Date();
+    let safeStr = dateStr;
+    if (typeof safeStr === 'string' && !safeStr.endsWith('Z') && !safeStr.includes('+')) {
+      safeStr += 'Z';
+    }
+    return new Date(safeStr);
+  },
   formatDate(dateStr) {
-    const d = new Date(dateStr);
+    const d = this.parseDateUTC(dateStr);
     return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
   },
   
   formatTime(dateStr) {
-    const d = new Date(dateStr);
+    const d = this.parseDateUTC(dateStr);
     return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
   },
   
@@ -331,3 +340,5 @@ const BGCTournament = {
 };
 
 document.addEventListener('DOMContentLoaded', () => BGCTournament.init());
+
+
