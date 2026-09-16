@@ -26,7 +26,7 @@ export default function BookingWizard() {
       
       <div className="flex justify-between mb-8 overflow-x-auto pb-4 gap-4">
         {steps.map((s, i) => (
-          <div key={s.key} className={lex-1 text-center min-w-[80px] pb-2 border-b-2 transition-colors }>
+          <div key={s.key} className={"flex-1 text-center min-w-[80px] pb-2 border-b-2 transition-colors " + (step >= i ? 'border-bgc-lime text-white' : 'border-white/10 text-white/40')}>
             <p className="text-xs font-mono mb-1">0{i + 1}</p>
             <p className="font-bold text-sm">{s.title}</p>
           </div>
@@ -36,15 +36,15 @@ export default function BookingWizard() {
       <div className="min-h-[300px]">
         {step === 0 && (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <button onClick={() => handleBranchChange('coimbatore')} className={p-6 rounded-xl border-2 transition-all }>Coimbatore</button>
-            <button onClick={() => handleBranchChange('pune')} className={p-6 rounded-xl border-2 transition-all }>Pune</button>
+            <button onClick={() => handleBranchChange('coimbatore')} className={"p-6 rounded-xl border-2 transition-all " + (booking.branch === 'coimbatore' ? 'border-bgc-lime bg-bgc-lime/10' : 'border-white/10 hover:border-white/30')}>Coimbatore</button>
+            <button onClick={() => handleBranchChange('pune')} className={"p-6 rounded-xl border-2 transition-all " + (booking.branch === 'pune' ? 'border-bgc-lime bg-bgc-lime/10' : 'border-white/10 hover:border-white/30')}>Pune</button>
           </motion.div>
         )}
 
         {step === 1 && (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {['PC Arena', 'Sim Racing', 'Console Lounge'].map(zone => (
-              <button key={zone} onClick={() => handleZoneChange(zone)} className={p-6 rounded-xl border-2 transition-all }>{zone}</button>
+              <button key={zone} onClick={() => handleZoneChange(zone)} className={"p-6 rounded-xl border-2 transition-all " + (booking.zone === zone ? 'border-bgc-lime bg-bgc-lime/10' : 'border-white/10 hover:border-white/30')}>{zone}</button>
             ))}
           </motion.div>
         )}
