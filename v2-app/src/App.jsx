@@ -1,0 +1,45 @@
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import Hero from './components/Hero';
+import Tournaments from './components/Tournaments';
+import BookingWizard from './components/BookingWizard';
+import Menu from './components/Menu';
+import Membership from './components/Membership';
+import Corporate from './components/Corporate';
+import Admin from './components/Admin';
+
+function Home() {
+  return (
+    <main>
+      <Hero />
+      <section id="book" className="py-20 px-4 md:px-8 max-w-6xl mx-auto">
+        <BookingWizard />
+      </section>
+      <section id="tournaments" className="py-20 px-4 md:px-8 bg-black/50">
+        <Tournaments />
+      </section>
+    </main>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <div className="min-h-screen">
+        <Header />
+        <div className="pt-24">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/menu" element={<Menu />} />
+            <Route path="/membership" element={<Membership />} />
+            <Route path="/corporate" element={<Corporate />} />
+            <Route path="/admin" element={<Admin />} />
+          </Routes>
+        </div>
+      </div>
+    </BrowserRouter>
+  );
+}
+
+export default App;
