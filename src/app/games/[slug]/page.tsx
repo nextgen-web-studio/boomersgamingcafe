@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronLeft, ShoppingCart, Heart, Share2, Star } from "lucide-react";
+import { ChevronLeft, ShoppingCart, Heart, Share2, Star, X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { use, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { DEMO_GAMES_DETAIL } from "@/lib/mockData";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
@@ -14,6 +15,7 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
   const router = useRouter();
   const { addToCart } = useCart();
   const [isWishlisted, setIsWishlisted] = useState(false);
+  const [showTrailer, setShowTrailer] = useState(false);
   // Fetch game dynamically from mock database (fallback to GoW if not found)
   const game = DEMO_GAMES_DETAIL[resolvedParams.slug as keyof typeof DEMO_GAMES_DETAIL] || DEMO_GAMES_DETAIL["god-of-war-ragnarok"]; 
 
@@ -146,14 +148,14 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
               <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 scrollbar-hide items-start">
                 {/* Trailer Placeholder */}
                 {game.media?.trailerUrl ? (
-                  <a href={game.media.trailerUrl} target="_blank" rel="noopener noreferrer" className="h-[200px] md:h-[280px] min-w-[85%] md:min-w-[45%] snap-center relative rounded-xl overflow-hidden group cursor-pointer border border-white/10 shrink-0 block">
+                  <button onClick={() => setShowTrailer(true)} className="h-[200px] md:h-[280px] min-w-[85%] md:min-w-[45%] snap-center relative rounded-xl overflow-hidden group cursor-pointer border border-white/10 shrink-0 block">
                     <img src={game.media?.trailerBg || game.heroImage} alt="Trailer" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/20 transition-colors">
                       <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 group-hover:scale-110 transition-transform">
                         <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[16px] border-l-white border-b-[10px] border-b-transparent ml-2" />
                       </div>
                     </div>
-                  </a>
+                  </button>
                 ) : (
                   <div className="h-[200px] md:h-[280px] min-w-[85%] md:min-w-[45%] snap-center relative rounded-xl overflow-hidden group border border-white/10 shrink-0">
                     <img src={game.media?.trailerBg || game.heroImage} alt="Trailer" className="w-full h-full object-cover transition-transform duration-500" />
@@ -225,6 +227,41 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
 
         </div>
       </div>
+
+      {/* Trailer Modal */}
+      <AnimatePresence>
+        {showTrailer && game.media?.trailerUrl && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 md:p-12"
+            onClick={() => setShowTrailer(false)}
+          >
+            <button 
+              className="absolute top-4 right-4 md:top-8 md:right-8 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+              onClick={() => setShowTrailer(false)}
+            >
+              <X className="w-6 h-6" />
+            </button>
+            
+            <motion.div 
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()} 
+              className="w-full max-w-5xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10"
+            >
+              <iframe 
+                src={`${game.media.trailerUrl.replace('watch?v=', 'embed/')}?autoplay=1`} 
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowFullScreen 
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
