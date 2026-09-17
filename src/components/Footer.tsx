@@ -1,7 +1,18 @@
+"use client";
+
 import Link from "next/link";
 import { Shield } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export function Footer() {
+  const pathname = usePathname();
+  const allowedPaths = ["/", "/subscription", "/cart"];
+  
+  // Only show footer on specific pages
+  if (!allowedPaths.includes(pathname)) {
+    return null;
+  }
+
   return (
     <footer className="w-full bg-[#111] border-t border-white/10 pt-16 pb-8 text-gray-400">
       <div className="container mx-auto px-4 md:px-6">

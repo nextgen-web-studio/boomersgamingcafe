@@ -75,51 +75,71 @@ export function Header() {
         </div>
       </header>
 
-      {/* Mobile Navigation Dropdown */}
+      {/* Mobile Navigation Drawer */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="lg:hidden absolute top-16 left-0 right-0 border-b border-white/10 bg-background/95 backdrop-blur-xl shadow-2xl z-40"
-          >
-            <nav className="flex flex-col p-4 space-y-2">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+            />
+            {/* Side Drawer */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed top-0 right-0 bottom-0 w-[80%] max-w-sm bg-[#111111] border-l border-white/10 z-50 lg:hidden flex flex-col shadow-2xl"
+            >
+              <div className="flex justify-end p-4 border-b border-white/10">
+                <button
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`px-4 py-3 rounded-lg text-lg font-medium transition-colors ${
-                    link.name === 'PlayStation Plus'
-                      ? 'text-yellow-400 font-bold hover:bg-white/5'
-                      : 'text-white/80 hover:text-white hover:bg-white/5'
-                  }`}
+                  className="p-2 text-white/70 hover:text-white bg-white/5 rounded-full transition-colors"
                 >
-                  {link.name}
-                </Link>
-              ))}
-              
-              <div className="border-t border-white/10 mt-2 pt-2 space-y-2">
-                <Link
-                  href="/account"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3 rounded-lg text-lg font-medium text-white/80 hover:text-white hover:bg-white/5 transition-colors"
-                >
-                  <User className="h-5 w-5" />
-                  My Account
-                </Link>
-                <Link
-                  href="/admin"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3 rounded-lg text-lg font-medium text-white/50 hover:text-white hover:bg-white/5 transition-colors"
-                >
-                  <Shield className="h-5 w-5" />
-                  Admin Panel
-                </Link>
+                  <X className="h-6 w-6" />
+                </button>
               </div>
-            </nav>
-          </motion.div>
+              <nav className="flex flex-col p-4 space-y-1 overflow-y-auto">
+                {NAV_LINKS.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`px-4 py-4 rounded-xl text-lg font-medium transition-colors flex items-center gap-3 ${
+                      link.name === 'PlayStation Plus'
+                        ? 'text-yellow-400 font-bold bg-yellow-500/10 border border-yellow-500/20 mt-2 mb-2'
+                        : 'text-white/80 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+                
+                <div className="border-t border-white/10 mt-4 pt-4 space-y-1">
+                  <Link
+                    href="/account"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center gap-3 px-4 py-4 rounded-xl text-lg font-medium text-white/80 hover:text-white hover:bg-white/5 transition-colors"
+                  >
+                    <User className="h-5 w-5" />
+                    My Account
+                  </Link>
+                  <Link
+                    href="/admin"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center gap-3 px-4 py-4 rounded-xl text-lg font-medium text-white/50 hover:text-white hover:bg-white/5 transition-colors"
+                  >
+                    <Shield className="h-5 w-5" />
+                    Admin Panel
+                  </Link>
+                </div>
+              </nav>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

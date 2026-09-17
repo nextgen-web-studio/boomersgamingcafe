@@ -37,11 +37,12 @@ export default function SubscriptionPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-blue-900/20 to-black z-0" />
         <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
           {/* PS Plus Logo Simulation */}
-          <div className="flex items-center gap-2 mb-6">
-            <div className="bg-yellow-500 w-8 h-8 flex items-center justify-center rounded-sm">
-              <div className="w-5 h-5 bg-black rounded-full mix-blend-screen" />
-            </div>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-white">PlayStation Plus</h1>
+          <div className="flex items-center gap-3 mb-8">
+            <img 
+              src="https://upload.wikimedia.org/wikipedia/commons/a/a7/PlayStation_Plus_logo.svg" 
+              alt="PlayStation Plus" 
+              className="h-10 md:h-14"
+            />
           </div>
           
           <h2 className="text-3xl md:text-6xl font-light mb-4 md:mb-6 tracking-tight max-w-3xl leading-tight text-white">

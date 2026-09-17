@@ -75,7 +75,7 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
         <div className="absolute inset-0 container mx-auto px-4 md:px-6 flex flex-col justify-end pb-8 md:pb-12">
           
           <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-start md:items-end">
-            <div className="w-32 md:w-48 shrink-0 overflow-hidden rounded-lg shadow-2xl border border-white/10 mt-12 md:mt-0">
+            <div className="w-32 md:w-48 hidden md:block shrink-0 overflow-hidden rounded-lg shadow-2xl border border-white/10 mt-12 md:mt-0">
               <img src={game.coverImage} alt={game.title} className="w-full h-auto object-cover" />
             </div>
             
@@ -128,15 +128,35 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
               </div>
             </section>
 
-            <section>
-              <h2 className="text-2xl font-bold mb-4 text-white">Features</h2>
-              <ul className="space-y-2">
+            <section className="pt-4">
+              <h2 className="text-2xl font-bold mb-6 text-white">Features</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {game.features.map((feature, i) => (
-                  <li key={i} className="flex items-start gap-2 text-white/70">
-                    <span className="text-primary mt-1">•</span> {feature}
-                  </li>
+                  <div key={i} className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl p-4 hover:bg-white/10 transition-colors">
+                    <div className="w-2 h-2 rounded-full bg-primary shrink-0" /> 
+                    <span className="text-white/90 font-medium">{feature}</span>
+                  </div>
                 ))}
-              </ul>
+              </div>
+            </section>
+
+            <section className="pt-8">
+              <h2 className="text-2xl font-bold mb-6 text-white">Gameplay & Media</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Trailer Placeholder */}
+                <div className="relative aspect-video rounded-xl overflow-hidden group cursor-pointer border border-white/10">
+                  <img src={game.heroImage} alt="Trailer" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/20 transition-colors">
+                    <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 group-hover:scale-110 transition-transform">
+                      <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[16px] border-l-white border-b-[10px] border-b-transparent ml-2" />
+                    </div>
+                  </div>
+                </div>
+                {/* Gameplay Screenshot Placeholder */}
+                <div className="relative aspect-video rounded-xl overflow-hidden border border-white/10">
+                  <img src={game.coverImage} alt="Gameplay" className="w-full h-full object-cover" />
+                </div>
+              </div>
             </section>
           </div>
 
