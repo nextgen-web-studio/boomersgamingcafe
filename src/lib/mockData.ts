@@ -13,6 +13,10 @@ export interface GameDetail {
   description: string;
   heroImage: string;
   coverImage: string;
+  media?: {
+    trailerBg: string;
+    gameplay: string;
+  };
   features: string[];
   tags: string[];
 }
@@ -32,8 +36,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,999",
     rentPrice: "₹399",
     description: "In Marvel's Spider-Man Remastered, the worlds of Peter Parker and Spider-Man collide in an original action-packed story.",
-    heroImage: "/images/spiderman-cover.jpg",
-    coverImage: "/images/spiderman-cover.jpg",
+    heroImage: "https://gmedia.playstation.com/is/image/SIEPDC/marvels-spider-man-remastered-hero-banner-desktop-01-en-17nov21?$1600px$",
+    coverImage: "https://image.api.playstation.com/vulcan/ap/rnd/202008/1020/b0OiumSTCnuFhTzB3x0BqRkE.png",
+    media: {
+      trailerBg: "https://gmedia.playstation.com/is/image/SIEPDC/marvels-spider-man-remastered-screenshot-01-en-17nov21?$1600px$",
+      gameplay: "https://gmedia.playstation.com/is/image/SIEPDC/marvels-spider-man-remastered-screenshot-04-en-17nov21?$1600px$"
+    },
     features: ["Single Player", "DualSense Support", "Ray Tracing", "Fast Loading"],
     tags: ["top", "ps5"]
   },
@@ -50,27 +58,35 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,999",
     rentPrice: "₹399",
     description: "Join Kratos and Atreus on a mythic journey for answers before Ragnarök arrives.",
-    heroImage: "/images/gow-hero.jpg",
-    coverImage: "/images/gow-cover.jpg",
+    heroImage: "https://gmedia.playstation.com/is/image/SIEPDC/god-of-war-ragnarok-hero-banner-desktop-01-en-07sep21?$1600px$",
+    coverImage: "https://image.api.playstation.com/vulcan/ap/rnd/202207/1210/4xJ8XoIG0yEQyJCgZIeb1H38.png",
+    media: {
+      trailerBg: "https://gmedia.playstation.com/is/image/SIEPDC/god-of-war-ragnarok-screenshot-01-en-07sep21?$1600px$",
+      gameplay: "https://gmedia.playstation.com/is/image/SIEPDC/god-of-war-ragnarok-screenshot-05-en-07sep21?$1600px$"
+    },
     features: ["Offline play enabled", "1 player", "Remote Play supported"],
     tags: ["top", "ps5", "ps4"]
   },
   "elden-ring": {
     title: "Elden Ring",
     slug: "elden-ring",
-    developer: "FromSoftware Inc.",
+    developer: "FromSoftware",
     publisher: "Bandai Namco",
     releaseDate: "2022-02-25",
     genre: "Action / RPG",
     platform: "PS5 • PS4",
     rating: "4.9",
     ageRating: "Mature 17+",
-    price: "₹3,499",
-    rentPrice: "₹299",
+    price: "₹3,999",
+    rentPrice: "₹399",
     description: "THE NEW FANTASY ACTION RPG. Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring.",
-    heroImage: "/images/elden-cover.jpg",
-    coverImage: "/images/elden-cover.jpg",
-    features: ["Online Multiplayer", "Co-op Supported", "Vibration Supported"],
+    heroImage: "https://gmedia.playstation.com/is/image/SIEPDC/elden-ring-hero-banner-desktop-01-en-19feb22?$1600px$",
+    coverImage: "https://image.api.playstation.com/vulcan/ap/rnd/202110/2000/aGhopp3MHppi7kooZA2NI6Yx.png",
+    media: {
+      trailerBg: "https://gmedia.playstation.com/is/image/SIEPDC/elden-ring-screenshot-01-en-19feb22?$1600px$",
+      gameplay: "https://gmedia.playstation.com/is/image/SIEPDC/elden-ring-screenshot-02-en-19feb22?$1600px$"
+    },
+    features: ["Single Player", "Online Multiplayer"],
     tags: ["top", "ps5", "ps4"]
   },
   "horizon-forbidden-west": {
@@ -86,44 +102,56 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹2,999",
     rentPrice: "₹299",
     description: "Join Aloy as she braves the Forbidden West - a majestic but dangerous frontier.",
-    heroImage: "/images/horizon-cover.jpg",
-    coverImage: "/images/horizon-cover.jpg",
+    heroImage: "https://gmedia.playstation.com/is/image/SIEPDC/horizon-forbidden-west-hero-banner-desktop-01-en-29aug21?$1600px$",
+    coverImage: "https://image.api.playstation.com/vulcan/ap/rnd/202107/3100/HOiWzArazUJW0AHBCWNKNBoE.png",
+    media: {
+      trailerBg: "https://gmedia.playstation.com/is/image/SIEPDC/horizon-forbidden-west-screenshot-01-en-29aug21?$1600px$",
+      gameplay: "https://gmedia.playstation.com/is/image/SIEPDC/horizon-forbidden-west-screenshot-02-en-29aug21?$1600px$"
+    },
     features: ["Single Player", "4K HDR", "3D Audio"],
     tags: ["deals", "ps5", "ps4"]
   },
-  "tlou-1-remastered": {
+  "the-last-of-us-part-1": {
     title: "The Last of Us Part I",
-    slug: "tlou-1-remastered",
+    slug: "the-last-of-us-part-1",
     developer: "Naughty Dog",
-    publisher: "PlayStation Publishing",
+    publisher: "PlayStation Studios",
     releaseDate: "2022-09-02",
     genre: "Action / Survival",
     platform: "PS5",
-    rating: "4.9",
+    rating: "4.8",
     ageRating: "Mature 17+",
-    price: "₹2,999",
-    rentPrice: "₹299",
-    description: "Experience the emotional storytelling and unforgettable characters in The Last of Us.",
-    heroImage: "/images/tlou-cover.jpg",
-    coverImage: "/images/tlou-cover.jpg",
-    features: ["Single Player", "Enhanced Graphics"],
+    price: "₹4,999",
+    rentPrice: "₹499",
+    description: "Experience the emotional storytelling and unforgettable characters in The Last of Us, winner of over 200 Game of the Year awards.",
+    heroImage: "https://gmedia.playstation.com/is/image/SIEPDC/the-last-of-us-part-i-hero-banner-desktop-01-en-18may22?$1600px$",
+    coverImage: "https://image.api.playstation.com/vulcan/ap/rnd/202206/0720/eEczyVA1m4kyzZWmfcKvjmPA.png",
+    media: {
+      trailerBg: "https://gmedia.playstation.com/is/image/SIEPDC/the-last-of-us-part-i-screenshot-01-en-18may22?$1600px$",
+      gameplay: "https://gmedia.playstation.com/is/image/SIEPDC/the-last-of-us-part-i-screenshot-03-en-18may22?$1600px$"
+    },
+    features: ["Single Player", "3D Audio", "DualSense Support"],
     tags: ["top", "ps5"]
   },
   "cyberpunk-2077": {
     title: "Cyberpunk 2077",
     slug: "cyberpunk-2077",
-    developer: "CD PROJEKT RED",
-    publisher: "CD PROJEKT RED",
+    developer: "CD Projekt Red",
+    publisher: "CD Projekt",
     releaseDate: "2020-12-10",
-    genre: "RPG",
-    platform: "PS5",
+    genre: "Action / RPG",
+    platform: "PS5 • PS4",
     rating: "4.6",
     ageRating: "Mature 17+",
     price: "₹2,999",
     rentPrice: "₹499",
     description: "Cyberpunk 2077 is an open-world, action-adventure RPG set in the megalopolis of Night City.",
-    heroImage: "/images/cyberpunk-hero.jpg",
-    coverImage: "/images/cyberpunk-cover.jpg",
+    heroImage: "https://gmedia.playstation.com/is/image/SIEPDC/cyberpunk-2077-phantom-liberty-hero-banner-desktop-01-en-07jun23?$1600px$",
+    coverImage: "https://image.api.playstation.com/vulcan/ap/rnd/202311/2812/28e35198ba15eb90cc856cbf2089baec9e62e157e8ce71dc.png",
+    media: {
+      trailerBg: "https://gmedia.playstation.com/is/image/SIEPDC/cyberpunk-2077-phantom-liberty-screenshot-01-en-07jun23?$1600px$",
+      gameplay: "https://gmedia.playstation.com/is/image/SIEPDC/cyberpunk-2077-phantom-liberty-screenshot-02-en-07jun23?$1600px$"
+    },
     features: ["Single Player", "Ray Tracing"],
     tags: ["deals", "ps5"]
   },
@@ -249,8 +277,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,499",
     rentPrice: "₹349",
     description: "Enlist in the Helldivers and join the fight for freedom across a hostile galaxy.",
-    heroImage: "/images/helldivers2-cover.svg",
-    coverImage: "/images/helldivers2-cover.svg",
+    heroImage: "https://gmedia.playstation.com/is/image/SIEPDC/helldivers-2-hero-banner-desktop-01-en-24may23?$1600px$",
+    coverImage: "https://image.api.playstation.com/vulcan/ap/rnd/202310/1816/8c9cd24036e4f3a73c1d9361a9bc3f0b2f5188f5727b13a8.png",
+    media: {
+      trailerBg: "https://gmedia.playstation.com/is/image/SIEPDC/helldivers-2-screenshot-01-en-24may23?$1600px$",
+      gameplay: "https://gmedia.playstation.com/is/image/SIEPDC/helldivers-2-screenshot-02-en-24may23?$1600px$"
+    },
     features: ["Online Co-op", "Multiplayer"],
     tags: ["top", "ps5"]
   },
@@ -267,8 +299,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,999",
     rentPrice: "₹399",
     description: "In the late 13th century, the Mongol empire has laid waste to entire nations.",
-    heroImage: "/images/ghost-cover.jpg",
-    coverImage: "/images/ghost-cover.jpg",
+    heroImage: "https://gmedia.playstation.com/is/image/SIEPDC/ghost-of-tsushima-directors-cut-hero-banner-desktop-01-en-23jun21?$1600px$",
+    coverImage: "https://image.api.playstation.com/vulcan/ap/rnd/202106/2322/Qd1v4uAW0k9rR0UoN5Bv49tE.png",
+    media: {
+      trailerBg: "https://gmedia.playstation.com/is/image/SIEPDC/ghost-of-tsushima-directors-cut-screenshot-01-en-23jun21?$1600px$",
+      gameplay: "https://gmedia.playstation.com/is/image/SIEPDC/ghost-of-tsushima-directors-cut-screenshot-02-en-23jun21?$1600px$"
+    },
     features: ["Single Player", "Co-op"],
     tags: ["top", "ps5", "ps4"]
   },
@@ -285,8 +321,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹2,999",
     rentPrice: "₹299",
     description: "From legendary game creator Hideo Kojima comes a genre-defying experience.",
-    heroImage: "/images/deathstranding-cover.jpg",
-    coverImage: "/images/deathstranding-cover.jpg",
+    heroImage: "https://gmedia.playstation.com/is/image/SIEPDC/death-stranding-directors-cut-hero-banner-desktop-01-en-07jul21?$1600px$",
+    coverImage: "https://image.api.playstation.com/vulcan/ap/rnd/202106/2215/kSjL5l2u6NlH5mX2Y0R7H7Y9.png",
+    media: {
+      trailerBg: "https://gmedia.playstation.com/is/image/SIEPDC/death-stranding-directors-cut-screenshot-01-en-07jul21?$1600px$",
+      gameplay: "https://gmedia.playstation.com/is/image/SIEPDC/death-stranding-directors-cut-screenshot-02-en-07jul21?$1600px$"
+    },
     features: ["Single Player"],
     tags: ["deals", "ps5"]
   },
@@ -303,8 +343,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹2,499",
     rentPrice: "₹249",
     description: "Ride and fight into a deadly, post pandemic America.",
-    heroImage: "/images/daysgone-cover.jpg",
-    coverImage: "/images/daysgone-cover.jpg",
+    heroImage: "https://gmedia.playstation.com/is/image/SIEPDC/days-gone-hero-banner-desktop-01-en-14jan21?$1600px$",
+    coverImage: "https://image.api.playstation.com/vulcan/img/rnd/202010/2217/LuzJWyl6rG2rF3Tz1cIeL12m.png",
+    media: {
+      trailerBg: "https://gmedia.playstation.com/is/image/SIEPDC/days-gone-screenshot-01-en-14jan21?$1600px$",
+      gameplay: "https://gmedia.playstation.com/is/image/SIEPDC/days-gone-screenshot-02-en-14jan21?$1600px$"
+    },
     features: ["Single Player"],
     tags: ["deals", "ps4"]
   },
@@ -321,8 +365,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,999",
     rentPrice: "₹399",
     description: "Break the cycle as Selene fights for survival in a shapeshifting alien world.",
-    heroImage: "/images/returnal-cover.jpg",
-    coverImage: "/images/returnal-cover.jpg",
+    heroImage: "https://gmedia.playstation.com/is/image/SIEPDC/returnal-hero-banner-desktop-01-en-14jan21?$1600px$",
+    coverImage: "https://image.api.playstation.com/vulcan/ap/rnd/202011/1717/hZc5XjZJjFmUo6O6aYwO2m8W.png",
+    media: {
+      trailerBg: "https://gmedia.playstation.com/is/image/SIEPDC/returnal-screenshot-01-en-14jan21?$1600px$",
+      gameplay: "https://gmedia.playstation.com/is/image/SIEPDC/returnal-screenshot-02-en-14jan21?$1600px$"
+    },
     features: ["Single Player", "Co-op"],
     tags: ["top", "ps5"]
   },
@@ -339,8 +387,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,999",
     rentPrice: "₹399",
     description: "Blast your way through an interdimensional adventure with Ratchet and Clank.",
-    heroImage: "/images/ratchet-cover.jpg",
-    coverImage: "/images/ratchet-cover.jpg",
+    heroImage: "https://gmedia.playstation.com/is/image/SIEPDC/ratchet-and-clank-rift-apart-hero-banner-desktop-01-en-11feb21?$1600px$",
+    coverImage: "https://image.api.playstation.com/vulcan/ap/rnd/202101/2921/D0C5H9eJ0gU1fXb6sX9x6T8T.png",
+    media: {
+      trailerBg: "https://gmedia.playstation.com/is/image/SIEPDC/ratchet-and-clank-rift-apart-screenshot-01-en-11feb21?$1600px$",
+      gameplay: "https://gmedia.playstation.com/is/image/SIEPDC/ratchet-and-clank-rift-apart-screenshot-02-en-11feb21?$1600px$"
+    },
     features: ["Single Player"],
     tags: ["top", "ps5"]
   },
@@ -357,8 +409,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹2,999",
     rentPrice: "₹299",
     description: "Seek your legacy and leave your mark on the map in UNCHARTED: Legacy of Thieves Collection.",
-    heroImage: "/images/uncharted-cover.jpg",
-    coverImage: "/images/uncharted-cover.jpg",
+    heroImage: "https://gmedia.playstation.com/is/image/SIEPDC/uncharted-legacy-of-thieves-collection-hero-banner-desktop-01-en-08sep21?$1600px$",
+    coverImage: "https://image.api.playstation.com/vulcan/ap/rnd/202109/0821/kYJdJtZ6y7Q1E9M6l5W9U9V0.png",
+    media: {
+      trailerBg: "https://gmedia.playstation.com/is/image/SIEPDC/uncharted-legacy-of-thieves-collection-screenshot-01-en-08sep21?$1600px$",
+      gameplay: "https://gmedia.playstation.com/is/image/SIEPDC/uncharted-legacy-of-thieves-collection-screenshot-02-en-08sep21?$1600px$"
+    },
     features: ["Single Player"],
     tags: ["deals", "ps5"]
   }

@@ -145,7 +145,7 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Trailer Placeholder */}
                 <div className="relative aspect-video rounded-xl overflow-hidden group cursor-pointer border border-white/10">
-                  <img src={game.heroImage} alt="Trailer" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <img src={game.media?.trailerBg || game.heroImage} alt="Trailer" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/20 transition-colors">
                     <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 group-hover:scale-110 transition-transform">
                       <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[16px] border-l-white border-b-[10px] border-b-transparent ml-2" />
@@ -154,7 +154,7 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
                 </div>
                 {/* Gameplay Screenshot Placeholder */}
                 <div className="relative aspect-video rounded-xl overflow-hidden border border-white/10">
-                  <img src={game.coverImage} alt="Gameplay" className="w-full h-full object-cover" />
+                  <img src={game.media?.gameplay || game.coverImage} alt="Gameplay" className="w-full h-full object-cover" />
                 </div>
               </div>
             </section>
