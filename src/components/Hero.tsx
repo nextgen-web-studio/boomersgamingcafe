@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, ShoppingCart } from "lucide-react";
 import { Button } from "./ui/Button";
+import Link from "next/link";
 
 // Temporary placeholder data until we connect to Supabase
 const HERO_GAMES = [
