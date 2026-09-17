@@ -61,10 +61,10 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,999",
     rentPrice: "₹399",
     description: "Join Kratos and Atreus on a mythic journey for answers before Ragnarök arrives.",
-    heroImage: "https://img.youtube.com/vi/hfJ4Km46A-0/hqdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/hfJ4Km46A-0/hqdefault.jpg",
+    heroImage: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2322010/header.jpg",
+    coverImage: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2322010/header.jpg",
     media: {
-      trailerBg: "https://img.youtube.com/vi/hfJ4Km46A-0/hqdefault.jpg",
+      trailerBg: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2322010/header.jpg",
       gameplay: "https://img.youtube.com/vi/hfJ4Km46A-0/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=hfJ4Km46A-0"
     ,
@@ -232,10 +232,10 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹4,999",
     rentPrice: "₹499",
     description: "A standalone game directed by Brian Horton and Cameron Christian.",
-    heroImage: "https://img.youtube.com/vi/ZdlM-02L8t4/hqdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/ZdlM-02L8t4/hqdefault.jpg",
+    heroImage: "https://image.api.playstation.com/vulcan/ap/rnd/202109/0821/x3zW7P5R7ZqXq9z5y4V7Xy8Z.png",
+    coverImage: "https://image.api.playstation.com/vulcan/ap/rnd/202109/0821/x3zW7P5R7ZqXq9z5y4V7Xy8Z.png",
     media: {
-      trailerBg: "https://img.youtube.com/vi/ZdlM-02L8t4/hqdefault.jpg",
+      trailerBg: "https://image.api.playstation.com/vulcan/ap/rnd/202109/0821/x3zW7P5R7ZqXq9z5y4V7Xy8Z.png",
       gameplay: "https://img.youtube.com/vi/ZdlM-02L8t4/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=ZdlM-02L8t4"
     },
@@ -347,10 +347,10 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,499",
     rentPrice: "₹349",
     description: "Enlist in the Helldivers and join the fight for freedom across a hostile galaxy.",
-    heroImage: "https://img.youtube.com/vi/ZUTsoX80FwA/hqdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/ZUTsoX80FwA/hqdefault.jpg",
+    heroImage: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2536700/header.jpg",
+    coverImage: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2536700/header.jpg",
     media: {
-      trailerBg: "https://img.youtube.com/vi/ZUTsoX80FwA/hqdefault.jpg",
+      trailerBg: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2536700/header.jpg",
       gameplay: "https://img.youtube.com/vi/ZUTsoX80FwA/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=ZUTsoX80FwA"
     ,
@@ -377,10 +377,10 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,999",
     rentPrice: "₹399",
     description: "In the late 13th century, the Mongol empire has laid waste to entire nations.",
-    heroImage: "https://img.youtube.com/vi/MUz539AeC5Y/hqdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/MUz539AeC5Y/hqdefault.jpg",
+    heroImage: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2215430/header.jpg",
+    coverImage: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2215430/header.jpg",
     media: {
-      trailerBg: "https://img.youtube.com/vi/MUz539AeC5Y/hqdefault.jpg",
+      trailerBg: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2215430/header.jpg",
       gameplay: "https://img.youtube.com/vi/MUz539AeC5Y/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=MUz539AeC5Y"
     ,
@@ -470,10 +470,10 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,999",
     rentPrice: "₹399",
     description: "Break the cycle as Selene fights for survival in a shapeshifting alien world.",
-    heroImage: "https://img.youtube.com/vi/Jv4DjVcGNOo/hqdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/Jv4DjVcGNOo/hqdefault.jpg",
+    heroImage: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1649240/header.jpg",
+    coverImage: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1649240/header.jpg",
     media: {
-      trailerBg: "https://img.youtube.com/vi/Jv4DjVcGNOo/hqdefault.jpg",
+      trailerBg: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1649240/header.jpg",
       gameplay: "https://img.youtube.com/vi/Jv4DjVcGNOo/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=Jv4DjVcGNOo"
     ,
