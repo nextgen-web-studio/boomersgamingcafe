@@ -91,7 +91,7 @@ function TierCard({ tier, onSubscribe }: { tier: typeof TIERS[0], onSubscribe: (
   const [selectedPlan, setSelectedPlan] = useState("12-Month");
 
   return (
-    <div className="min-w-[85vw] md:min-w-0 snap-center bg-white text-black rounded-2xl overflow-hidden shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-gray-200 flex flex-col transition-transform duration-300 hover:-translate-y-1">
+    <div className="w-full bg-white text-black rounded-2xl overflow-hidden shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-gray-200 flex flex-col transition-transform duration-300 hover:-translate-y-1">
       {/* Header */}
       <div className={`${tier.headerBg} px-4 py-3 md:px-6 md:py-5 flex items-center justify-between`}>
         <h3 className={`text-xl md:text-2xl font-black tracking-tight ${tier.headerText}`}>{tier.name}</h3>
@@ -191,19 +191,12 @@ export default function SubscriptionPage() {
         </p>
       </div>
 
-      {/* Pricing Tiers Carousel / Grid */}
+      {/* Pricing Tiers Stack / Grid */}
       <div className="max-w-[1200px] mx-auto relative">
-        <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-12 px-6 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:snap-none scrollbar-hide items-stretch">
+        <div className="flex flex-col md:grid md:grid-cols-3 gap-6 md:gap-8 pb-12 px-4 md:px-6 items-stretch">
           {TIERS.map(tier => (
             <TierCard key={tier.id} tier={tier} onSubscribe={handleSubscribe} />
           ))}
-        </div>
-        
-        {/* Mobile Swipe Indicator */}
-        <div className="flex md:hidden justify-center items-center gap-2 pb-8 opacity-50">
-           <div className="w-8 h-1 bg-[#0070D1] rounded-full"></div>
-           <div className="w-2 h-1 bg-gray-400 rounded-full"></div>
-           <div className="w-2 h-1 bg-gray-400 rounded-full"></div>
         </div>
       </div>
     </div>
