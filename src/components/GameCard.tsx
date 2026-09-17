@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Heart } from "lucide-react";
@@ -26,6 +27,8 @@ export function GameCard({
   rentPrice,
   originalPrice,
 }: GameCardProps) {
+  const [isWishlisted, setIsWishlisted] = useState(false);
+
   return (
     <div className="group relative flex flex-col overflow-hidden rounded-xl bg-card transition-all hover:scale-[1.02] hover:shadow-xl hover:shadow-black/50 hover:z-10 border border-white/5">
       {/* Cover Image */}
@@ -41,8 +44,14 @@ export function GameCard({
         
         {/* Quick Actions (Show on Hover) */}
         <div className="absolute right-3 top-3 flex flex-col gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          <button className="flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-md hover:bg-white hover:text-black transition-colors shadow-lg" onClick={(e) => e.preventDefault()}>
-            <Heart className="h-5 w-5" />
+          <button 
+            className={`flex h-10 w-10 items-center justify-center rounded-full backdrop-blur-md transition-colors shadow-lg ${isWishlisted ? 'bg-red-500 text-white' : 'bg-black/60 text-white hover:bg-white hover:text-black'}`}
+            onClick={(e) => {
+              e.preventDefault();
+              setIsWishlisted(!isWishlisted);
+            }}
+          >
+            <Heart className={`h-5 w-5 ${isWishlisted ? 'fill-current' : ''}`} />
           </button>
         </div>
 

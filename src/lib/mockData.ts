@@ -37,11 +37,11 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,999",
     rentPrice: "₹399",
     description: "In Marvel's Spider-Man Remastered, the worlds of Peter Parker and Spider-Man collide in an original action-packed story.",
-    heroImage: "https://img.youtube.com/vi/q4IrtAX5pRw/maxresdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/q4IrtAX5pRw/maxresdefault.jpg",
+    heroImage: "https://img.youtube.com/vi/q4IrtAX5pRw/hqdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/q4IrtAX5pRw/hqdefault.jpg",
     media: {
-      trailerBg: "https://img.youtube.com/vi/q4IrtAX5pRw/maxresdefault.jpg",
-      gameplay: "https://img.youtube.com/vi/q4IrtAX5pRw/maxresdefault.jpg",
+      trailerBg: "https://img.youtube.com/vi/q4IrtAX5pRw/hqdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/q4IrtAX5pRw/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=q4IrtAX5pRw"
     },
     features: ["Single Player", "DualSense Support", "Ray Tracing", "Fast Loading"],
@@ -60,11 +60,11 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,999",
     rentPrice: "₹399",
     description: "Join Kratos and Atreus on a mythic journey for answers before Ragnarök arrives.",
-    heroImage: "https://img.youtube.com/vi/hfJ4Km46A-0/maxresdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/hfJ4Km46A-0/maxresdefault.jpg",
+    heroImage: "https://img.youtube.com/vi/hfJ4Km46A-0/hqdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/hfJ4Km46A-0/hqdefault.jpg",
     media: {
-      trailerBg: "https://img.youtube.com/vi/hfJ4Km46A-0/maxresdefault.jpg",
-      gameplay: "https://img.youtube.com/vi/hfJ4Km46A-0/maxresdefault.jpg",
+      trailerBg: "https://img.youtube.com/vi/hfJ4Km46A-0/hqdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/hfJ4Km46A-0/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=hfJ4Km46A-0"
     },
     features: ["Offline play enabled", "1 player", "Remote Play supported"],
@@ -83,11 +83,11 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,999",
     rentPrice: "₹399",
     description: "THE NEW FANTASY ACTION RPG. Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring.",
-    heroImage: "https://img.youtube.com/vi/E3Huy2cdih0/maxresdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/E3Huy2cdih0/maxresdefault.jpg",
+    heroImage: "https://img.youtube.com/vi/E3Huy2cdih0/hqdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/E3Huy2cdih0/hqdefault.jpg",
     media: {
-      trailerBg: "https://img.youtube.com/vi/E3Huy2cdih0/maxresdefault.jpg",
-      gameplay: "https://img.youtube.com/vi/E3Huy2cdih0/maxresdefault.jpg",
+      trailerBg: "https://img.youtube.com/vi/E3Huy2cdih0/hqdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/E3Huy2cdih0/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=E3Huy2cdih0"
     },
     features: ["Single Player", "Online Multiplayer"],
@@ -106,11 +106,11 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹2,999",
     rentPrice: "₹299",
     description: "Join Aloy as she braves the Forbidden West - a majestic but dangerous frontier.",
-    heroImage: "https://img.youtube.com/vi/Lq594Xpoa8g/maxresdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/Lq594Xpoa8g/maxresdefault.jpg",
+    heroImage: "https://img.youtube.com/vi/Lq594Xpoa8g/hqdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/Lq594Xpoa8g/hqdefault.jpg",
     media: {
-      trailerBg: "https://img.youtube.com/vi/Lq594Xpoa8g/maxresdefault.jpg",
-      gameplay: "https://img.youtube.com/vi/Lq594Xpoa8g/maxresdefault.jpg",
+      trailerBg: "https://img.youtube.com/vi/Lq594Xpoa8g/hqdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/Lq594Xpoa8g/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=Lq594Xpoa8g"
     },
     features: ["Single Player", "4K HDR", "3D Audio"],
@@ -129,11 +129,11 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹4,999",
     rentPrice: "₹499",
     description: "Experience the emotional storytelling and unforgettable characters in The Last of Us, winner of over 200 Game of the Year awards.",
-    heroImage: "https://img.youtube.com/vi/WxjeV10H1F0/maxresdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/WxjeV10H1F0/maxresdefault.jpg",
+    heroImage: "https://img.youtube.com/vi/WxjeV10H1F0/hqdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/WxjeV10H1F0/hqdefault.jpg",
     media: {
-      trailerBg: "https://img.youtube.com/vi/WxjeV10H1F0/maxresdefault.jpg",
-      gameplay: "https://img.youtube.com/vi/WxjeV10H1F0/maxresdefault.jpg",
+      trailerBg: "https://img.youtube.com/vi/WxjeV10H1F0/hqdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/WxjeV10H1F0/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=WxjeV10H1F0"
     },
     features: ["Single Player", "3D Audio", "DualSense Support"],
@@ -152,11 +152,11 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹2,999",
     rentPrice: "₹499",
     description: "Cyberpunk 2077 is an open-world, action-adventure RPG set in the megalopolis of Night City.",
-    heroImage: "https://img.youtube.com/vi/8X2kIfS6fb8/maxresdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/8X2kIfS6fb8/maxresdefault.jpg",
+    heroImage: "https://img.youtube.com/vi/8X2kIfS6fb8/hqdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/8X2kIfS6fb8/hqdefault.jpg",
     media: {
-      trailerBg: "https://img.youtube.com/vi/8X2kIfS6fb8/maxresdefault.jpg",
-      gameplay: "https://img.youtube.com/vi/8X2kIfS6fb8/maxresdefault.jpg",
+      trailerBg: "https://img.youtube.com/vi/8X2kIfS6fb8/hqdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/8X2kIfS6fb8/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=8X2kIfS6fb8"
     },
     features: ["Single Player", "Ray Tracing"],
@@ -176,11 +176,11 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹5,499",
     rentPrice: "₹599",
     description: "Welcome to Leonida, the home of the neon-soaked streets of Vice City and beyond.",
-    heroImage: "https://img.youtube.com/vi/QdBZY2fkU-0/maxresdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/QdBZY2fkU-0/maxresdefault.jpg",
+    heroImage: "https://img.youtube.com/vi/QdBZY2fkU-0/hqdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/QdBZY2fkU-0/hqdefault.jpg",
     media: {
-      trailerBg: "https://img.youtube.com/vi/QdBZY2fkU-0/maxresdefault.jpg",
-      gameplay: "https://img.youtube.com/vi/QdBZY2fkU-0/maxresdefault.jpg",
+      trailerBg: "https://img.youtube.com/vi/QdBZY2fkU-0/hqdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/QdBZY2fkU-0/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=QdBZY2fkU-0"
     },
     features: ["Single Player", "Online Multiplayer"],
@@ -199,11 +199,11 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹4,999",
     rentPrice: "₹499",
     description: "A standalone game directed by Brian Horton and Cameron Christian.",
-    heroImage: "https://img.youtube.com/vi/ZdlM-02L8t4/maxresdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/ZdlM-02L8t4/maxresdefault.jpg",
+    heroImage: "https://img.youtube.com/vi/ZdlM-02L8t4/hqdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/ZdlM-02L8t4/hqdefault.jpg",
     media: {
-      trailerBg: "https://img.youtube.com/vi/ZdlM-02L8t4/maxresdefault.jpg",
-      gameplay: "https://img.youtube.com/vi/ZdlM-02L8t4/maxresdefault.jpg",
+      trailerBg: "https://img.youtube.com/vi/ZdlM-02L8t4/hqdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/ZdlM-02L8t4/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=ZdlM-02L8t4"
     },
     features: ["Single Player", "DualSense Support"],
@@ -222,11 +222,11 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹4,999",
     rentPrice: "₹499",
     description: "Embark on a new journey with a new Ghost, Atsu, and explore the lands surrounding Mount Yōtei in 1603.",
-    heroImage: "https://img.youtube.com/vi/7z7MM6N9g2M/maxresdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/7z7MM6N9g2M/maxresdefault.jpg",
+    heroImage: "https://img.youtube.com/vi/7z7MM6N9g2M/hqdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/7z7MM6N9g2M/hqdefault.jpg",
     media: {
-      trailerBg: "https://img.youtube.com/vi/7z7MM6N9g2M/maxresdefault.jpg",
-      gameplay: "https://img.youtube.com/vi/7z7MM6N9g2M/maxresdefault.jpg",
+      trailerBg: "https://img.youtube.com/vi/7z7MM6N9g2M/hqdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/7z7MM6N9g2M/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=7z7MM6N9g2M"
     },
     features: ["Single Player"],
@@ -245,11 +245,11 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,999",
     rentPrice: "₹399",
     description: "Winner of over 175 Game of the Year Awards and recipient of over 250 perfect scores, RDR2 is the epic tale of outlaw Arthur Morgan.",
-    heroImage: "https://img.youtube.com/vi/eaW0tYpxyp0/maxresdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/eaW0tYpxyp0/maxresdefault.jpg",
+    heroImage: "https://img.youtube.com/vi/eaW0tYpxyp0/hqdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/eaW0tYpxyp0/hqdefault.jpg",
     media: {
-      trailerBg: "https://img.youtube.com/vi/eaW0tYpxyp0/maxresdefault.jpg",
-      gameplay: "https://img.youtube.com/vi/eaW0tYpxyp0/maxresdefault.jpg",
+      trailerBg: "https://img.youtube.com/vi/eaW0tYpxyp0/hqdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/eaW0tYpxyp0/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=eaW0tYpxyp0"
     },
     features: ["Single Player", "Online Multiplayer"],
@@ -268,11 +268,11 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹2,799",
     rentPrice: "₹299",
     description: "Experience entertainment blockbusters Grand Theft Auto V and GTA Online.",
-    heroImage: "https://img.youtube.com/vi/QkkoHAzjnUs/maxresdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/QkkoHAzjnUs/maxresdefault.jpg",
+    heroImage: "https://img.youtube.com/vi/QkkoHAzjnUs/hqdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/QkkoHAzjnUs/hqdefault.jpg",
     media: {
-      trailerBg: "https://img.youtube.com/vi/QkkoHAzjnUs/maxresdefault.jpg",
-      gameplay: "https://img.youtube.com/vi/QkkoHAzjnUs/maxresdefault.jpg",
+      trailerBg: "https://img.youtube.com/vi/QkkoHAzjnUs/hqdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/QkkoHAzjnUs/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=QkkoHAzjnUs"
     },
     features: ["Single Player", "Online Multiplayer"],
@@ -291,11 +291,11 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹4,499",
     rentPrice: "₹449",
     description: "EA SPORTS FC™ 24 is a new era for The World's Game: 19,000+ fully licensed players, 700+ teams, and 30+ leagues.",
-    heroImage: "https://img.youtube.com/vi/XhP3Xh4LMA8/maxresdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/XhP3Xh4LMA8/maxresdefault.jpg",
+    heroImage: "https://img.youtube.com/vi/XhP3Xh4LMA8/hqdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/XhP3Xh4LMA8/hqdefault.jpg",
     media: {
-      trailerBg: "https://img.youtube.com/vi/XhP3Xh4LMA8/maxresdefault.jpg",
-      gameplay: "https://img.youtube.com/vi/XhP3Xh4LMA8/maxresdefault.jpg",
+      trailerBg: "https://img.youtube.com/vi/XhP3Xh4LMA8/hqdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/XhP3Xh4LMA8/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=XhP3Xh4LMA8"
     },
     features: ["Single Player", "Local Multiplayer", "Online Multiplayer"],
@@ -314,11 +314,11 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,499",
     rentPrice: "₹349",
     description: "Enlist in the Helldivers and join the fight for freedom across a hostile galaxy.",
-    heroImage: "https://img.youtube.com/vi/ZUTsoX80FwA/maxresdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/ZUTsoX80FwA/maxresdefault.jpg",
+    heroImage: "https://img.youtube.com/vi/ZUTsoX80FwA/hqdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/ZUTsoX80FwA/hqdefault.jpg",
     media: {
-      trailerBg: "https://img.youtube.com/vi/ZUTsoX80FwA/maxresdefault.jpg",
-      gameplay: "https://img.youtube.com/vi/ZUTsoX80FwA/maxresdefault.jpg",
+      trailerBg: "https://img.youtube.com/vi/ZUTsoX80FwA/hqdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/ZUTsoX80FwA/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=ZUTsoX80FwA"
     },
     features: ["Online Co-op", "Multiplayer"],
@@ -337,11 +337,11 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,999",
     rentPrice: "₹399",
     description: "In the late 13th century, the Mongol empire has laid waste to entire nations.",
-    heroImage: "https://img.youtube.com/vi/MUz539AeC5Y/maxresdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/MUz539AeC5Y/maxresdefault.jpg",
+    heroImage: "https://img.youtube.com/vi/MUz539AeC5Y/hqdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/MUz539AeC5Y/hqdefault.jpg",
     media: {
-      trailerBg: "https://img.youtube.com/vi/MUz539AeC5Y/maxresdefault.jpg",
-      gameplay: "https://img.youtube.com/vi/MUz539AeC5Y/maxresdefault.jpg",
+      trailerBg: "https://img.youtube.com/vi/MUz539AeC5Y/hqdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/MUz539AeC5Y/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=MUz539AeC5Y"
     },
     features: ["Single Player", "Co-op"],
@@ -360,11 +360,11 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹2,999",
     rentPrice: "₹299",
     description: "From legendary game creator Hideo Kojima comes a genre-defying experience.",
-    heroImage: "https://img.youtube.com/vi/piIgkj7BgIg/maxresdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/piIgkj7BgIg/maxresdefault.jpg",
+    heroImage: "https://img.youtube.com/vi/piIgkj7BgIg/hqdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/piIgkj7BgIg/hqdefault.jpg",
     media: {
-      trailerBg: "https://img.youtube.com/vi/piIgkj7BgIg/maxresdefault.jpg",
-      gameplay: "https://img.youtube.com/vi/piIgkj7BgIg/maxresdefault.jpg",
+      trailerBg: "https://img.youtube.com/vi/piIgkj7BgIg/hqdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/piIgkj7BgIg/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=piIgkj7BgIg"
     },
     features: ["Single Player"],
@@ -383,11 +383,11 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹2,499",
     rentPrice: "₹249",
     description: "Ride and fight into a deadly, post pandemic America.",
-    heroImage: "https://img.youtube.com/vi/VDqBQhGJaX0/maxresdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/VDqBQhGJaX0/maxresdefault.jpg",
+    heroImage: "https://img.youtube.com/vi/VDqBQhGJaX0/hqdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/VDqBQhGJaX0/hqdefault.jpg",
     media: {
-      trailerBg: "https://img.youtube.com/vi/VDqBQhGJaX0/maxresdefault.jpg",
-      gameplay: "https://img.youtube.com/vi/VDqBQhGJaX0/maxresdefault.jpg",
+      trailerBg: "https://img.youtube.com/vi/VDqBQhGJaX0/hqdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/VDqBQhGJaX0/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=VDqBQhGJaX0"
     },
     features: ["Single Player"],
@@ -406,11 +406,11 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,999",
     rentPrice: "₹399",
     description: "Break the cycle as Selene fights for survival in a shapeshifting alien world.",
-    heroImage: "https://img.youtube.com/vi/Jv4DjVcGNOo/maxresdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/Jv4DjVcGNOo/maxresdefault.jpg",
+    heroImage: "https://img.youtube.com/vi/Jv4DjVcGNOo/hqdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/Jv4DjVcGNOo/hqdefault.jpg",
     media: {
-      trailerBg: "https://img.youtube.com/vi/Jv4DjVcGNOo/maxresdefault.jpg",
-      gameplay: "https://img.youtube.com/vi/Jv4DjVcGNOo/maxresdefault.jpg",
+      trailerBg: "https://img.youtube.com/vi/Jv4DjVcGNOo/hqdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/Jv4DjVcGNOo/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=Jv4DjVcGNOo"
     },
     features: ["Single Player", "Co-op"],
@@ -429,11 +429,11 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,999",
     rentPrice: "₹399",
     description: "Blast your way through an interdimensional adventure with Ratchet and Clank.",
-    heroImage: "https://img.youtube.com/vi/9p_gg9UW9k4/maxresdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/9p_gg9UW9k4/maxresdefault.jpg",
+    heroImage: "https://img.youtube.com/vi/9p_gg9UW9k4/hqdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/9p_gg9UW9k4/hqdefault.jpg",
     media: {
-      trailerBg: "https://img.youtube.com/vi/9p_gg9UW9k4/maxresdefault.jpg",
-      gameplay: "https://img.youtube.com/vi/9p_gg9UW9k4/maxresdefault.jpg",
+      trailerBg: "https://img.youtube.com/vi/9p_gg9UW9k4/hqdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/9p_gg9UW9k4/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=9p_gg9UW9k4"
     },
     features: ["Single Player"],
@@ -452,14 +452,15 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹2,999",
     rentPrice: "₹299",
     description: "Seek your legacy and leave your mark on the map in UNCHARTED: Legacy of Thieves Collection.",
-    heroImage: "https://img.youtube.com/vi/4wJzI54oO5E/maxresdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/4wJzI54oO5E/maxresdefault.jpg",
+    heroImage: "https://img.youtube.com/vi/4wJzI54oO5E/hqdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/4wJzI54oO5E/hqdefault.jpg",
     media: {
-      trailerBg: "https://img.youtube.com/vi/4wJzI54oO5E/maxresdefault.jpg",
-      gameplay: "https://img.youtube.com/vi/4wJzI54oO5E/maxresdefault.jpg",
+      trailerBg: "https://img.youtube.com/vi/4wJzI54oO5E/hqdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/4wJzI54oO5E/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=4wJzI54oO5E"
     },
     features: ["Single Player"],
     tags: ["deals", "ps5"]
   }
 };
+

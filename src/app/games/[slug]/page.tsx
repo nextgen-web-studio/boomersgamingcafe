@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft, ShoppingCart, Heart, Share2, Star } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { use } from "react";
+import { use, useState } from "react";
 import { DEMO_GAMES_DETAIL } from "@/lib/mockData";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
@@ -13,6 +13,7 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
   const resolvedParams = use(params);
   const router = useRouter();
   const { addToCart } = useCart();
+  const [isWishlisted, setIsWishlisted] = useState(false);
   // Fetch game dynamically from mock database (fallback to GoW if not found)
   const game = DEMO_GAMES_DETAIL[resolvedParams.slug as keyof typeof DEMO_GAMES_DETAIL] || DEMO_GAMES_DETAIL["god-of-war-ragnarok"]; 
 
@@ -142,10 +143,10 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
 
             <section className="pt-8">
               <h2 className="text-2xl font-bold mb-6 text-white">Gameplay & Media</h2>
-              <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 scrollbar-hide">
+              <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 scrollbar-hide items-start">
                 {/* Trailer Placeholder */}
                 {game.media?.trailerUrl ? (
-                  <a href={game.media.trailerUrl} target="_blank" rel="noopener noreferrer" className="min-w-[85%] md:min-w-[45%] snap-center relative aspect-video rounded-xl overflow-hidden group cursor-pointer border border-white/10 shrink-0 block">
+                  <a href={game.media.trailerUrl} target="_blank" rel="noopener noreferrer" className="h-[200px] md:h-[280px] min-w-[85%] md:min-w-[45%] snap-center relative rounded-xl overflow-hidden group cursor-pointer border border-white/10 shrink-0 block">
                     <img src={game.media?.trailerBg || game.heroImage} alt="Trailer" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/20 transition-colors">
                       <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 group-hover:scale-110 transition-transform">
@@ -154,7 +155,7 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
                     </div>
                   </a>
                 ) : (
-                  <div className="min-w-[85%] md:min-w-[45%] snap-center relative aspect-video rounded-xl overflow-hidden group border border-white/10 shrink-0">
+                  <div className="h-[200px] md:h-[280px] min-w-[85%] md:min-w-[45%] snap-center relative rounded-xl overflow-hidden group border border-white/10 shrink-0">
                     <img src={game.media?.trailerBg || game.heroImage} alt="Trailer" className="w-full h-full object-cover transition-transform duration-500" />
                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                       <span className="text-white font-medium bg-black/60 px-4 py-2 rounded-full backdrop-blur-md">Trailer Unavailable</span>
@@ -162,7 +163,7 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
                   </div>
                 )}
                 {/* Gameplay Screenshot Placeholder */}
-                <div className="min-w-[85%] md:min-w-[45%] snap-center relative aspect-video rounded-xl overflow-hidden border border-white/10 shrink-0">
+                <div className="h-[200px] md:h-[280px] min-w-[85%] md:min-w-[45%] snap-center relative rounded-xl overflow-hidden border border-white/10 shrink-0">
                   <img src={game.media?.gameplay || game.coverImage} alt="Gameplay" className="w-full h-full object-cover" />
                 </div>
               </div>
@@ -208,8 +209,12 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
 
               {/* Action Links */}
               <div className="flex justify-between items-center mt-6 pt-6 border-t border-white/10">
-                <button className="flex items-center gap-2 text-sm font-medium text-white/60 hover:text-white transition-colors">
-                  <Heart className="h-4 w-4" /> Add to Wishlist
+                <button 
+                  onClick={() => setIsWishlisted(!isWishlisted)}
+                  className={`flex items-center gap-2 text-sm font-medium transition-colors ${isWishlisted ? 'text-red-500 hover:text-red-400' : 'text-white/60 hover:text-white'}`}
+                >
+                  <Heart className={`h-4 w-4 ${isWishlisted ? 'fill-current' : ''}`} /> 
+                  {isWishlisted ? 'Wishlisted' : 'Add to Wishlist'}
                 </button>
                 <button className="flex items-center gap-2 text-sm font-medium text-white/60 hover:text-white transition-colors">
                   <Share2 className="h-4 w-4" /> Share
