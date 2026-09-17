@@ -30,15 +30,15 @@ const TIERS = [
     headerBg: "bg-[#1F1F1F]",
     headerText: "text-[#F3C51A]",
     features: [
-      { text: "Classics Catalogue", icon: Gamepad2 },
-      { text: "Game Trials", icon: Clock },
-      { text: "Game Catalogue", icon: Sparkles },
-      { text: "Ubisoft+ Classics", icon: Download },
-      { text: "Monthly Games", icon: Gamepad2 },
-      { text: "Online Multiplayer", icon: Users },
-      { text: "Exclusive Discounts", icon: Tag },
-      { text: "Cloud Storage", icon: Cloud },
-      { text: "Share Play", icon: Users },
+      { text: "Classics Catalogue", icon: Gamepad2, included: true },
+      { text: "Game Trials", icon: Clock, included: true },
+      { text: "Game Catalogue", icon: Sparkles, included: true },
+      { text: "Ubisoft+ Classics", icon: Download, included: true },
+      { text: "Monthly Games", icon: Gamepad2, included: true },
+      { text: "Online Multiplayer", icon: Users, included: true },
+      { text: "Exclusive Discounts", icon: Tag, included: true },
+      { text: "Cloud Storage", icon: Cloud, included: true },
+      { text: "Share Play", icon: Users, included: true },
     ],
     plans: [
       { id: "12-Month", priceLabel: "Rs 9,879 every 12 months", price: 9879, badge: "Best value*", subtext: "33% off 12 months versus 1 month" },
@@ -52,13 +52,15 @@ const TIERS = [
     headerBg: "bg-[#F3C51A]",
     headerText: "text-black",
     features: [
-      { text: "Game Catalogue", icon: Sparkles },
-      { text: "Ubisoft+ Classics", icon: Download },
-      { text: "Monthly Games", icon: Gamepad2 },
-      { text: "Online Multiplayer", icon: Users },
-      { text: "Exclusive Discounts", icon: Tag },
-      { text: "Cloud Storage", icon: Cloud },
-      { text: "Share Play", icon: Users },
+      { text: "Classics Catalogue", icon: Gamepad2, included: false },
+      { text: "Game Trials", icon: Clock, included: false },
+      { text: "Game Catalogue", icon: Sparkles, included: true },
+      { text: "Ubisoft+ Classics", icon: Download, included: true },
+      { text: "Monthly Games", icon: Gamepad2, included: true },
+      { text: "Online Multiplayer", icon: Users, included: true },
+      { text: "Exclusive Discounts", icon: Tag, included: true },
+      { text: "Cloud Storage", icon: Cloud, included: true },
+      { text: "Share Play", icon: Users, included: true },
     ],
     plans: [
       { id: "12-Month", priceLabel: "Rs 8,709 every 12 months", price: 8709, badge: "Best value*", subtext: "25% off 12 months versus 1 month" },
@@ -72,12 +74,15 @@ const TIERS = [
     headerBg: "bg-[#EBEBEB]",
     headerText: "text-black",
     features: [
-      { text: "Monthly Games", icon: Gamepad2 },
-      { text: "Online Multiplayer", icon: Users },
-      { text: "Exclusive Discounts", icon: Tag },
-      { text: "Exclusive Content", icon: Download },
-      { text: "Cloud Storage", icon: Cloud },
-      { text: "Share Play", icon: Users },
+      { text: "Classics Catalogue", icon: Gamepad2, included: false },
+      { text: "Game Trials", icon: Clock, included: false },
+      { text: "Game Catalogue", icon: Sparkles, included: false },
+      { text: "Ubisoft+ Classics", icon: Download, included: false },
+      { text: "Monthly Games", icon: Gamepad2, included: true },
+      { text: "Online Multiplayer", icon: Users, included: true },
+      { text: "Exclusive Discounts", icon: Tag, included: true },
+      { text: "Cloud Storage", icon: Cloud, included: true },
+      { text: "Share Play", icon: Users, included: true },
     ],
     plans: [
       { id: "12-Month", priceLabel: "Rs 3,949 every 12 months", price: 3949, badge: "Best value*", subtext: "34% off 12 months versus 1 month" },
@@ -101,8 +106,13 @@ function TierCard({ tier, onSubscribe }: { tier: typeof TIERS[0], onSubscribe: (
       <div className="p-4 md:p-6 flex-1 bg-white">
         <div className="space-y-2.5 md:space-y-4">
           {tier.features.map((f, idx) => (
-            <div key={idx} className="flex items-center gap-3 text-[13px] md:text-[15px] text-gray-800 font-medium">
-              <f.icon className="w-4 h-4 md:w-5 md:h-5 text-gray-400 shrink-0" strokeWidth={1.25} />
+            <div 
+              key={idx} 
+              className={`flex items-center gap-3 text-[13px] md:text-[15px] font-medium transition-all ${
+                f.included ? 'text-gray-800' : 'text-gray-400 line-through opacity-60'
+              }`}
+            >
+              <f.icon className={`w-4 h-4 md:w-5 md:h-5 shrink-0 ${f.included ? 'text-gray-400' : 'text-gray-300'}`} strokeWidth={1.25} />
               {f.text}
             </div>
           ))}
