@@ -38,11 +38,15 @@ export default function SubscriptionPage() {
         <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
           {/* PS Plus Logo Simulation */}
           <div className="flex items-center gap-3 mb-8">
-            <img 
-              src="https://upload.wikimedia.org/wikipedia/commons/a/a7/PlayStation_Plus_logo.svg" 
-              alt="PlayStation Plus" 
-              className="h-10 md:h-14"
-            />
+            {/* SVG PlayStation Plus Logo Inline (Guaranteed to render) */}
+            <div className="flex justify-center text-white">
+              <svg width="200" height="60" viewBox="0 0 400 120" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                {/* Minimalist bold text fallback representation of PS Plus to avoid huge path data if exact path isn't strictly necessary, but let's just write "PlayStation Plus" cleanly if exact logo paths are too large. Actually, I can just use a reliable font-based logo for now */}
+                <text x="0" y="75" fontFamily="Arial, sans-serif" fontSize="48" fontWeight="bold" letterSpacing="-2">
+                  PlayStation <tspan fill="#eab308">Plus</tspan>
+                </text>
+              </svg>
+            </div>
           </div>
           
           <h2 className="text-3xl md:text-6xl font-light mb-4 md:mb-6 tracking-tight max-w-3xl leading-tight text-white">
