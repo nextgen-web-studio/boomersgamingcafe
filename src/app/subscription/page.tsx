@@ -1,207 +1,204 @@
 "use client";
 
-import { Check, Info } from "lucide-react";
+import { Check, Info, Users, Tag, Cloud, Download, Gamepad2, Sparkles, Clock } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+// Authentic PlayStation Plus rounded cross inline SVG
 const PSPlusLogo = ({ className = "h-8" }: { className?: string }) => (
   <div className={`flex items-center gap-2 ${className}`}>
     <svg viewBox="0 0 100 100" className="h-full aspect-square text-[#F3C51A]" fill="currentColor">
-      {/* Authentic PlayStation Plus rounded cross */}
       <path d="M70,36.5H63.5V30c0-6.9-5.6-12.5-12.5-12.5h-2c-6.9,0-12.5,5.6-12.5,12.5v6.5H30c-6.9,0-12.5,5.6-12.5,12.5v2 c0,6.9,5.6,12.5,12.5,12.5h6.5V70c0,6.9,5.6,12.5,12.5,12.5h2c6.9,0,12.5-5.6,12.5-12.5v-6.5H70c6.9,0,12.5-5.6,12.5-12.5v-2 C82.5,42.1,76.9,36.5,70,36.5z" />
     </svg>
-    <span className="font-bold tracking-tight whitespace-nowrap" style={{ fontFamily: 'sans-serif' }}>
+    <span className="font-bold tracking-tight whitespace-nowrap text-black" style={{ fontFamily: 'sans-serif' }}>
       PlayStation Plus
     </span>
   </div>
 );
 
+const TIERS = [
+  {
+    id: "Deluxe",
+    name: "DELUXE",
+    headerBg: "bg-[#1F1F1F]",
+    headerText: "text-[#F3C51A]",
+    features: [
+      { text: "Classics Catalogue", icon: Gamepad2 },
+      { text: "Game Trials", icon: Clock },
+      { text: "Game Catalogue", icon: Sparkles },
+      { text: "Ubisoft+ Classics", icon: Download },
+      { text: "Monthly Games", icon: Gamepad2 },
+      { text: "Online Multiplayer", icon: Users },
+      { text: "Exclusive Discounts", icon: Tag },
+      { text: "Cloud Storage", icon: Cloud },
+      { text: "Share Play", icon: Users },
+    ],
+    plans: [
+      { id: "12-Month", priceLabel: "Rs 9,879 every 12 months", price: 9879, badge: "Best value*", subtext: "33% off 12 months versus 1 month" },
+      { id: "3-Month", priceLabel: "Rs 2,989 every 3 months", price: 2989 },
+      { id: "1-Month", priceLabel: "Rs 1,109 every month", price: 1109 },
+    ]
+  },
+  {
+    id: "Extra",
+    name: "EXTRA",
+    headerBg: "bg-[#F3C51A]",
+    headerText: "text-black",
+    features: [
+      { text: "Game Catalogue", icon: Sparkles },
+      { text: "Ubisoft+ Classics", icon: Download },
+      { text: "Monthly Games", icon: Gamepad2 },
+      { text: "Online Multiplayer", icon: Users },
+      { text: "Exclusive Discounts", icon: Tag },
+      { text: "Cloud Storage", icon: Cloud },
+      { text: "Share Play", icon: Users },
+    ],
+    plans: [
+      { id: "12-Month", priceLabel: "Rs 8,709 every 12 months", price: 8709, badge: "Best value*", subtext: "25% off 12 months versus 1 month" },
+      { id: "3-Month", priceLabel: "Rs 2,599 every 3 months", price: 2599 },
+      { id: "1-Month", priceLabel: "Rs 979 every month", price: 979 },
+    ]
+  },
+  {
+    id: "Essential",
+    name: "ESSENTIAL",
+    headerBg: "bg-[#EBEBEB]",
+    headerText: "text-black",
+    features: [
+      { text: "Monthly Games", icon: Gamepad2 },
+      { text: "Online Multiplayer", icon: Users },
+      { text: "Exclusive Discounts", icon: Tag },
+      { text: "Exclusive Content", icon: Download },
+      { text: "Cloud Storage", icon: Cloud },
+      { text: "Share Play", icon: Users },
+    ],
+    plans: [
+      { id: "12-Month", priceLabel: "Rs 3,949 every 12 months", price: 3949, badge: "Best value*", subtext: "34% off 12 months versus 1 month" },
+      { id: "3-Month", priceLabel: "Rs 1,199 every 3 months", price: 1199 },
+      { id: "1-Month", priceLabel: "Rs 499 every month", price: 499 },
+    ]
+  }
+];
+
+function TierCard({ tier, onSubscribe }: { tier: typeof TIERS[0], onSubscribe: Function }) {
+  const [selectedPlan, setSelectedPlan] = useState("12-Month");
+
+  return (
+    <div className="min-w-[85vw] md:min-w-0 snap-center bg-white text-black rounded-2xl overflow-hidden shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-gray-200 flex flex-col transition-transform duration-300 hover:-translate-y-1">
+      {/* Header */}
+      <div className={`${tier.headerBg} px-6 py-5 flex items-center justify-between`}>
+        <h3 className={`text-2xl font-black tracking-tight ${tier.headerText}`}>{tier.name}</h3>
+      </div>
+
+      {/* Features */}
+      <div className="p-6 flex-1 bg-white">
+        <div className="space-y-4">
+          {tier.features.map((f, idx) => (
+            <div key={idx} className="flex items-center gap-4 text-[15px] text-gray-800 font-medium">
+              <f.icon className="w-5 h-5 text-gray-500" strokeWidth={1.5} />
+              {f.text}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Pricing Options */}
+      <div className="p-6 bg-gray-50/80 border-t border-gray-100 flex flex-col gap-3">
+        {tier.plans.map(plan => (
+          <label 
+            key={plan.id} 
+            className={`flex items-start justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${
+              selectedPlan === plan.id 
+                ? 'border-[#0070D1] bg-white shadow-sm' 
+                : 'border-transparent hover:bg-gray-100 bg-transparent'
+            }`}
+          >
+            <div className="flex flex-col pr-4">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="font-bold text-[15px] text-gray-900">{plan.id} Plan</span>
+                {plan.badge && (
+                  <span className="text-[10px] bg-black text-white px-1.5 py-0.5 rounded-[3px] font-bold tracking-wide uppercase">
+                    {plan.badge}
+                  </span>
+                )}
+              </div>
+              <span className="text-[13px] font-semibold text-gray-700">{plan.priceLabel}</span>
+              {plan.subtext && <span className="text-[11px] text-gray-500 mt-0.5">{plan.subtext}</span>}
+            </div>
+            <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 mt-1 ${
+              selectedPlan === plan.id ? 'border-[#0070D1]' : 'border-gray-300'
+            }`}>
+              {selectedPlan === plan.id && <div className="w-3 h-3 bg-[#0070D1] rounded-full" />}
+            </div>
+          </label>
+        ))}
+      </div>
+
+      {/* Action Button */}
+      <div className="px-6 pb-6 pt-2 bg-gray-50/80">
+        <button 
+          onClick={() => onSubscribe(tier.id, tier.plans.find(p => p.id === selectedPlan))} 
+          className="w-full bg-[#0070D1] hover:bg-[#005fb3] text-white font-bold py-4 rounded-full transition-colors text-[15px] shadow-md shadow-blue-900/10"
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function SubscriptionPage() {
   const { addToCart } = useCart();
   const router = useRouter();
-  const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('monthly');
 
-  const plans = {
-    Essential: { monthly: 499, annual: 3949 },
-    Extra: { monthly: 749, annual: 6699 },
-    Deluxe: { monthly: 849, annual: 7599 }
-  };
-
-  const handleSubscribe = (tier: keyof typeof plans) => {
+  const handleSubscribe = (tierId: string, selectedPlan: any) => {
     let cover = "/images/psplus-essential.svg";
-    if (tier === "Extra") cover = "/images/psplus-extra.svg";
-    if (tier === "Deluxe") cover = "/images/psplus-deluxe.svg";
-
-    const price = plans[tier][billingCycle];
-    const typeLabel = billingCycle === 'monthly' ? '1 Month' : '12 Months';
+    if (tierId === "Extra") cover = "/images/psplus-extra.svg";
+    if (tierId === "Deluxe") cover = "/images/psplus-deluxe.svg";
 
     addToCart({
-      gameId: `ps-plus-${tier.toLowerCase()}-${billingCycle}`,
-      title: `PlayStation Plus ${tier} - ${typeLabel}`,
+      gameId: `ps-plus-${tierId.toLowerCase()}-${selectedPlan.id}`,
+      title: `PlayStation Plus ${tierId} - ${selectedPlan.id}`,
       platform: "PS5 • PS4",
       coverImage: cover,
       purchaseType: "permanent",
-      price: price
+      price: selectedPlan.price
     });
     router.push('/cart');
   };
 
   return (
-    <div className="min-h-screen bg-white text-black pb-24 font-sans">
-      {/* Hero Section */}
-      <div 
-        className="relative overflow-hidden py-24 md:py-32 bg-black flex flex-col items-center justify-center text-center bg-cover bg-center"
-        style={{ backgroundImage: `url('/images/gow-hero.jpg')` }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/20 to-black z-0" />
-        <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
-          
-          {/* Authentic PS Plus Logo */}
-          <div className="mb-6 bg-black/40 backdrop-blur-md px-6 py-3 rounded-2xl border border-white/10 shadow-2xl inline-block">
-            <PSPlusLogo className="h-10 md:h-14 text-white" />
-          </div>
-          
-          <h2 className="text-3xl md:text-6xl font-light mb-4 md:mb-6 tracking-tight max-w-3xl leading-tight text-white">
-            Choose your PlayStation Plus plan
-          </h2>
-          <p className="text-base md:text-xl text-gray-300 max-w-2xl font-light mb-8 md:mb-10">
-            Enjoy all the core PlayStation Plus benefits, hundreds of games in the Game Catalog, as well as exclusive benefits like game trials, cloud streaming, and the Classics Catalog.
-          </p>
-
-          {/* Billing Toggle */}
-          <div className="flex items-center bg-white/10 backdrop-blur-md rounded-full p-1 border border-white/20 relative z-20">
-            <button 
-              onClick={() => setBillingCycle('monthly')}
-              className={`px-6 py-2.5 rounded-full text-sm md:text-base font-bold transition-colors ${billingCycle === 'monthly' ? 'bg-white text-black' : 'text-white hover:text-white/80'}`}
-            >
-              1 Month
-            </button>
-            <button 
-              onClick={() => setBillingCycle('annual')}
-              className={`px-6 py-2.5 rounded-full text-sm md:text-base font-bold transition-colors ${billingCycle === 'annual' ? 'bg-white text-black' : 'text-white hover:text-white/80'}`}
-            >
-              12 Months
-            </button>
-          </div>
+    <div className="min-h-screen bg-[#F5F5F7] pb-24 font-sans selection:bg-blue-200">
+      
+      {/* Header Section */}
+      <div className="pt-20 pb-12 px-4 flex flex-col items-center justify-center text-center">
+        <div className="mb-8">
+          <PSPlusLogo className="h-10 md:h-12 scale-110" />
         </div>
+        <h1 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-[#1F1F1F] max-w-2xl">
+          COMPARE MEMBERSHIP PLANS
+        </h1>
+        <p className="text-sm md:text-base text-gray-600 max-w-2xl font-medium leading-relaxed px-4">
+          Discover your next great adventure with brand-new catalogues of hundreds of current and classic games, limited-time trials, online multiplayer, member-exclusive discounts and more, with a choice of three membership options.
+        </p>
       </div>
 
-      {/* Pricing Tiers */}
-      <div className="container mx-auto px-4 max-w-[1400px] mt-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          
-          {/* ESSENTIAL TIER (Light/Gray styling) */}
-          <div className="flex flex-col bg-[#E6E6E6] text-black rounded-lg overflow-hidden transition-transform hover:-translate-y-2 duration-300">
-            <div className="p-8 pb-4 flex-1">
-              <div className="flex justify-between items-start mb-6">
-                <div>
-                  <PSPlusLogo className="h-4 text-black mb-2 opacity-60" />
-                  <h3 className="text-4xl font-light tracking-tight">ESSENTIAL</h3>
-                </div>
-              </div>
-              <p className="text-gray-700 text-sm h-16">
-                Enhance your PlayStation experience with core features, including online multiplayer access, two PS4 and one PS5 downloadable games to play each month, exclusive discounts, and more.
-              </p>
-              
-              <div className="my-8 h-14">
-                <p className="text-xs text-gray-500 mb-1">{billingCycle === 'monthly' ? '1 Month' : '12 Months'}</p>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-3xl font-medium">₹{plans.Essential[billingCycle]}</span>
-                </div>
-              </div>
-
-              <Button onClick={() => handleSubscribe("Essential")} className="w-full bg-[#E04F26] hover:bg-[#c94520] text-white rounded-full font-bold py-6 text-lg mb-8">
-                Add to Cart
-              </Button>
-
-              <div className="space-y-4 text-sm font-medium">
-                <div className="flex gap-4"><Check className="h-5 w-5 shrink-0" /> Monthly Games</div>
-                <div className="flex gap-4"><Check className="h-5 w-5 shrink-0" /> Online Multiplayer</div>
-                <div className="flex gap-4"><Check className="h-5 w-5 shrink-0" /> Exclusive Discounts</div>
-                <div className="flex gap-4"><Check className="h-5 w-5 shrink-0" /> Exclusive Content</div>
-                <div className="flex gap-4"><Check className="h-5 w-5 shrink-0" /> Cloud Storage</div>
-                <div className="flex gap-4"><Check className="h-5 w-5 shrink-0" /> Share Play</div>
-              </div>
-            </div>
-          </div>
-
-          {/* EXTRA TIER (Yellow styling) */}
-          <div className="flex flex-col bg-[#F3C51A] text-black rounded-lg overflow-hidden transition-transform hover:-translate-y-2 duration-300 relative">
-            <div className="p-8 pb-4 flex-1">
-              <div className="flex justify-between items-start mb-6">
-                <div>
-                  <PSPlusLogo className="h-4 text-black mb-2 opacity-70" />
-                  <h3 className="text-4xl font-light tracking-tight">EXTRA</h3>
-                </div>
-              </div>
-              <p className="text-black/80 text-sm h-16">
-                Enjoy all the core PlayStation Plus benefits, and explore a world of incredible gaming experiences with the Game Catalog, featuring hundreds of downloadable PS4 and PS5 games.
-              </p>
-              
-              <div className="my-8 h-14">
-                <p className="text-xs text-black/60 mb-1">{billingCycle === 'monthly' ? '1 Month' : '12 Months'}</p>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-3xl font-medium">₹{plans.Extra[billingCycle]}</span>
-                </div>
-              </div>
-
-              <Button onClick={() => handleSubscribe("Extra")} className="w-full bg-black hover:bg-gray-900 text-white rounded-full font-bold py-6 text-lg mb-8">
-                Add to Cart
-              </Button>
-
-              <div className="space-y-4 text-sm font-medium">
-                <div className="flex gap-4"><Check className="h-5 w-5 shrink-0" /> Game Catalog</div>
-                <div className="flex gap-4"><Check className="h-5 w-5 shrink-0" /> Ubisoft+ Classics</div>
-                <div className="flex gap-4 text-black/50 border-t border-black/10 pt-4"><Check className="h-5 w-5 shrink-0" /> Monthly Games</div>
-                <div className="flex gap-4 text-black/50"><Check className="h-5 w-5 shrink-0" /> Online Multiplayer</div>
-                <div className="flex gap-4 text-black/50"><Check className="h-5 w-5 shrink-0" /> Exclusive Discounts</div>
-                <div className="flex gap-4 text-black/50"><Check className="h-5 w-5 shrink-0" /> Exclusive Content</div>
-                <div className="flex gap-4 text-black/50"><Check className="h-5 w-5 shrink-0" /> Cloud Storage</div>
-                <div className="flex gap-4 text-black/50"><Check className="h-5 w-5 shrink-0" /> Share Play</div>
-              </div>
-            </div>
-          </div>
-
-          {/* DELUXE TIER (Black/Dark styling) */}
-          <div className="flex flex-col bg-[#1A1A1A] text-white border border-gray-800 rounded-lg overflow-hidden transition-transform hover:-translate-y-2 duration-300">
-            <div className="p-8 pb-4 flex-1">
-              <div className="flex justify-between items-start mb-6">
-                <div>
-                  <PSPlusLogo className="h-4 text-white mb-2 opacity-80" />
-                  <h3 className="text-4xl font-light tracking-tight">DELUXE</h3>
-                </div>
-              </div>
-              <p className="text-gray-400 text-sm h-16">
-                Enjoy all the core PlayStation Plus benefits, hundreds of games in the Game Catalog, as well as exclusive benefits like game trials and the Classics Catalog.
-              </p>
-              
-              <div className="my-8 h-14">
-                <p className="text-xs text-gray-500 mb-1">{billingCycle === 'monthly' ? '1 Month' : '12 Months'}</p>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-3xl font-medium">₹{plans.Deluxe[billingCycle]}</span>
-                </div>
-              </div>
-
-              <Button onClick={() => handleSubscribe("Deluxe")} className="w-full bg-white hover:bg-gray-200 text-black rounded-full font-bold py-6 text-lg mb-8">
-                Add to Cart
-              </Button>
-
-              <div className="space-y-4 text-sm font-medium">
-                <div className="flex gap-4"><Check className="h-5 w-5 shrink-0 text-[#F3C51A]" /> Classics Catalog</div>
-                <div className="flex gap-4"><Check className="h-5 w-5 shrink-0 text-[#F3C51A]" /> Game Trials</div>
-                <div className="flex gap-4 text-gray-500 border-t border-gray-800 pt-4"><Check className="h-5 w-5 shrink-0" /> Game Catalog</div>
-                <div className="flex gap-4 text-gray-500"><Check className="h-5 w-5 shrink-0" /> Ubisoft+ Classics</div>
-                <div className="flex gap-4 text-gray-500"><Check className="h-5 w-5 shrink-0" /> Monthly Games</div>
-                <div className="flex gap-4 text-gray-500"><Check className="h-5 w-5 shrink-0" /> Online Multiplayer</div>
-                <div className="flex gap-4 text-gray-500"><Check className="h-5 w-5 shrink-0" /> Exclusive Discounts</div>
-                <div className="flex gap-4 text-gray-500"><Check className="h-5 w-5 shrink-0" /> Cloud Storage</div>
-              </div>
-            </div>
-          </div>
-
+      {/* Pricing Tiers Carousel / Grid */}
+      <div className="max-w-[1200px] mx-auto relative">
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-12 px-6 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:snap-none scrollbar-hide items-stretch">
+          {TIERS.map(tier => (
+            <TierCard key={tier.id} tier={tier} onSubscribe={handleSubscribe} />
+          ))}
+        </div>
+        
+        {/* Mobile Swipe Indicator */}
+        <div className="flex md:hidden justify-center items-center gap-2 pb-8 opacity-50">
+           <div className="w-8 h-1 bg-[#0070D1] rounded-full"></div>
+           <div className="w-2 h-1 bg-gray-400 rounded-full"></div>
+           <div className="w-2 h-1 bg-gray-400 rounded-full"></div>
         </div>
       </div>
     </div>
