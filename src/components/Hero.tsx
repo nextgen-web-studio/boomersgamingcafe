@@ -9,30 +9,33 @@ import { Button } from "./ui/Button";
 const HERO_GAMES = [
   {
     id: "1",
-    title: "Cyberpunk 2077: Phantom Liberty",
-    description: "Return as cyber-enhanced mercenary V and embark on a high-stakes mission of espionage and intrigue to save the NUS President.",
+    title: "Grand Theft Auto VI",
+    slug: "gta-6",
+    description: "Welcome to Leonida, home to the neon-soaked streets of Vice City and beyond in the biggest, most immersive evolution of the Grand Theft Auto universe yet.",
     platform: "PS5",
-    price: "₹2,999",
-    rentPrice: "₹499 / 7 Days",
-    image: "/images/cyberpunk-hero.jpg", 
+    price: "₹5,499",
+    rentPrice: "₹599 / 7 Days",
+    image: "https://media.rockstargames.com/rockstargames-newsite/uploads/22bf689e414c7764f2ce9052bda403061da1dc5c.jpg", // High quality GTA 6 artwork
   },
   {
     id: "2",
-    title: "Ghost of Tsushima Director's Cut",
-    description: "Uncover the hidden wonders of Tsushima in this open-world action adventure.",
+    title: "Marvel's Wolverine",
+    slug: "wolverine",
+    description: "A standalone game directed by Brian Horton and Cameron Christian, featuring cutting-edge gameplay and a deeply emotional narrative.",
     platform: "PS5",
-    price: "₹3,999",
-    rentPrice: "₹399 / 7 Days",
-    image: "/images/ghost-hero.jpg",
+    price: "₹4,999",
+    rentPrice: "₹499 / 7 Days",
+    image: "https://gmedia.playstation.com/is/image/SIEPDC/marvels-wolverine-hero-banner-desktop-01-en-07sep21?$1600px$", 
   },
   {
     id: "3",
-    title: "God of War Ragnarök",
-    description: "Embark on an epic and heartfelt journey as Kratos and Atreus struggle with holding on and letting go.",
-    platform: "PS5 • PS4",
-    price: "₹3,999",
-    rentPrice: "₹399 / 7 Days",
-    image: "/images/gow-hero.jpg",
+    title: "Ghost of Yōtei",
+    slug: "ghost-of-yotei",
+    description: "Embark on a new journey with a new Ghost, Atsu, and explore the lands surrounding Mount Yōtei in 1603.",
+    platform: "PS5",
+    price: "₹4,999",
+    rentPrice: "₹499 / 7 Days",
+    image: "https://gmedia.playstation.com/is/image/SIEPDC/ghost-of-yotei-hero-desktop-01-en-24sep24?$1600px$",
   }
 ];
 
@@ -94,15 +97,11 @@ export function Hero() {
               </p>
               
               <div className="flex flex-wrap items-center gap-2 md:gap-3">
-                <Button size="lg" className="bg-white text-black hover:bg-white/90 text-sm md:text-base px-3 md:px-6 flex-1 sm:flex-none">
-                  Buy {HERO_GAMES[currentIndex].price}
-                </Button>
-                <Button size="lg" variant="secondary" className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 text-sm md:text-base px-3 md:px-6 flex-1 sm:flex-none">
-                  Rent {HERO_GAMES[currentIndex].rentPrice?.split(' /')[0]}
-                </Button>
-                <Button size="icon" variant="ghost" className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-white/10 backdrop-blur-md hover:bg-white/20 border border-white/20 shrink-0">
-                  <ShoppingCart className="h-4 w-4 md:h-5 md:w-5" />
-                </Button>
+                <Link href={`/games/${HERO_GAMES[currentIndex].slug}`}>
+                  <Button size="lg" className="bg-white text-black hover:bg-white/90 text-sm md:text-base px-6 md:px-8 flex-1 sm:flex-none font-bold">
+                    Buy Now
+                  </Button>
+                </Link>
               </div>
             </motion.div>
           </AnimatePresence>

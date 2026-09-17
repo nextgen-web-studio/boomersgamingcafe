@@ -4,9 +4,11 @@ import { Check, Info } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
+import { useRouter } from "next/navigation";
 
 export default function SubscriptionPage() {
   const { addToCart } = useCart();
+  const router = useRouter();
 
   const handleSubscribe = (tier: string, price: number) => {
     let cover = "/images/psplus-essential.svg";
@@ -21,11 +23,11 @@ export default function SubscriptionPage() {
       purchaseType: "permanent",
       price: price
     });
-    alert(`${tier} added to cart!`);
+    router.push('/cart');
   };
 
   return (
-    <div className="min-h-screen bg-[#1F1F1F] text-white pb-24 font-sans">
+    <div className="min-h-screen bg-white text-black pb-24 font-sans">
       {/* Hero Section */}
       <div 
         className="relative overflow-hidden py-24 md:py-32 bg-black flex flex-col items-center justify-center text-center bg-cover bg-center"
@@ -39,10 +41,10 @@ export default function SubscriptionPage() {
             <div className="bg-yellow-500 w-8 h-8 flex items-center justify-center rounded-sm">
               <div className="w-5 h-5 bg-black rounded-full mix-blend-screen" />
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight">PlayStation Plus</h1>
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-white">PlayStation Plus</h1>
           </div>
           
-          <h2 className="text-3xl md:text-6xl font-light mb-4 md:mb-6 tracking-tight max-w-3xl leading-tight">
+          <h2 className="text-3xl md:text-6xl font-light mb-4 md:mb-6 tracking-tight max-w-3xl leading-tight text-white">
             Choose your PlayStation Plus plan
           </h2>
           <p className="text-base md:text-xl text-gray-300 max-w-2xl font-light mb-8 md:mb-10">

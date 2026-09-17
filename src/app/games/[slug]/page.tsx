@@ -7,9 +7,11 @@ import { Button } from "@/components/ui/Button";
 import { use } from "react";
 import { DEMO_GAMES_DETAIL } from "@/lib/mockData";
 import { useCart } from "@/context/CartContext";
+import { useRouter } from "next/navigation";
 
 export default function GameDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = use(params);
+  const router = useRouter();
   const { addToCart } = useCart();
   // Fetch game dynamically from mock database (fallback to GoW if not found)
   const game = DEMO_GAMES_DETAIL[resolvedParams.slug as keyof typeof DEMO_GAMES_DETAIL] || DEMO_GAMES_DETAIL["god-of-war-ragnarok"]; 
@@ -24,6 +26,7 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
       purchaseType: "permanent",
       price: numericPrice
     });
+    router.push('/cart');
   };
 
   const handleRent = () => {
@@ -37,6 +40,7 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
       purchaseType: "rental",
       price: numericRent
     });
+    router.push('/cart');
   };
 
   return (
@@ -70,9 +74,9 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
         
         <div className="absolute inset-0 container mx-auto px-4 md:px-6 flex flex-col justify-end pb-8 md:pb-12">
           
-          <div className="flex flex-col md:flex-row gap-8 items-end">
-            <div className="w-48 hidden md:block shrink-0 overflow-hidden rounded-lg shadow-2xl border border-white/10">
-              <img src={game.coverImage} alt={game.title} className="w-full h-auto" />
+          <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-start md:items-end">
+            <div className="w-32 md:w-48 shrink-0 overflow-hidden rounded-lg shadow-2xl border border-white/10 mt-12 md:mt-0">
+              <img src={game.coverImage} alt={game.title} className="w-full h-auto object-cover" />
             </div>
             
             <div className="flex-1 space-y-4">
