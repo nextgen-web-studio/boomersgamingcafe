@@ -165,15 +165,19 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
                   </div>
                 )}
                 
-                {/* 5 Gameplay Screenshots */}
-                {[
+                {/* Gameplay Screenshots */}
+                {game.media?.screenshots?.map((imgUrl, idx) => (
+                  <div key={idx} className="h-[200px] md:h-[280px] min-w-[85%] md:min-w-[45%] snap-center relative rounded-xl overflow-hidden border border-white/10 shrink-0">
+                    <img src={imgUrl} alt={`Gameplay Screenshot ${idx + 1}`} className="w-full h-full object-cover" />
+                  </div>
+                )) || [
                   game.media?.gameplay || game.coverImage,
                   game.heroImage,
-                  "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop",
-                  "https://images.unsplash.com/photo-1605901309584-818e25960b8f?q=80&w=2019&auto=format&fit=crop",
-                  "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=2070&auto=format&fit=crop"
+                  game.coverImage,
+                  game.media?.trailerBg || game.heroImage,
+                  game.media?.gameplay || game.heroImage
                 ].map((imgUrl, idx) => (
-                  <div key={idx} className="h-[200px] md:h-[280px] min-w-[85%] md:min-w-[45%] snap-center relative rounded-xl overflow-hidden border border-white/10 shrink-0">
+                  <div key={`fallback-${idx}`} className="h-[200px] md:h-[280px] min-w-[85%] md:min-w-[45%] snap-center relative rounded-xl overflow-hidden border border-white/10 shrink-0">
                     <img src={imgUrl} alt={`Gameplay Screenshot ${idx + 1}`} className="w-full h-full object-cover" />
                   </div>
                 ))}

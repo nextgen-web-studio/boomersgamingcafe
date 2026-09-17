@@ -66,6 +66,14 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
       trailerBg: "https://img.youtube.com/vi/hfJ4Km46A-0/hqdefault.jpg",
       gameplay: "https://img.youtube.com/vi/hfJ4Km46A-0/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=hfJ4Km46A-0"
+    ,
+      screenshots: [
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2322010/ss_7c59382e67eadf779e0e15c3837ee91158237f11.1920x1080.jpg?t=1776465233",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2322010/ss_05f27139b15c5410d07cd59b7b52adbdf73e13da.1920x1080.jpg?t=1776465233",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2322010/ss_974a7b998c0c14da7fe52a342cf36c98850a57ac.1920x1080.jpg?t=1776465233",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2322010/ss_78350297511e81f287b4bc361935efbc3016f6db.1920x1080.jpg?t=1776465233",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2322010/ss_7cbcd6847cac4d2d42f496954d0df715c6af0b3a.1920x1080.jpg?t=1776465233"
+      ]
     },
     features: ["Offline play enabled", "1 player", "Remote Play supported"],
     tags: ["top", "ps5", "ps4"]
@@ -112,6 +120,14 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
       trailerBg: "https://img.youtube.com/vi/Lq594Xpoa8g/hqdefault.jpg",
       gameplay: "https://img.youtube.com/vi/Lq594Xpoa8g/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=Lq594Xpoa8g"
+    ,
+      screenshots: [
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2420110/ss_7c1ead4b3d952fd0fb92735397945bd8732bba53.1920x1080.jpg?t=1789585745",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2420110/ss_2d05273cef37bcc3651dc9dbea42dbeca5f5f196.1920x1080.jpg?t=1789585745",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2420110/ss_87750b2dbc34d82d1ffef7aaab40a9f46d970d99.1920x1080.jpg?t=1789585745",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2420110/ss_a4a19b86e80488f3d608e835e5ae3086760db866.1920x1080.jpg?t=1789585745",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2420110/ss_16055ecb20ad2879811db3e97375aef43eef0a8c.1920x1080.jpg?t=1789585745"
+      ]
     },
     features: ["Single Player", "4K HDR", "3D Audio"],
     tags: ["deals", "ps5", "ps4"]
@@ -135,6 +151,14 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
       trailerBg: "https://img.youtube.com/vi/WxjeV10H1F0/hqdefault.jpg",
       gameplay: "https://img.youtube.com/vi/WxjeV10H1F0/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=WxjeV10H1F0"
+    ,
+      screenshots: [
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1888930/ss_3f1805ecddafacee7f61f87cb8e4624435a83ee3.1920x1080.jpg?t=1750959031",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1888930/ss_89fffc2857dcae29dee2a09f1be33d745610e19d.1920x1080.jpg?t=1750959031",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1888930/ss_8cd55ab975b2e47f4d4d9a0da4ae6948040ef807.1920x1080.jpg?t=1750959031",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1888930/ss_f4829000d3677a9b5b2f234482a7deff12b31ac9.1920x1080.jpg?t=1750959031",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1888930/ss_3bed642215856b863799884f6f11671a1ef014d4.1920x1080.jpg?t=1750959031"
+      ]
     },
     features: ["Single Player", "3D Audio", "DualSense Support"],
     tags: ["top", "ps5"]
@@ -158,6 +182,14 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
       trailerBg: "https://img.youtube.com/vi/8X2kIfS6fb8/hqdefault.jpg",
       gameplay: "https://img.youtube.com/vi/8X2kIfS6fb8/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=8X2kIfS6fb8"
+    ,
+      screenshots: [
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/ss_2f649b68d579bf87011487d29bc4ccbfdd97d34f.1920x1080.jpg?t=1784714077",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/ss_0e64170751e1ae20ff8fdb7001a8892fd48260e7.1920x1080.jpg?t=1784714077",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/ss_af2804aa4bf35d4251043744412ce3b359a125ef.1920x1080.jpg?t=1784714077",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/ss_7924f64b6e5d586a80418c9896a1c92881a7905b.1920x1080.jpg?t=1784714077",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/ss_4eb068b1cf52c91b57157b84bed18a186ed7714b.1920x1080.jpg?t=1784714077"
+      ]
     },
     features: ["Single Player", "Ray Tracing"],
     tags: ["deals", "ps5"]
@@ -320,6 +352,13 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
       trailerBg: "https://img.youtube.com/vi/ZUTsoX80FwA/hqdefault.jpg",
       gameplay: "https://img.youtube.com/vi/ZUTsoX80FwA/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=ZUTsoX80FwA"
+    ,
+      screenshots: [
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2536700/ss_b44c7c2999ff38515a118133dd024fb8006a8827.1920x1080.jpg?t=1698651832",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2536700/ss_4e1fe1d8d6e6a4aeec501d021c164decccf2f637.1920x1080.jpg?t=1698651832",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2536700/ss_d6d60879b2713f89dc31962c2fdf04efd7087e4f.1920x1080.jpg?t=1698651832",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2536700/ss_30d415c499d71b65182c966560f170513a2ceb7b.1920x1080.jpg?t=1698651832"
+      ]
     },
     features: ["Online Co-op", "Multiplayer"],
     tags: ["top", "ps5"]
@@ -343,6 +382,14 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
       trailerBg: "https://img.youtube.com/vi/MUz539AeC5Y/hqdefault.jpg",
       gameplay: "https://img.youtube.com/vi/MUz539AeC5Y/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=MUz539AeC5Y"
+    ,
+      screenshots: [
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2215430/ss_51eb1a47a41271abb0aa781de576f704d95b601b.1920x1080.jpg?t=1763409398",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2215430/ss_d60e16422fc1605181e0fedee3e2cfc1e02c750e.1920x1080.jpg?t=1763409398",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2215430/ss_11409331d57966ef193d66ffcded569d02a4e034.1920x1080.jpg?t=1763409398",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2215430/ss_bd593bab36968778b95ed4a1a12ec82d2350d351.1920x1080.jpg?t=1763409398",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2215430/ss_63cc7ea967bf808c73129792d9ae8e3fdb2962bf.1920x1080.jpg?t=1763409398"
+      ]
     },
     features: ["Single Player", "Co-op"],
     tags: ["top", "ps5", "ps4"]
@@ -366,6 +413,14 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
       trailerBg: "https://img.youtube.com/vi/piIgkj7BgIg/hqdefault.jpg",
       gameplay: "https://img.youtube.com/vi/piIgkj7BgIg/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=piIgkj7BgIg"
+    ,
+      screenshots: [
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1850570/ss_f64a1140651ff5af30eb63bb6e5b41753d00a98e.1920x1080.jpg?t=1773400635",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1850570/ss_4b6d7d010d1701b2b57bf8ef1b4975a04b3d632f.1920x1080.jpg?t=1773400635",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1850570/ss_bc8812817c074772822c1d1e8a6b016983cf05e8.1920x1080.jpg?t=1773400635",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1850570/ss_d47bde2e349606b3ef1f641e2d8fb7ccf1adba77.1920x1080.jpg?t=1773400635",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1850570/ss_8f0a2b1f6ea6da05c53f802034e08cbe92aaccab.1920x1080.jpg?t=1773400635"
+      ]
     },
     features: ["Single Player"],
     tags: ["deals", "ps5"]
@@ -389,6 +444,14 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
       trailerBg: "https://img.youtube.com/vi/VDqBQhGJaX0/hqdefault.jpg",
       gameplay: "https://img.youtube.com/vi/VDqBQhGJaX0/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=VDqBQhGJaX0"
+    ,
+      screenshots: [
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1259420/ss_8d958e566d5315463d099b21eae729d0f462caad.1920x1080.jpg?t=1750947718",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1259420/ss_4a1a39d5559909424ed36414070477a96c91e92c.1920x1080.jpg?t=1750947718",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1259420/ss_364f3048399fcb95df5e878c708c94e934cd53d4.1920x1080.jpg?t=1750947718",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1259420/ss_80bbb5ea187cc422012f7a84e694f20f87a26862.1920x1080.jpg?t=1750947718",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1259420/ss_a947f551335679fbffcbe64a3ffcb939429ed533.1920x1080.jpg?t=1750947718"
+      ]
     },
     features: ["Single Player"],
     tags: ["deals", "ps4"]
@@ -412,6 +475,14 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
       trailerBg: "https://img.youtube.com/vi/Jv4DjVcGNOo/hqdefault.jpg",
       gameplay: "https://img.youtube.com/vi/Jv4DjVcGNOo/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=Jv4DjVcGNOo"
+    ,
+      screenshots: [
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1649240/ss_3c260834df0c87cfc9ac1b457d0ec0eb3b9f367c.1920x1080.jpg?t=1750956860",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1649240/ss_a91854c29cee0b4975862d174f03ff374ae5e26c.1920x1080.jpg?t=1750956860",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1649240/ss_e15da2a195556b773ba8a982051f55de50d79a75.1920x1080.jpg?t=1750956860",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1649240/ss_ea2f5b9dd34cd18e05970343edfb36ed0dade475.1920x1080.jpg?t=1750956860",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1649240/ss_7ba021e0dd34bdcfff04a6e600323858acdbec4e.1920x1080.jpg?t=1750956860"
+      ]
     },
     features: ["Single Player", "Co-op"],
     tags: ["top", "ps5"]
@@ -458,6 +529,14 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
       trailerBg: "https://img.youtube.com/vi/4wJzI54oO5E/hqdefault.jpg",
       gameplay: "https://img.youtube.com/vi/4wJzI54oO5E/hqdefault.jpg",
       trailerUrl: "https://www.youtube.com/watch?v=4wJzI54oO5E"
+    ,
+      screenshots: [
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1659420/e59420593825cddd6c5718561b1ffa44d4086f4d/ss_e59420593825cddd6c5718561b1ffa44d4086f4d.1920x1080.jpg?t=1779309472",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1659420/1bb804eb1e1ac1b23840c977586c8f9c2c0393a8/ss_1bb804eb1e1ac1b23840c977586c8f9c2c0393a8.1920x1080.jpg?t=1779309472",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1659420/074469c3a7070c2a821ae984705276028ebf34c2/ss_074469c3a7070c2a821ae984705276028ebf34c2.1920x1080.jpg?t=1779309472",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1659420/f2571b7c3de0eaffdee86191b70840c958cc1354/ss_f2571b7c3de0eaffdee86191b70840c958cc1354.1920x1080.jpg?t=1779309472",
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1659420/2bf8a52b2f2e9915e5042182f7c389d2d1ceff8e/ss_2bf8a52b2f2e9915e5042182f7c389d2d1ceff8e.1920x1080.jpg?t=1779309472"
+      ]
     },
     features: ["Single Player"],
     tags: ["deals", "ps5"]
