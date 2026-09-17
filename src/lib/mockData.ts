@@ -16,6 +16,7 @@ export interface GameDetail {
   media?: {
     trailerBg: string;
     gameplay: string;
+    trailerUrl?: string;
   };
   features: string[];
   tags: string[];
@@ -36,11 +37,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,999",
     rentPrice: "₹399",
     description: "In Marvel's Spider-Man Remastered, the worlds of Peter Parker and Spider-Man collide in an original action-packed story.",
-    heroImage: "https://upload.wikimedia.org/wikipedia/en/2/23/Spider-Man_Remastered_cover_art.jpg",
-    coverImage: "https://upload.wikimedia.org/wikipedia/en/2/23/Spider-Man_Remastered_cover_art.jpg",
+    heroImage: "https://img.youtube.com/vi/q4IrtAX5pRw/maxresdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/q4IrtAX5pRw/maxresdefault.jpg",
     media: {
-      trailerBg: "https://upload.wikimedia.org/wikipedia/en/2/23/Spider-Man_Remastered_cover_art.jpg",
-      gameplay: "https://upload.wikimedia.org/wikipedia/en/2/23/Spider-Man_Remastered_cover_art.jpg"
+      trailerBg: "https://img.youtube.com/vi/q4IrtAX5pRw/maxresdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/q4IrtAX5pRw/maxresdefault.jpg",
+      trailerUrl: "https://www.youtube.com/watch?v=q4IrtAX5pRw"
     },
     features: ["Single Player", "DualSense Support", "Ray Tracing", "Fast Loading"],
     tags: ["top", "ps5"]
@@ -58,11 +60,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,999",
     rentPrice: "₹399",
     description: "Join Kratos and Atreus on a mythic journey for answers before Ragnarök arrives.",
-    heroImage: "https://upload.wikimedia.org/wikipedia/en/e/ee/God_of_War_Ragnar%C3%B6k_cover.jpg",
-    coverImage: "https://upload.wikimedia.org/wikipedia/en/e/ee/God_of_War_Ragnar%C3%B6k_cover.jpg",
+    heroImage: "https://img.youtube.com/vi/hfJ4Km46A-0/maxresdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/hfJ4Km46A-0/maxresdefault.jpg",
     media: {
-      trailerBg: "https://upload.wikimedia.org/wikipedia/en/e/ee/God_of_War_Ragnar%C3%B6k_cover.jpg",
-      gameplay: "https://upload.wikimedia.org/wikipedia/en/e/ee/God_of_War_Ragnar%C3%B6k_cover.jpg"
+      trailerBg: "https://img.youtube.com/vi/hfJ4Km46A-0/maxresdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/hfJ4Km46A-0/maxresdefault.jpg",
+      trailerUrl: "https://www.youtube.com/watch?v=hfJ4Km46A-0"
     },
     features: ["Offline play enabled", "1 player", "Remote Play supported"],
     tags: ["top", "ps5", "ps4"]
@@ -80,11 +83,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,999",
     rentPrice: "₹399",
     description: "THE NEW FANTASY ACTION RPG. Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring.",
-    heroImage: "https://upload.wikimedia.org/wikipedia/en/b/b9/Elden_Ring_Box_art.jpg",
-    coverImage: "https://upload.wikimedia.org/wikipedia/en/b/b9/Elden_Ring_Box_art.jpg",
+    heroImage: "https://img.youtube.com/vi/E3Huy2cdih0/maxresdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/E3Huy2cdih0/maxresdefault.jpg",
     media: {
-      trailerBg: "https://upload.wikimedia.org/wikipedia/en/b/b9/Elden_Ring_Box_art.jpg",
-      gameplay: "https://upload.wikimedia.org/wikipedia/en/b/b9/Elden_Ring_Box_art.jpg"
+      trailerBg: "https://img.youtube.com/vi/E3Huy2cdih0/maxresdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/E3Huy2cdih0/maxresdefault.jpg",
+      trailerUrl: "https://www.youtube.com/watch?v=E3Huy2cdih0"
     },
     features: ["Single Player", "Online Multiplayer"],
     tags: ["top", "ps5", "ps4"]
@@ -102,11 +106,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹2,999",
     rentPrice: "₹299",
     description: "Join Aloy as she braves the Forbidden West - a majestic but dangerous frontier.",
-    heroImage: "https://upload.wikimedia.org/wikipedia/en/6/69/Horizon_Forbidden_West_cover_art.jpg",
-    coverImage: "https://upload.wikimedia.org/wikipedia/en/6/69/Horizon_Forbidden_West_cover_art.jpg",
+    heroImage: "https://img.youtube.com/vi/Lq594Xpoa8g/maxresdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/Lq594Xpoa8g/maxresdefault.jpg",
     media: {
-      trailerBg: "https://upload.wikimedia.org/wikipedia/en/6/69/Horizon_Forbidden_West_cover_art.jpg",
-      gameplay: "https://upload.wikimedia.org/wikipedia/en/6/69/Horizon_Forbidden_West_cover_art.jpg"
+      trailerBg: "https://img.youtube.com/vi/Lq594Xpoa8g/maxresdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/Lq594Xpoa8g/maxresdefault.jpg",
+      trailerUrl: "https://www.youtube.com/watch?v=Lq594Xpoa8g"
     },
     features: ["Single Player", "4K HDR", "3D Audio"],
     tags: ["deals", "ps5", "ps4"]
@@ -124,11 +129,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹4,999",
     rentPrice: "₹499",
     description: "Experience the emotional storytelling and unforgettable characters in The Last of Us, winner of over 200 Game of the Year awards.",
-    heroImage: "https://upload.wikimedia.org/wikipedia/en/2/28/The_Last_of_Us_Part_I_cover.jpg",
-    coverImage: "https://upload.wikimedia.org/wikipedia/en/2/28/The_Last_of_Us_Part_I_cover.jpg",
+    heroImage: "https://img.youtube.com/vi/WxjeV10H1F0/maxresdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/WxjeV10H1F0/maxresdefault.jpg",
     media: {
-      trailerBg: "https://upload.wikimedia.org/wikipedia/en/2/28/The_Last_of_Us_Part_I_cover.jpg",
-      gameplay: "https://upload.wikimedia.org/wikipedia/en/2/28/The_Last_of_Us_Part_I_cover.jpg"
+      trailerBg: "https://img.youtube.com/vi/WxjeV10H1F0/maxresdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/WxjeV10H1F0/maxresdefault.jpg",
+      trailerUrl: "https://www.youtube.com/watch?v=WxjeV10H1F0"
     },
     features: ["Single Player", "3D Audio", "DualSense Support"],
     tags: ["top", "ps5"]
@@ -146,11 +152,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹2,999",
     rentPrice: "₹499",
     description: "Cyberpunk 2077 is an open-world, action-adventure RPG set in the megalopolis of Night City.",
-    heroImage: "https://upload.wikimedia.org/wikipedia/en/9/9f/Cyberpunk_2077_box_art.jpg",
-    coverImage: "https://upload.wikimedia.org/wikipedia/en/9/9f/Cyberpunk_2077_box_art.jpg",
+    heroImage: "https://img.youtube.com/vi/8X2kIfS6fb8/maxresdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/8X2kIfS6fb8/maxresdefault.jpg",
     media: {
-      trailerBg: "https://upload.wikimedia.org/wikipedia/en/9/9f/Cyberpunk_2077_box_art.jpg",
-      gameplay: "https://upload.wikimedia.org/wikipedia/en/9/9f/Cyberpunk_2077_box_art.jpg"
+      trailerBg: "https://img.youtube.com/vi/8X2kIfS6fb8/maxresdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/8X2kIfS6fb8/maxresdefault.jpg",
+      trailerUrl: "https://www.youtube.com/watch?v=8X2kIfS6fb8"
     },
     features: ["Single Player", "Ray Tracing"],
     tags: ["deals", "ps5"]
@@ -169,11 +176,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹5,499",
     rentPrice: "₹599",
     description: "Welcome to Leonida, the home of the neon-soaked streets of Vice City and beyond.",
-    heroImage: "https://upload.wikimedia.org/wikipedia/en/0/05/Grand_Theft_Auto_VI.png",
-    coverImage: "https://upload.wikimedia.org/wikipedia/en/0/05/Grand_Theft_Auto_VI.png",
+    heroImage: "https://img.youtube.com/vi/QdBZY2fkU-0/maxresdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/QdBZY2fkU-0/maxresdefault.jpg",
     media: {
-      trailerBg: "https://upload.wikimedia.org/wikipedia/en/0/05/Grand_Theft_Auto_VI.png",
-      gameplay: "https://upload.wikimedia.org/wikipedia/en/0/05/Grand_Theft_Auto_VI.png"
+      trailerBg: "https://img.youtube.com/vi/QdBZY2fkU-0/maxresdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/QdBZY2fkU-0/maxresdefault.jpg",
+      trailerUrl: "https://www.youtube.com/watch?v=QdBZY2fkU-0"
     },
     features: ["Single Player", "Online Multiplayer"],
     tags: ["upcoming", "ps5"]
@@ -191,11 +199,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹4,999",
     rentPrice: "₹499",
     description: "A standalone game directed by Brian Horton and Cameron Christian.",
-    heroImage: "https://upload.wikimedia.org/wikipedia/en/7/7b/Marvel%27s_Wolverine_cover_art.jpg",
-    coverImage: "https://upload.wikimedia.org/wikipedia/en/7/7b/Marvel%27s_Wolverine_cover_art.jpg",
+    heroImage: "https://img.youtube.com/vi/ZdlM-02L8t4/maxresdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/ZdlM-02L8t4/maxresdefault.jpg",
     media: {
-      trailerBg: "https://upload.wikimedia.org/wikipedia/en/7/7b/Marvel%27s_Wolverine_cover_art.jpg",
-      gameplay: "https://upload.wikimedia.org/wikipedia/en/7/7b/Marvel%27s_Wolverine_cover_art.jpg"
+      trailerBg: "https://img.youtube.com/vi/ZdlM-02L8t4/maxresdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/ZdlM-02L8t4/maxresdefault.jpg",
+      trailerUrl: "https://www.youtube.com/watch?v=ZdlM-02L8t4"
     },
     features: ["Single Player", "DualSense Support"],
     tags: ["upcoming", "ps5"]
@@ -213,11 +222,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹4,999",
     rentPrice: "₹499",
     description: "Embark on a new journey with a new Ghost, Atsu, and explore the lands surrounding Mount Yōtei in 1603.",
-    heroImage: "https://upload.wikimedia.org/wikipedia/en/0/0e/Ghost_of_Y%C5%8Dtei_cover_art.jpg",
-    coverImage: "https://upload.wikimedia.org/wikipedia/en/0/0e/Ghost_of_Y%C5%8Dtei_cover_art.jpg",
+    heroImage: "https://img.youtube.com/vi/7z7MM6N9g2M/maxresdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/7z7MM6N9g2M/maxresdefault.jpg",
     media: {
-      trailerBg: "https://upload.wikimedia.org/wikipedia/en/0/0e/Ghost_of_Y%C5%8Dtei_cover_art.jpg",
-      gameplay: "https://upload.wikimedia.org/wikipedia/en/0/0e/Ghost_of_Y%C5%8Dtei_cover_art.jpg"
+      trailerBg: "https://img.youtube.com/vi/7z7MM6N9g2M/maxresdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/7z7MM6N9g2M/maxresdefault.jpg",
+      trailerUrl: "https://www.youtube.com/watch?v=7z7MM6N9g2M"
     },
     features: ["Single Player"],
     tags: ["upcoming", "ps5"]
@@ -235,11 +245,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,999",
     rentPrice: "₹399",
     description: "Winner of over 175 Game of the Year Awards and recipient of over 250 perfect scores, RDR2 is the epic tale of outlaw Arthur Morgan.",
-    heroImage: "https://upload.wikimedia.org/wikipedia/en/4/44/Red_Dead_Redemption_II.jpg",
-    coverImage: "https://upload.wikimedia.org/wikipedia/en/4/44/Red_Dead_Redemption_II.jpg",
+    heroImage: "https://img.youtube.com/vi/eaW0tYpxyp0/maxresdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/eaW0tYpxyp0/maxresdefault.jpg",
     media: {
-      trailerBg: "https://upload.wikimedia.org/wikipedia/en/4/44/Red_Dead_Redemption_II.jpg",
-      gameplay: "https://upload.wikimedia.org/wikipedia/en/4/44/Red_Dead_Redemption_II.jpg"
+      trailerBg: "https://img.youtube.com/vi/eaW0tYpxyp0/maxresdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/eaW0tYpxyp0/maxresdefault.jpg",
+      trailerUrl: "https://www.youtube.com/watch?v=eaW0tYpxyp0"
     },
     features: ["Single Player", "Online Multiplayer"],
     tags: ["top", "ps4"]
@@ -257,11 +268,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹2,799",
     rentPrice: "₹299",
     description: "Experience entertainment blockbusters Grand Theft Auto V and GTA Online.",
-    heroImage: "https://upload.wikimedia.org/wikipedia/en/a/a5/Grand_Theft_Auto_V.png",
-    coverImage: "https://upload.wikimedia.org/wikipedia/en/a/a5/Grand_Theft_Auto_V.png",
+    heroImage: "https://img.youtube.com/vi/QkkoHAzjnUs/maxresdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/QkkoHAzjnUs/maxresdefault.jpg",
     media: {
-      trailerBg: "https://upload.wikimedia.org/wikipedia/en/a/a5/Grand_Theft_Auto_V.png",
-      gameplay: "https://upload.wikimedia.org/wikipedia/en/a/a5/Grand_Theft_Auto_V.png"
+      trailerBg: "https://img.youtube.com/vi/QkkoHAzjnUs/maxresdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/QkkoHAzjnUs/maxresdefault.jpg",
+      trailerUrl: "https://www.youtube.com/watch?v=QkkoHAzjnUs"
     },
     features: ["Single Player", "Online Multiplayer"],
     tags: ["top", "ps5", "ps4"]
@@ -279,11 +291,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹4,499",
     rentPrice: "₹449",
     description: "EA SPORTS FC™ 24 is a new era for The World's Game: 19,000+ fully licensed players, 700+ teams, and 30+ leagues.",
-    heroImage: "https://upload.wikimedia.org/wikipedia/en/e/ea/EA_Sports_FC_24_cover_art.jpg",
-    coverImage: "https://upload.wikimedia.org/wikipedia/en/e/ea/EA_Sports_FC_24_cover_art.jpg",
+    heroImage: "https://img.youtube.com/vi/XhP3Xh4LMA8/maxresdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/XhP3Xh4LMA8/maxresdefault.jpg",
     media: {
-      trailerBg: "https://upload.wikimedia.org/wikipedia/en/e/ea/EA_Sports_FC_24_cover_art.jpg",
-      gameplay: "https://upload.wikimedia.org/wikipedia/en/e/ea/EA_Sports_FC_24_cover_art.jpg"
+      trailerBg: "https://img.youtube.com/vi/XhP3Xh4LMA8/maxresdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/XhP3Xh4LMA8/maxresdefault.jpg",
+      trailerUrl: "https://www.youtube.com/watch?v=XhP3Xh4LMA8"
     },
     features: ["Single Player", "Local Multiplayer", "Online Multiplayer"],
     tags: ["top", "ps5", "ps4"]
@@ -301,11 +314,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,499",
     rentPrice: "₹349",
     description: "Enlist in the Helldivers and join the fight for freedom across a hostile galaxy.",
-    heroImage: "https://upload.wikimedia.org/wikipedia/en/5/52/Helldivers_2_cover_art.jpg",
-    coverImage: "https://upload.wikimedia.org/wikipedia/en/5/52/Helldivers_2_cover_art.jpg",
+    heroImage: "https://img.youtube.com/vi/ZUTsoX80FwA/maxresdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/ZUTsoX80FwA/maxresdefault.jpg",
     media: {
-      trailerBg: "https://upload.wikimedia.org/wikipedia/en/5/52/Helldivers_2_cover_art.jpg",
-      gameplay: "https://upload.wikimedia.org/wikipedia/en/5/52/Helldivers_2_cover_art.jpg"
+      trailerBg: "https://img.youtube.com/vi/ZUTsoX80FwA/maxresdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/ZUTsoX80FwA/maxresdefault.jpg",
+      trailerUrl: "https://www.youtube.com/watch?v=ZUTsoX80FwA"
     },
     features: ["Online Co-op", "Multiplayer"],
     tags: ["top", "ps5"]
@@ -323,11 +337,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,999",
     rentPrice: "₹399",
     description: "In the late 13th century, the Mongol empire has laid waste to entire nations.",
-    heroImage: "https://upload.wikimedia.org/wikipedia/en/b/b6/Ghost_of_Tsushima.jpg",
-    coverImage: "https://upload.wikimedia.org/wikipedia/en/b/b6/Ghost_of_Tsushima.jpg",
+    heroImage: "https://img.youtube.com/vi/MUz539AeC5Y/maxresdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/MUz539AeC5Y/maxresdefault.jpg",
     media: {
-      trailerBg: "https://upload.wikimedia.org/wikipedia/en/b/b6/Ghost_of_Tsushima.jpg",
-      gameplay: "https://upload.wikimedia.org/wikipedia/en/b/b6/Ghost_of_Tsushima.jpg"
+      trailerBg: "https://img.youtube.com/vi/MUz539AeC5Y/maxresdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/MUz539AeC5Y/maxresdefault.jpg",
+      trailerUrl: "https://www.youtube.com/watch?v=MUz539AeC5Y"
     },
     features: ["Single Player", "Co-op"],
     tags: ["top", "ps5", "ps4"]
@@ -345,11 +360,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹2,999",
     rentPrice: "₹299",
     description: "From legendary game creator Hideo Kojima comes a genre-defying experience.",
-    heroImage: "https://upload.wikimedia.org/wikipedia/en/2/22/Death_Stranding_cover_art.jpg",
-    coverImage: "https://upload.wikimedia.org/wikipedia/en/2/22/Death_Stranding_cover_art.jpg",
+    heroImage: "https://img.youtube.com/vi/piIgkj7BgIg/maxresdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/piIgkj7BgIg/maxresdefault.jpg",
     media: {
-      trailerBg: "https://upload.wikimedia.org/wikipedia/en/2/22/Death_Stranding_cover_art.jpg",
-      gameplay: "https://upload.wikimedia.org/wikipedia/en/2/22/Death_Stranding_cover_art.jpg"
+      trailerBg: "https://img.youtube.com/vi/piIgkj7BgIg/maxresdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/piIgkj7BgIg/maxresdefault.jpg",
+      trailerUrl: "https://www.youtube.com/watch?v=piIgkj7BgIg"
     },
     features: ["Single Player"],
     tags: ["deals", "ps5"]
@@ -367,11 +383,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹2,499",
     rentPrice: "₹249",
     description: "Ride and fight into a deadly, post pandemic America.",
-    heroImage: "https://upload.wikimedia.org/wikipedia/en/f/fc/Days_Gone_cover_art.jpg",
-    coverImage: "https://upload.wikimedia.org/wikipedia/en/f/fc/Days_Gone_cover_art.jpg",
+    heroImage: "https://img.youtube.com/vi/VDqBQhGJaX0/maxresdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/VDqBQhGJaX0/maxresdefault.jpg",
     media: {
-      trailerBg: "https://upload.wikimedia.org/wikipedia/en/f/fc/Days_Gone_cover_art.jpg",
-      gameplay: "https://upload.wikimedia.org/wikipedia/en/f/fc/Days_Gone_cover_art.jpg"
+      trailerBg: "https://img.youtube.com/vi/VDqBQhGJaX0/maxresdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/VDqBQhGJaX0/maxresdefault.jpg",
+      trailerUrl: "https://www.youtube.com/watch?v=VDqBQhGJaX0"
     },
     features: ["Single Player"],
     tags: ["deals", "ps4"]
@@ -389,11 +406,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,999",
     rentPrice: "₹399",
     description: "Break the cycle as Selene fights for survival in a shapeshifting alien world.",
-    heroImage: "https://upload.wikimedia.org/wikipedia/en/0/07/Returnal_cover_art.jpg",
-    coverImage: "https://upload.wikimedia.org/wikipedia/en/0/07/Returnal_cover_art.jpg",
+    heroImage: "https://img.youtube.com/vi/Jv4DjVcGNOo/maxresdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/Jv4DjVcGNOo/maxresdefault.jpg",
     media: {
-      trailerBg: "https://upload.wikimedia.org/wikipedia/en/0/07/Returnal_cover_art.jpg",
-      gameplay: "https://upload.wikimedia.org/wikipedia/en/0/07/Returnal_cover_art.jpg"
+      trailerBg: "https://img.youtube.com/vi/Jv4DjVcGNOo/maxresdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/Jv4DjVcGNOo/maxresdefault.jpg",
+      trailerUrl: "https://www.youtube.com/watch?v=Jv4DjVcGNOo"
     },
     features: ["Single Player", "Co-op"],
     tags: ["top", "ps5"]
@@ -411,11 +429,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹3,999",
     rentPrice: "₹399",
     description: "Blast your way through an interdimensional adventure with Ratchet and Clank.",
-    heroImage: "https://upload.wikimedia.org/wikipedia/en/1/1a/Ratchet_%26_Clank_Rift_Apart_cover_art.jpg",
-    coverImage: "https://upload.wikimedia.org/wikipedia/en/1/1a/Ratchet_%26_Clank_Rift_Apart_cover_art.jpg",
+    heroImage: "https://img.youtube.com/vi/9p_gg9UW9k4/maxresdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/9p_gg9UW9k4/maxresdefault.jpg",
     media: {
-      trailerBg: "https://upload.wikimedia.org/wikipedia/en/1/1a/Ratchet_%26_Clank_Rift_Apart_cover_art.jpg",
-      gameplay: "https://upload.wikimedia.org/wikipedia/en/1/1a/Ratchet_%26_Clank_Rift_Apart_cover_art.jpg"
+      trailerBg: "https://img.youtube.com/vi/9p_gg9UW9k4/maxresdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/9p_gg9UW9k4/maxresdefault.jpg",
+      trailerUrl: "https://www.youtube.com/watch?v=9p_gg9UW9k4"
     },
     features: ["Single Player"],
     tags: ["top", "ps5"]
@@ -433,11 +452,12 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "₹2,999",
     rentPrice: "₹299",
     description: "Seek your legacy and leave your mark on the map in UNCHARTED: Legacy of Thieves Collection.",
-    heroImage: "https://upload.wikimedia.org/wikipedia/en/9/93/Uncharted_4_box_artwork.jpg",
-    coverImage: "https://upload.wikimedia.org/wikipedia/en/9/93/Uncharted_4_box_artwork.jpg",
+    heroImage: "https://img.youtube.com/vi/4wJzI54oO5E/maxresdefault.jpg",
+    coverImage: "https://img.youtube.com/vi/4wJzI54oO5E/maxresdefault.jpg",
     media: {
-      trailerBg: "https://upload.wikimedia.org/wikipedia/en/9/93/Uncharted_4_box_artwork.jpg",
-      gameplay: "https://upload.wikimedia.org/wikipedia/en/9/93/Uncharted_4_box_artwork.jpg"
+      trailerBg: "https://img.youtube.com/vi/4wJzI54oO5E/maxresdefault.jpg",
+      gameplay: "https://img.youtube.com/vi/4wJzI54oO5E/maxresdefault.jpg",
+      trailerUrl: "https://www.youtube.com/watch?v=4wJzI54oO5E"
     },
     features: ["Single Player"],
     tags: ["deals", "ps5"]

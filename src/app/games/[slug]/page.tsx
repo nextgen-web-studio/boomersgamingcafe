@@ -142,18 +142,27 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
 
             <section className="pt-8">
               <h2 className="text-2xl font-bold mb-6 text-white">Gameplay & Media</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 scrollbar-hide">
                 {/* Trailer Placeholder */}
-                <div className="relative aspect-video rounded-xl overflow-hidden group cursor-pointer border border-white/10">
-                  <img src={game.media?.trailerBg || game.heroImage} alt="Trailer" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/20 transition-colors">
-                    <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 group-hover:scale-110 transition-transform">
-                      <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[16px] border-l-white border-b-[10px] border-b-transparent ml-2" />
+                {game.media?.trailerUrl ? (
+                  <a href={game.media.trailerUrl} target="_blank" rel="noopener noreferrer" className="min-w-[85%] md:min-w-[45%] snap-center relative aspect-video rounded-xl overflow-hidden group cursor-pointer border border-white/10 shrink-0 block">
+                    <img src={game.media?.trailerBg || game.heroImage} alt="Trailer" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/20 transition-colors">
+                      <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 group-hover:scale-110 transition-transform">
+                        <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[16px] border-l-white border-b-[10px] border-b-transparent ml-2" />
+                      </div>
+                    </div>
+                  </a>
+                ) : (
+                  <div className="min-w-[85%] md:min-w-[45%] snap-center relative aspect-video rounded-xl overflow-hidden group border border-white/10 shrink-0">
+                    <img src={game.media?.trailerBg || game.heroImage} alt="Trailer" className="w-full h-full object-cover transition-transform duration-500" />
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                      <span className="text-white font-medium bg-black/60 px-4 py-2 rounded-full backdrop-blur-md">Trailer Unavailable</span>
                     </div>
                   </div>
-                </div>
+                )}
                 {/* Gameplay Screenshot Placeholder */}
-                <div className="relative aspect-video rounded-xl overflow-hidden border border-white/10">
+                <div className="min-w-[85%] md:min-w-[45%] snap-center relative aspect-video rounded-xl overflow-hidden border border-white/10 shrink-0">
                   <img src={game.media?.gameplay || game.coverImage} alt="Gameplay" className="w-full h-full object-cover" />
                 </div>
               </div>
