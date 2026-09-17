@@ -164,10 +164,19 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
                     </div>
                   </div>
                 )}
-                {/* Gameplay Screenshot Placeholder */}
-                <div className="h-[200px] md:h-[280px] min-w-[85%] md:min-w-[45%] snap-center relative rounded-xl overflow-hidden border border-white/10 shrink-0">
-                  <img src={game.media?.gameplay || game.coverImage} alt="Gameplay" className="w-full h-full object-cover" />
-                </div>
+                
+                {/* 5 Gameplay Screenshots */}
+                {[
+                  game.media?.gameplay || game.coverImage,
+                  game.heroImage,
+                  "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop",
+                  "https://images.unsplash.com/photo-1605901309584-818e25960b8f?q=80&w=2019&auto=format&fit=crop",
+                  "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=2070&auto=format&fit=crop"
+                ].map((imgUrl, idx) => (
+                  <div key={idx} className="h-[200px] md:h-[280px] min-w-[85%] md:min-w-[45%] snap-center relative rounded-xl overflow-hidden border border-white/10 shrink-0">
+                    <img src={imgUrl} alt={`Gameplay Screenshot ${idx + 1}`} className="w-full h-full object-cover" />
+                  </div>
+                ))}
               </div>
             </section>
           </div>
