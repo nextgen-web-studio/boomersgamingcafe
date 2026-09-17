@@ -16,16 +16,16 @@ export function Footer() {
   return (
     <footer className="w-full bg-[#111] border-t border-white/10 pt-16 pb-8 text-gray-400">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-10 mb-12">
           
-          <div className="md:col-span-1">
+          <div className="col-span-2 md:col-span-1 mb-2 md:mb-0">
             <Link href="/" className="flex items-center gap-2 mb-6">
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-xl">
                 N
               </div>
               <span className="text-xl font-bold tracking-tight text-white">NextGen Store</span>
             </Link>
-            <p className="text-sm">
+            <p className="text-sm pr-4">
               Your ultimate destination for the latest games, rentals, and exclusive gaming subscriptions.
             </p>
           </div>

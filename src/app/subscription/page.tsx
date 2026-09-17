@@ -11,12 +11,15 @@ const PSPlusLogo = ({ className = "h-8" }: { className?: string }) => (
   <div className={`flex items-center gap-2 ${className}`}>
     <Image 
       src="/ps-plus-logo.svg"
-      alt="PlayStation Plus"
-      width={400}
+      alt="PlayStation Plus Icon"
+      width={100}
       height={100}
       className="h-full w-auto object-contain"
       priority
     />
+    <span className="font-bold tracking-tight whitespace-nowrap text-black" style={{ fontFamily: 'Arial, sans-serif' }}>
+      PlayStation Plus
+    </span>
   </div>
 );
 
