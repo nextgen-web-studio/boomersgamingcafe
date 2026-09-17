@@ -3,6 +3,7 @@
 import { Check, Info } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
+import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 
@@ -36,16 +37,17 @@ export default function SubscriptionPage() {
         {/* Placeholder for official PS Plus background */}
         <div className="absolute inset-0 bg-gradient-to-b from-blue-900/20 to-black z-0" />
         <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
-          {/* PS Plus Logo Simulation */}
+          {/* PS Plus Logo */}
           <div className="flex items-center gap-3 mb-8">
-            {/* SVG PlayStation Plus Logo Inline (Guaranteed to render) */}
-            <div className="flex justify-center text-white">
-              <svg width="200" height="60" viewBox="0 0 400 120" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                {/* Minimalist bold text fallback representation of PS Plus to avoid huge path data if exact path isn't strictly necessary, but let's just write "PlayStation Plus" cleanly if exact logo paths are too large. Actually, I can just use a reliable font-based logo for now */}
-                <text x="0" y="75" fontFamily="Arial, sans-serif" fontSize="48" fontWeight="bold" letterSpacing="-2">
-                  PlayStation <tspan fill="#eab308">Plus</tspan>
-                </text>
-              </svg>
+            <div className="flex justify-center">
+              <Image 
+                src="/ps-plus-logo.png" 
+                alt="PlayStation Plus" 
+                width={300} 
+                height={80} 
+                className="h-12 md:h-16 w-auto object-contain"
+                priority
+              />
             </div>
           </div>
           
