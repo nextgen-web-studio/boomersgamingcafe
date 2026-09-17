@@ -6,7 +6,6 @@ import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 import { useState, useRef } from "react";
 import Image from "next/image";
-import { DEMO_GAMES_DETAIL } from "@/lib/mockData";
 
 // Authentic PlayStation Plus Official Image Logo
 const PSPlusLogo = ({ className = "h-8" }: { className?: string }) => (
@@ -168,47 +167,38 @@ function TierCard({ tier, onSubscribe }: { tier: typeof TIERS[0], onSubscribe: (
 }
 
 
-
-const FloatingGameBackground = () => {
-  const games = Object.values(DEMO_GAMES_DETAIL);
-  // Pick specific games for desktop/mobile
-  const bgElements = [
-    { game: games[0], top: '10%', left: '5%', delay: 0, duration: 24, mobile: false }, // GTA 6
-    { game: games[1], top: '15%', right: '5%', delay: 2, duration: 20, mobile: true }, // Ghost of Yotei
-    { game: games[2], top: '45%', left: '2%', delay: 1, duration: 27, mobile: true }, // Wolverine
-    { game: games[3], top: '55%', right: '8%', delay: 3, duration: 22, mobile: false }, // Spider-Man 2
-    { game: games[5], top: '80%', left: '15%', delay: 4, duration: 25, mobile: true }, // TLOU2
-    { game: games[7], top: '85%', right: '10%', delay: 1.5, duration: 28, mobile: false }, // RDR2
-  ];
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-      {bgElements.map((el, idx) => (
-        <motion.div
-          key={idx}
-          animate={{ y: [0, -40, 0], opacity: [0.03, 0.08, 0.03] }}
-          transition={{ duration: el.duration, repeat: Infinity, ease: "easeInOut", delay: el.delay }}
-          className={`absolute ${el.mobile ? 'block' : 'hidden md:block'}`}
-          style={{ top: el.top, left: el.left, right: el.right }}
-        >
-          <div className="flex flex-col items-center justify-center opacity-70 blur-[0.5px] md:blur-[1px]">
-            <div className="relative w-20 h-28 md:w-32 md:h-44 rounded-lg overflow-hidden shadow-2xl mb-2">
-              <Image src={el.game.coverImage} alt={el.game.title} fill className="object-cover grayscale" />
-            </div>
-            <div className="text-[9px] md:text-xs font-bold text-gray-800 tracking-wider text-center w-28 md:w-40 truncate">
-              {el.game.title.toUpperCase()}
-            </div>
-            <div className="text-[7px] md:text-[9px] font-black text-gray-500 tracking-widest mt-0.5">
-              {el.game.platform}
-            </div>
-          </div>
-        </motion.div>
-      ))}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_40%,_rgba(245,245,247,0.8)_100%)] pointer-events-none" />
-    </div>
-  );
-};
-
+const FloatingShapes = () => (
+  <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+    <motion.div 
+      animate={{ y: [0, -20, 0], opacity: [0.15, 0.4, 0.15] }} 
+      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute top-12 left-[10%] md:top-20 md:left-[20%] text-black/20"
+    >
+      <Triangle className="w-8 h-8 md:w-16 md:h-16" strokeWidth={1.5} />
+    </motion.div>
+    <motion.div 
+      animate={{ y: [0, 20, 0], opacity: [0.15, 0.4, 0.15] }} 
+      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      className="absolute top-24 right-[10%] md:top-32 md:right-[20%] text-black/20"
+    >
+      <Circle className="w-8 h-8 md:w-14 md:h-14" strokeWidth={1.5} />
+    </motion.div>
+    <motion.div 
+      animate={{ y: [0, -15, 0], opacity: [0.15, 0.3, 0.15], rotate: [0, 45, 0] }} 
+      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+      className="absolute top-48 left-[85%] md:top-64 md:left-[25%] text-black/20"
+    >
+      <X className="w-8 h-8 md:w-12 md:h-12" strokeWidth={1.5} />
+    </motion.div>
+    <motion.div 
+      animate={{ y: [0, 15, 0], opacity: [0.15, 0.4, 0.15] }} 
+      transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+      className="absolute top-64 left-[15%] md:top-80 md:right-[25%] text-black/20"
+    >
+      <Square className="w-8 h-8 md:w-14 md:h-14" strokeWidth={1.5} />
+    </motion.div>
+  </div>
+);
 
 export default function SubscriptionPage() {
   const { addToCart } = useCart();
@@ -243,7 +233,7 @@ export default function SubscriptionPage() {
 
   return (
     <div className="relative min-h-screen bg-[#F5F5F7] pb-16 md:pb-24 font-sans selection:bg-blue-200 overflow-hidden">
-      <FloatingGameBackground />
+      <FloatingShapes />
       
       {/* Header Section */}
       <div className="pt-16 pb-8 md:pt-20 md:pb-10 px-4 flex flex-col items-center justify-center text-center relative z-10">
