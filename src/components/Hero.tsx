@@ -12,31 +12,31 @@ const HERO_GAMES = [
     id: "1",
     title: "Grand Theft Auto VI",
     slug: "gta-6",
-    description: "Welcome to Leonida, home to the neon-soaked streets of Vice City and beyond in the biggest, most immersive evolution of the Grand Theft Auto universe yet.",
+    description: "Welcome to Leonida, home to the neon-soaked streets of Vice City and beyond in the biggest, most immersive evolution of the Grand Theft Auto series yet.",
     platform: "PS5",
-    price: "₹5,499",
-    rentPrice: "₹599 / 7 Days",
-    image: "https://media.rockstargames.com/rockstargames-newsite/uploads/22bf689e414c7764f2ce9052bda403061da1dc5c.jpg", // High quality GTA 6 artwork
+    price: "Rs 15,499",
+    rentPrice: "Rs 1599 / 7 Days",
+    image: "/images/gta-vi.jpg", // Local reliable image
   },
   {
     id: "2",
     title: "Marvel's Wolverine",
     slug: "wolverine",
-    description: "A standalone game directed by Brian Horton and Cameron Christian, featuring cutting-edge gameplay and a deeply emotional narrative.",
+    description: "A standalone game directed by Brian Horton and Cameron Christian, promising an emotional narrative and cutting-edge gameplay.",
     platform: "PS5",
-    price: "₹4,999",
-    rentPrice: "₹499 / 7 Days",
-    image: "https://gmedia.playstation.com/is/image/SIEPDC/marvels-wolverine-hero-banner-desktop-01-en-07sep21?$1600px$", 
+    price: "Rs 14,999",
+    rentPrice: "Rs 1499 / 7 Days",
+    image: "https://image.api.playstation.com/vulcan/ap/rnd/202109/0821/x3zW7P5R7ZqXq9z5y4V7Xy8Z.png", 
   },
   {
     id: "3",
     title: "Ghost of Yōtei",
     slug: "ghost-of-yotei",
-    description: "Embark on a new journey with a new Ghost, Atsu, and explore the lands surrounding Mount Yōtei in 1603.",
+    description: "A new Ghost, a new time. Journey beyond the edge of Japan in this highly anticipated sequel.",
     platform: "PS5",
-    price: "₹4,999",
-    rentPrice: "₹499 / 7 Days",
-    image: "https://gmedia.playstation.com/is/image/SIEPDC/ghost-of-yotei-hero-desktop-01-en-24sep24?$1600px$",
+    price: "Rs 14,999",
+    rentPrice: "Rs 1499 / 7 Days",
+    image: "https://image.api.playstation.com/vulcan/ap/rnd/202409/2000/03945e8f498c8a149c4d9cb9ea2ed342d03ccb6dcb177891.png",
   }
 ];
 
