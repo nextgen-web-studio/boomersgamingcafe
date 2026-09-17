@@ -206,13 +206,13 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     platform: "PS5",
     rating: "TBD",
     ageRating: "Mature 17+",
-    price: "₹5,499",
-    rentPrice: "₹599",
+    price: "Rs 5,499",
+    rentPrice: "Rs 599",
     description: "Welcome to Leonida, the home of the neon-soaked streets of Vice City and beyond.",
-    heroImage: "https://media.rockstargames.com/rockstargames/img/global/news/upload/actual_1699997977.jpg",
-    coverImage: "https://media.rockstargames.com/rockstargames/img/global/news/upload/actual_1699997977.jpg",
+    heroImage: "/images/gta-vi.jpg",
+    coverImage: "/images/gta-vi.jpg",
     media: {
-      trailerBg: "https://media.rockstargames.com/rockstargames/img/global/news/upload/actual_1699997977.jpg",
+      trailerBg: "/images/gta-vi.jpg",
       gameplay: "",
       trailerUrl: "https://www.youtube.com/watch?v=QdBZY2fkU-0"
     },

@@ -16,6 +16,7 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
   const { addToCart } = useCart();
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [showTrailer, setShowTrailer] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   // Fetch game dynamically from mock database (fallback to GoW if not found)
   const game = DEMO_GAMES_DETAIL[resolvedParams.slug as keyof typeof DEMO_GAMES_DETAIL] || DEMO_GAMES_DETAIL["god-of-war-ragnarok"]; 
 
@@ -167,9 +168,9 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
                 
                 {/* Gameplay Screenshots */}
                 {game.media?.screenshots?.map((imgUrl, idx) => (
-                  <div key={idx} className="h-[180px] md:h-[280px] min-w-[75%] md:min-w-[45%] snap-center relative rounded-xl overflow-hidden border border-white/10 shrink-0">
-                    <img src={imgUrl} alt={`Gameplay Screenshot ${idx + 1}`} className="w-full h-full object-cover" />
-                  </div>
+                  <button key={idx} onClick={() => setSelectedImage(imgUrl)} className="h-[180px] md:h-[280px] min-w-[75%] md:min-w-[45%] snap-center relative rounded-xl overflow-hidden border border-white/10 shrink-0 block cursor-pointer group">
+                    <img src={imgUrl} alt={`Gameplay Screenshot ${idx + 1}`} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  </button>
                 )) || [
                   game.media?.gameplay || game.coverImage,
                   game.heroImage,
@@ -177,9 +178,9 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
                   game.media?.trailerBg || game.heroImage,
                   game.media?.gameplay || game.heroImage
                 ].map((imgUrl, idx) => (
-                  <div key={`fallback-${idx}`} className="h-[180px] md:h-[280px] min-w-[75%] md:min-w-[45%] snap-center relative rounded-xl overflow-hidden border border-white/10 shrink-0">
-                    <img src={imgUrl} alt={`Gameplay Screenshot ${idx + 1}`} className="w-full h-full object-cover" />
-                  </div>
+                  <button key={`fallback-${idx}`} onClick={() => setSelectedImage(imgUrl)} className="h-[180px] md:h-[280px] min-w-[75%] md:min-w-[45%] snap-center relative rounded-xl overflow-hidden border border-white/10 shrink-0 block cursor-pointer group">
+                    <img src={imgUrl} alt={`Gameplay Screenshot ${idx + 1}`} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  </button>
                 ))}
               </div>
             </section>
@@ -272,6 +273,26 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
                 allowFullScreen 
               />
             </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }} 
+            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4"
+          >
+            <button 
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            <img src={selectedImage} alt="Fullscreen Media" className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl" />
           </motion.div>
         )}
       </AnimatePresence>
