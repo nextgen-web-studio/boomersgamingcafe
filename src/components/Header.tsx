@@ -55,11 +55,11 @@ export function Header() {
       <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-background/80 backdrop-blur-md">
         <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-xl">
+          <Link href="/" className="flex items-center gap-2 group">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-xl shadow-[0_0_15px_rgba(var(--primary),0.3)] group-hover:shadow-[0_0_20px_rgba(var(--primary),0.6)] transition-all duration-300 group-hover:scale-105">
               N
             </div>
-            <span className="text-xl font-bold tracking-tight text-white">NextGen</span>
+            <span className="text-xl font-bold tracking-tight text-white group-hover:text-primary transition-colors duration-300">NextGen</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -68,7 +68,7 @@ export function Header() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-white ${link.name === 'PlayStation Plus' ? 'text-yellow-500 font-bold hover:text-yellow-400' : 'text-white/70'}`}
+                className={`text-sm font-medium transition-all duration-200 hover:text-white hover:-translate-y-[1px] ${link.name === 'PlayStation Plus' ? 'text-yellow-500 font-bold hover:text-yellow-400 drop-shadow-sm' : 'text-white/70'}`}
               >
                 {link.name}
               </Link>
@@ -77,21 +77,21 @@ export function Header() {
 
           {/* Right Side Icons */}
           <div className="flex items-center gap-3 md:gap-4">
-            <Link href="/search" className="text-white/70 hover:text-white transition-colors" aria-label="Search">
+            <Link href="/search" className="text-white/70 hover:text-white transition-all duration-200 hover:scale-110 active:scale-95" aria-label="Search">
               <Search className="h-5 w-5" />
             </Link>
-            <Link href="/cart" className="relative text-white/70 hover:text-white transition-colors">
+            <Link href="/cart" className="relative text-white/70 hover:text-white transition-all duration-200 hover:scale-110 active:scale-95 group">
               <ShoppingCart className="h-5 w-5" />
               {items.length > 0 && (
-                <span className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white">
+                <span className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white shadow-[0_0_10px_rgba(var(--primary),0.8)] group-hover:scale-110 transition-transform">
                   {items.length}
                 </span>
               )}
             </Link>
-            <Link href="/account" className="hidden md:block text-white/70 hover:text-white transition-colors">
+            <Link href="/account" className="hidden md:block text-white/70 hover:text-white transition-all duration-200 hover:scale-110 active:scale-95">
               <User className="h-5 w-5" />
             </Link>
-            <Link href="/admin" className="hidden md:block text-white/70 hover:text-white transition-colors" title="Admin Dashboard">
+            <Link href="/admin" className="hidden md:block text-white/70 hover:text-white transition-all duration-200 hover:scale-110 active:scale-95" title="Admin Dashboard">
               <Shield className="h-5 w-5" />
             </Link>
             <button

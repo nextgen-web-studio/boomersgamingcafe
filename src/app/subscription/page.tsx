@@ -1,6 +1,7 @@
 "use client";
 
-import { Users, Tag, Cloud, Download, Gamepad2, Sparkles, Clock } from "lucide-react";
+import { Users, Tag, Cloud, Download, Gamepad2, Sparkles, Clock, Triangle, Square, Circle, X } from "lucide-react";
+import { motion } from "framer-motion";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 import { useState, useRef } from "react";
@@ -165,6 +166,40 @@ function TierCard({ tier, onSubscribe }: { tier: typeof TIERS[0], onSubscribe: (
   );
 }
 
+
+const FloatingShapes = () => (
+  <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+    <motion.div 
+      animate={{ y: [0, -20, 0], opacity: [0.15, 0.4, 0.15] }} 
+      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute top-12 left-[10%] md:top-20 md:left-[20%] text-black/20"
+    >
+      <Triangle className="w-8 h-8 md:w-16 md:h-16" strokeWidth={1.5} />
+    </motion.div>
+    <motion.div 
+      animate={{ y: [0, 20, 0], opacity: [0.15, 0.4, 0.15] }} 
+      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      className="absolute top-24 right-[10%] md:top-32 md:right-[20%] text-black/20"
+    >
+      <Circle className="w-8 h-8 md:w-14 md:h-14" strokeWidth={1.5} />
+    </motion.div>
+    <motion.div 
+      animate={{ y: [0, -15, 0], opacity: [0.15, 0.3, 0.15], rotate: [0, 45, 0] }} 
+      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+      className="absolute top-48 left-[85%] md:top-64 md:left-[25%] text-black/20"
+    >
+      <X className="w-8 h-8 md:w-12 md:h-12" strokeWidth={1.5} />
+    </motion.div>
+    <motion.div 
+      animate={{ y: [0, 15, 0], opacity: [0.15, 0.4, 0.15] }} 
+      transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+      className="absolute top-64 left-[15%] md:top-80 md:right-[25%] text-black/20"
+    >
+      <Square className="w-8 h-8 md:w-14 md:h-14" strokeWidth={1.5} />
+    </motion.div>
+  </div>
+);
+
 export default function SubscriptionPage() {
   const { addToCart } = useCart();
   const router = useRouter();
@@ -197,23 +232,24 @@ export default function SubscriptionPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F5F7] pb-32 font-sans selection:bg-blue-200">
+    <div className="relative min-h-screen bg-[#F5F5F7] pb-16 md:pb-24 font-sans selection:bg-blue-200 overflow-hidden">
+      <FloatingShapes />
       
       {/* Header Section */}
-      <div className="pt-20 pb-12 px-4 flex flex-col items-center justify-center text-center">
-        <div className="mb-8">
+      <div className="pt-16 pb-8 md:pt-20 md:pb-10 px-4 flex flex-col items-center justify-center text-center relative z-10">
+        <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: "easeOut" }} className="mb-6 md:mb-8">
           <PSPlusLogo className="h-10 md:h-12 scale-110" />
-        </div>
-        <h1 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-[#1F1F1F] max-w-2xl">
+        </motion.div>
+        <motion.h1 initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }} className="text-4xl md:text-5xl font-black mb-4 md:mb-5 tracking-tight text-[#1F1F1F] max-w-2xl drop-shadow-sm">
           COMPARE MEMBERSHIP PLANS
-        </h1>
-        <p className="text-sm md:text-base text-gray-600 max-w-2xl font-medium leading-relaxed px-4">
+        </motion.h1>
+        <motion.p initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }} className="text-sm md:text-base text-gray-500 max-w-2xl font-medium leading-relaxed px-4">
           Discover your next great adventure with brand-new catalogues of hundreds of current and classic games, limited-time trials, online multiplayer, member-exclusive discounts and more, with a choice of three membership options.
-        </p>
+        </motion.p>
       </div>
 
       {/* Pricing Tiers Carousel / Grid */}
-      <div className="max-w-[1200px] mx-auto relative">
+      <div className="max-w-[1100px] mx-auto relative z-10">
         <div 
           ref={scrollRef}
           onScroll={handleScroll}
