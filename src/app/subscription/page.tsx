@@ -6,16 +6,18 @@ import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Image from "next/image";
 
-// Authentic PlayStation Plus rounded cross inline SVG
 // Authentic PlayStation Plus Official Image Logo
 const PSPlusLogo = ({ className = "h-8" }: { className?: string }) => (
   <div className={`flex items-center gap-2 ${className}`}>
-    <img 
-      src="https://gmedia.playstation.com/is/image/SIEPDC/ps-plus-logo-black-01-en-26jul22?$800px$"
+    <Image 
+      src="/ps-plus-logo.svg"
       alt="PlayStation Plus"
+      width={400}
+      height={100}
       className="h-full w-auto object-contain"
-      referrerPolicy="no-referrer"
+      priority
     />
   </div>
 );
@@ -99,7 +101,7 @@ function TierCard({ tier, onSubscribe }: { tier: typeof TIERS[0], onSubscribe: F
         <div className="space-y-2.5 md:space-y-4">
           {tier.features.map((f, idx) => (
             <div key={idx} className="flex items-center gap-3 text-[13px] md:text-[15px] text-gray-800 font-medium">
-              <f.icon className="w-4 h-4 md:w-5 md:h-5 text-gray-500 shrink-0" strokeWidth={1.5} />
+              <f.icon className="w-4 h-4 md:w-5 md:h-5 text-gray-400 shrink-0" strokeWidth={1.25} />
               {f.text}
             </div>
           ))}
@@ -113,23 +115,23 @@ function TierCard({ tier, onSubscribe }: { tier: typeof TIERS[0], onSubscribe: F
             key={plan.id} 
             className={`flex items-start justify-between p-3 md:p-4 rounded-xl cursor-pointer transition-all ${
               selectedPlan === plan.id 
-                ? 'border-2 border-[#0070D1] bg-white shadow-sm' 
-                : 'border-2 border-transparent hover:bg-gray-50'
+                ? 'border-[2px] border-[#0070D1] bg-white shadow-sm ring-1 ring-[#0070D1]/20' 
+                : 'border-[2px] border-transparent hover:bg-gray-50 bg-white'
             }`}
           >
             <div className="flex flex-col pr-2">
               <div className="flex items-center gap-2 mb-0.5">
-                <span className="font-bold text-[14px] md:text-[15px] text-gray-900 leading-tight">{plan.id} Plan</span>
+                <span className={`font-bold text-[14px] md:text-[15px] leading-tight ${selectedPlan === plan.id ? 'text-black' : 'text-gray-800'}`}>{plan.id} Plan</span>
                 {plan.badge && (
                   <span className="text-[9px] md:text-[10px] bg-black text-white px-1.5 py-[1px] rounded-[3px] font-bold tracking-wide uppercase">
                     {plan.badge}
                   </span>
                 )}
               </div>
-              <span className="text-[12px] md:text-[13px] font-semibold text-gray-700 leading-tight">{plan.priceLabel}</span>
-              {plan.subtext && <span className="text-[10px] md:text-[11px] text-gray-500 mt-0.5 leading-tight">{plan.subtext}</span>}
+              <span className={`text-[12px] md:text-[13px] font-semibold leading-tight ${selectedPlan === plan.id ? 'text-gray-800' : 'text-gray-600'}`}>{plan.priceLabel}</span>
+              {plan.subtext && <span className="text-[10px] md:text-[11px] text-gray-400 mt-0.5 leading-tight">{plan.subtext}</span>}
             </div>
-            <div className={`w-5 h-5 md:w-6 md:h-6 rounded-full border-2 flex items-center justify-center shrink-0 mt-0.5 ${
+            <div className={`w-5 h-5 md:w-6 md:h-6 rounded-full border-[1.5px] flex items-center justify-center shrink-0 mt-0.5 ${
               selectedPlan === plan.id ? 'border-[#0070D1]' : 'border-gray-300'
             }`}>
               {selectedPlan === plan.id && <div className="w-2.5 h-2.5 bg-[#0070D1] rounded-full" />}
@@ -139,10 +141,10 @@ function TierCard({ tier, onSubscribe }: { tier: typeof TIERS[0], onSubscribe: F
       </div>
 
       {/* Action Button */}
-      <div className="px-4 pb-4 md:px-6 md:pb-6 pt-1 md:pt-2 bg-white">
+      <div className="px-4 pb-5 md:px-6 md:pb-6 pt-1 md:pt-2 bg-white">
         <button 
           onClick={() => onSubscribe(tier.id, tier.plans.find(p => p.id === selectedPlan))} 
-          className="w-full bg-[#0070D1] hover:bg-[#005fb3] text-white font-bold py-3 md:py-4 rounded-full transition-colors text-[14px] md:text-[15px] shadow-md shadow-blue-900/10"
+          className="w-full bg-[#0070D1] hover:bg-[#005fb3] text-white font-bold py-3 md:py-4 rounded-[28px] transition-colors text-[14px] md:text-[15px] shadow-sm shadow-blue-900/10"
         >
           Add to Cart
         </button>
@@ -172,7 +174,7 @@ export default function SubscriptionPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F5F7] pb-24 font-sans selection:bg-blue-200">
+    <div className="min-h-screen bg-[#F5F5F7] pb-32 font-sans selection:bg-blue-200">
       
       {/* Header Section */}
       <div className="pt-20 pb-12 px-4 flex flex-col items-center justify-center text-center">
