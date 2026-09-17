@@ -3,7 +3,7 @@
 import { Users, Tag, Cloud, Download, Gamepad2, Sparkles, Clock } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 
 // Authentic PlayStation Plus Official Image Logo
@@ -91,7 +91,7 @@ function TierCard({ tier, onSubscribe }: { tier: typeof TIERS[0], onSubscribe: (
   const [selectedPlan, setSelectedPlan] = useState("12-Month");
 
   return (
-    <div className="w-full bg-white text-black rounded-2xl overflow-hidden shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-gray-200 flex flex-col transition-transform duration-300 hover:-translate-y-1">
+    <div className="min-w-[85vw] md:min-w-0 snap-center bg-white text-black rounded-2xl overflow-hidden shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-gray-200 flex flex-col transition-transform duration-300 hover:-translate-y-1">
       {/* Header */}
       <div className={`${tier.headerBg} px-4 py-3 md:px-6 md:py-5 flex items-center justify-between`}>
         <h3 className={`text-xl md:text-2xl font-black tracking-tight ${tier.headerText}`}>{tier.name}</h3>
@@ -158,6 +158,8 @@ function TierCard({ tier, onSubscribe }: { tier: typeof TIERS[0], onSubscribe: (
 export default function SubscriptionPage() {
   const { addToCart } = useCart();
   const router = useRouter();
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const handleSubscribe = (tierId: string, selectedPlan: any) => {
     let cover = "/images/psplus-essential.svg";
@@ -173,6 +175,15 @@ export default function SubscriptionPage() {
       price: selectedPlan.price
     });
     router.push('/cart');
+  };
+
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+    const scrollLeft = scrollRef.current.scrollLeft;
+    const width = scrollRef.current.clientWidth;
+    // Calculate which card is most visible
+    const index = Math.round(scrollLeft / width);
+    setActiveIndex(index);
   };
 
   return (
@@ -191,12 +202,26 @@ export default function SubscriptionPage() {
         </p>
       </div>
 
-      {/* Pricing Tiers Stack / Grid */}
+      {/* Pricing Tiers Carousel / Grid */}
       <div className="max-w-[1200px] mx-auto relative">
-        <div className="flex flex-col md:grid md:grid-cols-3 gap-6 md:gap-8 pb-12 px-4 md:px-6 items-stretch">
-          {TIERS.map(tier => (
+        <div 
+          ref={scrollRef}
+          onScroll={handleScroll}
+          className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-12 px-6 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:snap-none scrollbar-hide items-stretch"
+        >
+          {TIERS.map((tier) => (
             <TierCard key={tier.id} tier={tier} onSubscribe={handleSubscribe} />
           ))}
+        </div>
+        
+        {/* Dynamic Mobile Swipe Indicator */}
+        <div className="flex md:hidden justify-center items-center gap-2 pb-8">
+           {TIERS.map((_, idx) => (
+             <div 
+               key={idx} 
+               className={`h-1 rounded-full transition-all duration-300 ${activeIndex === idx ? "w-8 bg-[#0070D1]" : "w-2 bg-gray-400 opacity-50"}`} 
+             />
+           ))}
         </div>
       </div>
     </div>
