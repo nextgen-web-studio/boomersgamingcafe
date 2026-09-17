@@ -255,10 +255,10 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     price: "Rs 14,999",
     rentPrice: "Rs 1499",
     description: "Embark on a new journey with a new Ghost, Atsu, and explore the lands surrounding Mount Yōtei in 1603.",
-    heroImage: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2215430/header.jpg",
-    coverImage: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2215430/header.jpg",
+    heroImage: "/images/yotei.png",
+    coverImage: "/images/yotei.png",
     media: {
-      trailerBg: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2215430/header.jpg",
+      trailerBg: "/images/yotei.png",
       gameplay: "",
       trailerUrl: "https://www.youtube.com/watch?v=7z7MM6N9g2M"
     },
