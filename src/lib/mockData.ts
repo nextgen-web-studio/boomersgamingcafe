@@ -229,13 +229,13 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     platform: "PS5",
     rating: "TBD",
     ageRating: "Mature 17+",
-    price: "₹4,999",
-    rentPrice: "₹499",
+    price: "Rs 14,999",
+    rentPrice: "Rs 1499",
     description: "A standalone game directed by Brian Horton and Cameron Christian.",
-    heroImage: "https://image.api.playstation.com/vulcan/ap/rnd/202109/0821/x3zW7P5R7ZqXq9z5y4V7Xy8Z.png",
-    coverImage: "https://image.api.playstation.com/vulcan/ap/rnd/202109/0821/x3zW7P5R7ZqXq9z5y4V7Xy8Z.png",
+    heroImage: "/images/wolverine.jpg",
+    coverImage: "/images/wolverine.jpg",
     media: {
-      trailerBg: "https://image.api.playstation.com/vulcan/ap/rnd/202109/0821/x3zW7P5R7ZqXq9z5y4V7Xy8Z.png",
+      trailerBg: "/images/wolverine.jpg",
       gameplay: "",
       trailerUrl: "https://www.youtube.com/watch?v=ZdlM-02L8t4"
     },
@@ -252,17 +252,17 @@ export const DEMO_GAMES_DETAIL: Record<string, GameDetail> = {
     platform: "PS5",
     rating: "TBD",
     ageRating: "Mature 17+",
-    price: "₹4,999",
-    rentPrice: "₹499",
+    price: "Rs 14,999",
+    rentPrice: "Rs 1499",
     description: "Embark on a new journey with a new Ghost, Atsu, and explore the lands surrounding Mount Yōtei in 1603.",
-    heroImage: "https://image.api.playstation.com/vulcan/ap/rnd/202409/2000/03945e8f498c8a149c4d9cb9ea2ed342d03ccb6dcb177891.png",
-    coverImage: "https://image.api.playstation.com/vulcan/ap/rnd/202409/2000/03945e8f498c8a149c4d9cb9ea2ed342d03ccb6dcb177891.png",
+    heroImage: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2215430/header.jpg",
+    coverImage: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2215430/header.jpg",
     media: {
-      trailerBg: "https://image.api.playstation.com/vulcan/ap/rnd/202409/2000/03945e8f498c8a149c4d9cb9ea2ed342d03ccb6dcb177891.png",
+      trailerBg: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2215430/header.jpg",
       gameplay: "",
       trailerUrl: "https://www.youtube.com/watch?v=7z7MM6N9g2M"
     },
-    features: ["Single Player"],
+    features: ["Single Player", "Open World"],
     tags: ["upcoming", "ps5"]
   },
   "rdr-2": {

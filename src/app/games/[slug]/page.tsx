@@ -148,7 +148,7 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
               <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 scrollbar-hide items-start">
                 {/* Trailer Placeholder */}
                 {game.media?.trailerUrl ? (
-                  <button onClick={() => setShowTrailer(true)} className="h-[200px] md:h-[280px] min-w-[85%] md:min-w-[45%] snap-center relative rounded-xl overflow-hidden group cursor-pointer border border-white/10 shrink-0 block">
+                  <button onClick={() => setShowTrailer(true)} className="h-[180px] md:h-[280px] min-w-[75%] md:min-w-[45%] snap-center relative rounded-xl overflow-hidden group cursor-pointer border border-white/10 shrink-0 block">
                     <img src={game.media?.trailerBg || game.heroImage} alt="Trailer" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/20 transition-colors">
                       <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 group-hover:scale-110 transition-transform">
@@ -157,7 +157,7 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
                     </div>
                   </button>
                 ) : (
-                  <div className="h-[200px] md:h-[280px] min-w-[85%] md:min-w-[45%] snap-center relative rounded-xl overflow-hidden group border border-white/10 shrink-0">
+                  <div className="h-[180px] md:h-[280px] min-w-[75%] md:min-w-[45%] snap-center relative rounded-xl overflow-hidden group border border-white/10 shrink-0">
                     <img src={game.media?.trailerBg || game.heroImage} alt="Trailer" className="w-full h-full object-cover transition-transform duration-500" />
                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                       <span className="text-white font-medium bg-black/60 px-4 py-2 rounded-full backdrop-blur-md">Trailer Unavailable</span>
@@ -167,7 +167,7 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
                 
                 {/* Gameplay Screenshots */}
                 {game.media?.screenshots?.map((imgUrl, idx) => (
-                  <div key={idx} className="h-[200px] md:h-[280px] min-w-[85%] md:min-w-[45%] snap-center relative rounded-xl overflow-hidden border border-white/10 shrink-0">
+                  <div key={idx} className="h-[180px] md:h-[280px] min-w-[75%] md:min-w-[45%] snap-center relative rounded-xl overflow-hidden border border-white/10 shrink-0">
                     <img src={imgUrl} alt={`Gameplay Screenshot ${idx + 1}`} className="w-full h-full object-cover" />
                   </div>
                 )) || [
@@ -177,7 +177,7 @@ export default function GameDetailPage({ params }: { params: Promise<{ slug: str
                   game.media?.trailerBg || game.heroImage,
                   game.media?.gameplay || game.heroImage
                 ].map((imgUrl, idx) => (
-                  <div key={`fallback-${idx}`} className="h-[200px] md:h-[280px] min-w-[85%] md:min-w-[45%] snap-center relative rounded-xl overflow-hidden border border-white/10 shrink-0">
+                  <div key={`fallback-${idx}`} className="h-[180px] md:h-[280px] min-w-[75%] md:min-w-[45%] snap-center relative rounded-xl overflow-hidden border border-white/10 shrink-0">
                     <img src={imgUrl} alt={`Gameplay Screenshot ${idx + 1}`} className="w-full h-full object-cover" />
                   </div>
                 ))}

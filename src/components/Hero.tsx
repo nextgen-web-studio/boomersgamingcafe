@@ -26,7 +26,7 @@ const HERO_GAMES = [
     platform: "PS5",
     price: "Rs 14,999",
     rentPrice: "Rs 1499 / 7 Days",
-    image: "https://image.api.playstation.com/vulcan/ap/rnd/202109/0821/x3zW7P5R7ZqXq9z5y4V7Xy8Z.png", 
+    image: "/images/wolverine.jpg", 
   },
   {
     id: "3",
@@ -36,7 +36,7 @@ const HERO_GAMES = [
     platform: "PS5",
     price: "Rs 14,999",
     rentPrice: "Rs 1499 / 7 Days",
-    image: "https://image.api.playstation.com/vulcan/ap/rnd/202409/2000/03945e8f498c8a149c4d9cb9ea2ed342d03ccb6dcb177891.png",
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2215430/library_hero.jpg",
   }
 ];
 
@@ -55,7 +55,7 @@ export function Hero() {
   const prevSlide = () => setCurrentIndex((prev) => (prev - 1 + HERO_GAMES.length) % HERO_GAMES.length);
 
   return (
-    <div className="relative h-[80vh] min-h-[600px] w-full overflow-hidden bg-black">
+    <div className="relative h-[65vh] min-h-[450px] md:h-[80vh] md:min-h-[600px] w-full overflow-hidden bg-black">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
