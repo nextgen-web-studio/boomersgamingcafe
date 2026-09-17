@@ -1,8 +1,6 @@
 "use client";
 
-import { Check, Info, Users, Tag, Cloud, Download, Gamepad2, Sparkles, Clock } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import Link from "next/link";
+import { Users, Tag, Cloud, Download, Gamepad2, Sparkles, Clock } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -86,7 +84,7 @@ const TIERS = [
   }
 ];
 
-function TierCard({ tier, onSubscribe }: { tier: typeof TIERS[0], onSubscribe: Function }) {
+function TierCard({ tier, onSubscribe }: { tier: typeof TIERS[0], onSubscribe: (tierId: string, plan: any) => void }) {
   const [selectedPlan, setSelectedPlan] = useState("12-Month");
 
   return (
@@ -111,8 +109,9 @@ function TierCard({ tier, onSubscribe }: { tier: typeof TIERS[0], onSubscribe: F
       {/* Pricing Options */}
       <div className="p-3 md:p-6 bg-white border-t border-gray-100 flex flex-col gap-2">
         {tier.plans.map(plan => (
-          <label 
-            key={plan.id} 
+          <div 
+            key={plan.id}
+            onClick={() => setSelectedPlan(plan.id)}
             className={`flex items-start justify-between p-3 md:p-4 rounded-xl cursor-pointer transition-all ${
               selectedPlan === plan.id 
                 ? 'border-[2px] border-[#0070D1] bg-white shadow-sm ring-1 ring-[#0070D1]/20' 
@@ -136,7 +135,7 @@ function TierCard({ tier, onSubscribe }: { tier: typeof TIERS[0], onSubscribe: F
             }`}>
               {selectedPlan === plan.id && <div className="w-2.5 h-2.5 bg-[#0070D1] rounded-full" />}
             </div>
-          </label>
+          </div>
         ))}
       </div>
 

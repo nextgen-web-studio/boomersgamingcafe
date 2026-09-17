@@ -17,6 +17,7 @@ export interface GameDetail {
     trailerBg: string;
     gameplay: string;
     trailerUrl?: string;
+    screenshots?: string[];
   };
   features: string[];
   tags: string[];
