@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "NEXTGEN | Premium Digital Gaming Marketplace",
-  description: "Discover, buy, and rent the best games for PS5 and PS4.",
+  title: "PS Games Sales — PlayStation Games & Deals",
+  description: "Browse popular PlayStation games and current offers.",
 };
 
 export default function RootLayout({
@@ -17,13 +15,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${inter.className} min-h-screen flex flex-col bg-background text-foreground antialiased`}>
-        <Header />
-        <main className="flex-grow pt-16">
-          {children}
-        </main>
-        <Footer />
+    <html lang="en">
+      <body className={inter.className}>
+        {children}
       </body>
     </html>
   );
