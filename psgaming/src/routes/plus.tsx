@@ -33,6 +33,13 @@ function PlusPage() {
       {/* Hero Section */}
       <section className="relative w-full h-[70vh] min-h-[500px] overflow-hidden bg-[#000f28] text-white flex flex-col justify-center border-b-[8px] border-[#FFCC00]">
         
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img src="/ghost-of-yotei.jpg" alt="Ghost of Tsushima" className="w-full h-full object-cover object-top opacity-60" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#000f28] via-[#000f28]/90 to-transparent sm:via-[#000f28]/70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#000f28] to-transparent sm:hidden" />
+        </div>
+
         <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6">
           <div className="max-w-xl">
             <div className="flex items-center gap-3 mb-4 sm:mb-6">
@@ -40,15 +47,15 @@ function PlusPage() {
               <span className="text-xl sm:text-2xl font-light tracking-widest uppercase">PlayStation Plus</span>
             </div>
             
-            <h1 className="text-4xl md:text-6xl font-light leading-tight mb-4 sm:mb-6 tracking-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-4 sm:mb-6 tracking-tight">
               Get more of what you love with PlayStation Plus
             </h1>
             
-            <p className="text-sm sm:text-lg text-gray-300 mb-8 sm:mb-10 leading-relaxed font-medium">
+            <p className="text-sm sm:text-base lg:text-lg text-gray-300 mb-8 sm:mb-10 leading-relaxed font-medium max-w-md">
               Discover new games to play every month, jump into online multiplayer with friends and get exclusive discounts — all benefits designed to bring you more of the things you love, every time you play.
             </p>
             
-            <Button className="bg-[#cd3d26] hover:bg-[#b0301d] text-white rounded-full px-8 py-6 font-bold text-lg shadow-lg">
+            <Button className="bg-[#cd3d26] hover:bg-[#b0301d] text-white rounded-full px-8 py-6 font-bold text-base sm:text-lg shadow-lg">
               Join now
             </Button>
           </div>
@@ -56,26 +63,29 @@ function PlusPage() {
       </section>
 
       {/* Subscription Pricing Table */}
-      <section className="bg-[#f3f4f6] py-16 relative z-20 overflow-hidden">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-8 snap-x snap-mandatory hide-scrollbar px-4 sm:px-6 lg:grid lg:grid-cols-3 lg:overflow-visible lg:pb-0" style={{ scrollbarWidth: 'none' }}>
+      <section className="bg-[#f5f5f7] py-16 sm:py-24 relative z-20">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
+          <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-8 snap-x snap-mandatory hide-scrollbar lg:grid lg:grid-cols-3 lg:overflow-visible lg:pb-0" style={{ scrollbarWidth: 'none' }}>
             
             {/* Deluxe Tier */}
-            <div className="flex-none w-[85vw] sm:w-[400px] lg:w-auto snap-center flex flex-col bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
-              <div className="bg-[#111] p-4 sm:p-6 text-white">
-                <h3 className="text-2xl sm:text-3xl font-light tracking-wide uppercase">Deluxe</h3>
+            <div className="flex-none w-[85vw] sm:w-[400px] lg:w-auto snap-center flex flex-col bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+              <div className="bg-[#1f2233] p-4 sm:p-5 text-white">
+                <h3 className="text-xl sm:text-2xl font-bold tracking-wide uppercase">Deluxe</h3>
               </div>
               <div className="p-4 sm:p-6 flex-1 flex flex-col text-sm text-gray-700">
-                <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8 flex-1">
-                  {["Game Trials", "Classics Catalogue", "Game Catalogue", "Ubisoft+ Classics", "Monthly Games", "Online Multiplayer", "Exclusive Discounts", "Cloud Storage"].map((feat, i) => (
-                    <li key={i} className="flex items-center gap-3 font-medium">
-                      <Check className="size-4 text-[#00439c] stroke-[3]" />
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3 mb-8 flex-1">
+                  {[
+                    "Classics Catalogue", "Game Trials", "Game Catalogue", "Ubisoft+ Classics", 
+                    "Monthly Games", "Online Multiplayer", "Exclusive Discounts", "Share Play", "Cloud Storage"
+                  ].map((feat, i) => (
+                    <li key={i} className="flex items-center gap-2 font-semibold text-[11px] sm:text-[13px] text-gray-800">
+                      <Check className="size-3.5 text-[#0070cc] stroke-[4] shrink-0" />
                       <span>{feat}</span>
                     </li>
                   ))}
                 </ul>
 
-                <div className="space-y-2 bg-gray-50 p-2 rounded-lg mb-6">
+                <div className="space-y-3 mb-8">
                   {[
                     { id: "12", label: "12-Month Plan", price: "Rs 7,599 every 12 months", subtitle: "30% off 12 months versus 1 month" },
                     { id: "3", label: "3-Month Plan", price: "Rs 2,299 every 3 months" },
@@ -84,48 +94,52 @@ function PlusPage() {
                     <div 
                       key={plan.id}
                       onClick={() => setDeluxePlan(plan.id)}
-                      className={`flex items-start justify-between p-3 sm:p-4 rounded-md cursor-pointer border-2 transition-all ${deluxePlan === plan.id ? 'border-[#00439c] bg-white shadow-sm' : 'border-transparent hover:bg-gray-100'}`}
+                      className={`flex items-center justify-between p-4 rounded-lg cursor-pointer transition-colors ${deluxePlan === plan.id ? 'bg-[#f0f0f0]' : 'bg-[#f7f7f7] hover:bg-[#f0f0f0]'}`}
                     >
                       <div>
-                        <p className="font-bold text-gray-900 mb-1">{plan.label}</p>
-                        <p className="font-medium text-gray-600 text-xs sm:text-sm">{plan.price}</p>
-                        {plan.subtitle && <p className="text-[10px] sm:text-xs text-gray-500 mt-1">{plan.subtitle}</p>}
+                        <p className="font-bold text-gray-900 text-[13px] sm:text-sm">{plan.label}</p>
+                        <p className="font-medium text-gray-600 text-[11px] sm:text-xs mt-0.5">{plan.price}</p>
+                        {plan.subtitle && <p className="text-[10px] text-gray-400 mt-1">{plan.subtitle}</p>}
                       </div>
-                      {deluxePlan === plan.id ? <CircleDot className="text-[#00439c] size-4 sm:size-5 mt-1" /> : <Circle className="text-gray-300 size-4 sm:size-5 mt-1" />}
+                      <div className="size-5 rounded-full border-2 border-[#0070cc] flex items-center justify-center shrink-0 bg-white">
+                         {deluxePlan === plan.id && <div className="size-2.5 bg-[#0070cc] rounded-full" />}
+                      </div>
                     </div>
                   ))}
                 </div>
                 
-                <Button className="w-full py-5 sm:py-6 rounded-full font-bold text-sm sm:text-base bg-[#00439c] text-white hover:bg-[#00367a]">
+                <Button className="w-full py-6 rounded-full font-bold text-sm sm:text-base bg-[#0070cc] text-white hover:bg-[#005fb3]">
                   Subscribe
                 </Button>
               </div>
             </div>
 
             {/* Extra Tier */}
-            <div className="flex-none w-[85vw] sm:w-[400px] lg:w-auto snap-center flex flex-col bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden transform lg:-translate-y-4 border-t-8 border-t-[#FFCC00]">
-              <div className="bg-[#FFCC00] p-4 sm:p-6 text-black">
-                <h3 className="text-2xl sm:text-3xl font-light tracking-wide uppercase">Extra</h3>
+            <div className="flex-none w-[85vw] sm:w-[400px] lg:w-auto snap-center flex flex-col bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden transform lg:-translate-y-4">
+              <div className="bg-[#ffcc00] p-4 sm:p-5 text-black">
+                <h3 className="text-xl sm:text-2xl font-bold tracking-wide uppercase">Extra</h3>
               </div>
               <div className="p-4 sm:p-6 flex-1 flex flex-col text-sm text-gray-700">
-                <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8 flex-1">
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3 mb-8 flex-1">
                   {[
                     { text: "Classics Catalogue", disabled: true },
+                    { text: "Game Trials", disabled: true },
                     { text: "Game Catalogue", disabled: false },
                     { text: "Ubisoft+ Classics", disabled: false },
                     { text: "Monthly Games", disabled: false },
                     { text: "Online Multiplayer", disabled: false },
                     { text: "Exclusive Discounts", disabled: false },
+                    { text: "Share Play", disabled: false },
                     { text: "Cloud Storage", disabled: false }
                   ].map((feat, i) => (
-                    <li key={i} className={`flex items-center gap-3 font-medium ${feat.disabled ? 'text-gray-300' : ''}`}>
-                      {feat.disabled ? <div className="size-4" /> : <Check className="size-4 text-[#00439c] stroke-[3]" />}
+                    <li key={i} className={`flex items-center gap-2 font-semibold text-[11px] sm:text-[13px] ${feat.disabled ? 'text-gray-300' : 'text-gray-800'}`}>
+                      {feat.disabled ? <div className="size-3.5 border-2 border-gray-200 rounded-sm shrink-0" /> : <Check className="size-3.5 text-[#0070cc] stroke-[4] shrink-0" />}
                       <span>{feat.text}</span>
                     </li>
                   ))}
                 </ul>
 
-                <div className="space-y-2 bg-gray-50 p-2 rounded-lg mb-6">
+                <div className="space-y-3 mb-8">
                   {[
                     { id: "12", label: "12-Month Plan", price: "Rs 6,699 every 12 months", subtitle: "25% off 12 months versus 1 month" },
                     { id: "3", label: "3-Month Plan", price: "Rs 1,999 every 3 months" },
@@ -134,48 +148,52 @@ function PlusPage() {
                     <div 
                       key={plan.id}
                       onClick={() => setExtraPlan(plan.id)}
-                      className={`flex items-start justify-between p-3 sm:p-4 rounded-md cursor-pointer border-2 transition-all ${extraPlan === plan.id ? 'border-[#00439c] bg-white shadow-sm' : 'border-transparent hover:bg-gray-100'}`}
+                      className={`flex items-center justify-between p-4 rounded-lg cursor-pointer transition-colors ${extraPlan === plan.id ? 'bg-[#f0f0f0]' : 'bg-[#f7f7f7] hover:bg-[#f0f0f0]'}`}
                     >
                       <div>
-                        <p className="font-bold text-gray-900 mb-1">{plan.label}</p>
-                        <p className="font-medium text-gray-600 text-xs sm:text-sm">{plan.price}</p>
-                        {plan.subtitle && <p className="text-[10px] sm:text-xs text-gray-500 mt-1">{plan.subtitle}</p>}
+                        <p className="font-bold text-gray-900 text-[13px] sm:text-sm">{plan.label}</p>
+                        <p className="font-medium text-gray-600 text-[11px] sm:text-xs mt-0.5">{plan.price}</p>
+                        {plan.subtitle && <p className="text-[10px] text-gray-400 mt-1">{plan.subtitle}</p>}
                       </div>
-                      {extraPlan === plan.id ? <CircleDot className="text-[#00439c] size-4 sm:size-5 mt-1" /> : <Circle className="text-gray-300 size-4 sm:size-5 mt-1" />}
+                      <div className="size-5 rounded-full border-2 border-[#0070cc] flex items-center justify-center shrink-0 bg-white">
+                         {extraPlan === plan.id && <div className="size-2.5 bg-[#0070cc] rounded-full" />}
+                      </div>
                     </div>
                   ))}
                 </div>
                 
-                <Button className="w-full py-5 sm:py-6 rounded-full font-bold text-sm sm:text-base bg-gray-600 text-white hover:bg-gray-800">
+                <Button className="w-full py-6 rounded-full font-bold text-sm sm:text-base bg-[#363636] text-white hover:bg-black">
                   Subscribe
                 </Button>
               </div>
             </div>
 
             {/* Essential Tier */}
-            <div className="flex-none w-[85vw] sm:w-[400px] lg:w-auto snap-center flex flex-col bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
-              <div className="bg-gray-100 p-4 sm:p-6 text-gray-900">
-                <h3 className="text-2xl sm:text-3xl font-light tracking-wide uppercase">Essential</h3>
+            <div className="flex-none w-[85vw] sm:w-[400px] lg:w-auto snap-center flex flex-col bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+              <div className="bg-[#eaeaed] p-4 sm:p-5 text-gray-900">
+                <h3 className="text-xl sm:text-2xl font-bold tracking-wide uppercase">Essential</h3>
               </div>
               <div className="p-4 sm:p-6 flex-1 flex flex-col text-sm text-gray-700">
-                <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8 flex-1">
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3 mb-8 flex-1">
                   {[
                     { text: "Classics Catalogue", disabled: true },
+                    { text: "Game Trials", disabled: true },
                     { text: "Game Catalogue", disabled: true },
                     { text: "Ubisoft+ Classics", disabled: true },
                     { text: "Monthly Games", disabled: false },
                     { text: "Online Multiplayer", disabled: false },
                     { text: "Exclusive Discounts", disabled: false },
+                    { text: "Share Play", disabled: false },
                     { text: "Cloud Storage", disabled: false }
                   ].map((feat, i) => (
-                    <li key={i} className={`flex items-center gap-3 font-medium ${feat.disabled ? 'text-gray-300' : ''}`}>
-                      {feat.disabled ? <div className="size-4" /> : <Check className="size-4 text-[#00439c] stroke-[3]" />}
+                    <li key={i} className={`flex items-center gap-2 font-semibold text-[11px] sm:text-[13px] ${feat.disabled ? 'text-gray-300' : 'text-gray-800'}`}>
+                      {feat.disabled ? <div className="size-3.5 border-2 border-gray-200 rounded-sm shrink-0" /> : <Check className="size-3.5 text-[#0070cc] stroke-[4] shrink-0" />}
                       <span>{feat.text}</span>
                     </li>
                   ))}
                 </ul>
 
-                <div className="space-y-2 bg-gray-50 p-2 rounded-lg mb-6">
+                <div className="space-y-3 mb-8">
                   {[
                     { id: "12", label: "12-Month Plan", price: "Rs 3,949 every 12 months", subtitle: "34% off 12 months versus 1 month" },
                     { id: "3", label: "3-Month Plan", price: "Rs 1,199 every 3 months" },
@@ -184,19 +202,21 @@ function PlusPage() {
                     <div 
                       key={plan.id}
                       onClick={() => setEssentialPlan(plan.id)}
-                      className={`flex items-start justify-between p-3 sm:p-4 rounded-md cursor-pointer border-2 transition-all ${essentialPlan === plan.id ? 'border-[#00439c] bg-white shadow-sm' : 'border-transparent hover:bg-gray-100'}`}
+                      className={`flex items-center justify-between p-4 rounded-lg cursor-pointer transition-colors ${essentialPlan === plan.id ? 'bg-[#f0f0f0]' : 'bg-[#f7f7f7] hover:bg-[#f0f0f0]'}`}
                     >
                       <div>
-                        <p className="font-bold text-gray-900 mb-1">{plan.label}</p>
-                        <p className="font-medium text-gray-600 text-xs sm:text-sm">{plan.price}</p>
-                        {plan.subtitle && <p className="text-[10px] sm:text-xs text-gray-500 mt-1">{plan.subtitle}</p>}
+                        <p className="font-bold text-gray-900 text-[13px] sm:text-sm">{plan.label}</p>
+                        <p className="font-medium text-gray-600 text-[11px] sm:text-xs mt-0.5">{plan.price}</p>
+                        {plan.subtitle && <p className="text-[10px] text-gray-400 mt-1">{plan.subtitle}</p>}
                       </div>
-                      {essentialPlan === plan.id ? <CircleDot className="text-[#00439c] size-4 sm:size-5 mt-1" /> : <Circle className="text-gray-300 size-4 sm:size-5 mt-1" />}
+                      <div className="size-5 rounded-full border-2 border-[#0070cc] flex items-center justify-center shrink-0 bg-white">
+                         {essentialPlan === plan.id && <div className="size-2.5 bg-[#0070cc] rounded-full" />}
+                      </div>
                     </div>
                   ))}
                 </div>
                 
-                <Button className="w-full py-5 sm:py-6 rounded-full font-bold text-sm sm:text-base bg-gray-600 text-white hover:bg-gray-800">
+                <Button className="w-full py-6 rounded-full font-bold text-sm sm:text-base bg-[#363636] text-white hover:bg-black">
                   Subscribe
                 </Button>
               </div>
