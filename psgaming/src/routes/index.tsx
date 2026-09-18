@@ -27,7 +27,7 @@ function Index() {
           <p className="text-xs font-semibold uppercase">PlayStation Studios</p>
           <h1 className="mt-3 text-4xl font-bold leading-tight sm:text-6xl">God of War<br />Ragnarök</h1>
           <p className="mt-4 max-w-md text-sm leading-6 text-ink-muted sm:text-base">Embark on an epic and heartfelt journey as Kratos and Atreus struggle with holding on and letting go.</p>
-          <div className="mt-6 flex items-center gap-4"><Link to="/games/$slug" params={{ slug: "god-of-war-ragnarok" }} className={buttonVariants()}>Buy for ₹3,999</Link><span className="text-sm text-ink-muted line-through">₹4,999</span></div>
+          <div className="mt-6 flex items-center gap-4"><button className={buttonVariants()} onClick={() => { const rzp = new (window as any).Razorpay({ key: "rzp_test_TccMP6YnZ6PZD9", amount: 399900, currency: "INR", name: "God of War Ragnarok", description: "Digital Game Purchase", handler: function (response: any) { alert("Payment Successful! Payment ID: " + response.razorpay_payment_id); } }); rzp.open(); }}>Buy with Razorpay</button><span className="text-sm text-ink-muted line-through">₹4,999</span></div>
         </div>
       </div>
     </section>
@@ -45,3 +45,4 @@ function Index() {
     </section>
   </main>;
 }
+

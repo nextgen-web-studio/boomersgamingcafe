@@ -106,7 +106,7 @@ function RootShell({ children }: { children: ReactNode }) {
       </head>
       <body>
         {children}
-        <Scripts />
+        <Scripts /><script src="https://checkout.razorpay.com/v1/checkout.js"></script>
       </body>
     </html>
   );
@@ -122,3 +122,4 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
+
