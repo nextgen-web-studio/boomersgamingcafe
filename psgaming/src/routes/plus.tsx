@@ -25,7 +25,10 @@ function PlusPage() {
           <a href="#" className="hover:text-black transition-colors">What's new on PlayStation Plus</a>
           <a href="#" className="hover:text-black transition-colors">All games A-Z</a>
         </div>
-        <Button className="bg-[#cd3d26] hover:bg-[#b0301d] text-white rounded-full px-4 sm:px-5 font-bold h-8 text-xs shrink-0 ml-auto">
+        <Button 
+          onClick={() => document.getElementById('subscription-tiers')?.scrollIntoView({ behavior: 'smooth' })}
+          className="bg-[#cd3d26] hover:bg-[#b0301d] text-white rounded-full px-4 sm:px-5 font-bold h-8 text-xs shrink-0 ml-auto"
+        >
           Join PlayStation Plus
         </Button>
       </div>
@@ -57,7 +60,10 @@ function PlusPage() {
               Discover new games to play every month, jump into online multiplayer with friends and get exclusive discounts — all benefits designed to bring you more of the things you love, every time you play.
             </p>
             
-            <Button className="bg-[#cd3d26] hover:bg-[#b0301d] text-white rounded-full px-8 py-6 font-bold text-base sm:text-lg shadow-lg">
+            <Button 
+              onClick={() => document.getElementById('subscription-tiers')?.scrollIntoView({ behavior: 'smooth' })}
+              className="bg-[#cd3d26] hover:bg-[#b0301d] text-white rounded-full px-8 py-6 font-bold text-base sm:text-lg shadow-lg"
+            >
               Join now
             </Button>
           </div>
@@ -65,7 +71,7 @@ function PlusPage() {
       </section>
 
       {/* Subscription Pricing Table */}
-      <section className="bg-[#f5f5f7] py-16 sm:py-24 relative z-20">
+      <section id="subscription-tiers" className="bg-[#f5f5f7] py-16 sm:py-24 relative z-20">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
           <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-8 snap-x snap-mandatory hide-scrollbar lg:grid lg:grid-cols-3 lg:overflow-visible lg:pb-0" style={{ scrollbarWidth: 'none' }}>
             
@@ -311,7 +317,7 @@ function PlusPage() {
       {/* Benefits at a Glance */}
       <section className="bg-gray-50 py-24 overflow-hidden relative">
         <div className="mx-auto max-w-7xl text-center mb-12 px-4 sm:px-6">
-          <p className="text-gray-500 text-sm font-bold tracking-widest uppercase mb-4">PlayStation Plus at a glance</p>
+          <p className="text-[#0070cc] text-sm font-bold tracking-widest uppercase mb-4">PlayStation Plus at a glance</p>
           <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight max-w-3xl mx-auto uppercase">
             Benefits that enhance every way you play
           </h2>
@@ -320,20 +326,39 @@ function PlusPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-8 snap-x snap-mandatory hide-scrollbar lg:grid lg:grid-cols-4 lg:overflow-visible lg:pb-0" style={{ scrollbarWidth: 'none' }}>
             {[
-              { title: "Get exclusive discounts, in-game content and more", desc: "Access members-only PlayStation deals and offers, and claim exclusive content packs.", btn: "Find exclusive content" },
-              { title: "Play hundreds of games", desc: "Build your personal collection with our Monthly Games. Find more of the games you love.", btn: "See all games" },
-              { title: "Enjoy games online with friends", desc: "Team up with or battle other players, showing the world your skills via online multiplayer.", btn: "Explore multiplayer" },
-              { title: "Get exclusive discounts and more", desc: "Access members-only PlayStation deals and offers, and claim exclusive content packs.", btn: "Find exclusive" }
+              { 
+                title: "Get exclusive discounts, in-game content and more", 
+                desc: "Access members-only PlayStation deals and offers, and claim exclusive content packs.", 
+                btn: "Find exclusive content",
+                img: "/ratchet-and-clank-rift-apart.jpg"
+              },
+              { 
+                title: "Play hundreds of games", 
+                desc: "Build your personal collection with our Monthly Games. Find more of the games you love.", 
+                btn: "See all games",
+                img: "/horizon-zero-dawn-remastered.jpg"
+              },
+              { 
+                title: "Enjoy games online with friends", 
+                desc: "Team up with or battle other players, showing the world your skills via online multiplayer.", 
+                btn: "Explore multiplayer",
+                img: "/marvels-spider-man-2.jpg"
+              },
+              { 
+                title: "Explore the Classics Catalogue", 
+                desc: "Rediscover a selection of classic games from previous PlayStation generations, ready to play.", 
+                btn: "View classics",
+                img: "/god-of-war-ragnarok.jpg"
+              }
             ].map((benefit, i) => (
-              <div key={i} className="flex-none w-[80vw] sm:w-[350px] lg:w-auto snap-center bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 flex flex-col hover:-translate-y-2 transition-transform duration-300">
-                <div className="h-40 sm:h-48 bg-[#FFCC00] relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-black/20 mix-blend-overlay" />
-                  <img src="/ratchet-and-clank-rift-apart.jpg" className="w-full h-full object-cover mix-blend-multiply opacity-50" alt="" />
+              <div key={i} className="flex-none w-[80vw] sm:w-[320px] lg:w-auto snap-center bg-white rounded-3xl overflow-hidden shadow-xl shadow-gray-200/50 flex flex-col hover:-translate-y-2 transition-transform duration-300">
+                <div className="h-44 sm:h-48 relative overflow-hidden bg-gray-900">
+                  <img src={benefit.img} className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" alt="" />
                 </div>
                 <div className="p-6 sm:p-8 flex flex-col flex-1">
-                  <h4 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">{benefit.title}</h4>
-                  <p className="text-xs sm:text-sm text-gray-600 mb-6 sm:mb-8 flex-1 leading-relaxed">{benefit.desc}</p>
-                  <Button className="w-fit bg-[#00439c] hover:bg-[#00367a] text-white rounded-full px-5 sm:px-6 font-bold text-xs sm:text-sm">
+                  <h4 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 leading-snug">{benefit.title}</h4>
+                  <p className="text-sm sm:text-base text-gray-600 mb-8 flex-1 leading-relaxed">{benefit.desc}</p>
+                  <Button className="w-fit bg-[#0070cc] hover:bg-[#005fb3] text-white rounded-full px-6 py-5 font-bold text-sm shadow-md">
                     {benefit.btn}
                   </Button>
                 </div>
@@ -406,7 +431,10 @@ function PlusPage() {
             Whether you're looking to join or upgrade, answer a few quick questions to find out exactly which PlayStation Plus membership will get you more from your PlayStation experience.
           </p>
           
-          <Button className="bg-[#0070cc] hover:bg-[#005fb3] text-white rounded-full px-12 py-6 font-bold text-lg w-full max-w-[300px] shadow-md transition-transform hover:-translate-y-1">
+          <Button 
+            onClick={() => document.getElementById('subscription-tiers')?.scrollIntoView({ behavior: 'smooth' })}
+            className="bg-[#0070cc] hover:bg-[#005fb3] text-white rounded-full px-12 py-6 font-bold text-lg w-full max-w-[300px] shadow-md transition-transform hover:-translate-y-1"
+          >
             Let's go
           </Button>
         </div>
