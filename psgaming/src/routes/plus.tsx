@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Check, ChevronLeft, ChevronRight } from "lucide-react";
+import { Check, ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
@@ -45,12 +45,11 @@ function PlusPage() {
 
         <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 mt-8 sm:mt-12">
           <div className="max-w-xl">
-            <div className="mb-6 sm:mb-8">
-              <img 
-                src="/ps-plus-logo.jpg" 
-                alt="PlayStation Plus" 
-                className="h-8 sm:h-12 object-contain invert brightness-0 contrast-200" 
-              />
+            <div className="flex items-center gap-3 mb-6 sm:mb-8">
+              <div className="relative flex items-center justify-center size-8 sm:size-10">
+                <Plus className="text-[#FFCC00] size-full stroke-[3]" />
+              </div>
+              <span className="text-2xl sm:text-3xl font-sans font-light tracking-widest uppercase">PLAYSTATION PLUS</span>
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-4 sm:mb-6 tracking-tight">
@@ -82,13 +81,13 @@ function PlusPage() {
                 <h3 className="text-xl sm:text-2xl font-bold tracking-wide uppercase">Deluxe</h3>
               </div>
               <div className="p-4 sm:p-6 flex-1 flex flex-col text-sm text-gray-700">
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3 mb-8 flex-1">
+                <ul className="grid grid-cols-2 gap-x-2 sm:gap-x-4 gap-y-3 mb-8 flex-1">
                   {[
                     "Classics Catalogue", "Game Trials", "Game Catalogue", "Ubisoft+ Classics", 
                     "Monthly Games", "Online Multiplayer", "Exclusive Discounts", "Share Play", "Cloud Storage"
                   ].map((feat, i) => (
-                    <li key={i} className="flex items-center gap-2 font-semibold text-[11px] sm:text-[13px] text-gray-800">
-                      <Check className="size-3.5 text-[#0070cc] stroke-[4] shrink-0" />
+                    <li key={i} className="flex items-start sm:items-center gap-1.5 sm:gap-2 font-semibold text-[10px] sm:text-[13px] text-gray-800 leading-tight">
+                      <Check className="size-3.5 sm:size-4 text-[#0070cc] stroke-[4] shrink-0 mt-0.5 sm:mt-0" />
                       <span>{feat}</span>
                     </li>
                   ))}
@@ -129,7 +128,7 @@ function PlusPage() {
                 <h3 className="text-xl sm:text-2xl font-bold tracking-wide uppercase">Extra</h3>
               </div>
               <div className="p-4 sm:p-6 flex-1 flex flex-col text-sm text-gray-700">
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3 mb-8 flex-1">
+                <ul className="grid grid-cols-2 gap-x-2 sm:gap-x-4 gap-y-3 mb-8 flex-1">
                   {[
                     { text: "Classics Catalogue", disabled: true },
                     { text: "Game Trials", disabled: true },
@@ -141,8 +140,8 @@ function PlusPage() {
                     { text: "Share Play", disabled: false },
                     { text: "Cloud Storage", disabled: false }
                   ].map((feat, i) => (
-                    <li key={i} className={`flex items-center gap-2 font-semibold text-[11px] sm:text-[13px] ${feat.disabled ? 'text-gray-300' : 'text-gray-800'}`}>
-                      {feat.disabled ? <div className="size-3.5 border-2 border-gray-200 rounded-sm shrink-0" /> : <Check className="size-3.5 text-[#0070cc] stroke-[4] shrink-0" />}
+                    <li key={i} className={`flex items-start sm:items-center gap-1.5 sm:gap-2 font-semibold text-[10px] sm:text-[13px] leading-tight ${feat.disabled ? 'text-gray-300' : 'text-gray-800'}`}>
+                      {feat.disabled ? <div className="size-3.5 sm:size-4 border-2 border-gray-200 rounded-sm shrink-0 mt-0.5 sm:mt-0" /> : <Check className="size-3.5 sm:size-4 text-[#0070cc] stroke-[4] shrink-0 mt-0.5 sm:mt-0" />}
                       <span>{feat.text}</span>
                     </li>
                   ))}
@@ -183,7 +182,7 @@ function PlusPage() {
                 <h3 className="text-xl sm:text-2xl font-bold tracking-wide uppercase">Essential</h3>
               </div>
               <div className="p-4 sm:p-6 flex-1 flex flex-col text-sm text-gray-700">
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3 mb-8 flex-1">
+                <ul className="grid grid-cols-2 gap-x-2 sm:gap-x-4 gap-y-3 mb-8 flex-1">
                   {[
                     { text: "Classics Catalogue", disabled: true },
                     { text: "Game Trials", disabled: true },
@@ -195,8 +194,8 @@ function PlusPage() {
                     { text: "Share Play", disabled: false },
                     { text: "Cloud Storage", disabled: false }
                   ].map((feat, i) => (
-                    <li key={i} className={`flex items-center gap-2 font-semibold text-[11px] sm:text-[13px] ${feat.disabled ? 'text-gray-300' : 'text-gray-800'}`}>
-                      {feat.disabled ? <div className="size-3.5 border-2 border-gray-200 rounded-sm shrink-0" /> : <Check className="size-3.5 text-[#0070cc] stroke-[4] shrink-0" />}
+                    <li key={i} className={`flex items-start sm:items-center gap-1.5 sm:gap-2 font-semibold text-[10px] sm:text-[13px] leading-tight ${feat.disabled ? 'text-gray-300' : 'text-gray-800'}`}>
+                      {feat.disabled ? <div className="size-3.5 sm:size-4 border-2 border-gray-200 rounded-sm shrink-0 mt-0.5 sm:mt-0" /> : <Check className="size-3.5 sm:size-4 text-[#0070cc] stroke-[4] shrink-0 mt-0.5 sm:mt-0" />}
                       <span>{feat.text}</span>
                     </li>
                   ))}
