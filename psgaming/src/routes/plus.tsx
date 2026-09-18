@@ -45,7 +45,7 @@ function PlusPage() {
               <span className="text-2xl font-light tracking-widest uppercase">PlayStation Plus</span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-light leading-tight mb-6 tracking-tight">
+            <h1 className="text-4xl md:text-6xl font-light leading-tight mb-6 tracking-tight">
               Get more of what you love with PlayStation Plus
             </h1>
             
@@ -61,12 +61,12 @@ function PlusPage() {
       </section>
 
       {/* Subscription Pricing Table */}
-      <section className="bg-[#f3f4f6] px-4 py-16 sm:px-6 relative z-20">
+      <section className="bg-[#f3f4f6] py-16 relative z-20 overflow-hidden">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-6 lg:grid-cols-3">
+          <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-8 snap-x snap-mandatory hide-scrollbar px-4 sm:px-6 lg:grid lg:grid-cols-3 lg:overflow-visible lg:pb-0" style={{ scrollbarWidth: 'none' }}>
             
             {/* Deluxe Tier */}
-            <div className="flex flex-col bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+            <div className="flex-none w-[85vw] sm:w-[400px] lg:w-auto snap-center flex flex-col bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
               <div className="bg-[#111] p-6 text-white">
                 <h3 className="text-3xl font-light tracking-wide uppercase">Deluxe</h3>
               </div>
@@ -108,7 +108,7 @@ function PlusPage() {
             </div>
 
             {/* Extra Tier */}
-            <div className="flex flex-col bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden transform lg:-translate-y-4 border-t-8 border-t-[#FFCC00]">
+            <div className="flex-none w-[85vw] sm:w-[400px] lg:w-auto snap-center flex flex-col bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden transform lg:-translate-y-4 border-t-8 border-t-[#FFCC00]">
               <div className="bg-[#FFCC00] p-6 text-black">
                 <h3 className="text-3xl font-light tracking-wide uppercase">Extra</h3>
               </div>
@@ -158,7 +158,7 @@ function PlusPage() {
             </div>
 
             {/* Essential Tier */}
-            <div className="flex flex-col bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+            <div className="flex-none w-[85vw] sm:w-[400px] lg:w-auto snap-center flex flex-col bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
               <div className="bg-gray-100 p-6 text-gray-900">
                 <h3 className="text-3xl font-light tracking-wide uppercase">Essential</h3>
               </div>
@@ -250,7 +250,7 @@ function PlusPage() {
       <section className="bg-gray-50 px-4 py-24 sm:px-6">
         <div className="mx-auto max-w-7xl text-center mb-16">
           <p className="text-gray-500 text-sm font-bold tracking-widest uppercase mb-4">PlayStation Plus at a glance</p>
-          <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight max-w-3xl mx-auto uppercase">
+          <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight max-w-3xl mx-auto uppercase">
             Benefits that enhance every way you play
           </h2>
         </div>
@@ -285,7 +285,7 @@ function PlusPage() {
         <div className="mx-auto max-w-7xl grid md:grid-cols-2 overflow-hidden bg-white shadow-2xl rounded-3xl border border-gray-100 my-12">
           <div className="p-12 md:p-24 flex flex-col justify-center">
             <p className="text-gray-500 text-sm font-bold tracking-widest uppercase mb-4">Take the quiz</p>
-            <h2 className="text-4xl md:text-5xl font-black text-[#001230] mb-6 tracking-tight uppercase leading-tight">
+            <h2 className="text-3xl md:text-5xl font-black text-[#001230] mb-6 tracking-tight uppercase leading-tight">
               Which PlayStation Plus membership is right for you?
             </h2>
             <p className="text-gray-600 text-lg mb-10 leading-relaxed">
