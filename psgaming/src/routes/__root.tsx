@@ -91,6 +91,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
+    scripts: [
+      { src: "https://checkout.razorpay.com/v1/checkout.js" }
+    ]
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -106,7 +109,7 @@ function RootShell({ children }: { children: ReactNode }) {
       </head>
       <body>
         {children}
-        <Scripts /><script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+        <Scripts />
       </body>
     </html>
   );

@@ -29,6 +29,11 @@ function PlusPage() {
       if (planId === "1") { amount = 499; planName = "Essential 1-Month Plan"; }
     }
 
+    if (!(window as any).Razorpay) {
+      alert("Payment gateway is still loading. Please try again in a moment.");
+      return;
+    }
+
     const rzp = new (window as any).Razorpay({ 
       key: "rzp_test_TccMP6YnZ6PZD9", 
       amount: amount * 100, 

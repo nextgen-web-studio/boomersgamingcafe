@@ -25,6 +25,12 @@ export function SiteHeader() {
 
   const handleCheckout = () => {
     if (cartItems.length === 0) return;
+    
+    if (!(window as any).Razorpay) {
+      alert("Payment gateway is still loading. Please try again in a moment.");
+      return;
+    }
+
     const rzp = new (window as any).Razorpay({ 
       key: "rzp_test_TccMP6YnZ6PZD9", 
       amount: cartTotal * 100, 
