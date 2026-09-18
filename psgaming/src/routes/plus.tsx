@@ -35,16 +35,18 @@ function PlusPage() {
         
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
-          <img src="/ghost-of-yotei.jpg" alt="Ghost of Tsushima" className="w-full h-full object-cover object-top opacity-60" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#000f28] via-[#000f28]/90 to-transparent sm:via-[#000f28]/70" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#000f28] to-transparent sm:hidden" />
+          <img src="/ghost-of-yotei.jpg" alt="Ghost of Tsushima" className="w-full h-full object-cover object-center opacity-70" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#000f28] via-[#000f28]/80 to-transparent sm:via-[#000f28]/60" />
+          <div className="absolute inset-0 bg-[#000f28]/30 sm:hidden" />
         </div>
 
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6">
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 mt-8 sm:mt-12">
           <div className="max-w-xl">
-            <div className="flex items-center gap-3 mb-4 sm:mb-6">
-              <Plus className="text-[#FFCC00] size-6 sm:size-8 stroke-[4]" />
-              <span className="text-xl sm:text-2xl font-light tracking-widest uppercase">PlayStation Plus</span>
+            <div className="flex items-center gap-3 mb-6 sm:mb-8">
+              <div className="relative flex items-center justify-center size-8 sm:size-10">
+                <Plus className="text-[#FFCC00] size-full stroke-[3]" />
+              </div>
+              <span className="text-2xl sm:text-3xl font-light tracking-widest uppercase">PLAYSTATION PLUS</span>
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-4 sm:mb-6 tracking-tight">
@@ -253,7 +255,7 @@ function PlusPage() {
              <div className="w-full md:w-1/2 flex justify-center md:justify-end items-start pt-4">
                <div className="relative w-[90%] max-w-md">
                  <div className="absolute inset-0 bg-[#FFCC00] rounded-xl transform translate-x-4 -translate-y-4"></div>
-                 <img src="/ghost-of-yotei.jpg" alt="Ghost of Yotei" className="relative w-full rounded-xl shadow-2xl object-cover aspect-[2/1] sm:aspect-[16/9]" />
+                 <img src="/ghost-of-yotei.jpg" alt="Ghost of Yotei" className="relative w-full rounded-xl shadow-2xl object-cover object-top aspect-[4/3] sm:aspect-[16/9]" />
                </div>
              </div>
              
