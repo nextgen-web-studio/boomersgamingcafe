@@ -100,8 +100,8 @@ function Index() {
   const activeHero = heroGames[currentSlide];
 
   return <main>
-    <section className="bg-ink px-4 py-5 text-ink-foreground sm:px-6 sm:py-6">
-      <div className="relative mx-auto min-h-[430px] max-w-7xl overflow-hidden rounded-lg sm:min-h-[540px] group">
+    <section className="bg-ink text-ink-foreground relative w-full">
+      <div className="relative w-full h-[60vh] min-h-[400px] sm:h-[80vh] sm:min-h-[600px] overflow-hidden group">
         
         {/* Images */}
         {heroGames.map((game, index) => (
@@ -130,7 +130,7 @@ function Index() {
         </button>
 
         {/* Content */}
-        <div className="relative z-10 flex min-h-[430px] max-w-lg flex-col justify-end p-6 sm:min-h-[540px] sm:p-10 transition-all duration-500">
+        <div className="relative z-10 mx-auto max-w-7xl flex h-full flex-col justify-end p-6 pb-12 sm:p-10 sm:pb-16 transition-all duration-500"><div className="max-w-xl">
           <p className="text-xs font-semibold uppercase">{activeHero.subtitle}</p>
           <h1 className="mt-3 text-4xl font-bold leading-tight sm:text-6xl">{activeHero.title}</h1>
           <p className="mt-4 max-w-md text-sm leading-6 text-ink-muted sm:text-base">{activeHero.description}</p>
@@ -145,9 +145,7 @@ function Index() {
               <span className="text-sm text-ink-muted line-through">{activeHero.oldPrice}</span>
             )}
           </div>
-        </div>
-
-        {/* Indicators */}
+        </div></div>`n`n        {/* Indicators */}
         <div className="absolute bottom-6 right-10 z-20 flex gap-2">
           {heroGames.map((_, index) => (
             <button 
@@ -198,3 +196,5 @@ function Index() {
     </section>
   </main>;
 }
+
+

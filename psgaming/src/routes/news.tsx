@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/news")({
   component: NewsPage,
@@ -18,7 +18,7 @@ const newsArticles = [
     category: "Hardware",
     title: "Introducing the PlayStation 5 Pro",
     date: "September 10, 2026",
-    image: "/astro-bot.jpg", // Mock image since we don't have PS5 pro hardware image
+    image: "/astro-bot.jpg",
   },
   {
     id: 3,
@@ -45,38 +45,41 @@ const newsArticles = [
 
 function NewsPage() {
   return (
-    <main className="bg-canvas min-h-screen">
-      <div className="bg-ink text-ink-foreground py-16 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">PlayStation.Blog</h1>
-          <p className="text-xl text-ink-muted">The latest news and updates on all things PlayStation.</p>
+    <main className="bg-[#f3f4f6] min-h-screen">
+      {/* Colorful Header */}
+      <div className="relative overflow-hidden bg-gradient-to-r from-[#00439c] via-[#0070d1] to-[#00439c] text-white py-24 px-4">
+        <div className="absolute inset-0 bg-[url('/hero-bg-pattern.svg')] opacity-10" />
+        <div className="max-w-7xl mx-auto text-center relative z-10">
+          <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6 drop-shadow-md">PlayStation.Blog</h1>
+          <p className="text-xl md:text-2xl text-blue-100 font-medium max-w-2xl mx-auto drop-shadow">The latest news, updates, and deep dives into all things PlayStation.</p>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="max-w-7xl mx-auto px-4 py-16 -mt-10 relative z-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {newsArticles.map((article, idx) => (
             <article 
               key={article.id} 
-              className={`bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group cursor-pointer ${article.featured ? 'md:col-span-2 lg:col-span-2' : ''}`}
+              className={`bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group cursor-pointer ${article.featured ? 'md:col-span-2 lg:col-span-2 transform md:-translate-y-4' : ''}`}
             >
-              <div className={`overflow-hidden ${article.featured ? 'aspect-video' : 'aspect-[4/3]'}`}>
+              <div className={`overflow-hidden relative ${article.featured ? 'aspect-video' : 'aspect-[4/3]'}`}>
                 <img 
                   src={article.image} 
                   alt={article.title} 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-              <div className="p-6">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-xs font-bold uppercase tracking-wider text-primary">{article.category}</span>
-                  <span className="text-xs text-muted-foreground">{article.date}</span>
+              <div className="p-8">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-xs font-black uppercase tracking-widest text-[#00439c] bg-blue-50 px-3 py-1 rounded-full">{article.category}</span>
+                  <span className="text-sm font-semibold text-gray-400">{article.date}</span>
                 </div>
-                <h2 className={`${article.featured ? 'text-3xl' : 'text-xl'} font-bold leading-tight group-hover:text-primary transition-colors`}>
+                <h2 className={`${article.featured ? 'text-4xl' : 'text-2xl'} font-black leading-tight text-gray-900 group-hover:text-[#0070d1] transition-colors`}>
                   {article.title}
                 </h2>
                 {article.featured && (
-                  <p className="mt-4 text-muted-foreground line-clamp-2">
+                  <p className="mt-5 text-gray-600 text-lg font-medium leading-relaxed">
                     A new journey begins. Explore the breathtaking landscapes of 1603 Hokkaido in the next chapter of the Ghost franchise.
                   </p>
                 )}
