@@ -1,5 +1,5 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { Gamepad2, HardDrive, MonitorPlay, UsersRound } from "lucide-react";
+import { Gamepad2, Heart, Star, StarHalf, Globe, User, Settings2, Lightbulb, ChevronRight, MonitorPlay } from "lucide-react";
 
 import { GameCard } from "@/components/game-card";
 import { games, getGame } from "@/lib/games";
@@ -28,76 +28,138 @@ function GamePage() {
     });
   };
 
-  return <main className="bg-white min-h-screen pb-0">
+  return <main className="bg-black min-h-screen pb-0">
     {/* Hero Section */}
-    <section className="relative w-full h-[70vh] min-h-[500px] overflow-hidden bg-black text-white">
-      <img src={game.image.replace('.jpg', '-wide.jpg')} onError={(e) => (e.currentTarget.src = game.image)} alt={game.title} className="absolute inset-0 size-full object-cover opacity-60" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent" />
+    <section className="relative w-full bg-[#111] text-white">
+      {/* Background Image Container */}
+      <div className="w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:absolute lg:inset-0 lg:h-full lg:w-full">
+        <img 
+          src={game.image.replace('.jpg', '-wide.jpg')} 
+          onError={(e) => (e.currentTarget.src = game.image)} 
+          alt={game.title} 
+          className="w-full h-full object-cover object-top" 
+        />
+        {/* Desktop Gradient Overlay (Hidden on Mobile) */}
+        <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-[#111] via-[#111]/90 to-transparent" />
+      </div>
       
-      <div className="relative z-10 mx-auto max-w-7xl h-full flex flex-col justify-center px-4 sm:px-6">
-        <div className="max-w-xl mt-12">
-          <div className="bg-white text-black text-[10px] sm:text-xs font-bold px-2 py-1 inline-block rounded-sm mb-4">PS5</div>
-          <h1 className="text-5xl sm:text-7xl font-bold leading-tight mb-4 tracking-tight">{game.title}</h1>
-          <p className="text-lg text-gray-200 mb-8 leading-relaxed max-w-lg">
-            {game.description}
-          </p>
-          <div className="flex items-center gap-4 flex-wrap">
+      {/* Content Container (Below image on mobile, Overlaid on desktop) */}
+      <div className="relative z-10 mx-auto max-w-7xl lg:h-[70vh] lg:min-h-[600px] flex flex-col justify-end lg:justify-center">
+        <div className="bg-[#1f1f1f] lg:bg-transparent px-4 py-8 sm:px-6 md:p-8 lg:p-0 max-w-xl lg:mt-12 w-full lg:w-1/2 rounded-t-3xl lg:rounded-none -mt-6 lg:mt-0 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] lg:shadow-none">
+          
+          <h1 className="text-[32px] sm:text-5xl font-light mb-3 tracking-tight text-white leading-[1.1]">{game.title}</h1>
+          <p className="text-[13px] font-bold text-gray-200 mb-4 tracking-wide">Sony Interactive Entertainment</p>
+          
+          <div className="flex flex-wrap items-center gap-1.5 mb-4">
+            <span className="border border-white/40 text-white text-[10px] sm:text-xs font-bold px-1.5 py-0.5 rounded-sm">PS5</span>
+            <span className="border border-white/40 text-white text-[10px] sm:text-xs font-bold px-1.5 py-0.5 rounded-sm uppercase">STANDARD EDITION</span>
+            <span className="border border-white/40 text-white text-[10px] sm:text-xs font-bold px-1.5 py-0.5 rounded-sm uppercase">PS5 PRO ENHANCED</span>
+          </div>
+
+          <div className="flex items-center gap-1.5 mb-8">
+            <span className="text-sm font-medium">4.79</span>
+            <div className="flex items-center text-white">
+              <Star className="size-3.5 fill-white" />
+              <Star className="size-3.5 fill-white" />
+              <Star className="size-3.5 fill-white" />
+              <Star className="size-3.5 fill-white" />
+              <StarHalf className="size-3.5 fill-white" />
+            </div>
+            <span className="text-sm text-gray-300 ml-1">32k ratings</span>
+          </div>
+
+          <div className="mb-6 flex items-baseline gap-3">
+            <span className="text-xl sm:text-2xl font-normal">{game.price}</span>
+            {game.oldPrice && <span className="text-gray-400 text-sm line-through">{game.oldPrice}</span>}
+          </div>
+
+          <div className="flex items-center gap-3 w-full">
             <button 
-              className={`rounded-full px-6 py-3 sm:px-8 sm:py-3.5 font-bold flex items-center transition-colors text-base sm:text-lg shadow-lg ${inCart ? 'bg-green-600 text-white cursor-default' : 'bg-[#00439c] hover:bg-[#00367a] text-white'}`}
+              className={`flex-1 rounded-full py-3 sm:py-3.5 font-bold flex justify-center items-center transition-colors text-[15px] sm:text-lg ${inCart ? 'bg-[#333] text-gray-300 cursor-default' : 'bg-[#d1361f] hover:bg-[#b0301d] text-white'}`}
               onClick={handleAddToCart}
               disabled={inCart}
             >
-              {inCart ? 'Added to cart' : 'Add to cart'} &middot; {game.price}
+              {inCart ? 'Added to Cart' : 'Add to Cart'}
             </button>
-            {game.oldPrice && (
-              <span className="text-gray-400 font-medium line-through">{game.oldPrice}</span>
-            )}
+            <button className="flex-shrink-0 size-12 rounded-full border border-gray-400 flex items-center justify-center hover:bg-gray-800 transition-colors">
+              <Heart className="size-5 text-white" />
+            </button>
           </div>
         </div>
       </div>
     </section>
 
-    {/* Game Overview Section */}
-    <section className="bg-[#f3f4f6] px-4 py-12 sm:px-6 sm:py-24">
-      <div className="mx-auto max-w-7xl grid lg:grid-cols-[1.5fr_1fr] gap-12 sm:gap-16">
+    {/* Features / Game Overview Section */}
+    <section className="bg-black text-white px-4 py-12 sm:px-6 lg:py-24">
+      <div className="mx-auto max-w-7xl grid lg:grid-cols-[1.2fr_1fr] gap-12 sm:gap-20">
+        
+        {/* Features List (Left) */}
         <div>
-          <p className="text-[#00439c] text-sm font-bold tracking-widest uppercase mb-3 sm:mb-4">Game Overview</p>
-          <h2 className="text-3xl sm:text-5xl font-black text-gray-900 mb-4 sm:mb-6 tracking-tight">A new generation of adventure</h2>
-          <p className="text-base sm:text-lg text-gray-700 leading-relaxed mb-8 sm:mb-10">
-            {game.description} Built to make every battle, journey and discovery feel immediate and unforgettable.
-          </p>
-
-          <div className="grid grid-cols-2 gap-3 sm:gap-4">
-            <div className="bg-white p-4 sm:p-6 rounded-xl border border-gray-100 shadow-sm flex flex-col justify-center">
-              <Gamepad2 className="text-[#00439c] size-5 sm:size-6 mb-3 sm:mb-4" />
-              <p className="text-gray-500 text-[10px] sm:text-xs uppercase font-semibold mb-1">Genre</p>
-              <p className="font-bold text-gray-900 text-sm sm:text-base">{game.genre}</p>
+          {/* IARC Badge */}
+          <div className="flex gap-4 items-center border-b border-[#333] pb-6 mb-6">
+            <div className="bg-white text-black font-black text-xl w-12 h-12 flex flex-col items-center justify-center border-2 border-black rounded-sm shrink-0">
+              <span className="text-[8px] leading-none mb-0.5">IARC</span>
+              <span>18+</span>
             </div>
-            <div className="bg-white p-4 sm:p-6 rounded-xl border border-gray-100 shadow-sm flex flex-col justify-center">
-              <UsersRound className="text-[#00439c] size-5 sm:size-6 mb-3 sm:mb-4" />
-              <p className="text-gray-500 text-[10px] sm:text-xs uppercase font-semibold mb-1">Players</p>
-              <p className="font-bold text-gray-900 text-sm sm:text-base">1 player</p>
-            </div>
-            <div className="bg-white p-4 sm:p-6 rounded-xl border border-gray-100 shadow-sm flex flex-col justify-center">
-              <HardDrive className="text-[#00439c] size-5 sm:size-6 mb-3 sm:mb-4" />
-              <p className="text-gray-500 text-[10px] sm:text-xs uppercase font-semibold mb-1">Storage</p>
-              <p className="font-bold text-gray-900 text-sm sm:text-base">75 GB minimum</p>
-            </div>
-            <div className="bg-white p-4 sm:p-6 rounded-xl border border-gray-100 shadow-sm flex flex-col justify-center">
-              <MonitorPlay className="text-[#00439c] size-5 sm:size-6 mb-3 sm:mb-4" />
-              <p className="text-gray-500 text-[10px] sm:text-xs uppercase font-semibold mb-1">Display</p>
-              <p className="font-bold text-gray-900 text-sm sm:text-base">4K / HDR / 60fps</p>
+            <div className="text-[13px] font-medium leading-tight">
+              <p>Extreme Violence, Strong Language</p>
+              <p className="text-gray-400 mt-1 font-normal">In-Game Purchases</p>
             </div>
           </div>
+          
+          <div className="space-y-5 text-[15px] font-medium text-gray-100">
+            <div className="flex items-center gap-4">
+              <Globe className="size-6 shrink-0 text-white" />
+              <span>Offline play enabled</span>
+            </div>
+            <div className="flex items-center gap-4">
+              <User className="size-6 shrink-0 text-white" />
+              <span>1 player</span>
+            </div>
+            <div className="flex items-center gap-4">
+              <Gamepad2 className="size-6 shrink-0 text-white" />
+              <span>Remote Play supported</span>
+            </div>
+          </div>
+          
+          <div className="mt-8">
+            <h3 className="text-base font-bold mb-4">PS5 Version</h3>
+            <div className="space-y-5 text-[15px] font-medium text-gray-100">
+              <div className="flex items-start gap-4">
+                <Settings2 className="size-6 shrink-0 mt-0.5 text-white" />
+                <span>Vibration function and trigger effect supported (DualSense wireless controller)</span>
+              </div>
+              <div className="flex items-center gap-4">
+                <MonitorPlay className="size-6 shrink-0 text-white" />
+                <span>PS5 Pro Enhanced</span>
+              </div>
+              <div className="flex items-center gap-4">
+                <Lightbulb className="size-6 shrink-0 text-white" />
+                <span>Game Help supported</span>
+              </div>
+            </div>
+            
+            <button className="text-[#0070cc] font-medium mt-6 flex items-center gap-1 hover:underline text-[15px]">
+              View All <ChevronRight className="size-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Description Text (Right on Desktop, Below on Mobile) */}
+        <div className="text-gray-200">
+          <h2 className="text-3xl font-light mb-6 tracking-tight text-white">Game and Legal Info</h2>
+          <p className="text-[15px] sm:text-base leading-relaxed mb-6">
+            {game.description} Built to make every battle, journey and discovery feel immediate and unforgettable.
+          </p>
         </div>
       </div>
     </section>
 
     {/* Trailer */}
-    <section className="bg-black text-white px-4 py-12 sm:px-6 sm:py-24">
+    <section className="bg-black text-white px-4 py-8 sm:px-6 sm:py-16">
       <div className="mx-auto max-w-7xl">
-        <h2 className="text-3xl sm:text-5xl font-black mb-8 sm:mb-12 tracking-tight">Official trailer</h2>
-        <div className="aspect-video w-full mx-auto overflow-hidden rounded-2xl bg-[#111] shadow-2xl border border-white/10">
+        <h2 className="text-3xl sm:text-5xl font-light mb-8 tracking-tight">Official trailer</h2>
+        <div className="aspect-video w-full mx-auto overflow-hidden rounded-lg bg-[#111] shadow-2xl border border-white/10">
           <iframe 
             src={trailer} 
             title={`${game.title} official trailer`} 
@@ -110,9 +172,9 @@ function GamePage() {
     </section>
 
     {/* You may also like */}
-    <section className="bg-[#111] text-white px-4 py-12 sm:px-6 sm:py-24 border-t border-[#222]">
+    <section className="bg-black text-white px-4 py-12 sm:px-6 sm:py-24 border-t border-[#333]">
       <div className="mx-auto max-w-7xl">
-        <h2 className="text-2xl sm:text-4xl font-bold mb-6 sm:mb-10">You may also like</h2>
+        <h2 className="text-2xl sm:text-4xl font-light mb-8 tracking-tight">You may also like</h2>
         <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-5">
           {games.filter(g => g.slug !== game.slug).slice(0, 5).map(g => (
             <GameCard key={g.slug} game={g} />
