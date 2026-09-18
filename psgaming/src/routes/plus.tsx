@@ -342,35 +342,71 @@ function PlusPage() {
       </section>
 
       {/* Quiz Section */}
-      <section className="bg-white px-4 py-8 sm:px-6 pb-20">
-        <div className="mx-auto max-w-7xl grid md:grid-cols-2 overflow-hidden bg-white shadow-2xl rounded-3xl border border-gray-100 my-8">
-          <div className="p-10 md:p-24 flex flex-col justify-center">
-            <p className="text-gray-500 text-sm font-bold tracking-widest uppercase mb-4">Take the quiz</p>
-            <h2 className="text-3xl md:text-5xl font-black text-[#001230] mb-6 tracking-tight uppercase leading-tight">
-              Which PlayStation Plus membership is right for you?
-            </h2>
-            <p className="text-gray-600 text-base sm:text-lg mb-8 sm:mb-10 leading-relaxed">
-              Whether you're looking to join or upgrade, answer a few quick questions to find out exactly which PlayStation Plus membership will get you more from your PlayStation experience.
-            </p>
-            <Button className="w-fit bg-[#00439c] hover:bg-[#00367a] text-white rounded-full px-10 sm:px-12 py-5 sm:py-6 font-bold text-base sm:text-lg">
-              Let's go
-            </Button>
-          </div>
-          <div className="bg-[#001230] relative min-h-[400px] md:min-h-full overflow-hidden p-8 flex items-center justify-center">
-            {/* Geometric dark blue background with angled cut */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#00439c]/30 to-transparent" />
+      <section className="bg-[#eaeaed] relative overflow-hidden flex flex-col items-center w-full">
+        
+        {/* Top Dark Blue Angled Background */}
+        <div 
+          className="w-full bg-[#000f28] relative pt-12 pb-24 sm:pb-32 px-4 z-10"
+          style={{ clipPath: 'polygon(0 0, 100% 0, 100% 85%, 0 100%)' }}
+        >
+          {/* Subtle gradient overlay for the blue background */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-[#00439c]/20 to-transparent pointer-events-none" />
+
+          {/* Collage Container */}
+          <div className="mx-auto max-w-md sm:max-w-xl relative h-[300px] sm:h-[400px]">
+            {/* Main Left Image (Ghost) */}
+            <div className="absolute left-[5%] sm:left-[10%] top-[10%] w-[45%] sm:w-[40%] z-20 hover:scale-105 transition-transform duration-500">
+              <img 
+                src="/ghost-of-yotei.jpg" 
+                alt="Ghost" 
+                className="w-full aspect-[3/4] object-cover rounded-md border border-white/20 shadow-2xl" 
+              />
+            </div>
             
-            {/* Collage */}
-            <div className="relative w-full h-full max-w-sm mx-auto flex items-center justify-center">
-              <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full rotate-[-5deg] scale-105 sm:scale-110">
-                <img src="/ghost-of-yotei.jpg" alt="Ghost" className="w-full aspect-[3/4] object-cover rounded-md border-2 border-[#FFCC00] shadow-2xl transform translate-y-8" />
-                <div className="grid grid-rows-2 gap-3 sm:gap-4">
-                  <img src="/marvels-spider-man-2.jpg" alt="Spider-Man" className="w-full h-full object-cover rounded-md border-2 border-[#FFCC00] shadow-xl" />
-                  <img src="/god-of-war-ragnarok.jpg" alt="God of War" className="w-full h-full object-cover rounded-md border-2 border-[#FFCC00] shadow-xl" />
-                </div>
-              </div>
+            {/* Top Right Image 1 */}
+            <div className="absolute left-[55%] sm:left-[55%] top-[5%] w-[25%] sm:w-[22%] z-10 hover:scale-105 transition-transform duration-500">
+              <img 
+                src="/marvels-spider-man-2.jpg" 
+                alt="Spider-Man" 
+                className="w-full aspect-square object-cover rounded-sm border border-white/20 shadow-xl" 
+              />
+            </div>
+
+            {/* Middle Right Image 2 */}
+            <div className="absolute left-[50%] sm:left-[48%] top-[35%] sm:top-[30%] w-[22%] sm:w-[18%] z-30 hover:scale-105 transition-transform duration-500">
+              <img 
+                src="/ratchet-and-clank-rift-apart.jpg" 
+                alt="Game 2" 
+                className="w-full aspect-square object-cover rounded-sm border border-white/20 shadow-2xl shadow-black/50" 
+              />
+            </div>
+
+            {/* Bottom Right Image (God of War) */}
+            <div className="absolute left-[65%] sm:left-[60%] top-[45%] sm:top-[40%] w-[30%] sm:w-[25%] z-20 hover:scale-105 transition-transform duration-500">
+              <img 
+                src="/god-of-war-ragnarok.jpg" 
+                alt="God of War" 
+                className="w-full aspect-[4/5] object-cover rounded-sm border border-white/20 shadow-xl" 
+              />
             </div>
           </div>
+        </div>
+
+        {/* Bottom Content Area */}
+        <div className="w-full flex flex-col items-center text-center px-6 pt-4 pb-20 z-0 bg-[#eaeaed] relative">
+          <p className="text-black text-sm font-bold tracking-widest uppercase mb-4 sm:mb-6">Take the quiz</p>
+          
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-black mb-6 tracking-tighter uppercase leading-[0.95] max-w-2xl px-2">
+            Which PlayStation Plus membership is right for you?
+          </h2>
+          
+          <p className="text-gray-800 text-base sm:text-lg mb-8 sm:mb-10 max-w-2xl leading-relaxed px-4">
+            Whether you're looking to join or upgrade, answer a few quick questions to find out exactly which PlayStation Plus membership will get you more from your PlayStation experience.
+          </p>
+          
+          <Button className="bg-[#0070cc] hover:bg-[#005fb3] text-white rounded-full px-12 py-6 font-bold text-lg w-full max-w-[300px] shadow-md transition-transform hover:-translate-y-1">
+            Let's go
+          </Button>
         </div>
       </section>
 
