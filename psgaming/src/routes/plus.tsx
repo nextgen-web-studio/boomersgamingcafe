@@ -29,13 +29,6 @@ function PlusPage() {
             Join PlayStation Plus
           </Button>
         </div>
-        
-        {/* Bottom Row: Scrollable Links */}
-        <div className="flex items-center gap-6 px-4 sm:px-6 h-12 overflow-x-auto hide-scrollbar text-[15px] font-medium text-gray-600 border-t border-gray-100" style={{ scrollbarWidth: 'none' }}>
-          <a href="#" className="text-black bg-gray-100 px-4 py-1.5 rounded-full whitespace-nowrap font-semibold">Overview</a>
-          <a href="#" className="hover:text-black transition-colors whitespace-nowrap flex items-center gap-1">What's new on PlayStation Plus <ChevronRight className="size-4" /></a>
-          <a href="#" className="hover:text-black transition-colors whitespace-nowrap">All games A-Z</a>
-        </div>
       </div>
 
       {/* Hero Section */}
