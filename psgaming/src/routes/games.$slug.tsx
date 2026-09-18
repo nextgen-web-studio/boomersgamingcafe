@@ -1,18 +1,14 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { Check, Gamepad2, HardDrive, UsersRound } from "lucide-react";
+import { Gamepad2, HardDrive, MonitorPlay, UsersRound } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { GameCard } from "@/components/game-card";
 import { games, getGame } from "@/lib/games";
 
 export const Route = createFileRoute("/games/$slug")({
   loader: ({ params }) => { const game = getGame(params.slug); if (!game) throw notFound(); return game; },
   head: ({ loaderData }) => ({ meta: [
-    { title: `${loaderData?.title ?? "Game"} — PS Games Sales` },
+    { title: `${loaderData?.title ?? "Game"} - PS Games Sales` },
     { name: "description", content: loaderData?.description ?? "PlayStation game details." },
-    { property: "og:title", content: `${loaderData?.title ?? "Game"} — PS Games Sales` },
-    { property: "og:description", content: loaderData?.description ?? "PlayStation game details." },
-    { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" },
   ]}), component: GamePage,
 });
 
@@ -34,69 +30,104 @@ function GamePage() {
     rzp.open();
   };
 
-  return <main>
-    <section className="bg-ink px-4 py-8 text-ink-foreground sm:px-6 sm:py-14">
-      <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1fr_400px] lg:items-center">
-        <div className="aspect-video w-full max-w-2xl mx-auto overflow-hidden rounded-lg bg-ink-soft">
-          <img src={game.image} alt={game.title} className="size-full object-cover" />
-        </div>
-        <div className="min-w-0">
-          <p className="text-xs font-semibold text-primary">{game.platform ?? "PS5"}</p>
-          <h1 className="mt-3 text-4xl font-bold leading-tight sm:text-5xl">{game.title}</h1>
-          <p className="mt-4 leading-6 text-ink-muted">{game.description.split(". ")[0]}.</p>
-          <div className="mt-6 flex items-center gap-4">
+  return <main className="bg-white min-h-screen pb-0">
+    {/* Hero Section */}
+    <section className="relative w-full h-[70vh] min-h-[500px] overflow-hidden bg-black text-white">
+      <img src={game.image.replace('.jpg', '-wide.jpg')} onError={(e) => (e.currentTarget.src = game.image)} alt={game.title} className="absolute inset-0 size-full object-cover opacity-60" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent" />
+      
+      <div className="relative z-10 mx-auto max-w-7xl h-full flex flex-col justify-center px-4 sm:px-6">
+        <div className="max-w-xl mt-12">
+          <div className="bg-white text-black text-[10px] sm:text-xs font-bold px-2 py-1 inline-block rounded-sm mb-4">PS5</div>
+          <h1 className="text-5xl sm:text-7xl font-bold leading-tight mb-4 tracking-tight">{game.title}</h1>
+          <p className="text-lg text-gray-200 mb-8 leading-relaxed max-w-lg">
+            {game.description}
+          </p>
+          <div className="flex items-center gap-4">
             <button 
-              className="bg-[#00439c] hover:bg-[#00367a] text-white rounded-full px-6 py-3 font-bold flex items-center transition-colors text-base"
+              className="bg-[#00439c] hover:bg-[#00367a] text-white rounded-full px-8 py-3.5 font-bold flex items-center transition-colors text-lg shadow-lg"
               onClick={handleCheckout}
             >
               Add to cart &middot; {game.price}
             </button>
             {game.oldPrice && (
-              <span className="text-sm font-normal text-gray-400 line-through">{game.oldPrice}</span>
+              <span className="text-gray-400 font-medium line-through">{game.oldPrice}</span>
             )}
           </div>
         </div>
       </div>
     </section>
 
-    <section className="px-4 py-10 sm:px-6 sm:py-14">
-      <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1fr_300px]">
+    {/* Game Overview Section */}
+    <section className="bg-[#f3f4f6] px-4 py-16 sm:px-6 sm:py-24">
+      <div className="mx-auto max-w-7xl grid lg:grid-cols-[1.5fr_1fr] gap-16">
         <div>
-          <h2 className="text-2xl font-bold">About the game</h2>
-          <p className="mt-4 leading-7 text-muted-foreground">{game.description}</p>
-          
-          <h2 className="text-2xl font-bold mt-10 mb-6">Game media</h2>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="aspect-video bg-muted rounded-md overflow-hidden shadow-sm">
-               <img src={game.image} alt={game.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-            </div>
-            <div className="aspect-video bg-muted rounded-md overflow-hidden shadow-sm">
-               <img src={game.image} alt={game.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-            </div>
-          </div>
+          <p className="text-[#00439c] text-sm font-bold tracking-widest uppercase mb-4">Game Overview</p>
+          <h2 className="text-4xl sm:text-5xl font-black text-gray-900 mb-6 tracking-tight">A new generation of adventure</h2>
+          <p className="text-lg text-gray-700 leading-relaxed mb-10">
+            {game.description} Built to make every battle, journey and discovery feel immediate and unforgettable.
+          </p>
 
-          <div className="mt-10 grid grid-cols-2 gap-5 border-t border-border pt-5 text-xs sm:grid-cols-4">
-            {[[Gamepad2,"PS5 enhanced"],[UsersRound,"1 player"],[HardDrive,"75 GB"],[Check,"Remote Play"]].map(([Icon,label]) => { 
-              const I = Icon as typeof Gamepad2; 
-              return <div key={label as string}><I className="mb-2 size-5 text-primary" />{label as string}</div>
-            })}
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+              <Gamepad2 className="text-[#00439c] size-6 mb-4" />
+              <p className="text-gray-500 text-xs uppercase font-semibold mb-1">Genre</p>
+              <p className="font-bold text-gray-900">{game.genre}</p>
+            </div>
+            <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+              <UsersRound className="text-[#00439c] size-6 mb-4" />
+              <p className="text-gray-500 text-xs uppercase font-semibold mb-1">Players</p>
+              <p className="font-bold text-gray-900">1 player</p>
+            </div>
+            <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+              <HardDrive className="text-[#00439c] size-6 mb-4" />
+              <p className="text-gray-500 text-xs uppercase font-semibold mb-1">Storage</p>
+              <p className="font-bold text-gray-900">75 GB minimum</p>
+            </div>
+            <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+              <MonitorPlay className="text-[#00439c] size-6 mb-4" />
+              <p className="text-gray-500 text-xs uppercase font-semibold mb-1">Display</p>
+              <p className="font-bold text-gray-900">4K / HDR / 60fps</p>
+            </div>
           </div>
         </div>
-        <aside className="bg-canvas p-5 rounded-md border border-border">
-          <h2 className="font-bold">Game information</h2>
-          <dl className="mt-5 space-y-4 text-sm">
-            <div><dt className="text-muted-foreground">Genre</dt><dd>{game.genre}</dd></div>
-            <div><dt className="text-muted-foreground">Platform</dt><dd>{game.platform ?? "PS5"}</dd></div>
-            <div><dt className="text-muted-foreground">Publisher</dt><dd>PlayStation Studios</dd></div>
-          </dl>
-        </aside>
       </div>
     </section>
 
-    <section className="bg-canvas border-t border-border px-4 py-10 sm:px-6 sm:py-14">
-      <div className="mx-auto max-w-3xl">
-        <h2 className="text-2xl font-bold text-center">Official trailer</h2>
-        <div className="mt-5 aspect-video w-full overflow-hidden rounded-md bg-ink shadow-lg">
+    {/* See the world up close / Media Gallery */}
+    <section className="px-4 py-16 sm:px-6 sm:py-24 bg-white">
+      <div className="mx-auto max-w-7xl">
+        <p className="text-[#00439c] text-sm font-bold tracking-widest uppercase mb-4">Screenshots</p>
+        <div className="flex justify-between items-end mb-8">
+          <h2 className="text-4xl sm:text-5xl font-black text-gray-900 tracking-tight">See the world up close</h2>
+          <span className="text-gray-500 font-medium">5 images</span>
+        </div>
+        
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-[2fr_1fr_1fr] gap-4 h-auto lg:h-[600px]">
+          <div className="bg-gray-100 rounded-2xl overflow-hidden col-span-2 row-span-2 lg:row-span-2">
+            <img src={game.image} alt="Gallery 1" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+          </div>
+          <div className="bg-gray-100 rounded-2xl overflow-hidden">
+            <img src="/horizon-forbidden-west.jpg" alt="Gallery 2" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+          </div>
+          <div className="bg-gray-100 rounded-2xl overflow-hidden">
+            <img src="/ghost-of-yotei.jpg" alt="Gallery 3" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+          </div>
+          <div className="bg-gray-100 rounded-2xl overflow-hidden">
+            <img src="/death-stranding-2-on-the-beach.jpg" alt="Gallery 4" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+          </div>
+          <div className="bg-gray-100 rounded-2xl overflow-hidden">
+            <img src="/astro-bot.jpg" alt="Gallery 5" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Trailer */}
+    <section className="bg-black text-white px-4 py-16 sm:px-6 sm:py-24">
+      <div className="mx-auto max-w-7xl">
+        <h2 className="text-4xl sm:text-5xl font-black mb-12 tracking-tight">Official trailer</h2>
+        <div className="aspect-video w-full mx-auto overflow-hidden rounded-2xl bg-[#111] shadow-2xl border border-white/10">
           <iframe 
             src={trailer} 
             title={`${game.title} official trailer`} 
@@ -108,11 +139,14 @@ function GamePage() {
       </div>
     </section>
 
-    <section className="px-4 py-10 sm:px-6 sm:py-14">
-      <div className="mx-auto max-w-6xl">
-        <h2 className="text-2xl font-bold">You may also like</h2>
-        <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-          {games.filter(g => g.slug !== game.slug).slice(0,5).map(g => <GameCard key={g.slug} game={g} />)}
+    {/* You may also like */}
+    <section className="bg-[#111] text-white px-4 py-16 sm:px-6 sm:py-24 border-t border-[#222]">
+      <div className="mx-auto max-w-7xl">
+        <h2 className="text-3xl sm:text-4xl font-bold mb-10">You may also like</h2>
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
+          {games.filter(g => g.slug !== game.slug).slice(0, 5).map(g => (
+            <GameCard key={g.slug} game={g} />
+          ))}
         </div>
       </div>
     </section>
