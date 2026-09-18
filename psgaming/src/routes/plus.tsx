@@ -16,35 +16,35 @@ function PlusPage() {
     <main className="min-h-screen bg-white pb-0 flex flex-col w-full overflow-x-hidden">
       
       {/* Sub-Navigation */}
-      <div className="sticky top-0 z-40 bg-white border-b border-gray-200 px-4 sm:px-6 h-14 flex items-center justify-between text-sm hidden md:flex">
-        <div className="flex items-center gap-2 font-bold text-gray-900">
-          <img src="/ps-plus-logo.jpg" alt="PlayStation Plus" className="h-6 object-contain mix-blend-multiply" />
+      <div className="sticky top-0 z-40 bg-white border-b border-gray-200 px-4 sm:px-6 h-14 flex items-center justify-between text-sm w-full">
+        <div className="flex items-center gap-2 font-bold text-gray-900 shrink-0">
+          <img src="/ps-plus-logo.jpg" alt="PlayStation Plus" className="h-5 sm:h-6 object-contain mix-blend-multiply" />
         </div>
-        <div className="flex items-center gap-8 font-medium text-gray-600">
+        <div className="hidden md:flex items-center gap-8 font-medium text-gray-600 mx-4">
           <a href="#" className="text-black bg-gray-100 px-3 py-1 rounded-full">Overview</a>
           <a href="#" className="hover:text-black transition-colors">What's new on PlayStation Plus</a>
           <a href="#" className="hover:text-black transition-colors">All games A-Z</a>
         </div>
-        <Button className="bg-[#cd3d26] hover:bg-[#b0301d] text-white rounded-full px-5 font-bold h-8 text-xs">
+        <Button className="bg-[#cd3d26] hover:bg-[#b0301d] text-white rounded-full px-4 sm:px-5 font-bold h-8 text-xs shrink-0 ml-auto">
           Join PlayStation Plus
         </Button>
       </div>
 
       {/* Hero Section */}
-      <section className="relative w-full h-[80vh] min-h-[500px] overflow-hidden bg-[#000f28] text-white flex flex-col justify-center border-b-[8px] border-[#FFCC00]">
+      <section className="relative w-full h-[70vh] min-h-[500px] overflow-hidden bg-[#000f28] text-white flex flex-col justify-center border-b-[8px] border-[#FFCC00]">
         
         <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6">
           <div className="max-w-xl">
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-3 mb-4 sm:mb-6">
               <Plus className="text-[#FFCC00] size-6 sm:size-8 stroke-[4]" />
               <span className="text-xl sm:text-2xl font-light tracking-widest uppercase">PlayStation Plus</span>
             </div>
             
-            <h1 className="text-4xl md:text-6xl font-light leading-tight mb-6 tracking-tight">
+            <h1 className="text-4xl md:text-6xl font-light leading-tight mb-4 sm:mb-6 tracking-tight">
               Get more of what you love with PlayStation Plus
             </h1>
             
-            <p className="text-base sm:text-lg text-gray-300 mb-8 sm:mb-10 leading-relaxed font-medium">
+            <p className="text-sm sm:text-lg text-gray-300 mb-8 sm:mb-10 leading-relaxed font-medium">
               Discover new games to play every month, jump into online multiplayer with friends and get exclusive discounts — all benefits designed to bring you more of the things you love, every time you play.
             </p>
             
@@ -210,30 +210,33 @@ function PlusPage() {
       <section className="bg-[#1f2233] text-white">
         
         {/* Top blue block */}
-        <div className="bg-[#00439c] w-full px-4 py-12 sm:px-6">
+        <div className="bg-gradient-to-br from-[#00439c] via-[#003fb0] to-[#002277] w-full px-4 py-10 sm:px-6">
           <div className="mx-auto max-w-7xl flex flex-col md:flex-row items-center justify-between gap-8">
              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black uppercase text-white leading-tight w-full md:w-1/2">
                Discover the<br/>Game Catalogue
              </h2>
-             <div className="w-full md:w-1/2 flex justify-start md:justify-end">
-               <img src="/ghost-of-yotei.jpg" alt="Ghost of Yotei" className="w-full max-w-md rounded-xl border-4 border-[#FFCC00] shadow-2xl object-cover aspect-[21/9] sm:aspect-auto" />
+             <div className="w-full md:w-1/2 flex justify-center md:justify-end">
+               <div className="relative">
+                 <div className="absolute inset-2 bg-[#FFCC00] rounded-xl transform translate-x-3 translate-y-3"></div>
+                 <img src="/ghost-of-yotei.jpg" alt="Ghost of Yotei" className="relative w-full max-w-md rounded-xl shadow-2xl object-cover aspect-[16/9] sm:aspect-auto" />
+               </div>
              </div>
           </div>
         </div>
         
         {/* Carousel section */}
-        <div className="px-4 py-16 sm:px-6 mx-auto w-full max-w-7xl">
-          <p className="text-gray-300 text-lg leading-relaxed mb-10 max-w-2xl font-medium">
+        <div className="px-4 py-8 sm:py-12 sm:px-6 mx-auto w-full max-w-7xl">
+          <p className="text-gray-300 text-sm sm:text-lg leading-relaxed mb-8 max-w-2xl font-medium">
             With PlayStation Plus Extra or Deluxe you get access to more games from a huge on-demand library. Whether it's your go-to franchises and genres, games you always wanted to play or discovering new favourites by trying something completely different, there's always more to explore with the Game Catalogue.
           </p>
           
-          <div className="flex items-center gap-6 mb-8">
-            <button className="bg-white text-black font-bold px-6 py-2 rounded-full text-sm">Now trending</button>
+          <div className="flex items-center gap-6 mb-6">
+            <button className="bg-white text-black font-bold px-5 py-2 rounded-full text-sm">Now trending</button>
             <button className="text-gray-400 font-bold text-sm hover:text-white transition-colors">What's new</button>
           </div>
           
           <div className="flex justify-between items-center mb-4 sm:hidden">
-            <span className="text-gray-400 text-xs font-bold uppercase tracking-wider">Swipe to explore &rarr;</span>
+            <span className="text-gray-400 text-[10px] font-bold uppercase tracking-wider">Swipe to explore &rarr;</span>
           </div>
           
           <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-8 snap-x snap-mandatory hide-scrollbar" style={{ scrollbarWidth: 'none' }}>
@@ -243,14 +246,14 @@ function PlusPage() {
               { title: "RuneScape: Dragonwilds", genre: "Adventure", desc: "Explore a forgotten RuneScape continent.", img: "/horizon-zero-dawn-remastered.jpg" },
               { title: "Marvel's Spider-Man", genre: "Action", desc: "The worlds of Peter Parker and Spider-Man collide.", img: "/marvels-spider-man-2.jpg" },
             ].map((game, i) => (
-              <div key={i} className="flex-none w-[260px] sm:w-[320px] bg-[#293047] rounded-2xl overflow-hidden snap-start group cursor-pointer border border-white/5 hover:border-white/20 transition-colors shadow-xl">
-                <div className="aspect-[4/3] overflow-hidden">
+              <div key={i} className="flex-none w-[200px] sm:w-[280px] bg-[#293047] rounded-2xl overflow-hidden snap-start group cursor-pointer border border-white/5 hover:border-white/20 transition-colors shadow-xl">
+                <div className="aspect-square overflow-hidden">
                   <img src={game.img} alt={game.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 </div>
-                <div className="p-5 sm:p-6">
-                  <p className="text-[#3b82f6] text-xs font-bold uppercase tracking-wider mb-2">{game.genre}</p>
-                  <h4 className="text-lg sm:text-xl font-bold mb-2 text-white">{game.title}</h4>
-                  <p className="text-xs sm:text-sm text-gray-300 line-clamp-3">{game.desc}</p>
+                <div className="p-4 sm:p-5">
+                  <p className="text-[#3b82f6] text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-1 sm:mb-2">{game.genre}</p>
+                  <h4 className="text-base sm:text-lg font-bold mb-1 sm:mb-2 text-white">{game.title}</h4>
+                  <p className="text-[11px] sm:text-xs text-gray-300 line-clamp-3">{game.desc}</p>
                 </div>
               </div>
             ))}
