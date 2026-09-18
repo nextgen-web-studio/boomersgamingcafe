@@ -38,18 +38,19 @@ function PlusPage() {
         
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
-          <img src="/ghost-of-yotei.jpg" alt="Ghost of Tsushima" className="w-full h-full object-cover object-center opacity-70" />
+          <img src="/ghost-of-tsushima.jpg" alt="Ghost of Tsushima" className="w-full h-full object-cover object-center opacity-70" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#000f28] via-[#000f28]/80 to-transparent sm:via-[#000f28]/60" />
           <div className="absolute inset-0 bg-[#000f28]/30 sm:hidden" />
         </div>
 
         <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 mt-8 sm:mt-12">
           <div className="max-w-xl">
-            <div className="flex items-center gap-3 mb-6 sm:mb-8">
-              <div className="relative flex items-center justify-center size-8 sm:size-10">
-                <Plus className="text-[#FFCC00] size-full stroke-[3]" />
-              </div>
-              <span className="text-2xl sm:text-3xl font-light tracking-widest uppercase">PLAYSTATION PLUS</span>
+            <div className="mb-6 sm:mb-8">
+              <img 
+                src="/ps-plus-logo.jpg" 
+                alt="PlayStation Plus" 
+                className="h-8 sm:h-12 object-contain invert brightness-0 contrast-200" 
+              />
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-4 sm:mb-6 tracking-tight">
