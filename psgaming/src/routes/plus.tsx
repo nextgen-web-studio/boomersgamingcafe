@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Check, CircleDot, Circle, Plus, ChevronLeft, ChevronRight } from "lucide-react";
+import { Check, CircleDot, Circle, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
