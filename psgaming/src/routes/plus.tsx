@@ -16,53 +16,59 @@ function PlusPage() {
     <main className="min-h-screen bg-white pb-0 flex flex-col w-full overflow-x-hidden">
       
       {/* Sub-Navigation */}
-      <div className="sticky top-0 z-40 bg-white border-b border-gray-200 px-4 sm:px-6 h-14 flex items-center justify-between text-sm w-full">
-        <div className="flex items-center gap-2 font-bold text-gray-900 shrink-0">
-          <img src="/ps-plus-logo.jpg" alt="PlayStation Plus" className="h-5 sm:h-6 object-contain mix-blend-multiply" />
+      <div className="sticky top-0 z-40 bg-white border-b border-gray-200 flex flex-col w-full shadow-sm">
+        {/* Top Row: Logo & Join Button */}
+        <div className="flex items-center justify-between px-4 sm:px-6 h-14 w-full">
+          <div className="flex items-center shrink-0">
+            <img src="/ps-plus-logo.jpg" alt="PlayStation Plus" className="h-6 sm:h-7 object-contain mix-blend-multiply" />
+          </div>
+          <Button 
+            onClick={() => document.getElementById('subscription-tiers')?.scrollIntoView({ behavior: 'smooth' })}
+            className="bg-[#d1361f] hover:bg-[#b0301d] text-white rounded-full px-5 font-bold h-8 sm:h-9 text-[13px] sm:text-sm shrink-0"
+          >
+            Join PlayStation Plus
+          </Button>
         </div>
-        <div className="hidden md:flex items-center gap-8 font-medium text-gray-600 mx-4">
-          <a href="#" className="text-black bg-gray-100 px-3 py-1 rounded-full">Overview</a>
-          <a href="#" className="hover:text-black transition-colors">What's new on PlayStation Plus</a>
-          <a href="#" className="hover:text-black transition-colors">All games A-Z</a>
+        
+        {/* Bottom Row: Scrollable Links */}
+        <div className="flex items-center gap-6 px-4 sm:px-6 h-12 overflow-x-auto hide-scrollbar text-[15px] font-medium text-gray-600 border-t border-gray-100" style={{ scrollbarWidth: 'none' }}>
+          <a href="#" className="text-black bg-gray-100 px-4 py-1.5 rounded-full whitespace-nowrap font-semibold">Overview</a>
+          <a href="#" className="hover:text-black transition-colors whitespace-nowrap flex items-center gap-1">What's new on PlayStation Plus <ChevronRight className="size-4" /></a>
+          <a href="#" className="hover:text-black transition-colors whitespace-nowrap">All games A-Z</a>
         </div>
-        <Button 
-          onClick={() => document.getElementById('subscription-tiers')?.scrollIntoView({ behavior: 'smooth' })}
-          className="bg-[#cd3d26] hover:bg-[#b0301d] text-white rounded-full px-4 sm:px-5 font-bold h-8 text-xs shrink-0 ml-auto"
-        >
-          Join PlayStation Plus
-        </Button>
       </div>
 
       {/* Hero Section */}
-      <section className="relative w-full h-[70vh] min-h-[500px] overflow-hidden bg-[#000f28] text-white flex flex-col justify-center border-b-[8px] border-[#FFCC00]">
+      <section className="relative w-full min-h-[600px] sm:min-h-[700px] overflow-hidden text-white flex flex-col justify-center border-b-[8px] border-[#FFCC00]">
         
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <img src="/ghost-of-tsushima.jpg" alt="Ghost of Tsushima" className="w-full h-full object-cover object-center opacity-70" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#000f28] via-[#000f28]/80 to-transparent sm:via-[#000f28]/60" />
-          <div className="absolute inset-0 bg-[#000f28]/30 sm:hidden" />
+        {/* Background Image/Gradient - Matching Official PlayStation Plus Mobile styling */}
+        <div className="absolute inset-0 z-0 bg-[#000a33] overflow-hidden">
+          {/* Deep blue radial gradient to mimic the official PS Plus swoosh/glow */}
+          <div className="absolute top-0 right-0 w-[150%] h-[150%] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#003cb3] via-[#000f5c] to-[#000a33] opacity-80" />
+          <div className="absolute -bottom-1/4 -left-1/4 w-[100%] h-[100%] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#0047cc]/20 to-transparent" />
         </div>
 
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 mt-8 sm:mt-12">
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-6 mt-4 sm:mt-12">
           <div className="max-w-xl">
-            <div className="flex items-center gap-3 mb-6 sm:mb-8">
-              <div className="relative flex items-center justify-center size-8 sm:size-10">
-                <Plus className="text-[#FFCC00] size-full stroke-[3]" />
+            {/* Logo Layout exactly matching official screenshot */}
+            <div className="flex items-center gap-2.5 mb-6 sm:mb-8">
+              <div className="relative flex items-center justify-center size-10 sm:size-12 shrink-0 bg-[#FFCC00] rounded-sm">
+                <Plus className="text-black size-8 sm:size-10 stroke-[4]" />
               </div>
-              <span className="text-2xl sm:text-3xl font-sans font-light tracking-widest uppercase">PLAYSTATION PLUS</span>
+              <span className="text-[28px] sm:text-[34px] font-sans text-white font-medium leading-none tracking-tight">PlayStation<span className="font-light">®</span>Plus</span>
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-4 sm:mb-6 tracking-tight">
+            <h1 className="text-[38px] md:text-5xl lg:text-6xl font-light leading-[1.1] mb-5 sm:mb-6 tracking-tight">
               Get more of what you love with PlayStation Plus
             </h1>
             
-            <p className="text-sm sm:text-base lg:text-lg text-gray-300 mb-8 sm:mb-10 leading-relaxed font-medium max-w-md">
+            <p className="text-[15px] sm:text-base lg:text-lg text-gray-200 mb-8 sm:mb-10 leading-relaxed font-normal max-w-[90%] sm:max-w-md">
               Discover new games to play every month, jump into online multiplayer with friends and get exclusive discounts — all benefits designed to bring you more of the things you love, every time you play.
             </p>
             
             <Button 
               onClick={() => document.getElementById('subscription-tiers')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-[#cd3d26] hover:bg-[#b0301d] text-white rounded-full px-8 py-6 font-bold text-base sm:text-lg shadow-lg"
+              className="bg-[#d1361f] hover:bg-[#b0301d] text-white rounded-full px-8 py-[26px] font-bold text-lg sm:text-xl shadow-lg w-fit"
             >
               Join now
             </Button>
