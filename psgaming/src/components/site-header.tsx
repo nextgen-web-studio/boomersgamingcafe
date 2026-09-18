@@ -1,15 +1,19 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Menu, Search, ShoppingBag, UserRound, X } from "lucide-react";
+import { Menu, Search, ShoppingBag, Trash2, UserRound, X } from "lucide-react";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from "@/components/ui/sheet";
+import { useCart, removeFromCart, clearCart } from "@/lib/cart";
 
 export function SiteHeader() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
+  
+  const cartItems = useCart();
+  const cartTotal = cartItems.reduce((total, item) => total + parseInt(item.price.replace(/[^\d]/g, "")), 0);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,6 +21,22 @@ export function SiteHeader() {
       navigate({ to: "/", search: { q: searchQuery.trim() } });
       setIsMobileSearchOpen(false);
     }
+  };
+
+  const handleCheckout = () => {
+    if (cartItems.length === 0) return;
+    const rzp = new (window as any).Razorpay({ 
+      key: "rzp_test_TccMP6YnZ6PZD9", 
+      amount: cartTotal * 100, 
+      currency: "INR", 
+      name: "PS Games Sales", 
+      description: "Digital Games Purchase", 
+      handler: function (response: any) { 
+        alert("Payment Successful! Payment ID: " + response.razorpay_payment_id); 
+        clearCart();
+      } 
+    }); 
+    rzp.open();
   };
 
   return (
@@ -60,21 +80,58 @@ export function SiteHeader() {
           
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" aria-label="Shopping bag"><ShoppingBag className="size-5" /></Button>
+              <Button variant="ghost" size="icon" aria-label="Shopping bag" className="relative">
+                <ShoppingBag className="size-5" />
+                {cartItems.length > 0 && (
+                  <span className="absolute top-1.5 right-1.5 size-2 bg-red-600 rounded-full" />
+                )}
+              </Button>
             </SheetTrigger>
-            <SheetContent>
+            <SheetContent className="flex flex-col w-full sm:max-w-md">
               <SheetHeader>
                 <SheetTitle>Your Cart</SheetTitle>
               </SheetHeader>
-              <div className="mt-8 flex flex-col items-center justify-center text-center space-y-4">
-                <ShoppingBag className="size-16 text-muted-foreground/30" />
-                <p className="text-muted-foreground">Your cart is currently empty.</p>
-                <SheetClose asChild>
-                  <Button className="w-full mt-4" asChild>
-                    <Link to="/" search={{}}>Continue Shopping</Link>
-                  </Button>
-                </SheetClose>
+              
+              <div className="flex-1 overflow-y-auto py-6">
+                {cartItems.length === 0 ? (
+                  <div className="flex flex-col items-center justify-center text-center space-y-4 h-full">
+                    <ShoppingBag className="size-16 text-muted-foreground/30" />
+                    <p className="text-muted-foreground">Your cart is currently empty.</p>
+                    <SheetClose asChild>
+                      <Button className="mt-4" variant="outline" asChild>
+                        <Link to="/" search={{}}>Continue Shopping</Link>
+                      </Button>
+                    </SheetClose>
+                  </div>
+                ) : (
+                  <div className="space-y-6">
+                    {cartItems.map(item => (
+                      <div key={item.slug} className="flex gap-4 items-center">
+                        <img src={item.image} alt={item.title} className="size-16 rounded-md object-cover bg-muted" />
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-semibold text-sm truncate">{item.title}</h4>
+                          <p className="text-sm text-muted-foreground">{item.price}</p>
+                        </div>
+                        <Button variant="ghost" size="icon" onClick={() => removeFromCart(item.slug)} className="text-destructive hover:text-destructive hover:bg-destructive/10 shrink-0">
+                          <Trash2 className="size-4" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
+              
+              {cartItems.length > 0 && (
+                <div className="pt-6 border-t border-border mt-auto">
+                  <div className="flex justify-between font-bold text-lg mb-6">
+                    <span>Total</span>
+                    <span>Rs {cartTotal.toLocaleString('en-IN')}</span>
+                  </div>
+                  <Button className="w-full bg-[#00439c] hover:bg-[#00367a] text-white py-6 text-lg rounded-full" onClick={handleCheckout}>
+                    Checkout
+                  </Button>
+                </div>
+              )}
             </SheetContent>
           </Sheet>
 

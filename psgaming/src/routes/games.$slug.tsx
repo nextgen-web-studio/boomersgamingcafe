@@ -3,6 +3,7 @@ import { Gamepad2, HardDrive, MonitorPlay, UsersRound } from "lucide-react";
 
 import { GameCard } from "@/components/game-card";
 import { games, getGame } from "@/lib/games";
+import { addToCart, useCart } from "@/lib/cart";
 
 export const Route = createFileRoute("/games/$slug")({
   loader: ({ params }) => { const game = getGame(params.slug); if (!game) throw notFound(); return game; },
@@ -15,19 +16,16 @@ export const Route = createFileRoute("/games/$slug")({
 function GamePage() {
   const game = Route.useLoaderData();
   const trailer = game.trailer ?? "https://www.youtube.com/embed/uvZZvTRFbTs";
+  const cartItems = useCart();
+  const inCart = cartItems.some(i => i.slug === game.slug);
   
-  const handleCheckout = () => {
-    const rzp = new (window as any).Razorpay({ 
-      key: "rzp_test_TccMP6YnZ6PZD9", 
-      amount: parseInt(game.price.replace(/[^\d]/g, "")) * 100, 
-      currency: "INR", 
-      name: game.title, 
-      description: "Digital Game Purchase", 
-      handler: function (response: any) { 
-        alert("Payment Successful! Payment ID: " + response.razorpay_payment_id); 
-      } 
-    }); 
-    rzp.open();
+  const handleAddToCart = () => {
+    addToCart({
+      slug: game.slug,
+      title: game.title,
+      price: game.price,
+      image: game.image,
+    });
   };
 
   return <main className="bg-white min-h-screen pb-0">
@@ -43,12 +41,13 @@ function GamePage() {
           <p className="text-lg text-gray-200 mb-8 leading-relaxed max-w-lg">
             {game.description}
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 flex-wrap">
             <button 
-              className="bg-[#00439c] hover:bg-[#00367a] text-white rounded-full px-8 py-3.5 font-bold flex items-center transition-colors text-lg shadow-lg"
-              onClick={handleCheckout}
+              className={`rounded-full px-6 py-3 sm:px-8 sm:py-3.5 font-bold flex items-center transition-colors text-base sm:text-lg shadow-lg ${inCart ? 'bg-green-600 text-white cursor-default' : 'bg-[#00439c] hover:bg-[#00367a] text-white'}`}
+              onClick={handleAddToCart}
+              disabled={inCart}
             >
-              Add to cart &middot; {game.price}
+              {inCart ? 'Added to cart' : 'Add to cart'} &middot; {game.price}
             </button>
             {game.oldPrice && (
               <span className="text-gray-400 font-medium line-through">{game.oldPrice}</span>
