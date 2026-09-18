@@ -18,8 +18,7 @@ function PlusPage() {
       {/* Sub-Navigation */}
       <div className="sticky top-0 z-40 bg-white border-b border-gray-200 px-4 sm:px-6 h-14 flex items-center justify-between text-sm hidden md:flex">
         <div className="flex items-center gap-2 font-bold text-gray-900">
-          <Plus className="text-[#FFCC00] size-5 stroke-[4]" />
-          <span>PlayStation Plus</span>
+          <img src="/ps-plus-logo.jpg" alt="PlayStation Plus" className="h-6 object-contain mix-blend-multiply" />
         </div>
         <div className="flex items-center gap-8 font-medium text-gray-600">
           <a href="#" className="text-black bg-gray-100 px-3 py-1 rounded-full">Overview</a>
@@ -32,17 +31,12 @@ function PlusPage() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative w-full h-[80vh] min-h-[600px] overflow-hidden bg-[#001230] text-white flex flex-col justify-center border-b-[12px] border-[#FFCC00]">
-        <div className="absolute inset-0 z-0">
-          <img src="/marvels-spider-man-2-wide.jpg" alt="PS Plus Hero" className="size-full object-cover opacity-40 mix-blend-luminosity" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#001230] via-[#001230]/80 to-transparent" />
-        </div>
+      <section className="relative w-full h-[80vh] min-h-[600px] overflow-hidden bg-[#000d23] text-white flex flex-col justify-center border-b-[12px] border-[#FFCC00]">
         
         <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6">
           <div className="max-w-xl">
             <div className="flex items-center gap-3 mb-6">
-              <Plus className="text-[#FFCC00] size-8 stroke-[4]" />
-              <span className="text-2xl font-light tracking-widest uppercase">PlayStation Plus</span>
+              <img src="/ps-plus-logo.jpg" alt="PlayStation Plus" className="h-10 object-contain invert brightness-0 filter" style={{ filter: "brightness(0) invert(1)" }} />
             </div>
             
             <h1 className="text-4xl md:text-6xl font-light leading-tight mb-6 tracking-tight">
@@ -66,7 +60,7 @@ function PlusPage() {
           <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-8 snap-x snap-mandatory hide-scrollbar px-4 sm:px-6 lg:grid lg:grid-cols-3 lg:overflow-visible lg:pb-0" style={{ scrollbarWidth: 'none' }}>
             
             {/* Deluxe Tier */}
-            <div className="flex-none w-[85vw] sm:w-[400px] lg:w-auto snap-center flex flex-col bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+            <div className="flex-none w-[75vw] sm:w-[400px] lg:w-auto snap-center flex flex-col bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
               <div className="bg-[#111] p-6 text-white">
                 <h3 className="text-3xl font-light tracking-wide uppercase">Deluxe</h3>
               </div>
@@ -108,7 +102,7 @@ function PlusPage() {
             </div>
 
             {/* Extra Tier */}
-            <div className="flex-none w-[85vw] sm:w-[400px] lg:w-auto snap-center flex flex-col bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden transform lg:-translate-y-4 border-t-8 border-t-[#FFCC00]">
+            <div className="flex-none w-[75vw] sm:w-[400px] lg:w-auto snap-center flex flex-col bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden transform lg:-translate-y-4 border-t-8 border-t-[#FFCC00]">
               <div className="bg-[#FFCC00] p-6 text-black">
                 <h3 className="text-3xl font-light tracking-wide uppercase">Extra</h3>
               </div>
@@ -158,7 +152,7 @@ function PlusPage() {
             </div>
 
             {/* Essential Tier */}
-            <div className="flex-none w-[85vw] sm:w-[400px] lg:w-auto snap-center flex flex-col bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+            <div className="flex-none w-[75vw] sm:w-[400px] lg:w-auto snap-center flex flex-col bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
               <div className="bg-gray-100 p-6 text-gray-900">
                 <h3 className="text-3xl font-light tracking-wide uppercase">Essential</h3>
               </div>
@@ -224,14 +218,17 @@ function PlusPage() {
             </div>
           </div>
           
-          <div className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory hide-scrollbar" style={{ scrollbarWidth: 'none' }}>
+          <div className="flex justify-between items-center mb-4 sm:hidden">
+            <span className="text-gray-400 text-xs font-bold uppercase tracking-wider">Swipe to explore &rarr;</span>
+          </div>
+          <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-8 snap-x snap-mandatory hide-scrollbar" style={{ scrollbarWidth: 'none' }}>
             {[
               { title: "Hogwarts Legacy", genre: "Unique", desc: "Experience Hogwarts in the late 1800s in the immersive open-world action RPG.", img: "/marvels-spider-man-miles-morales.jpg" },
               { title: "Silent Hill 2", genre: "Horror", desc: "Experience psychological horror at its finest.", img: "/silent-hill-2.jpg" },
               { title: "RuneScape: Dragonwilds", genre: "Adventure", desc: "Explore a forgotten RuneScape continent.", img: "/horizon-zero-dawn-remastered.jpg" },
               { title: "Marvel's Spider-Man", genre: "Action", desc: "The worlds of Peter Parker and Spider-Man collide.", img: "/marvels-spider-man-2.jpg" },
             ].map((game, i) => (
-              <div key={i} className="flex-none w-[320px] bg-[#1a1a1a] rounded-2xl overflow-hidden snap-start group cursor-pointer border border-white/5 hover:border-white/20 transition-colors shadow-2xl">
+              <div key={i} className="flex-none w-[260px] sm:w-[320px] bg-[#1a1a1a] rounded-2xl overflow-hidden snap-start group cursor-pointer border border-white/5 hover:border-white/20 transition-colors shadow-2xl">
                 <div className="aspect-[4/3] overflow-hidden">
                   <img src={game.img} alt={game.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 </div>

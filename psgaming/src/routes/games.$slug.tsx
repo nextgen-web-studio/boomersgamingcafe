@@ -105,19 +105,19 @@ function GamePage() {
         
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-[2fr_1fr_1fr] gap-4 h-auto lg:h-[600px]">
           <div className="bg-gray-100 rounded-2xl overflow-hidden col-span-2 row-span-2 lg:row-span-2">
-            <img src={game.image} alt="Gallery 1" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+            <img src={game.image.replace('.jpg', '-wide.jpg')} onError={(e) => (e.currentTarget.src = game.image)} alt={`${game.title} screenshot 1`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
           </div>
           <div className="bg-gray-100 rounded-2xl overflow-hidden">
-            <img src="/horizon-forbidden-west.jpg" alt="Gallery 2" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+            <img src={game.image.replace('.jpg', '-wide.jpg')} onError={(e) => (e.currentTarget.src = game.image)} alt={`${game.title} screenshot 2`} className="w-full h-full object-cover object-left hover:scale-105 transition-transform duration-700" />
           </div>
           <div className="bg-gray-100 rounded-2xl overflow-hidden">
-            <img src="/ghost-of-yotei.jpg" alt="Gallery 3" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+            <img src={game.image.replace('.jpg', '-wide.jpg')} onError={(e) => (e.currentTarget.src = game.image)} alt={`${game.title} screenshot 3`} className="w-full h-full object-cover object-right hover:scale-105 transition-transform duration-700" />
           </div>
           <div className="bg-gray-100 rounded-2xl overflow-hidden">
-            <img src="/death-stranding-2-on-the-beach.jpg" alt="Gallery 4" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+            <img src={game.image} alt={`${game.title} screenshot 4`} className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700" />
           </div>
           <div className="bg-gray-100 rounded-2xl overflow-hidden">
-            <img src="/astro-bot.jpg" alt="Gallery 5" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+            <img src={game.image} alt={`${game.title} screenshot 5`} className="w-full h-full object-cover object-bottom hover:scale-105 transition-transform duration-700" />
           </div>
         </div>
       </div>
