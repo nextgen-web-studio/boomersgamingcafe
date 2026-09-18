@@ -62,11 +62,11 @@ function NewsPage() {
               key={article.id} 
               className={`bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group cursor-pointer ${article.featured ? 'md:col-span-2 lg:col-span-2 transform md:-translate-y-4' : ''}`}
             >
-              <div className={`overflow-hidden relative ${article.featured ? 'aspect-video' : 'aspect-[4/3]'}`}>
+              <div className={`overflow-hidden relative ${article.featured ? 'aspect-auto max-h-[500px] bg-black' : 'aspect-[4/3] bg-muted'}`}>
                 <img 
                   src={article.image} 
                   alt={article.title} 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
+                  className={`w-full h-full group-hover:scale-105 transition-transform duration-700 ease-in-out ${article.featured ? 'object-contain' : 'object-cover'}`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
@@ -88,6 +88,43 @@ function NewsPage() {
           ))}
         </div>
       </div>
+
+      {/* Upcoming Games Section */}
+      <section className="bg-white px-4 py-20 border-t border-gray-200">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-between mb-12">
+            <h2 className="text-4xl font-black text-gray-900 tracking-tight">Upcoming Games</h2>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="flex flex-col">
+              <div className="aspect-video bg-black rounded-2xl overflow-hidden shadow-lg">
+                <iframe 
+                  src="https://www.youtube.com/embed/9fVYKsEmuRo" 
+                  title="Upcoming Game Trailer 1" 
+                  className="w-full h-full" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowFullScreen 
+                />
+              </div>
+              <h3 className="text-2xl font-bold mt-6">Marvel's Wolverine</h3>
+              <p className="text-gray-500 mt-2 font-medium">Coming 2026. A standalone game directed by Brian Horton and Cameron Christian.</p>
+            </div>
+            <div className="flex flex-col">
+              <div className="aspect-video bg-black rounded-2xl overflow-hidden shadow-lg">
+                <iframe 
+                  src="https://www.youtube.com/embed/uvZZvTRFbTs" 
+                  title="Upcoming Game Trailer 2" 
+                  className="w-full h-full" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowFullScreen 
+                />
+              </div>
+              <h3 className="text-2xl font-bold mt-6">Death Stranding 2: On The Beach</h3>
+              <p className="text-gray-500 mt-2 font-medium">Sam Porter Bridges returns in a new journey to save humanity from extinction.</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

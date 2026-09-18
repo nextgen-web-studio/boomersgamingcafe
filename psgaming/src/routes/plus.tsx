@@ -163,6 +163,39 @@ function PlusPage() {
           </div>
         </div>
       </section>
+
+      {/* Game Catalog Preview Section */}
+      <section className="bg-black text-white px-4 py-24 sm:px-6 border-t border-[#333]">
+        <div className="mx-auto max-w-7xl grid lg:grid-cols-[1fr_1.5fr] gap-12 items-center">
+          <div>
+            <div className="flex items-center gap-2 mb-6">
+              <Plus className="text-[#FFCC00] size-8 stroke-[4]" />
+              <span className="text-3xl font-light tracking-widest uppercase">PlayStation Plus</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-light leading-tight mb-6">
+              Discover your next great adventure
+            </h2>
+            <p className="text-gray-400 text-lg mb-8">
+              Hundreds of incredible PS4 and PS5 games are ready to play with three flexible membership plans.
+            </p>
+            <Button className="bg-[#00439c] hover:bg-[#00367a] text-white rounded-full px-8 py-6 font-bold text-lg" onClick={() => document.getElementById('subscriptions')?.scrollIntoView({behavior: 'smooth'})}>
+              Choose your plan
+            </Button>
+          </div>
+          
+          <div className="grid grid-cols-3 gap-3 md:gap-5 relative">
+            <div className="transform translate-y-6 relative group">
+              <img src="/astro-bot.jpg" alt="Astro Bot" className="rounded-xl object-cover w-full aspect-[3/4] shadow-2xl border border-white/10 group-hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div className="transform -translate-y-2 relative group z-10">
+              <img src="/death-stranding-2-on-the-beach.jpg" alt="Death Stranding 2" className="rounded-xl object-cover w-full aspect-[3/4] shadow-2xl border border-white/10 group-hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div className="transform translate-y-8 relative group">
+              <img src="/grand-theft-auto-vi.jpg" alt="GTA VI" className="rounded-xl object-cover w-full aspect-[3/4] shadow-2xl border border-white/10 group-hover:scale-105 transition-transform duration-500" />
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

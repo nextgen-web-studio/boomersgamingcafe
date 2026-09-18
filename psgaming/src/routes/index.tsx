@@ -130,22 +130,26 @@ function Index() {
         </button>
 
         {/* Content */}
-        <div className="relative z-10 mx-auto max-w-7xl flex h-full flex-col justify-end p-6 pb-12 sm:p-10 sm:pb-16 transition-all duration-500"><div className="max-w-xl">
-          <p className="text-xs font-semibold uppercase">{activeHero.subtitle}</p>
-          <h1 className="mt-3 text-4xl font-bold leading-tight sm:text-6xl">{activeHero.title}</h1>
-          <p className="mt-4 max-w-md text-sm leading-6 text-ink-muted sm:text-base">{activeHero.description}</p>
-          <div className="mt-6 flex items-center gap-4">
-            <button 
-              className={buttonVariants()} 
-              onClick={() => handleCheckout(activeHero)}
-            >
-              Buy for {activeHero.price}
-            </button>
-            {activeHero.oldPrice && (
-              <span className="text-sm text-ink-muted line-through">{activeHero.oldPrice}</span>
-            )}
+        <div className="relative z-10 mx-auto max-w-7xl flex h-full flex-col justify-end p-6 pb-12 sm:p-10 sm:pb-16 transition-all duration-500">
+          <div className="max-w-xl">
+            <div className="bg-white text-black text-[10px] sm:text-xs font-bold px-1.5 py-0.5 sm:px-2 sm:py-1 inline-block rounded-sm mb-2 sm:mb-3">PS5</div>
+            <h1 className="text-4xl font-bold leading-tight sm:text-6xl text-white">{activeHero.title}</h1>
+            <p className="mt-3 sm:mt-4 max-w-md text-sm leading-6 text-gray-300 sm:text-base">{activeHero.description}</p>
+            <div className="mt-5 sm:mt-6 flex items-center gap-4">
+              <button 
+                className="bg-[#00439c] hover:bg-[#00367a] text-white rounded-full px-5 sm:px-6 py-2 sm:py-3 font-bold flex items-center transition-colors text-sm sm:text-base"
+                onClick={() => handleCheckout(activeHero)}
+              >
+                Add to cart &middot; {activeHero.price}
+              </button>
+              {activeHero.oldPrice && (
+                <span className="text-sm text-gray-400 line-through">{activeHero.oldPrice}</span>
+              )}
+            </div>
           </div>
-        </div></div>`n`n        {/* Indicators */}
+        </div>
+
+        {/* Indicators */}
         <div className="absolute bottom-6 right-10 z-20 flex gap-2">
           {heroGames.map((_, index) => (
             <button 

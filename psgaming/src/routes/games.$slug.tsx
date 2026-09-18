@@ -44,13 +44,17 @@ function GamePage() {
           <p className="text-xs font-semibold text-primary">{game.platform ?? "PS5"}</p>
           <h1 className="mt-3 text-4xl font-bold leading-tight sm:text-5xl">{game.title}</h1>
           <p className="mt-4 leading-6 text-ink-muted">{game.description.split(". ")[0]}.</p>
-          <p className="mt-6 text-3xl font-bold">
-            {game.price} 
-            {game.oldPrice && <span className="ml-2 text-sm font-normal text-ink-muted line-through">{game.oldPrice}</span>}
-          </p>
-          <Button className="mt-6 w-full sm:w-auto" onClick={handleCheckout}>
-            Buy for {game.price}
-          </Button>
+          <div className="mt-6 flex items-center gap-4">
+            <button 
+              className="bg-[#00439c] hover:bg-[#00367a] text-white rounded-full px-6 py-3 font-bold flex items-center transition-colors text-base"
+              onClick={handleCheckout}
+            >
+              Add to cart &middot; {game.price}
+            </button>
+            {game.oldPrice && (
+              <span className="text-sm font-normal text-gray-400 line-through">{game.oldPrice}</span>
+            )}
+          </div>
         </div>
       </div>
     </section>
@@ -60,14 +64,25 @@ function GamePage() {
         <div>
           <h2 className="text-2xl font-bold">About the game</h2>
           <p className="mt-4 leading-7 text-muted-foreground">{game.description}</p>
-          <div className="mt-7 grid grid-cols-2 gap-5 border-t border-border pt-5 text-xs sm:grid-cols-4">
+          
+          <h2 className="text-2xl font-bold mt-10 mb-6">Game media</h2>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="aspect-video bg-muted rounded-md overflow-hidden shadow-sm">
+               <img src={game.image} alt={game.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div className="aspect-video bg-muted rounded-md overflow-hidden shadow-sm">
+               <img src={game.image} alt={game.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+            </div>
+          </div>
+
+          <div className="mt-10 grid grid-cols-2 gap-5 border-t border-border pt-5 text-xs sm:grid-cols-4">
             {[[Gamepad2,"PS5 enhanced"],[UsersRound,"1 player"],[HardDrive,"75 GB"],[Check,"Remote Play"]].map(([Icon,label]) => { 
               const I = Icon as typeof Gamepad2; 
               return <div key={label as string}><I className="mb-2 size-5 text-primary" />{label as string}</div>
             })}
           </div>
         </div>
-        <aside className="bg-canvas p-5 rounded-md">
+        <aside className="bg-canvas p-5 rounded-md border border-border">
           <h2 className="font-bold">Game information</h2>
           <dl className="mt-5 space-y-4 text-sm">
             <div><dt className="text-muted-foreground">Genre</dt><dd>{game.genre}</dd></div>
@@ -78,7 +93,7 @@ function GamePage() {
       </div>
     </section>
 
-    <section className="bg-canvas px-4 py-10 sm:px-6 sm:py-14">
+    <section className="bg-canvas border-t border-border px-4 py-10 sm:px-6 sm:py-14">
       <div className="mx-auto max-w-3xl">
         <h2 className="text-2xl font-bold text-center">Official trailer</h2>
         <div className="mt-5 aspect-video w-full overflow-hidden rounded-md bg-ink shadow-lg">
