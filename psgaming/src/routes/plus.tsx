@@ -12,6 +12,36 @@ function PlusPage() {
   const [extraPlan, setExtraPlan] = useState("12");
   const [essentialPlan, setEssentialPlan] = useState("12");
 
+  const handleSubscribe = (tier: string, planId: string) => {
+    let amount = 0;
+    let planName = "";
+    if (tier === "Deluxe") {
+      if (planId === "12") { amount = 7599; planName = "Deluxe 12-Month Plan"; }
+      if (planId === "3") { amount = 2299; planName = "Deluxe 3-Month Plan"; }
+      if (planId === "1") { amount = 849; planName = "Deluxe 1-Month Plan"; }
+    } else if (tier === "Extra") {
+      if (planId === "12") { amount = 6699; planName = "Extra 12-Month Plan"; }
+      if (planId === "3") { amount = 1999; planName = "Extra 3-Month Plan"; }
+      if (planId === "1") { amount = 749; planName = "Extra 1-Month Plan"; }
+    } else if (tier === "Essential") {
+      if (planId === "12") { amount = 3949; planName = "Essential 12-Month Plan"; }
+      if (planId === "3") { amount = 1199; planName = "Essential 3-Month Plan"; }
+      if (planId === "1") { amount = 499; planName = "Essential 1-Month Plan"; }
+    }
+
+    const rzp = new (window as any).Razorpay({ 
+      key: "rzp_test_TccMP6YnZ6PZD9", 
+      amount: amount * 100, 
+      currency: "INR", 
+      name: "PlayStation Plus", 
+      description: planName, 
+      handler: function (response: any) { 
+        alert("Subscription Successful! Payment ID: " + response.razorpay_payment_id); 
+      } 
+    }); 
+    rzp.open();
+  };
+
   return (
     <main className="min-h-screen bg-white pb-0 flex flex-col w-full overflow-x-hidden">
       
@@ -116,7 +146,10 @@ function PlusPage() {
                   ))}
                 </div>
                 
-                <Button className="w-full py-6 rounded-full font-bold text-sm sm:text-base bg-[#0070cc] text-white hover:bg-[#005fb3]">
+                <Button 
+                  onClick={() => handleSubscribe("Deluxe", deluxePlan)}
+                  className="w-full py-6 rounded-full font-bold text-sm sm:text-base bg-[#0070cc] text-white hover:bg-[#005fb3]"
+                >
                   Subscribe
                 </Button>
               </div>
@@ -170,9 +203,7 @@ function PlusPage() {
                   ))}
                 </div>
                 
-                <Button className="w-full py-6 rounded-full font-bold text-sm sm:text-base bg-[#363636] text-white hover:bg-black">
-                  Subscribe
-                </Button>
+                <Button onClick={() => handleSubscribe("Extra", extraPlan)} className="w-full py-6 rounded-full font-bold text-sm sm:text-base bg-[#363636] text-white hover:bg-black">Subscribe</Button>
               </div>
             </div>
 
@@ -224,9 +255,7 @@ function PlusPage() {
                   ))}
                 </div>
                 
-                <Button className="w-full py-6 rounded-full font-bold text-sm sm:text-base bg-[#363636] text-white hover:bg-black">
-                  Subscribe
-                </Button>
+                <Button onClick={() => handleSubscribe("Essential", essentialPlan)} className="w-full py-6 rounded-full font-bold text-sm sm:text-base bg-[#363636] text-white hover:bg-black">Subscribe</Button>
               </div>
             </div>
 
