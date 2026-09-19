@@ -40,30 +40,34 @@ function MediaCarousel({ images }: { images: string[] }) {
           .hide-scroll::-webkit-scrollbar { display: none; }
         `}} />
         {images.map((img, i) => (
-          <div key={i} className="flex-none w-[85vw] sm:w-[60vw] md:w-[500px] snap-center aspect-video relative rounded-lg overflow-hidden bg-[#1f1f1f] border border-white/10 shrink-0 hide-scroll">
+          <div key={i} className="flex-none w-[78vw] sm:w-[60vw] md:w-[500px] snap-center aspect-video relative rounded-lg overflow-hidden bg-[#1f1f1f] border border-white/10 shrink-0 hide-scroll">
             <img src={img} className="w-full h-full object-cover" alt={`Screenshot ${i + 1}`} />
           </div>
         ))}
       </div>
       
-      <button 
-        onClick={() => scroll('left')}
-        className="absolute left-6 sm:left-10 top-[45%] -translate-y-1/2 w-10 h-10 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:bg-gray-200 transition-colors z-10 opacity-90"
-      >
-        <ChevronLeft className="size-6 -ml-0.5" />
-      </button>
-      <button 
-        onClick={() => scroll('right')}
-        className="absolute right-6 sm:right-10 top-[45%] -translate-y-1/2 w-10 h-10 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:bg-gray-200 transition-colors z-10 opacity-90"
-      >
-        <ChevronRight className="size-6 ml-0.5" />
-      </button>
+      {activeIndex > 0 && (
+        <button 
+          onClick={() => scroll('left')}
+          className="absolute left-2 sm:left-6 top-[45%] -translate-y-1/2 w-10 h-10 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:bg-gray-200 transition-colors z-10 opacity-90"
+        >
+          <ChevronLeft className="size-6 -ml-0.5" />
+        </button>
+      )}
+      {activeIndex < images.length - 1 && (
+        <button 
+          onClick={() => scroll('right')}
+          className="absolute right-2 sm:right-6 top-[45%] -translate-y-1/2 w-10 h-10 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:bg-gray-200 transition-colors z-10 opacity-90"
+        >
+          <ChevronRight className="size-6 ml-0.5" />
+        </button>
+      )}
       
-      <div className="flex justify-center gap-2 mt-2">
+      <div className="flex justify-center gap-1.5 mt-2">
         {images.map((_, i) => (
           <div 
             key={i} 
-            className={`h-[3px] rounded-full transition-all duration-300 ${i === activeIndex ? 'w-6 bg-white' : 'w-6 bg-white/30'}`}
+            className={`h-[2px] rounded-full transition-all duration-300 ${i === activeIndex ? 'w-6 bg-white' : 'w-6 bg-[#444]'}`}
           />
         ))}
       </div>
@@ -156,11 +160,11 @@ function GamePage() {
     </section>
 
     {/* Features / Game Overview Section */}
-    <section className="bg-black text-white px-4 py-12 sm:px-6 lg:py-24">
-      <div className="mx-auto max-w-7xl grid lg:grid-cols-[1.2fr_1fr] gap-12 sm:gap-20">
+    <section className="bg-black text-white py-12 sm:py-24 overflow-hidden">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 flex flex-col lg:grid lg:grid-cols-[1.2fr_1fr] gap-12 sm:gap-20">
         
         {/* Features List (Left) */}
-        <div>
+        <div className="order-1 lg:order-none">
           {/* IARC Badge */}
           <div className="flex gap-4 items-center border-b border-[#333] pb-6 mb-6">
             <div className="bg-white text-black font-black text-xl w-12 h-12 flex flex-col items-center justify-center border-2 border-black rounded-sm shrink-0">
@@ -212,23 +216,26 @@ function GamePage() {
         </div>
 
         {/* Description Text (Right on Desktop, Below on Mobile) */}
-        <div className="text-gray-200">
-          <h2 className="text-3xl font-light mb-6 tracking-tight text-white">Game and Legal Info</h2>
+        <div className="order-3 lg:order-2 text-gray-200">
+          <h2 className="text-3xl font-light mb-6 tracking-tight text-white lg:text-center text-left">Editions:</h2>
+          <h2 className="text-3xl font-light mb-6 tracking-tight text-white mt-12">Game and Legal Info</h2>
           <p className="text-[15px] sm:text-base leading-relaxed mb-6">
             {game.description} Built to make every battle, journey and discovery feel immediate and unforgettable.
           </p>
         </div>
+
+        {/* Media Carousel (Mobile: Middle, Desktop: Spans full width below) */}
+        <div className="order-2 lg:order-3 lg:col-span-2 -mx-4 sm:mx-0">
+          <MediaCarousel images={[
+            game.image.replace('.jpg', '-wide.jpg'),
+            game.image,
+            "/marvels-spider-man-2.jpg",
+            "/ghost-of-tsushima-hq.jpg",
+            "/god-of-war-ragnarok.jpg",
+            "/ratchet-and-clank-rift-apart.jpg"
+          ]} />
+        </div>
       </div>
-      
-      {/* Media Carousel */}
-      <MediaCarousel images={[
-        game.image.replace('.jpg', '-wide.jpg'),
-        game.image,
-        "/marvels-spider-man-2.jpg",
-        "/ghost-of-tsushima-hq.jpg",
-        "/god-of-war-ragnarok.jpg",
-        "/ratchet-and-clank-rift-apart.jpg"
-      ]} />
     </section>
 
     {/* Trailer */}
