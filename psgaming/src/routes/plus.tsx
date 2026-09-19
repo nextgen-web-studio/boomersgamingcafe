@@ -18,9 +18,9 @@ function PlusPage() {
   const handleScroll = () => {
     if (scrollRef.current) {
       const scrollLeft = scrollRef.current.scrollLeft;
-      const width = scrollRef.current.clientWidth;
-      // Using card width roughly 280 for desktop, 220 for mobile, approx scroll index
-      const childWidth = scrollRef.current.firstElementChild?.clientWidth || width;
+      const child = scrollRef.current.firstElementChild as HTMLElement;
+      // sm:gap-6 (24px) or gap-4 (16px) depending on screen, using approx 20px average for simple math
+      const childWidth = child ? child.clientWidth + 20 : scrollRef.current.clientWidth;
       const index = Math.round(scrollLeft / childWidth);
       setActiveSlide(Math.min(index, 3)); // 4 items total, max index 3
     }
@@ -28,15 +28,17 @@ function PlusPage() {
 
   const scrollLeft = () => {
     if (scrollRef.current) {
-      const childWidth = scrollRef.current.firstElementChild?.clientWidth || scrollRef.current.clientWidth;
-      scrollRef.current.scrollBy({ left: -(childWidth + 16), behavior: 'smooth' });
+      const child = scrollRef.current.firstElementChild as HTMLElement;
+      const scrollAmount = child ? (child.clientWidth + 20) * 0.8 : scrollRef.current.clientWidth / 2;
+      scrollRef.current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
     }
   };
 
   const scrollRight = () => {
     if (scrollRef.current) {
-      const childWidth = scrollRef.current.firstElementChild?.clientWidth || scrollRef.current.clientWidth;
-      scrollRef.current.scrollBy({ left: childWidth + 16, behavior: 'smooth' });
+      const child = scrollRef.current.firstElementChild as HTMLElement;
+      const scrollAmount = child ? (child.clientWidth + 20) * 0.8 : scrollRef.current.clientWidth / 2;
+      scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
   };
 

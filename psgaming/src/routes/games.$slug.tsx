@@ -13,17 +13,19 @@ function MediaCarousel({ images }: { images: string[] }) {
   const handleScroll = () => {
     if (scrollRef.current) {
       const scrollLeft = scrollRef.current.scrollLeft;
-      const width = scrollRef.current.clientWidth;
-      const index = Math.round(scrollLeft / width);
+      const child = scrollRef.current.firstElementChild as HTMLElement;
+      // Add gap (16px) to child width for precise index calculation
+      const childWidth = child ? child.clientWidth + 16 : scrollRef.current.clientWidth;
+      const index = Math.round(scrollLeft / childWidth);
       setActiveIndex(index);
     }
   };
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
-      // Find the width of one card (using the first child)
-      const firstChild = scrollRef.current.firstElementChild as HTMLElement;
-      const scrollAmount = firstChild ? firstChild.clientWidth + 16 : scrollRef.current.clientWidth;
+      const child = scrollRef.current.firstElementChild as HTMLElement;
+      // Scroll by ~80% of item width to prevent CSS snap from skipping over items
+      const scrollAmount = child ? (child.clientWidth + 16) * 0.8 : scrollRef.current.clientWidth / 2;
       scrollRef.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
     }
   };
