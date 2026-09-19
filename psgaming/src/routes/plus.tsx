@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Check, ChevronLeft, ChevronRight, Plus } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/plus")({
@@ -11,6 +11,34 @@ function PlusPage() {
   const [deluxePlan, setDeluxePlan] = useState("12");
   const [extraPlan, setExtraPlan] = useState("12");
   const [essentialPlan, setEssentialPlan] = useState("12");
+  
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  const handleScroll = () => {
+    if (scrollRef.current) {
+      const scrollLeft = scrollRef.current.scrollLeft;
+      const width = scrollRef.current.clientWidth;
+      // Using card width roughly 280 for desktop, 220 for mobile, approx scroll index
+      const childWidth = scrollRef.current.firstElementChild?.clientWidth || width;
+      const index = Math.round(scrollLeft / childWidth);
+      setActiveSlide(Math.min(index, 3)); // 4 items total, max index 3
+    }
+  };
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      const childWidth = scrollRef.current.firstElementChild?.clientWidth || scrollRef.current.clientWidth;
+      scrollRef.current.scrollBy({ left: -(childWidth + 16), behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      const childWidth = scrollRef.current.firstElementChild?.clientWidth || scrollRef.current.clientWidth;
+      scrollRef.current.scrollBy({ left: childWidth + 16, behavior: 'smooth' });
+    }
+  };
 
   const handleSubscribe = (tier: string, planId: string) => {
     let amount = 0;
@@ -307,25 +335,37 @@ function PlusPage() {
           
           <div className="relative group">
             {/* Decorative Scroll Arrows */}
-            <button className="hidden sm:flex absolute left-0 top-1/3 -translate-x-1/2 -translate-y-1/2 size-12 bg-white rounded-full items-center justify-center text-black z-20 shadow-xl hover:scale-105 transition-transform disabled:opacity-50">
-              <ChevronLeft className="size-6" />
-            </button>
-            <button className="hidden sm:flex absolute right-0 top-1/3 translate-x-1/2 -translate-y-1/2 size-12 bg-white rounded-full items-center justify-center text-black z-20 shadow-xl hover:scale-105 transition-transform">
-              <ChevronRight className="size-6" />
-            </button>
+            {activeSlide > 0 && (
+              <button onClick={scrollLeft} className="hidden sm:flex absolute left-0 top-[40%] -translate-x-1/2 -translate-y-1/2 size-12 bg-white rounded-full items-center justify-center text-black z-20 shadow-xl hover:scale-105 transition-transform">
+                <ChevronLeft className="size-6 -ml-0.5" />
+              </button>
+            )}
+            {activeSlide < 3 && (
+              <button onClick={scrollRight} className="hidden sm:flex absolute right-0 top-[40%] translate-x-1/2 -translate-y-1/2 size-12 bg-white rounded-full items-center justify-center text-black z-20 shadow-xl hover:scale-105 transition-transform">
+                <ChevronRight className="size-6 ml-0.5" />
+              </button>
+            )}
 
             <div className="flex justify-between items-center mb-4 sm:hidden">
               <span className="text-gray-400 text-[10px] font-bold uppercase tracking-wider">Swipe to explore &rarr;</span>
             </div>
             
-            <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-8 snap-x snap-mandatory hide-scrollbar" style={{ scrollbarWidth: 'none' }}>
+            <div 
+              ref={scrollRef}
+              onScroll={handleScroll}
+              className="flex gap-4 sm:gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scroll-smooth" 
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              <style dangerouslySetInnerHTML={{__html: `
+                .hide-scroll::-webkit-scrollbar { display: none; }
+              `}} />
               {[
                 { title: "Hogwarts Legacy", genre: "Unique", desc: "Experience Hogwarts in the late 1800s in the immersive open-world action RPG.", img: "/marvels-spider-man-miles-morales.jpg" },
                 { title: "Silent Hill 2", genre: "Horror", desc: "Experience psychological horror at its finest.", img: "/silent-hill-2.jpg" },
                 { title: "RuneScape: Dragonwilds", genre: "Adventure", desc: "Explore a forgotten RuneScape continent where dragons have awoken.", img: "/horizon-zero-dawn-remastered.jpg" },
                 { title: "Marvel's Spider-Man Remastered", genre: "Action", desc: "The worlds of Peter Parker and Spider-Man collide in this original story.", img: "/marvels-spider-man-2.jpg" },
               ].map((game, i) => (
-                <div key={i} className="flex-none w-[220px] sm:w-[280px] bg-[#293047] rounded-2xl overflow-hidden snap-start group cursor-pointer border border-transparent hover:border-white/20 transition-all shadow-xl hover:shadow-2xl">
+                <div key={i} className="flex-none w-[240px] sm:w-[280px] bg-[#293047] rounded-2xl overflow-hidden snap-center group cursor-pointer border border-transparent hover:border-white/20 transition-all shadow-xl hover:shadow-2xl hide-scroll">
                   <div className="aspect-[4/5] sm:aspect-square overflow-hidden relative">
                     <img src={game.img} alt={game.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                   </div>
@@ -339,10 +379,13 @@ function PlusPage() {
             </div>
             
             {/* Pagination dots (like iPad) */}
-            <div className="flex justify-center gap-2 mt-2">
-              <div className="w-8 h-1 bg-white rounded-full"></div>
-              <div className="w-2 h-1 bg-white/30 rounded-full"></div>
-              <div className="w-2 h-1 bg-white/30 rounded-full"></div>
+            <div className="flex justify-center gap-1.5 mt-2">
+              {[0, 1, 2, 3].map((idx) => (
+                <div 
+                  key={idx} 
+                  className={`h-1.5 rounded-full transition-all duration-300 ${idx === activeSlide ? 'w-8 bg-white' : 'w-2 bg-[#444]'}`}
+                />
+              ))}
             </div>
           </div>
         </div>
