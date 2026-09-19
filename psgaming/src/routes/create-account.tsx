@@ -2,11 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-export const Route = createFileRoute("/sign-in")({
-  component: SignInPage,
+export const Route = createFileRoute("/create-account")({
+  component: CreateAccountPage,
 });
 
-function SignInPage() {
+function CreateAccountPage() {
   return (
     <div className="min-h-[calc(100vh-64px)] bg-[#f3f4f6] flex flex-col items-center justify-start pt-8 sm:justify-center sm:pt-0 p-4">
       <div className="w-full max-w-md bg-white p-8 rounded-none shadow-xl border-t-4 border-t-primary">
@@ -16,9 +16,9 @@ function SignInPage() {
           </div>
         </div>
         
-        <h1 className="text-2xl font-bold text-center text-[#1f2937] mb-6">Sign In to PlayStation</h1>
+        <h1 className="text-2xl font-bold text-center text-[#1f2937] mb-6">Create New Account</h1>
         
-        <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); alert("Sign in is purely visual for now!"); }}>
+        <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); alert("Account creation is purely visual for now!"); }}>
           <div className="space-y-1">
             <label className="text-sm font-medium text-gray-700">Sign-In ID (Email Address)</label>
             <Input type="email" required className="rounded-none border-gray-300 focus-visible:ring-primary focus-visible:border-primary" />
@@ -28,15 +28,18 @@ function SignInPage() {
             <label className="text-sm font-medium text-gray-700">Password</label>
             <Input type="password" required className="rounded-none border-gray-300 focus-visible:ring-primary focus-visible:border-primary" />
           </div>
+
+          <div className="space-y-1">
+            <label className="text-sm font-medium text-gray-700">Confirm Password</label>
+            <Input type="password" required className="rounded-none border-gray-300 focus-visible:ring-primary focus-visible:border-primary" />
+          </div>
           
-          <Button type="submit" className="w-full rounded-none bg-primary hover:bg-primary/90 text-white font-semibold py-6">
-            Sign In
+          <Button type="submit" className="w-full rounded-none bg-primary hover:bg-primary/90 text-white font-semibold py-6 mt-4">
+            Next
           </Button>
         </form>
 
         <div className="mt-6 text-center text-sm space-y-4">
-          <a href="#" className="text-primary hover:underline font-medium block">Trouble Signing In?</a>
-          
           <div className="relative py-2">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t border-gray-300" />
@@ -47,7 +50,7 @@ function SignInPage() {
           </div>
           
           <Button variant="outline" className="w-full rounded-none border-gray-300 font-semibold py-6" asChild>
-            <Link to="/create-account">Create New Account</Link>
+            <Link to="/sign-in">Already have an account? Sign In</Link>
           </Button>
         </div>
       </div>
