@@ -1,9 +1,75 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { Gamepad2, Heart, Star, StarHalf, Globe, User, Settings2, Lightbulb, ChevronRight, MonitorPlay } from "lucide-react";
+import { Gamepad2, Heart, Star, StarHalf, Globe, User, Settings2, Lightbulb, ChevronRight, ChevronLeft, MonitorPlay } from "lucide-react";
+import { useState, useRef } from "react";
 
 import { GameCard } from "@/components/game-card";
 import { games, getGame } from "@/lib/games";
 import { addToCart, useCart } from "@/lib/cart";
+
+function MediaCarousel({ images }: { images: string[] }) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleScroll = () => {
+    if (scrollRef.current) {
+      const scrollLeft = scrollRef.current.scrollLeft;
+      const width = scrollRef.current.clientWidth;
+      const index = Math.round(scrollLeft / width);
+      setActiveIndex(index);
+    }
+  };
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      // Find the width of one card (using the first child)
+      const firstChild = scrollRef.current.firstElementChild as HTMLElement;
+      const scrollAmount = firstChild ? firstChild.clientWidth + 16 : scrollRef.current.clientWidth;
+      scrollRef.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <div className="relative w-full mt-12 mb-8 group overflow-hidden">
+      <div 
+        ref={scrollRef}
+        onScroll={handleScroll}
+        className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 px-4 sm:px-6"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+      >
+        <style dangerouslySetInnerHTML={{__html: `
+          .hide-scroll::-webkit-scrollbar { display: none; }
+        `}} />
+        {images.map((img, i) => (
+          <div key={i} className="flex-none w-[85vw] sm:w-[60vw] md:w-[500px] snap-center aspect-video relative rounded-lg overflow-hidden bg-[#1f1f1f] border border-white/10 shrink-0 hide-scroll">
+            <img src={img} className="w-full h-full object-cover" alt={`Screenshot ${i + 1}`} />
+          </div>
+        ))}
+      </div>
+      
+      <button 
+        onClick={() => scroll('left')}
+        className="absolute left-6 sm:left-10 top-[45%] -translate-y-1/2 w-10 h-10 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:bg-gray-200 transition-colors z-10 opacity-90"
+      >
+        <ChevronLeft className="size-6 -ml-0.5" />
+      </button>
+      <button 
+        onClick={() => scroll('right')}
+        className="absolute right-6 sm:right-10 top-[45%] -translate-y-1/2 w-10 h-10 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:bg-gray-200 transition-colors z-10 opacity-90"
+      >
+        <ChevronRight className="size-6 ml-0.5" />
+      </button>
+      
+      <div className="flex justify-center gap-2 mt-2">
+        {images.map((_, i) => (
+          <div 
+            key={i} 
+            className={`h-[3px] rounded-full transition-all duration-300 ${i === activeIndex ? 'w-6 bg-white' : 'w-6 bg-white/30'}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export const Route = createFileRoute("/games/$slug")({
   loader: ({ params }) => { const game = getGame(params.slug); if (!game) throw notFound(); return game; },
@@ -153,6 +219,16 @@ function GamePage() {
           </p>
         </div>
       </div>
+      
+      {/* Media Carousel */}
+      <MediaCarousel images={[
+        game.image.replace('.jpg', '-wide.jpg'),
+        game.image,
+        "/marvels-spider-man-2.jpg",
+        "/ghost-of-tsushima-hq.jpg",
+        "/god-of-war-ragnarok.jpg",
+        "/ratchet-and-clank-rift-apart.jpg"
+      ]} />
     </section>
 
     {/* Trailer */}
