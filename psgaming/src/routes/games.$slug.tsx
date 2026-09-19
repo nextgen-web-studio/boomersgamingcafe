@@ -12,12 +12,17 @@ function MediaCarousel({ images }: { images: string[] }) {
 
   const handleScroll = () => {
     if (scrollRef.current) {
-      const scrollLeft = scrollRef.current.scrollLeft;
+      const { scrollLeft, clientWidth, scrollWidth } = scrollRef.current;
       const child = scrollRef.current.firstElementChild as HTMLElement;
-      // Add gap (16px) to child width for precise index calculation
-      const childWidth = child ? child.clientWidth + 16 : scrollRef.current.clientWidth;
-      const index = Math.round(scrollLeft / childWidth);
-      setActiveIndex(index);
+      const childWidth = child ? child.clientWidth + 16 : clientWidth;
+      
+      // If we've scrolled all the way to the right edge, force the last dot to be active
+      if (Math.ceil(scrollLeft + clientWidth) >= scrollWidth - 10) {
+        setActiveIndex(images.length - 1);
+      } else {
+        const index = Math.round(scrollLeft / childWidth);
+        setActiveIndex(index);
+      }
     }
   };
 

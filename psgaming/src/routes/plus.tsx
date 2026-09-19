@@ -17,12 +17,18 @@ function PlusPage() {
 
   const handleScroll = () => {
     if (scrollRef.current) {
-      const scrollLeft = scrollRef.current.scrollLeft;
+      const { scrollLeft, clientWidth, scrollWidth } = scrollRef.current;
       const child = scrollRef.current.firstElementChild as HTMLElement;
       // sm:gap-6 (24px) or gap-4 (16px) depending on screen, using approx 20px average for simple math
-      const childWidth = child ? child.clientWidth + 20 : scrollRef.current.clientWidth;
-      const index = Math.round(scrollLeft / childWidth);
-      setActiveSlide(Math.min(index, 3)); // 4 items total, max index 3
+      const childWidth = child ? child.clientWidth + 20 : clientWidth;
+      
+      // If we've scrolled all the way to the right edge, force the last dot to be active
+      if (Math.ceil(scrollLeft + clientWidth) >= scrollWidth - 10) {
+        setActiveSlide(3); // 4 items total, index 3 is last
+      } else {
+        const index = Math.round(scrollLeft / childWidth);
+        setActiveSlide(Math.min(index, 3));
+      }
     }
   };
 
