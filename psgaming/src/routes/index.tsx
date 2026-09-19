@@ -99,66 +99,70 @@ function Index() {
 
   const activeHero = heroGames[currentSlide];
 
+  const isHome = !q && !section;
+
   return <main>
-    <section className="bg-ink text-ink-foreground relative w-full">
-      <div className="relative w-full h-[60vh] min-h-[400px] sm:h-[80vh] sm:min-h-[600px] overflow-hidden group">
-        
-        {/* Images */}
-        {heroGames.map((game, index) => (
-          <img 
-            key={game.id}
-            src={game.image} 
-            alt={game.title} 
-            className={`absolute inset-0 size-full object-cover object-center transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100 z-0' : 'opacity-0 -z-10'}`} 
-          />
-        ))}
-
-        <div className="absolute inset-0 bg-hero-shade z-10" />
-        
-        {/* Controls */}
-        <button 
-          onClick={() => setCurrentSlide(prev => (prev === 0 ? heroGames.length - 1 : prev - 1))}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/80"
-        >
-          <ChevronLeft className="size-6" />
-        </button>
-        <button 
-          onClick={() => setCurrentSlide(prev => (prev + 1) % heroGames.length)}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/80"
-        >
-          <ChevronRight className="size-6" />
-        </button>
-
-        {/* Content */}
-        <div className="relative z-10 mx-auto max-w-7xl flex h-full flex-col justify-end p-6 pb-12 sm:p-10 sm:pb-16 transition-all duration-500">
-          <div className="max-w-xl">
-            <div className="bg-white text-black text-[10px] sm:text-xs font-bold px-1.5 py-0.5 sm:px-2 sm:py-1 inline-block rounded-sm mb-2 sm:mb-3">PS5</div>
-            <h1 className="text-4xl font-bold leading-tight sm:text-6xl text-white">{activeHero.title}</h1>
-            <p className="mt-3 sm:mt-4 max-w-md text-sm leading-6 text-gray-300 sm:text-base">{activeHero.description}</p>
-            <div className="mt-5 sm:mt-6 flex items-center gap-4">
-              <Link
-                to="/games/$slug"
-                params={{ slug: activeHero.id }}
-                className="bg-white hover:bg-gray-200 text-black rounded-full px-5 sm:px-6 py-2 sm:py-3 font-bold flex items-center transition-colors text-sm sm:text-base"
-              >
-                Explore game
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Indicators */}
-        <div className="absolute bottom-6 right-10 z-20 flex gap-2">
-          {heroGames.map((_, index) => (
-            <button 
-              key={index} 
-              onClick={() => setCurrentSlide(index)}
-              className={`h-2 rounded-full transition-all ${index === currentSlide ? 'w-8 bg-white' : 'w-2 bg-white/50 hover:bg-white/80'}`}
+    {isHome && (
+      <section className="bg-ink text-ink-foreground relative w-full">
+        <div className="relative w-full h-[60vh] min-h-[400px] sm:h-[80vh] sm:min-h-[600px] overflow-hidden group">
+          
+          {/* Images */}
+          {heroGames.map((game, index) => (
+            <img 
+              key={game.id}
+              src={game.image} 
+              alt={game.title} 
+              className={`absolute inset-0 size-full object-cover object-center transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100 z-0' : 'opacity-0 -z-10'}`} 
             />
           ))}
+
+          <div className="absolute inset-0 bg-hero-shade z-10" />
+          
+          {/* Controls */}
+          <button 
+            onClick={() => setCurrentSlide(prev => (prev === 0 ? heroGames.length - 1 : prev - 1))}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/80"
+          >
+            <ChevronLeft className="size-6" />
+          </button>
+          <button 
+            onClick={() => setCurrentSlide(prev => (prev + 1) % heroGames.length)}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/80"
+          >
+            <ChevronRight className="size-6" />
+          </button>
+
+          {/* Content */}
+          <div className="relative z-10 mx-auto max-w-7xl flex h-full flex-col justify-end p-6 pb-12 sm:p-10 sm:pb-16 transition-all duration-500">
+            <div className="max-w-xl">
+              <div className="bg-white text-black text-[10px] sm:text-xs font-bold px-1.5 py-0.5 sm:px-2 sm:py-1 inline-block rounded-sm mb-2 sm:mb-3">PS5</div>
+              <h1 className="text-4xl font-bold leading-tight sm:text-6xl text-white">{activeHero.title}</h1>
+              <p className="mt-3 sm:mt-4 max-w-md text-sm leading-6 text-gray-300 sm:text-base">{activeHero.description}</p>
+              <div className="mt-5 sm:mt-6 flex items-center gap-4">
+                <Link
+                  to="/games/$slug"
+                  params={{ slug: activeHero.id }}
+                  className="bg-white hover:bg-gray-200 text-black rounded-full px-5 sm:px-6 py-2 sm:py-3 font-bold flex items-center transition-colors text-sm sm:text-base"
+                >
+                  Explore game
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Indicators */}
+          <div className="absolute bottom-6 right-10 z-20 flex gap-2">
+            {heroGames.map((_, index) => (
+              <button 
+                key={index} 
+                onClick={() => setCurrentSlide(index)}
+                className={`h-2 rounded-full transition-all ${index === currentSlide ? 'w-8 bg-white' : 'w-2 bg-white/50 hover:bg-white/80'}`}
+              />
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    )}
 
     <section className="bg-canvas px-4 py-12 sm:px-6 sm:py-16">
       <div className="mx-auto max-w-7xl">
