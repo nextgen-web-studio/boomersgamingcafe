@@ -12,25 +12,18 @@ function MediaCarousel({ images }: { images: string[] }) {
 
   const handleScroll = () => {
     if (scrollRef.current) {
-      const { scrollLeft, clientWidth, scrollWidth } = scrollRef.current;
-      const child = scrollRef.current.firstElementChild as HTMLElement;
-      const childWidth = child ? child.clientWidth + 16 : clientWidth;
-      
-      // If we've scrolled all the way to the right edge, force the last dot to be active
-      if (Math.ceil(scrollLeft + clientWidth) >= scrollWidth - 10) {
-        setActiveIndex(images.length - 1);
-      } else {
-        const index = Math.round(scrollLeft / childWidth);
-        setActiveIndex(index);
-      }
+      const scrollLeft = scrollRef.current.scrollLeft;
+      const width = scrollRef.current.clientWidth;
+      const index = Math.round(scrollLeft / width);
+      setActiveIndex(index);
     }
   };
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
-      const child = scrollRef.current.firstElementChild as HTMLElement;
-      // Scroll by ~80% of item width to prevent CSS snap from skipping over items
-      const scrollAmount = child ? (child.clientWidth + 16) * 0.8 : scrollRef.current.clientWidth / 2;
+      // Find the width of one card (using the first child)
+      const firstChild = scrollRef.current.firstElementChild as HTMLElement;
+      const scrollAmount = firstChild ? firstChild.clientWidth + 16 : scrollRef.current.clientWidth;
       scrollRef.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
     }
   };
