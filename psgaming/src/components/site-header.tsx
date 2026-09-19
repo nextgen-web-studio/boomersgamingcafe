@@ -38,8 +38,8 @@ export function SiteHeader() {
       name: "PS Games Sales", 
       description: "Digital Games Purchase", 
       handler: function (response: any) { 
-        alert("Payment Successful! Payment ID: " + response.razorpay_payment_id); 
         clearCart();
+        navigate({ to: "/success" });
       } 
     }); 
     rzp.open();

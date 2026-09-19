@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { Check, ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,7 @@ export const Route = createFileRoute("/plus")({
 });
 
 function PlusPage() {
+  const router = useRouter();
   const [deluxePlan, setDeluxePlan] = useState("12");
   const [extraPlan, setExtraPlan] = useState("12");
   const [essentialPlan, setEssentialPlan] = useState("12");
@@ -69,7 +70,7 @@ function PlusPage() {
       name: "PlayStation Plus", 
       description: planName, 
       handler: function (response: any) { 
-        alert("Subscription Successful! Payment ID: " + response.razorpay_payment_id); 
+        router.navigate({ to: "/success" });
       } 
     }); 
     rzp.open();
