@@ -5,6 +5,7 @@ import { useState, useRef } from "react";
 import { GameCard } from "@/components/game-card";
 import { games, getGame } from "@/lib/games";
 import { addToCart, useCart } from "@/lib/cart";
+import { useWishlist, toggleWishlist } from "@/lib/wishlist";
 
 function MediaCarousel({ images }: { images: string[] }) {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -89,6 +90,9 @@ function GamePage() {
   const cartItems = useCart();
   const inCart = cartItems.some(i => i.slug === game.slug);
   
+  const wishlistItems = useWishlist();
+  const inWishlist = wishlistItems.some(i => i.slug === game.slug);
+  
   const handleAddToCart = () => {
     addToCart({
       slug: game.slug,
@@ -151,8 +155,11 @@ function GamePage() {
             >
               {inCart ? 'Added to Cart' : 'Add to Cart'}
             </button>
-            <button className="flex-shrink-0 size-12 rounded-full border border-gray-400 flex items-center justify-center hover:bg-gray-800 transition-colors">
-              <Heart className="size-5 text-white" />
+            <button 
+              onClick={() => toggleWishlist(game.slug)}
+              className={`flex-shrink-0 size-12 rounded-full border flex items-center justify-center transition-colors ${inWishlist ? 'border-red-500 bg-red-500/10 hover:bg-red-500/20' : 'border-gray-400 hover:bg-gray-800'}`}
+            >
+              <Heart className={`size-5 ${inWishlist ? 'fill-red-500 text-red-500' : 'text-white'}`} />
             </button>
           </div>
         </div>
