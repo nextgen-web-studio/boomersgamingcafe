@@ -217,8 +217,7 @@ function GamePage() {
 
         {/* Description Text (Right on Desktop, Below on Mobile) */}
         <div className="order-3 lg:order-2 text-gray-200">
-          <h2 className="text-3xl font-light mb-6 tracking-tight text-white lg:text-center text-left">Editions:</h2>
-          <h2 className="text-3xl font-light mb-6 tracking-tight text-white mt-12">Game and Legal Info</h2>
+          <h2 className="text-3xl font-light mb-6 tracking-tight text-white">Game and Legal Info</h2>
           <p className="text-[15px] sm:text-base leading-relaxed mb-6">
             {game.description} Built to make every battle, journey and discovery feel immediate and unforgettable.
           </p>
