@@ -1,6 +1,6 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { Check, ChevronLeft, ChevronRight, Plus } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/plus")({
@@ -16,28 +16,41 @@ function PlusPage() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
 
-  const handleScroll = () => {
-    if (scrollRef.current) {
-      const scrollLeft = scrollRef.current.scrollLeft;
-      const width = scrollRef.current.clientWidth;
-      // Using card width roughly 280 for desktop, 220 for mobile, approx scroll index
-      const childWidth = scrollRef.current.firstElementChild?.clientWidth || width;
-      const index = Math.round(scrollLeft / childWidth);
-      setActiveSlide(Math.min(index, 3)); // 4 items total, max index 3
-    }
-  };
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Number(entry.target.getAttribute('data-index'));
+            setActiveSlide(index);
+          }
+        });
+      },
+      { root: container, threshold: 0.6 }
+    );
+
+    const children = container.querySelectorAll('.explore-slide');
+    children.forEach((child) => observer.observe(child));
+
+    return () => observer.disconnect();
+  }, []);
 
   const scrollLeft = () => {
     if (scrollRef.current) {
-      const childWidth = scrollRef.current.firstElementChild?.clientWidth || scrollRef.current.clientWidth;
-      scrollRef.current.scrollBy({ left: -(childWidth + 16), behavior: 'smooth' });
+      const child = scrollRef.current.firstElementChild as HTMLElement;
+      const scrollAmount = child ? (child.clientWidth + 20) * 0.8 : scrollRef.current.clientWidth / 2;
+      scrollRef.current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
     }
   };
 
   const scrollRight = () => {
     if (scrollRef.current) {
-      const childWidth = scrollRef.current.firstElementChild?.clientWidth || scrollRef.current.clientWidth;
-      scrollRef.current.scrollBy({ left: childWidth + 16, behavior: 'smooth' });
+      const child = scrollRef.current.firstElementChild as HTMLElement;
+      const scrollAmount = child ? (child.clientWidth + 20) * 0.8 : scrollRef.current.clientWidth / 2;
+      scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
   };
 
@@ -429,7 +442,7 @@ function PlusPage() {
                 img: "/god-of-war-ragnarok.jpg"
               }
             ].map((benefit, i) => (
-              <div key={i} className="flex-none w-[80vw] sm:w-[320px] lg:w-auto snap-center bg-white rounded-3xl overflow-hidden shadow-xl shadow-gray-200/50 flex flex-col hover:-translate-y-2 transition-transform duration-300">
+              <div key={i} data-index={i} className="explore-slide flex-none w-[80vw] sm:w-[320px] lg:w-auto snap-center bg-white rounded-3xl overflow-hidden shadow-xl shadow-gray-200/50 flex flex-col hover:-translate-y-2 transition-transform duration-300">
                 <div className="h-44 sm:h-48 relative overflow-hidden bg-gray-900">
                   <img src={benefit.img} className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" alt="" />
                 </div>

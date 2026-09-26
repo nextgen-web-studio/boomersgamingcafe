@@ -7,24 +7,45 @@ import { games, getGame } from "@/lib/games";
 import { addToCart, useCart } from "@/lib/cart";
 import { useWishlist, toggleWishlist } from "@/lib/wishlist";
 
-function MediaCarousel({ images }: { images: string[] }) {
+function MediaCarousel({ slug }: { slug: string }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const handleScroll = () => {
-    if (scrollRef.current) {
-      const scrollLeft = scrollRef.current.scrollLeft;
-      const width = scrollRef.current.clientWidth;
-      const index = Math.round(scrollLeft / width);
-      setActiveIndex(index);
-    }
-  };
+  const images = [
+    `/images/${slug}-0.jpg`,
+    `/images/${slug}-1.jpg`,
+    `/images/${slug}-2.jpg`,
+    `/images/${slug}-3.jpg`,
+    `/images/${slug}-4.jpg`
+  ];
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Number(entry.target.getAttribute('data-index'));
+            setActiveIndex(index);
+          }
+        });
+      },
+      { root: container, threshold: 0.6 }
+    );
+
+    const children = container.querySelectorAll('.carousel-item');
+    children.forEach((child) => observer.observe(child));
+
+    return () => observer.disconnect();
+  }, []);
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
-      // Find the width of one card (using the first child)
-      const firstChild = scrollRef.current.firstElementChild as HTMLElement;
-      const scrollAmount = firstChild ? firstChild.clientWidth + 16 : scrollRef.current.clientWidth;
+      const child = scrollRef.current.firstElementChild as HTMLElement;
+      // Scroll by 80% of item width for flawless CSS snapping
+      const scrollAmount = child ? (child.clientWidth + 16) * 0.8 : scrollRef.current.clientWidth / 2;
       scrollRef.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
     }
   };
@@ -33,7 +54,6 @@ function MediaCarousel({ images }: { images: string[] }) {
     <div className="relative w-full mt-12 mb-8 group overflow-hidden">
       <div 
         ref={scrollRef}
-        onScroll={handleScroll}
         className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 px-4 sm:px-6"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
@@ -41,8 +61,8 @@ function MediaCarousel({ images }: { images: string[] }) {
           .hide-scroll::-webkit-scrollbar { display: none; }
         `}} />
         {images.map((img, i) => (
-          <div key={i} className="flex-none w-[78vw] sm:w-[60vw] md:w-[500px] snap-center aspect-video relative rounded-lg overflow-hidden bg-[#1f1f1f] border border-white/10 shrink-0 hide-scroll">
-            <img src={img} className="w-full h-full object-cover" alt={`Screenshot ${i + 1}`} />
+          <div key={i} data-index={i} className="carousel-item flex-none w-[78vw] sm:w-[60vw] md:w-[500px] snap-center aspect-video relative rounded-lg overflow-hidden bg-[#1f1f1f] border border-white/10 shrink-0 hide-scroll">
+            <img src={img} onError={(e) => (e.currentTarget.src = "/marvels-spider-man-2.jpg")} className="w-full h-full object-cover" alt={`Screenshot ${i + 1}`} />
           </div>
         ))}
       </div>
@@ -232,14 +252,7 @@ function GamePage() {
 
         {/* Media Carousel (Mobile: Middle, Desktop: Spans full width below) */}
         <div className="order-2 lg:order-3 lg:col-span-2 -mx-4 sm:mx-0">
-          <MediaCarousel images={[
-            game.image.replace('.jpg', '-wide.jpg'),
-            game.image,
-            "/marvels-spider-man-2.jpg",
-            "/ghost-of-tsushima-hq.jpg",
-            "/god-of-war-ragnarok.jpg",
-            "/ratchet-and-clank-rift-apart.jpg"
-          ]} />
+          <MediaCarousel slug={game.slug} />
         </div>
       </div>
     </section>
