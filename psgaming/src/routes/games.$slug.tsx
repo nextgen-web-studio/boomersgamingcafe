@@ -1,4 +1,4 @@
-import { createFileRoute, notFound } from "@tanstack/react-router";
+import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { Gamepad2, Heart, Star, StarHalf, Globe, User, Settings2, Lightbulb, ChevronRight, ChevronLeft, MonitorPlay } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
@@ -141,6 +141,10 @@ function GamePage() {
       <div className="relative z-10 mx-auto max-w-7xl lg:h-[70vh] lg:min-h-[600px] flex flex-col justify-end lg:justify-center">
         <div className="bg-[#1f1f1f] lg:bg-transparent px-4 py-8 sm:px-6 md:p-8 lg:p-0 max-w-xl lg:mt-12 w-full lg:w-1/2 rounded-t-3xl lg:rounded-none -mt-6 lg:mt-0 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] lg:shadow-none">
           
+          <Link to="/" className="inline-flex items-center gap-2 text-[13px] font-bold text-gray-400 hover:text-white mb-6 transition-colors w-fit">
+            <ChevronLeft className="size-4" /> Back to Store
+          </Link>
+
           <h1 className="text-[32px] sm:text-5xl font-light mb-3 tracking-tight text-white leading-[1.1]">{game.title}</h1>
           <p className="text-[13px] font-bold text-gray-200 mb-4 tracking-wide">Sony Interactive Entertainment</p>
           
