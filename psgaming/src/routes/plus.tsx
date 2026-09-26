@@ -1,4 +1,4 @@
-import { createFileRoute, useRouter } from "@tanstack/react-router";
+﻿import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { Check, ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
@@ -134,7 +134,7 @@ function PlusPage() {
             </h1>
             
             <p className="text-[15px] sm:text-base lg:text-lg text-gray-200 mb-8 sm:mb-10 leading-relaxed font-normal max-w-[90%] sm:max-w-md">
-              Discover new games to play every month, jump into online multiplayer with friends and get exclusive discounts — all benefits designed to bring you more of the things you love, every time you play.
+              Discover new games to play every month, jump into online multiplayer with friends and get exclusive discounts â€” all benefits designed to bring you more of the things you love, every time you play.
             </p>
             
             <Button 
@@ -366,7 +366,7 @@ function PlusPage() {
             
             <div 
               ref={scrollRef}
-              onScroll={handleScroll}
+              
               className="flex gap-4 sm:gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scroll-smooth" 
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
