@@ -1,6 +1,6 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { Gamepad2, Heart, Star, StarHalf, Globe, User, Settings2, Lightbulb, ChevronRight, ChevronLeft, MonitorPlay } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import { GameCard } from "@/components/game-card";
 import { games, getGame } from "@/lib/games";
